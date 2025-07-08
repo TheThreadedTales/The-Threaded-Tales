@@ -1,0 +1,30 @@
+[
+  {
+    "Product Name": "Handloom Towel",
+    "Description": "Soft & breathable cotton towel.",
+    "Price (INR)": 499,
+    "Image URL": "https://images.unsplash.com/photo-1585238342028-3ba9e1e0f437",
+    "WhatsApp Order Link": "https://wa.me/919876543210?text=I%20want%20to%20order%20Handloom%20Towel"
+  },
+  {
+    "Product Name": "Bedsheet Set",
+    "Description": "Naturally dyed handwoven bedsheets.",
+    "Price (INR)": 1299,
+    "Image URL": "https://images.unsplash.com/photo-1603080365816-d43c249fd498",
+    "WhatsApp Order Link": "https://wa.me/919876543210?text=I%20want%20to%20order%20Bedsheet%20Set"
+  },
+  {
+    "Product Name": "Cushion Cover",
+    "Description": "Colorful handloom cushion covers.",
+    "Price (INR)": 399,
+    "Image URL": "https://images.unsplash.com/photo-1603072443457-4b8c6cd6bde5",
+    "WhatsApp Order Link": "https://wa.me/919876543210?text=I%20want%20to%20order%20Cushion%20Cover"
+  },
+  {
+    "Product Name": "Throw Blanket",
+    "Description": "Elegant cotton throw with tassels.",
+    "Price (INR)": 899,
+    "Image URL": "https://images.unsplash.com/photo-1582056600493-d50c7acfd6d5",
+    "WhatsApp Order Link": "https://wa.me/919876543210?text=I%20want%20to%20order%20Throw%20Blanket"
+  }
+]
