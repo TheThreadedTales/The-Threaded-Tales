@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
- <!-- Custom Styles -->
+<!-- Custom Styles -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500&display=swap');
 
@@ -24,12 +24,35 @@
   .tango {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .murray {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .hero-text {
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-bg {
+    background-image: url('./hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
   @keyframes slideInLeft {
@@ -61,21 +84,17 @@
 </style>
 
 
-  <!-- Hero -->
- <!-- Hero -->
+
 <!-- Hero -->
-<section
-  class="relative h-[80vh] bg-no-repeat bg-center bg-contain flex flex-col items-center justify-center"
-  style="background-image: url('./hero-bg.png.png');"
->
-  <div class="text-center animate-fade-in-up px-4">
-    <h1 class="tango text-white mb-2 leading-tight">Threaded Tales</h1>
-    <p class="murray text-white italic">by Elleganza Emporium</p>
-    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">
-      Explore Products
-    </a>
+<section class="relative h-screen hero-bg flex items-center justify-center">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1 class="tango">Threaded Tales</h1>
+    <span class="murray">by Elleganza Emporium</span>
+    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Explore Products</a>
   </div>
 </section>
+
 
 
 <!-- Our Story -->
