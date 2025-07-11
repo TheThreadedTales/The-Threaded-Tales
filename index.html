@@ -44,7 +44,7 @@
 
   .hero-bg {
     background-image: url('./images/hero-bg.png.png'); /* Make sure this matches your actual file */
-    background-size: cover;
+    background-size: 120%;
     background-position: center;
     background-repeat: no-repeat;
   }
@@ -127,13 +127,17 @@
 
 <!-- Our Story -->
 <!-- Our Story Section -->
-<section class="our-story-section relative py-16">
-  <div class="background-image-left animate-slide-in-left"></div>
-  <div class="background-image-right animate-slide-in-right"></div>
-  <div class="our-story-content">
+<!-- Our Story Section -->
+<section id="our-story" class="relative py-20 bg-white overflow-hidden">
+  <!-- Sliding Images -->
+  <img src="./images/our-story-1.jpg.jpg" alt="Our Story Left" class="absolute left-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-left" />
+  <img src="./images/our-story-2.jpg.jpg" alt="Our Story Right" class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-right" />
+
+  <!-- Overlay Content -->
+  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-4xl tango mb-4">Our Story</h2>
-    <p class="murray max-w-3xl mx-auto">
-      Woven with care, love, and tradition — our fabrics carry the legacy of cruelty-free sourcing, organic dyes, and the hands of skilled artisans across India.
+    <p class="text-lg murray">
+      Handwoven with care, our products are created using cruelty-free processes and organic dyes. Each piece is a story told by artisans committed to sustainability and elegance.
     </p>
   </div>
 </section>
