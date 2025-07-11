@@ -13,44 +13,85 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Custom Styles -->
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .tango {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 3rem;
-    }
-    .murray {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-    }
-  </style>
-</head>
+ <!-- Custom Styles -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500&display=swap');
 
-<body class="bg-white text-gray-800 scroll-smooth">
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tango {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 3rem;
+  }
+
+  .murray {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+  }
+
+  @keyframes slideInLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 0.2; }
+  }
+
+  @keyframes slideInRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 0.2; }
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 2.5s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 2.5s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+</style>
+
 
   <!-- Hero -->
-  <section class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1618220179428-2370b6f173ad');">
-    <div class="bg-black bg-opacity-50 p-8 rounded-xl text-center animate-fade-in-up">
-      <div class="mb-6 text-white">
-        <div class="tango">Threaded Tales</div>
-        <div class="murray italic mt-1">by Elleganza Emporium</div>
-      </div>
-      <p class="text-white text-lg mb-6">Crafted by tradition. Designed for elegance.</p>
-      <a href="#products" class="px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Explore Products</a>
-    </div>
-  </section>
+ <!-- Hero -->
+<section class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('./images/hero-bg.png.png');">
+  <div class="bg-black bg-opacity-50 p-8 rounded-xl text-center animate-fade-in-up">
+    <h1 class="text-white font-bold mb-2" style="font-size: 3.5rem; font-family: 'Tango BT', serif;">
+      Threaded Tales
+    </h1>
+    <p class="text-white text-md" style="font-family: 'Murray', serif; font-size: 1.2rem;">
+      by Elleganza Emporium
+    </p>
+    <p class="text-white text-lg mt-4">Crafted by tradition. Designed for elegance.</p>
+    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Explore Products</a>
+  </div>
+</section>
 
-  <!-- About -->
-  <section class="py-16 px-6 md:px-20 bg-gray-50" id="about">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-semibold mb-4">Our Story</h2>
-      <p class="text-gray-600 text-lg leading-relaxed animate-fade-in-up">
-        Our handloom products are woven with love and care by skilled artisans from India. We bring you timeless pieces – towels, throws, bedsheets – made sustainably, ethically, and beautifully.
-      </p>
-    </div>
-  </section>
+<!-- Our Story -->
+<section class="relative py-16 px-6 md:px-20 bg-gray-50 overflow-hidden" id="about">
+  <div class="absolute top-0 left-0 h-full w-1/2 opacity-20 animate-slide-in-left z-0">
+    <img src="./images/our-story-1.jpg.jpg" class="object-cover w-full h-full" alt="Our Story 1">
+  </div>
+  <div class="absolute top-0 right-0 h-full w-1/2 opacity-20 animate-slide-in-right z-0">
+    <img src="./images/our-story-2.jpg.jpg" class="object-cover w-full h-full" alt="Our Story 2">
+  </div>
+  <div class="relative z-10 max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-semibold mb-4">Our Story</h2>
+    <p class="text-gray-600 text-lg leading-relaxed animate-fade-in-up">
+      Our handloom products are woven with love and care by skilled artisans from India. We bring you timeless pieces – towels, throws, bedsheets – made sustainably, ethically, and beautifully.
+    </p>
+  </div>
+</section>
+
 
   <!-- Products -->
   <section class="py-16 px-6 md:px-20 bg-white" id="products">
