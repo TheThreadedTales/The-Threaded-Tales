@@ -3,137 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Threaded Tales</title>
+  <title>Threaded Tales</title>
 
   <!-- Tailwind & Lottie -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- Custom Styles -->
-<!-- Custom Styles -->
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500&display=swap');
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
 
-  body {
-    font-family: 'Inter', sans-serif;
-  }
+    .tango {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 4rem;
+    }
 
-  .tango {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 4rem;
-  }
+    .murray {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      display: block;
+      margin-top: 0.5rem;
+    }
 
-  .murray {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    display: block;
-    margin-top: 0.5rem;
-  }
+    .hero-text {
+      text-align: center;
+      color: white;
+      position: relative;
+      z-index: 10;
+    }
 
-  .hero-text {
-    text-align: center;
-    color: white;
-    position: relative;
-    z-index: 10;
-  }
+    .hero-bg {
+      background-image: url('./images/hero-bg.png.png');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-  .hero-bg {
-    background-image: url('./images/hero-bg.png.png'); /* Make sure this matches your actual file */
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+    .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
 
-  .hero-overlay {
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
+    @keyframes slideInLeft {
+      0% { transform: translateX(-100%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 0.25; }
+    }
 
-  @keyframes slideInLeft {
-    0% { transform: translateX(-100%); opacity: 0; }
-    100% { transform: translateX(0); opacity: 0.25; }
-  }
+    @keyframes slideInRight {
+      0% { transform: translateX(100%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 0.25; }
+    }
 
-  @keyframes slideInRight {
-    0% { transform: translateX(100%); opacity: 0; }
-    100% { transform: translateX(0); opacity: 0.25; }
-  }
+    .animate-slide-in-left {
+      animation: slideInLeft 3s ease-out forwards;
+    }
 
-  .animate-slide-in-left {
-    animation: slideInLeft 3s ease-out forwards;
-  }
+    .animate-slide-in-right {
+      animation: slideInRight 3s ease-out forwards;
+    }
 
-  .animate-slide-in-right {
-    animation: slideInRight 3s ease-out forwards;
-  }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
 
-  .our-story-section {
-    position: relative;
-    overflow: hidden;
-  }
+    .fade-in-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
 
-  .background-image-left,
-  .background-image-right {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    z-index: 0;
-  }
-
-  .background-image-left {
-    left: 0;
-    background-image: url('./images/our-story-1.jpg.jpg');
-  }
-
-  .background-image-right {
-    right: 0;
-    background-image: url('./images/our-story-2.jpg.jpg');
-  }
-
-  .our-story-content {
-    position: relative;
-    z-index: 10;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-</style>
-
-
-
-<!-- Hero -->
-<!-- Hero -->
+<body>
+<!-- Hero Section -->
 <section class="relative h-screen hero-bg flex items-center justify-center">
   <div class="hero-overlay"></div>
   <div class="hero-text">
-    <h1 class="tango">The Threaded Tales</h1>
+    <h1 class="tango">Threaded Tales</h1>
     <span class="murray">by Elleganza Emporium</span>
     <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Explore Products</a>
   </div>
 </section>
 
-
-
-<!-- Our Story -->
-<!-- Our Story Section -->
 <!-- Our Story Section -->
 <section id="our-story" class="relative py-20 bg-white overflow-hidden">
-  <!-- Sliding Images -->
-  <img src="./images/our-story-1.jpg.jpg" alt="Our Story Left" class="absolute left-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-left" />
-  <img src="./images/our-story-2.jpg.jpg" alt="Our Story Right" class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-right" />
-
-  <!-- Overlay Content -->
+  <img src="./images/our-story-1.jpg.jpg" class="absolute left-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-left" />
+  <img src="./images/our-story-2.jpg.jpg" class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-20 animate-slide-in-right" />
   <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-4xl tango mb-4">Our Story</h2>
     <p class="text-lg murray">
@@ -142,169 +106,176 @@
   </div>
 </section>
 
-
-  <!-- Products -->
-  <section class="py-16 px-6 md:px-20 bg-white" id="products">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl font-semibold">Our Products</h2>
-      <p class="text-gray-600 mt-2">Explore the collection</p>
-    </div>
-    <div id="product-grid" class="grid md:grid-cols-4 gap-6">
-      <!-- Products loaded here -->
-    </div>
-  </section>
-
-  <!-- Cart Button -->
-  <button id="cart-button" class="fixed top-4 right-4 z-50 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 shadow-lg">
-    🛒 Cart (<span id="cart-count">0</span>)
-  </button>
-
-  <!-- Cart Modal -->
-  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-      <button id="close-cart" class="absolute top-2 right-4 text-gray-500 hover:text-black text-xl">&times;</button>
-      <h2 class="text-xl font-semibold mb-4">Your Cart</h2>
-      <ul id="cart-items" class="mb-4 text-sm text-gray-700 space-y-2"></ul>
-      <button id="checkout-btn" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Checkout on WhatsApp</button>
-    </div>
+<!-- Products -->
+<section class="py-16 px-6 md:px-20 bg-white" id="products">
+  <div class="text-center mb-10">
+    <h2 class="text-4xl font-semibold">Our Products</h2>
+    <p class="text-gray-600 mt-2">Explore the collection</p>
   </div>
+  <div id="product-grid" class="grid md:grid-cols-4 gap-6"></div>
+</section>
 
-  <!-- Artisans -->
-  <section class="py-16 bg-gray-50 px-6 md:px-20">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl font-semibold">Meet the Makers</h2>
-      <p class="text-gray-600 mt-2">Stories from the loom</p>
-    </div>
-    <div class="max-w-3xl mx-auto">
-      <lottie-player src="https://lottie.host/3c7084be-9f3a-4a0c-b9c9-20184969e60a/X7zdn3qHY7.json" background="transparent" speed="1" style="width: 100%; height: 300px;" loop autoplay></lottie-player>
-      <p class="text-center text-gray-600 mt-6">
-        Our weavers come from generations of artisans, each thread woven with pride and tradition. Your purchase empowers these skilled hands.
+<!-- Cart Button + Modal -->
+<button id="cart-button" class="fixed top-4 right-4 z-50 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 shadow-lg">
+  🛒 Cart (<span id="cart-count">0</span>)
+</button>
+<div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+    <button id="close-cart" class="absolute top-2 right-4 text-gray-500 hover:text-black text-xl">&times;</button>
+    <h2 class="text-xl font-semibold mb-4">Your Cart</h2>
+    <ul id="cart-items" class="mb-4 text-sm text-gray-700 space-y-2"></ul>
+    <button id="checkout-btn" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Checkout on WhatsApp</button>
+  </div>
+</div>
+
+<!-- Artisans Section -->
+<section class="py-16 bg-gray-50 px-6 md:px-20" id="artisans">
+  <div class="text-center mb-10">
+    <h2 class="text-4xl font-semibold">Meet the Makers</h2>
+    <p class="text-gray-600 mt-2">Stories from the loom</p>
+  </div>
+  <div class="max-w-4xl mx-auto space-y-10">
+    <div class="fade-in-up">
+      <img src="./images/artisan1.jpg" class="mx-auto w-full max-w-sm rounded-xl shadow-lg" />
+      <p class="text-center text-gray-600 mt-4">
+        Lakshmi, a fourth-generation weaver from Varanasi, revives ancient motifs through vibrant colors.
       </p>
     </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="py-16 px-6 md:px-20">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl font-semibold">Customer Love</h2>
+    <div class="fade-in-up">
+      <img src="./images/artisan2.jpg" class="mx-auto w-full max-w-sm rounded-xl shadow-lg" />
+      <p class="text-center text-gray-600 mt-4">
+        Ravi specializes in handloom cotton, blending tradition with innovation from his village workshop.
+      </p>
     </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">
-        “The quality is unmatched. It feels so special knowing this was handwoven.”
-      </div>
-      <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">
-        “Love the natural colors and the softness. Definitely buying more!”
-      </div>
-      <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">
-        “Beautiful packaging and amazing story behind the products. Support local!”
-      </div>
+    <div>
+      <lottie-player src="https://lottie.host/3c7084be-9f3a-4a0c-b9c9-20184969e60a/X7zdn3qHY7.json" background="transparent" speed="1" style="width: 100%; height: 300px;" loop autoplay></lottie-player>
+      <p class="text-center text-gray-600 mt-6">
+        Our weavers come from generations of artisans, each thread woven with pride and tradition.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contact -->
-  <section class="py-16 bg-gray-100 px-6 md:px-20" id="contact">
-    <div class="text-center mb-8">
-      <h2 class="text-4xl font-semibold">Get In Touch</h2>
-      <p class="text-gray-600 mt-2">We’d love to hear from you at elleganzaemporium@gmail.com</p>
-    </div>
-    <form class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
-      <input type="text" placeholder="Your Name" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg" />
-      <input type="email" placeholder="Email Address" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg" />
-      <textarea placeholder="Message" rows="4" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg"></textarea>
-      <button type="submit" class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition">Send Message</button>
-    </form>
-  </section>
+<!-- Testimonials -->
+<section class="py-16 px-6 md:px-20">
+  <div class="text-center mb-10">
+    <h2 class="text-4xl font-semibold">Customer Love</h2>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“The quality is unmatched. It feels so special knowing this was handwoven.”</div>
+    <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“Love the natural colors and the softness. Definitely buying more!”</div>
+    <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“Beautiful packaging and amazing story behind the products. Support local!”</div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="bg-black text-white text-center py-6">
-    <p>© 2025 The Threaded Tales. All rights reserved.</p>
-    <div class="mt-2 text-sm">
-      Follow us on 
-      <a href="https://www.instagram.com/elleganzaemporium?igsh=MWpiZWZneDdwYm51aQ==" class="underline hover:text-gray-400 transition" target="_blank" rel="noopener noreferrer">Instagram</a>
-    </div>
-  </footer>
+<!-- Contact -->
+<section class="py-16 bg-gray-100 px-6 md:px-20" id="contact">
+  <div class="text-center mb-8">
+    <h2 class="text-4xl font-semibold">Get In Touch</h2>
+    <p class="text-gray-600 mt-2">We’d love to hear from you at elleganzaemporium@gmail.com</p>
+  </div>
+  <form class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <input type="text" placeholder="Your Name" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg" />
+    <input type="email" placeholder="Email Address" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg" />
+    <textarea placeholder="Message" rows="4" class="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg"></textarea>
+    <button type="submit" class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition">Send Message</button>
+  </form>
+</section>
 
-  <!-- Product & Cart JS -->
-  <script>
-    let cart = [];
+<!-- Footer -->
+<footer class="bg-black text-white text-center py-6">
+  <p>© 2025 Threaded Tales. All rights reserved.</p>
+  <div class="mt-2 text-sm">
+    Follow us on 
+    <a href="https://www.instagram.com/elleganzaemporium?igsh=MWpiZWZneDdwYm51aQ==" class="underline hover:text-gray-400 transition" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </div>
+</footer>
 
-    function addToCart(product) {
-      const existing = cart.find(p => p.name === product.name);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ ...product, qty: 1 });
-      }
-      document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
-    }
+<!-- JS for Products + Cart -->
+<script>
+  let cart = [];
 
-    function openCart() {
-      document.getElementById('cart-modal').classList.remove('hidden');
-      const list = document.getElementById('cart-items');
-      list.innerHTML = '';
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} (x${item.qty}) - ₹${item.price * item.qty}`;
-        list.appendChild(li);
-      });
-    }
+  function addToCart(product) {
+    const existing = cart.find(p => p.name === product.name);
+    if (existing) existing.qty += 1;
+    else cart.push({ ...product, qty: 1 });
 
-    function closeCart() {
-      document.getElementById('cart-modal').classList.add('hidden');
-    }
+    document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+  }
 
-    function checkoutOnWhatsApp() {
-      const summary = cart.map(item => `${item.name} (x${item.qty})`).join('%0A');
-      const url = `https://wa.me/918607115548?text=Hi%20Abhi%2C%20I%20want%20to%20order:%0A${summary}`;
-      window.open(url, '_blank');
-    }
-
-    document.getElementById('cart-button').addEventListener('click', openCart);
-    document.getElementById('close-cart').addEventListener('click', closeCart);
-    document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
-
-    async function loadProducts() {
-      try {
-        const response = await fetch('./handloom_products.json');
-        const products = await response.json();
-        const grid = document.getElementById('product-grid');
-        grid.innerHTML = '';
-
-        products.forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition';
-          card.innerHTML = `
-            <img src="${product["Image URL"]}" class="w-full h-56 object-cover" />
-            <div class="p-4">
-              <h3 class="text-lg font-semibold">${product["Product Name"]}</h3>
-              <p class="text-sm text-gray-500">${product["Description"]}</p>
-              <p class="text-sm font-semibold text-gray-800 mb-2">₹${product["Price (INR)"]}</p>
-              <button class="add-to-cart px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Add to Cart</button>
-            </div>
-          `;
-          card.querySelector('.add-to-cart').addEventListener('click', () => {
-            addToCart({ name: product["Product Name"], price: product["Price (INR)"] });
-          });
-          grid.appendChild(card);
-        });
-      } catch (err) {
-        console.error("Failed to load products:", err);
-        document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
-      }
-    }
-
-    loadProducts();
-  </script>
-
-  <!-- Animation -->
-  <script>
-    document.querySelectorAll('.animate-fade-in-up').forEach(el => {
-      el.classList.add('opacity-0', 'translate-y-6');
-      setTimeout(() => {
-        el.classList.remove('opacity-0', 'translate-y-6');
-        el.classList.add('transition', 'duration-1000', 'ease-out');
-      }, 300);
+  function openCart() {
+    document.getElementById('cart-modal').classList.remove('hidden');
+    const list = document.getElementById('cart-items');
+    list.innerHTML = '';
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} (x${item.qty}) - ₹${item.price * item.qty}`;
+      list.appendChild(li);
     });
-  </script>
+  }
+
+  function closeCart() {
+    document.getElementById('cart-modal').classList.add('hidden');
+  }
+
+  function checkoutOnWhatsApp() {
+    const summary = cart.map(item => `${item.name} (x${item.qty})`).join('%0A');
+    const url = `https://wa.me/918607115548?text=Hi%20Abhi%2C%20I%20want%20to%20order:%0A${summary}`;
+    window.open(url, '_blank');
+  }
+
+  document.getElementById('cart-button').addEventListener('click', openCart);
+  document.getElementById('close-cart').addEventListener('click', closeCart);
+  document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
+
+  async function loadProducts() {
+    try {
+      const response = await fetch('./handloom_products.json');
+      const products = await response.json();
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition';
+        card.innerHTML = `
+          <img src="${product["Image URL"]}" class="w-full h-56 object-cover" />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">${product["Product Name"]}</h3>
+            <p class="text-sm text-gray-500">${product["Description"]}</p>
+            <p class="text-sm font-semibold text-gray-800 mb-2">₹${product["Price (INR)"]}</p>
+            <button class="add-to-cart px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Add to Cart</button>
+          </div>
+        `;
+        card.querySelector('.add-to-cart').addEventListener('click', () => {
+          addToCart({ name: product["Product Name"], price: product["Price (INR)"] });
+        });
+        grid.appendChild(card);
+      });
+    } catch (err) {
+      console.error("Failed to load products:", err);
+      document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
+    }
+  }
+
+  loadProducts();
+</script>
+
+<!-- Scroll Animation for Artisan Images -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  document.querySelectorAll('.fade-in-up').forEach(el => {
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
