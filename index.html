@@ -84,12 +84,22 @@
 </head>
 
 <body>
+  <!-- Launch Offer Banner -->
+<div class="bg-yellow-400 text-black text-center py-2 px-4 font-semibold">
+  🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+</div>
 <!-- Hero Section -->
 <section class="relative h-screen hero-bg flex items-center justify-center">
   <div class="hero-overlay"></div>
-  <div class="hero-text">
+  <div class="hero-text text-center">
     <h1 class="tango">The Threaded Tales</h1>
     <span class="murray">by Elleganza Emporium</span>
+
+    <!-- 🔥 Launch Offer + Timer -->
+    <div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
+      🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
+    </div>
+
     <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Explore Products</a>
   </div>
 </section>
@@ -375,5 +385,28 @@
     observer.observe(el);
   });
 </script>
+  <script>
+// Set the deadline (change date as needed)
+const deadline = new Date("2025-07-26T23:59:59").getTime();
+
+const countdownInterval = setInterval(() => {
+  const now = new Date().getTime();
+  const distance = deadline - now;
+
+  if (distance < 0) {
+    clearInterval(countdownInterval);
+    document.getElementById("countdown").textContent = "Offer Ended";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
+</script>
+
 </body>
 </html>
