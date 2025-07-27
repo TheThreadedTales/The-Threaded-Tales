@@ -14,6 +14,28 @@
 
   <!-- Custom Styles -->
   <style>
+  
+  .scrolling-banner {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .scrolling-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 15s linear infinite;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
     body {
       font-family: 'Inter', sans-serif;
     }
@@ -85,9 +107,12 @@
 
 <body>
   <!-- Launch Offer Banner -->
-<div class="bg-yellow-400 text-black text-center py-2 px-4 font-semibold">
-  🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+<div class="bg-yellow-400 text-black py-2 px-4 scrolling-banner">
+  <div class="scrolling-text font-semibold text-lg">
+    🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+  </div>
 </div>
+
 <!-- Hero Section -->
 <!-- Hero Section -->
 <section class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: url('images/hero-bg.png.png');">
