@@ -299,7 +299,6 @@
     const existing = cart.find(p => p.name === product.name);
     if (existing) existing.qty += 1;
     else cart.push({ ...product, qty: 1 });
-
     updateCartCount();
   }
 
@@ -319,7 +318,6 @@
   function renderCart() {
     const list = document.getElementById('cart-items');
     list.innerHTML = '';
-
     let total = 0;
 
     cart.forEach((item, index) => {
@@ -372,7 +370,8 @@
   document.getElementById('cart-button').addEventListener('click', openCart);
   document.getElementById('close-cart').addEventListener('click', closeCart);
   document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
-  // ✅ Option 1: Modal Close Logic
+
+  // Modal close logic
   document.getElementById("modal-close").addEventListener("click", () => {
     document.getElementById("product-modal").classList.add("hidden");
     document.getElementById("modal-content").innerHTML = "";
@@ -385,123 +384,121 @@
     }
   });
 
-
   async function loadProducts() {
-  try {
-    const response = await fetch('./handloom_products.json');
-    const products = await response.json();
-    const grid = document.getElementById('product-grid');
-    grid.innerHTML = '';
+    try {
+      const response = await fetch('./handloom_products.json');
+      const products = await response.json();
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
 
-   
-products.forEach((product, index) => {
-  const name = product.name;
-  const description = product.description;
-  const originalPrice = product.price;
-  const discountedPrice = Math.floor(originalPrice * 0.5);
-  const images = product.images || [];
-  const details = product.details || {};
+      products.forEach((product, index) => {
+        const name = product.name;
+        const description = product.description;
+        const originalPrice = product.price;
+        const discountedPrice = Math.floor(originalPrice * 0.5);
+        const images = product.images || [];
+        const details = product.details || {};
 
-  const card = document.createElement('div');
-  card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+        const card = document.createElement('div');
+        card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
 
-  const imageId = `product-image-${index}`;
+        const imageId = `product-image-${index}`;
 
-  card.innerHTML = `
-    <div class="relative h-72 overflow-hidden">
-      <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
-    </div>
-    <div class="p-4">
-      <h3 class="text-xl font-semibold">${name}</h3>
-      <p class="text-sm text-gray-600 mt-1">${description}</p>
-      
-      <div class="mt-3">
-        <div class="flex items-center space-x-2">
-          <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
-          <span class="line-through text-gray-400">₹${originalPrice}</span>
-          <span class="text-green-600 font-semibold">50% off</span>
-        </div>
-        <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
-      </div>
-
-      <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
-      <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
-    </div>
-  `;
-
-  card.querySelector('.add-to-cart').addEventListener('click', () => {
-    addToCart({ name, price: discountedPrice });
-  });
-
-  // View Details button click = open modal
-  card.querySelector('.view-details').addEventListener('click', () => {
-    const modal = document.getElementById('product-modal');
-    const modalContent = document.getElementById('modal-content');
-
-    modalContent.innerHTML = `
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <img src="${images[0]}" class="w-full h-72 object-cover rounded" />
-          <div class="flex mt-2 space-x-2 overflow-x-auto">
-            ${images.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" />`).join('')}
+        card.innerHTML = `
+          <div class="relative h-72 overflow-hidden">
+            <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
           </div>
-        </div>
-        <div>
-          <h2 class="text-2xl font-bold">${name}</h2>
-          <p class="text-sm text-gray-600 mt-1">${description}</p>
-          <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
-
-          <div class="mt-4 text-sm">
-            <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
-            <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
-            <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">${name}</h3>
+            <p class="text-sm text-gray-600 mt-1">${description}</p>
+            <div class="mt-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+                <span class="line-through text-gray-400">₹${originalPrice}</span>
+                <span class="text-green-600 font-semibold">50% off</span>
+              </div>
+              <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+            </div>
+            <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+            <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
           </div>
+        `;
 
-          <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
-        </div>
-      </div>
-    `;
+        card.querySelector('.add-to-cart').addEventListener('click', () => {
+          addToCart({ name, price: discountedPrice });
+        });
 
-    modal.classList.remove('hidden');
+        card.querySelector('.view-details').addEventListener('click', () => {
+          const modal = document.getElementById('product-modal');
+          const modalContent = document.getElementById('modal-content');
 
-    // Add to cart inside modal
-    modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
-      addToCart({ name, price: discountedPrice });
-    });
-  });
+          modalContent.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <img id="main-modal-image" src="${images[0]}" class="w-full h-72 object-cover rounded mb-2" />
+                <div class="flex mt-2 space-x-2 overflow-x-auto">
+                  ${images.map(img => `<img src="${img}" class="thumbnail w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" />`).join('')}
+                </div>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">${name}</h2>
+                <p class="text-sm text-gray-600 mt-1">${description}</p>
+                <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+                <div class="mt-4 text-sm">
+                  <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+                  <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+                  <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+                </div>
+                <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+              </div>
+            </div>
+          `;
 
-  // Hover slideshow (optional)
-  let interval;
-  let currentImageIndex = 0;
-  card.addEventListener('mouseenter', () => {
-    if (images.length > 1) {
-      interval = setInterval(() => {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        const img = document.getElementById(imageId);
-        if (img) img.src = images[currentImageIndex];
-      }, 1000);
+          modal.classList.remove('hidden');
+
+          // Add to cart from modal
+          modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
+            addToCart({ name, price: discountedPrice });
+          });
+
+          // ✅ Thumbnail click to change main image
+          modalContent.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+              document.getElementById('main-modal-image').src = thumb.src;
+            });
+          });
+        });
+
+        // Hover image slideshow
+        let interval;
+        let currentImageIndex = 0;
+        card.addEventListener('mouseenter', () => {
+          if (images.length > 1) {
+            interval = setInterval(() => {
+              currentImageIndex = (currentImageIndex + 1) % images.length;
+              const img = document.getElementById(imageId);
+              if (img) img.src = images[currentImageIndex];
+            }, 1000);
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          clearInterval(interval);
+          const img = document.getElementById(imageId);
+          if (img) img.src = images[0];
+          currentImageIndex = 0;
+        });
+
+        grid.appendChild(card);
+      });
+
+    } catch (err) {
+      console.error("Failed to load products:", err);
+      document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
     }
-  });
-  card.addEventListener('mouseleave', () => {
-    clearInterval(interval);
-    const img = document.getElementById(imageId);
-    if (img) img.src = images[0];
-    currentImageIndex = 0;
-  });
-
-  grid.appendChild(card);
-});
-
-  } catch (err) {
-    console.error("Failed to load products:", err);
-    document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
   }
-}
 
-  // ✅ Load products when page is ready
   window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
-
 
   loadProducts();
 </script>
