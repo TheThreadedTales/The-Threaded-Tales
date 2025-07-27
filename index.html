@@ -295,13 +295,11 @@
 
 <script>
   let cart = [];
-  let currentImageIndex = 0;
 
   function addToCart(product) {
     const existing = cart.find(p => p.name === product.name);
     if (existing) existing.qty += 1;
     else cart.push({ ...product, qty: 1 });
-
     updateCartCount();
   }
 
@@ -321,7 +319,6 @@
   function renderCart() {
     const list = document.getElementById('cart-items');
     list.innerHTML = '';
-
     let total = 0;
 
     cart.forEach((item, index) => {
@@ -366,8 +363,8 @@
   }
 
   function checkoutOnWhatsApp() {
-    const summary = cart.map(item => \`\${item.name} (x\${item.qty})\`).join('%0A');
-    const url = \`https://wa.me/918607115548?text=Hi%20Threaded%20Tales%2C%20I%20want%20to%20order:%0A\${summary}\`;
+    const summary = cart.map(item => `${item.name} (x${item.qty})`).join('%0A');
+    const url = `https://wa.me/918607115548?text=Hi%20Threaded%20Tales%2C%20I%20want%20to%20order:%0A${summary}`;
     window.open(url, '_blank');
   }
 
@@ -375,6 +372,7 @@
   document.getElementById('close-cart').addEventListener('click', closeCart);
   document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
 
+  // Modal close logic
   document.getElementById("modal-close").addEventListener("click", () => {
     document.getElementById("product-modal").classList.add("hidden");
     document.getElementById("modal-content").innerHTML = "";
@@ -395,89 +393,117 @@
       grid.innerHTML = '';
 
       products.forEach((product, index) => {
+        const name = product.name;
+        const description = product.description;
+        const originalPrice = product.price;
+        const discountedPrice = Math.floor(originalPrice * 0.5);
+        const images = product.images || [];
+        const details = product.details || {};
+
         const card = document.createElement('div');
-        card.className = 'bg-white border rounded-lg shadow-sm overflow-hidden';
+        card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
 
-        card.innerHTML = \`
-          <img src="\${product.images[0]}" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">\${product.name}</h3>
-            <p class="text-sm text-gray-600 mb-2">₹\${product.price}</p>
-            <button class="view-details text-blue-600 text-sm underline">View Details</button>
-            <button class="add-to-cart ml-4 bg-black text-white text-sm px-2 py-1 rounded">Add to Cart</button>
+        const imageId = `product-image-${index}`;
+
+        card.innerHTML = `
+          <div class="relative h-72 overflow-hidden">
+            <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
           </div>
-        \`;
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">${name}</h3>
+            <p class="text-sm text-gray-600 mt-1">${description}</p>
+            <div class="mt-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+                <span class="line-through text-gray-400">₹${originalPrice}</span>
+                <span class="text-green-600 font-semibold">50% off</span>
+              </div>
+              <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+            </div>
+            <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+            <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+          </div>
+        `;
 
-        card.querySelector('.add-to-cart').addEventListener('click', () => addToCart(product));
+        card.querySelector('.add-to-cart').addEventListener('click', () => {
+          addToCart({ name, price: discountedPrice });
+        });
 
         card.querySelector('.view-details').addEventListener('click', () => {
-          currentImageIndex = 0;
           const modal = document.getElementById('product-modal');
           const modalContent = document.getElementById('modal-content');
+
+          modalContent.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <img id="main-modal-image" src="${images[0]}" class="w-full h-72 object-cover rounded mb-2" />
+                <div class="flex mt-2 space-x-2 overflow-x-auto">
+                  ${images.map(img => `<img src="${img}" class="thumbnail w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" />`).join('')}
+                </div>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">${name}</h2>
+                <p class="text-sm text-gray-600 mt-1">${description}</p>
+                <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+                <div class="mt-4 text-sm">
+                  <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+                  <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+                  <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+                </div>
+                <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+              </div>
+            </div>
+          `;
+
           modal.classList.remove('hidden');
 
-          modalContent.innerHTML = \`
-            <div class="relative text-center">
-              <h2 class="text-xl font-semibold mb-2">\${product.name}</h2>
-              <p class="text-gray-700 mb-4">\${product.description}</p>
-              <div class="flex items-center justify-center mb-4 relative">
-                <button id="prev-img" class="absolute left-0 text-2xl px-2">←</button>
-                <img id="main-modal-img" src="\${product.images[0]}" class="max-w-full max-h-[400px] object-contain zoom cursor-pointer" />
-                <button id="next-img" class="absolute right-0 text-2xl px-2">→</button>
-              </div>
-              <div class="flex justify-center gap-2 mb-4">
-                \${product.images.map((img, i) => \`
-                  <img src="\${img}" data-index="\${i}" class="w-16 h-16 object-cover border cursor-pointer thumb-img" />
-                \`).join('')}
-              </div>
-              <button onclick='addToCart(\${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded">Add to Cart</button>
-            </div>
-          \`;
+          // Add to cart from modal
+          modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
+            addToCart({ name, price: discountedPrice });
+          });
 
-          const mainImg = modalContent.querySelector('#main-modal-img');
-          const thumbs = modalContent.querySelectorAll('.thumb-img');
-
-          thumbs.forEach(thumb => {
+          // ✅ Thumbnail click to change main image
+          modalContent.querySelectorAll('.thumbnail').forEach(thumb => {
             thumb.addEventListener('click', () => {
-              currentImageIndex = parseInt(thumb.dataset.index);
-              mainImg.src = product.images[currentImageIndex];
+              document.getElementById('main-modal-image').src = thumb.src;
             });
           });
+        });
 
-          modalContent.querySelector('#prev-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
-            mainImg.src = product.images[currentImageIndex];
-          });
-
-          modalContent.querySelector('#next-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % product.images.length;
-            mainImg.src = product.images[currentImageIndex];
-          });
-
-          mainImg.addEventListener('click', () => {
-            const newWindow = window.open('');
-            newWindow.document.write('<img src="' + mainImg.src + '" style="width:100%;height:auto;" />');
-          });
+        // Hover image slideshow
+        let interval;
+        let currentImageIndex = 0;
+        card.addEventListener('mouseenter', () => {
+          if (images.length > 1) {
+            interval = setInterval(() => {
+              currentImageIndex = (currentImageIndex + 1) % images.length;
+              const img = document.getElementById(imageId);
+              if (img) img.src = images[currentImageIndex];
+            }, 1000);
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          clearInterval(interval);
+          const img = document.getElementById(imageId);
+          if (img) img.src = images[0];
+          currentImageIndex = 0;
         });
 
         grid.appendChild(card);
       });
+
     } catch (err) {
-      console.error('Error loading products:', err);
+      console.error("Failed to load products:", err);
+      document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
     }
   }
+
+  window.addEventListener('DOMContentLoaded', loadProducts);
+</script>
 
   loadProducts();
 </script>
 
-<style>
-  .zoom:hover {
-    transform: scale(1.2);
-  }
-  .zoom {
-    transition: transform 0.3s ease-in-out;
-  }
-</style>
 
 
 <!-- Scroll Animation for Artisan Images -->
