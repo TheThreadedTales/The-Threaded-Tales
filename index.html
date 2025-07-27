@@ -371,36 +371,55 @@
     grid.innerHTML = '';
 
     products.forEach(product => {
-      const originalPrice = product["Price (INR)"];
-      const discountedPrice = Math.floor(originalPrice * 0.5); // 50% off (you can change %)
+  const originalPrice = product["Price (INR)"];
+  const discountedPrice = Math.floor(originalPrice * 0.5); // 50% off
 
-      const card = document.createElement('div');
-      card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition';
-      card.innerHTML = `
-        <img src="${product["Image URL"]}" class="w-full h-56 object-cover" />
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">${product["Product Name"]}</h3>
-          <p class="text-sm text-gray-500">${product["Description"]}</p>
-          
-          <div class="mt-2">
-            <div class="flex items-center space-x-2">
-              <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
-              <span class="line-through text-gray-400">₹${originalPrice}</span>
-              <span class="text-green-600 font-semibold">50% off</span>
-            </div>
-            <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
-          </div>
+  const card = document.createElement('div');
+  card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition';
 
-          <button class="add-to-cart mt-3 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+  // Use multiple images from the "images" array
+  const imageHTML = product.images.map((src, index) => `
+    <img src="${src}" class="w-full h-56 object-cover ${index !== 0 ? 'hidden' : ''}" data-index="${index}" />
+  `).join('');
+
+  card.innerHTML = `
+    <div class="relative product-image-slider">
+      ${imageHTML}
+    </div>
+    <div class="p-4">
+      <h3 class="text-lg font-semibold">${product["Product Name"]}</h3>
+      <p class="text-sm text-gray-500">${product["Description"]}</p>
+      
+      <div class="mt-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+          <span class="line-through text-gray-400">₹${originalPrice}</span>
+          <span class="text-green-600 font-semibold">50% off</span>
         </div>
-      `;
+        <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+      </div>
 
-      card.querySelector('.add-to-cart').addEventListener('click', () => {
-        addToCart({ name: product["Product Name"], price: discountedPrice });
-      });
+      <button class="add-to-cart mt-3 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+    </div>
+  `;
 
-      grid.appendChild(card);
-    });
+  // Add image slideshow behavior
+  const slider = card.querySelector('.product-image-slider');
+  const imgs = slider.querySelectorAll('img');
+  let currentIndex = 0;
+  setInterval(() => {
+    imgs[currentIndex].classList.add('hidden');
+    currentIndex = (currentIndex + 1) % imgs.length;
+    imgs[currentIndex].classList.remove('hidden');
+  }, 3000); // every 3 seconds
+
+  card.querySelector('.add-to-cart').addEventListener('click', () => {
+    addToCart({ name: product["Product Name"], price: discountedPrice });
+  });
+
+  grid.appendChild(card);
+});
+
   } catch (err) {
     console.error("Failed to load products:", err);
     document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
