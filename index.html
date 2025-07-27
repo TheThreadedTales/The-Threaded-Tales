@@ -16,10 +16,15 @@
   <style>
   
   .scrolling-banner {
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-  }
+  position: fixed;     /* Make it stick to top */
+  top: 0;              /* Align it to the top */
+  width: 100%;         /* Full width */
+  z-index: 50;         /* Ensure it stays above all sections */
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
 
   .scrolling-text {
     display: inline-block;
@@ -37,7 +42,8 @@
   }
 
     body {
-      font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
+  padding-top: 48px; /* Adjust based on banner height (approx) */
     }
 
     .tango {
