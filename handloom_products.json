@@ -1,5 +1,24 @@
 [
   {
+    "id": 1,
+    "name": "FSoft Feel Door Mat",
+    "price": 500,
+    "images": [
+      "images/Doormat1.jpeg",
+      "images/Doormat2.jpeg",
+      "images/Doormat3.jpeg",
+      "images/Doormat4.jpeg",
+      "images/Doormat5.jpeg",
+     
+    "description": "Super Soft Fluffy Door Mat for you and your loved ones. Easy to clean with Rubber Backings",
+    "details": {
+      "fabric": "Material Soft imported Furr like threads",
+      "Dimesnions": "40 X 60 CMs",
+      "washCare": "Dry clean only"
+    }
+  }
+]
+
     "Product Name": "Handloom Towel",
     "Description": "Soft & breathable cotton towel.",
     "Price (INR)": 499,
