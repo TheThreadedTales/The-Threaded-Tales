@@ -92,6 +92,11 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .zoom:hover {
+      transform: scale(1.2);
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+    }
   </style>
 </head>
 
@@ -171,6 +176,14 @@
     </button>
   </div>
 </div>
+  <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
+  <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+    <div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+      <!-- ❌ Modal Close -->
+      <button id="modal-close" class="absolute top-2 right-2 text-gray-700 hover:text-red-600 text-2xl font-bold">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
 
 <!-- Artisans Section -->
@@ -323,7 +336,6 @@
 
     cart.forEach((item, index) => {
       total += item.price * item.qty;
-
       const li = document.createElement('li');
       li.innerHTML = `
         <div class="flex justify-between items-center">
@@ -372,7 +384,6 @@
   document.getElementById('close-cart').addEventListener('click', closeCart);
   document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
 
-  // Modal close logic
   document.getElementById("modal-close").addEventListener("click", () => {
     document.getElementById("product-modal").classList.add("hidden");
     document.getElementById("modal-content").innerHTML = "";
@@ -393,18 +404,12 @@
       grid.innerHTML = '';
 
       products.forEach((product, index) => {
-        const name = product.name;
-        const description = product.description;
-        const originalPrice = product.price;
+        const { name, description, price: originalPrice, images = [], details = {} } = product;
         const discountedPrice = Math.floor(originalPrice * 0.5);
-        const images = product.images || [];
-        const details = product.details || {};
+        const imageId = `product-image-${index}`;
 
         const card = document.createElement('div');
         card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
-
-        const imageId = `product-image-${index}`;
-
         card.innerHTML = `
           <div class="relative h-72 overflow-hidden">
             <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
@@ -429,16 +434,28 @@
           addToCart({ name, price: discountedPrice });
         });
 
+        // 🆕 View Details button click = open modal
         card.querySelector('.view-details').addEventListener('click', () => {
           const modal = document.getElementById('product-modal');
           const modalContent = document.getElementById('modal-content');
+          let currentImageIndex = 0;
+
+          function renderModalImage() {
+            return `<img src="${images[currentImageIndex]}" 
+              id="main-modal-image"
+              class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
+          }
 
           modalContent.innerHTML = `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
               <div>
-                <img id="main-modal-image" src="${images[0]}" class="w-full h-72 object-cover rounded mb-2" />
+                <div class="relative">
+                  ${renderModalImage()}
+                  <button id="prev-img" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-2 rounded-l shadow">◀</button>
+                  <button id="next-img" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-2 rounded-r shadow">▶</button>
+                </div>
                 <div class="flex mt-2 space-x-2 overflow-x-auto">
-                  ${images.map(img => `<img src="${img}" class="thumbnail w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" />`).join('')}
+                  ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
                 </div>
               </div>
               <div>
@@ -457,28 +474,38 @@
 
           modal.classList.remove('hidden');
 
-          // Add to cart from modal
+          // 🆕 Add to cart from modal
           modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
             addToCart({ name, price: discountedPrice });
           });
 
-          // ✅ Thumbnail click to change main image
-          modalContent.querySelectorAll('.thumbnail').forEach(thumb => {
-            thumb.addEventListener('click', () => {
-              document.getElementById('main-modal-image').src = thumb.src;
-            });
+          // 🔁 Left/right arrow handlers
+          modalContent.querySelector('#prev-img').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            document.getElementById('main-modal-image').src = images[currentImageIndex];
+          });
+
+          modalContent.querySelector('#next-img').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('main-modal-image').src = images[currentImageIndex];
+          });
+
+          // ⛶ Fullscreen on image click
+          modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
+            const img = document.getElementById('main-modal-image');
+            if (img.requestFullscreen) img.requestFullscreen();
           });
         });
 
-        // Hover image slideshow
+        // Hover slideshow on product card
         let interval;
-        let currentImageIndex = 0;
+        let currentImage = 0;
         card.addEventListener('mouseenter', () => {
           if (images.length > 1) {
             interval = setInterval(() => {
-              currentImageIndex = (currentImageIndex + 1) % images.length;
+              currentImage = (currentImage + 1) % images.length;
               const img = document.getElementById(imageId);
-              if (img) img.src = images[currentImageIndex];
+              if (img) img.src = images[currentImage];
             }, 1000);
           }
         });
@@ -486,12 +513,10 @@
           clearInterval(interval);
           const img = document.getElementById(imageId);
           if (img) img.src = images[0];
-          currentImageIndex = 0;
         });
 
         grid.appendChild(card);
       });
-
     } catch (err) {
       console.error("Failed to load products:", err);
       document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
@@ -500,12 +525,8 @@
 
   window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
-
   loadProducts();
 </script>
-
-
-
 <!-- Scroll Animation for Artisan Images -->
 <script>
   const observer = new IntersectionObserver((entries) => {
