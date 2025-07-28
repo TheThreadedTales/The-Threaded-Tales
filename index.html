@@ -518,7 +518,7 @@ setTimeout(() => {
 }, 0);
   // Show modal
   modal.classList.remove('hidden');
-       modal.classList.remove('hidden');
+      
 
           // 🆕 Add to cart from modal
           modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
@@ -526,15 +526,20 @@ setTimeout(() => {
           });
 
           // 🔁 Left/right arrow handlers
-          modalContent.querySelector('#prev-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            document.getElementById('main-modal-image').src = images[currentImageIndex];
-          });
+           document.getElementById('prev-img').addEventListener('click', () => {
+    if (currentImageIndex > 0) {
+      currentImageIndex--;
+      updateMainImage();
+    }
+  });
 
-          modalContent.querySelector('#next-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            document.getElementById('main-modal-image').src = images[currentImageIndex];
-          });
+  document.getElementById('next-img').addEventListener('click', () => {
+    if (currentImageIndex < images.length - 1) {
+      currentImageIndex++;
+      updateMainImage();
+    }
+  });
+});
 
           // ⛶ Fullscreen on image click
           modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
