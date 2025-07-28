@@ -155,7 +155,7 @@
     <h2 class="text-4xl font-semibold">Our Products</h2>
     <p class="text-gray-600 mt-2">Explore the collection</p>
   </div>
-  <div id="product-grid" class="grid md:grid-cols-4 gap-6"></div>
+  <div id="products-container" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 p-4"></div>
 </section>
   
 
@@ -431,16 +431,19 @@ products.forEach((product, index) => {
     </div>
   `;
 
-  // Add to cart from card
   card.querySelector('.add-to-cart').addEventListener('click', () => {
     addToCart({ name, price: discountedPrice });
   });
 
-  // View Details Modal
   card.querySelector('.view-details').addEventListener('click', () => {
     const modal = document.getElementById('product-modal');
     const modalContent = document.getElementById('modal-content');
     let currentImageIndex = 0;
+
+    const updateMainImage = () => {
+      const mainImg = document.getElementById('main-modal-image');
+      if (mainImg) mainImg.src = images[currentImageIndex];
+    };
 
     const otherDetailsArray = (details["Other Details"] || "")
       .split(" , ")
@@ -456,14 +459,14 @@ products.forEach((product, index) => {
               class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
 
             <!-- Left Arrow -->
-            <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-300 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-400 transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
             <!-- Right Arrow -->
-            <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-300 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-400 transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -473,7 +476,7 @@ products.forEach((product, index) => {
           <!-- Thumbnails -->
           <div class="flex mt-2 space-x-2 overflow-x-auto">
             ${images.map((img, i) => `
-              <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" data-index="${i}" />
+              <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
             `).join('')}
           </div>
         </div>
@@ -497,7 +500,7 @@ products.forEach((product, index) => {
           <div class="flex items-center mt-4 space-x-2">
             <label for="modalQty" class="text-gray-600">Quantity:</label>
             <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-            <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="add-to-cart bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
               Add to Cart
             </button>
           </div>
@@ -505,10 +508,9 @@ products.forEach((product, index) => {
       </div>
     `;
 
-    // ✅ Modal behavior scripts
     modal.classList.remove('hidden');
 
-    // Fullscreen zoom
+    // ⛶ Fullscreen
     setTimeout(() => {
       const mainImage = document.getElementById('main-modal-image');
       mainImage.addEventListener('click', () => {
@@ -520,28 +522,28 @@ products.forEach((product, index) => {
       });
     }, 0);
 
-    // Arrows
-    modalContent.querySelector('#prev-img').addEventListener('click', () => {
-      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      document.getElementById('main-modal-image').src = images[currentImageIndex];
-    });
+    // Arrows Navigation
+    setTimeout(() => {
+      const prev = modalContent.querySelector('#prev-img');
+      const next = modalContent.querySelector('#next-img');
 
-    modalContent.querySelector('#next-img').addEventListener('click', () => {
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      document.getElementById('main-modal-image').src = images[currentImageIndex];
-    });
+      if (prev && next) {
+        prev.addEventListener('click', () => {
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          updateMainImage();
+        });
 
-    // Thumbnails click
-    modalContent.querySelectorAll('.w-16').forEach(thumb => {
-      thumb.addEventListener('click', (e) => {
-        currentImageIndex = parseInt(e.target.getAttribute('data-index'));
-        document.getElementById('main-modal-image').src = images[currentImageIndex];
-      });
-    });
+        next.addEventListener('click', () => {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          updateMainImage();
+        });
+      }
+    }, 0);
   });
 
-  container.appendChild(card);
+  document.getElementById('products-container').appendChild(card);
 });
+
 
      
 
