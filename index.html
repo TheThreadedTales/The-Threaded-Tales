@@ -406,76 +406,62 @@
       grid.innerHTML = '';
        const container = document.getElementById('product-container');
 
-products.forEach((product, index) => {
-  const { name, description, price: originalPrice, images = [], details = {} } = product;
-  const discountedPrice = Math.floor(originalPrice * 0.5);
-  const imageId = `product-image-${index}`;
+     // ✅ Final corrected code for product rendering + modal integration
+products.forEach(product => {
+  const card = document.createElement("div");
+  card.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
 
-  const card = document.createElement('div');
-  card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+  const images = product.images || ["/placeholder.jpg"];
+  const name = product.name;
+  const description = product.description;
+  const originalPrice = product.originalPrice;
+  const discountedPrice = product.discountedPrice;
+  const details = product.details || {};
+
   card.innerHTML = `
-    <div class="relative h-72 overflow-hidden">
-      <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
-    </div>
-    <div class="p-4">
-      <h3 class="text-xl font-semibold">${name}</h3>
-      <p class="text-sm text-gray-600 mt-1">${description}</p>
-      <div class="mt-3">
-        <div class="flex items-center space-x-2">
-          <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
-          <span class="line-through text-gray-400">₹${originalPrice}</span>
-          <span class="text-green-600 font-semibold">50% off</span>
-        </div>
-        <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
-      </div>
-      <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
-      <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+    <img src="${images[0]}" class="w-full h-48 object-cover rounded mb-2">
+    <h3 class="text-lg font-bold">${name}</h3>
+    <p class="text-sm text-gray-600">${description}</p>
+    <div class="mt-auto">
+      <p class="text-gray-900 font-semibold mt-2">₹${discountedPrice}</p>
+      <button class="mt-2 view-details bg-black text-white px-4 py-1 rounded">View Details</button>
     </div>
   `;
 
-  card.querySelector('.add-to-cart').addEventListener('click', () => {
-    addToCart({ name, price: discountedPrice });
-  });
+  document.getElementById("products-grid").appendChild(card);
 
-  card.querySelector('.view-details').addEventListener('click', () => {
-    const modal = document.getElementById('product-modal');
-    const modalContent = document.getElementById('modal-content');
+  card.querySelector(".view-details").addEventListener("click", () => {
+    const modal = document.getElementById("product-modal");
+    const modalContent = document.getElementById("modal-content");
     let currentImageIndex = 0;
-
-    const updateMainImage = () => {
-      const mainImg = document.getElementById('main-modal-image');
-      if (mainImg) mainImg.src = images[currentImageIndex];
-    };
 
     const otherDetailsArray = (details["Other Details"] || "")
       .split(" , ")
-      .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
-      .join('');
+      .map(
+        detail => `<li class="list-disc ml-6 text-gray-700 text-sm">${detail}</li>`
+      )
+      .join("");
 
     modalContent.innerHTML = `
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-        <!-- Left: Image with arrows + thumbnails -->
         <div>
           <div class="relative">
             <img src="${images[0]}" id="main-modal-image"
               class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
 
-            <!-- Left Arrow -->
-            <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-300 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-400 transition">
+            <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
-            <!-- Right Arrow -->
-            <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-300 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-400 transition">
+            <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
 
-          <!-- Thumbnails -->
           <div class="flex mt-2 space-x-2 overflow-x-auto">
             ${images.map((img, i) => `
               <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
@@ -483,7 +469,6 @@ products.forEach((product, index) => {
           </div>
         </div>
 
-        <!-- Right: Details -->
         <div class="text-sm text-gray-700 space-y-2">
           <h2 class="text-2xl font-bold">${name}</h2>
           <p>${description}</p>
@@ -502,7 +487,7 @@ products.forEach((product, index) => {
           <div class="flex items-center mt-4 space-x-2">
             <label for="modalQty" class="text-gray-600">Quantity:</label>
             <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-            <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            <button class="add-to-cart bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
               Add to Cart
             </button>
           </div>
@@ -510,44 +495,29 @@ products.forEach((product, index) => {
       </div>
     `;
 
-    modal.classList.remove('hidden');
+    modal.classList.remove("hidden");
 
-    // ⛶ Fullscreen
-    setTimeout(() => {
-      const mainImage = document.getElementById('main-modal-image');
-      mainImage.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          mainImage.requestFullscreen();
-        } else {
-          document.exitFullscreen();
-        }
-      });
-    }, 0);
+    modalContent.querySelector(".add-to-cart").addEventListener("click", () => {
+      const qty = parseInt(document.getElementById("modalQty").value) || 1;
+      addToCart({ ...product, quantity: qty });
+    });
 
-    // Arrows Navigation
-    setTimeout(() => {
-      const prev = modalContent.querySelector('#prev-img');
-      const next = modalContent.querySelector('#next-img');
+    modalContent.querySelector("#prev-img").addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      document.getElementById("main-modal-image").src = images[currentImageIndex];
+    });
 
-      if (prev && next) {
-        prev.addEventListener('click', () => {
-          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-          updateMainImage();
-        });
+    modalContent.querySelector("#next-img").addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      document.getElementById("main-modal-image").src = images[currentImageIndex];
+    });
 
-        next.addEventListener('click', () => {
-          currentImageIndex = (currentImageIndex + 1) % images.length;
-          updateMainImage();
-        });
-      }
-    }, 0);
+    modalContent.querySelector("#main-modal-image").addEventListener("click", () => {
+      const img = document.getElementById("main-modal-image");
+      if (img.requestFullscreen) img.requestFullscreen();
+    });
   });
-
-  document.getElementById('products-container').appendChild(card);
 });
-
-
-     
 
   
 
