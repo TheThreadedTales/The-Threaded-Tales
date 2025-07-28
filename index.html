@@ -439,112 +439,152 @@ document.getElementById("modal-content").innerHTML = "";
 }
 });
 
-
   async function loadProducts() {
-    try {
-      const response = await fetch('./handloom_products.json');
-      const products = await response.json();
-      const grid = document.getElementById('product-grid');
-      grid.innerHTML = '';
+try {
+const response = await fetch('./handloom_products.json');
+const products = await response.json();
+const grid = document.getElementById('product-grid');
+grid.innerHTML = '';
 
-      products.forEach((product, index) => {
-        const { name, price, images, description } = product;
+products.forEach((product, index) => {
+const { name, description, price: originalPrice, images = [], details = {} } = product;
+const discountedPrice = Math.floor(originalPrice * 0.5);
+const imageId = product-image-${index};
 
-        const productCard = document.createElement('div');
-        productCard.className = 'bg-white rounded-lg shadow-md overflow-hidden';
-        productCard.innerHTML = `
-          <img src="${images[0]}" alt="${name}" class="w-full h-48 object-cover cursor-pointer product-image">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">${name}</h3>
-            <p class="text-green-700 font-bold">₹${price}</p>
-            <button class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 view-details" data-index="${index}">View Details</button>
-          </div>
-        `;
+const card = document.createElement('div');
+card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+card.innerHTML = `
+         <div class="relative h-72 overflow-hidden">
+           <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+         </div>
+         <div class="p-4">
+           <h3 class="text-xl font-semibold">${name}</h3>
+           <p class="text-sm text-gray-600 mt-1">${description}</p>
+           <div class="mt-3">
+             <div class="flex items-center space-x-2">
+               <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+               <span class="line-through text-gray-400">₹${originalPrice}</span>
+               <span class="text-green-600 font-semibold">50% off</span>
+             </div>
+             <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+           </div>
+           <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+           <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+         </div>
+       `;
 
-        grid.appendChild(productCard);
-      });
+card.querySelector('.add-to-cart').addEventListener('click', () => {
+addToCart({ name, price: discountedPrice });
+});
 
-      // ✅ Modal Logic
-      document.querySelectorAll('.view-details').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          const i = +btn.dataset.index;
-          const { name, price, description, images } = products[i];
-          let currentImageIndex = 0;
+// 🆕 View Details button click = open modal
+card.querySelector('.view-details').addEventListener('click', () => {
+const modal = document.getElementById('product-modal');
+const modalContent = document.getElementById('modal-content');
+let currentImageIndex = 0;
 
-          const modal = document.getElementById('product-modal');
-          const modalContent = document.getElementById('modal-content');
+function renderModalImage() {
+return `<img src="${images[currentImageIndex]}" 
+             id="main-modal-image"
+             class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
+}
 
-          modalContent.innerHTML = `
-            <div class="text-center">
-              <div class="relative">
-                <img id="main-modal-image" src="${images[0]}" class="mx-auto w-full max-h-72 object-cover cursor-zoom-in rounded" />
-                <button id="prev-img" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white px-2 py-1">⟵</button>
-                <button id="next-img" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white px-2 py-1">⟶</button>
-              </div>
-              <h2 class="text-xl font-semibold mt-4">${name}</h2>
-              <p class="text-gray-600 my-2">${description}</p>
-              <p class="text-green-700 font-bold mb-2">₹${price}</p>
+modalContent.innerHTML = `
+           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+             <div>
+               <div class="relative">
+                 ${renderModalImage()}
+                
+                  <!-- 🔁 Left Arrow (points left) -->
+<button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+</button>
 
-              <!-- ✅ Quantity Selector -->
-              <div class="flex items-center justify-center mb-4">
-                <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
-                <span id="quantity" class="px-4">1</span>
-                <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
-              </div>
+<!-- 🔁 Right Arrow (points right) -->
+<button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+  </svg>
+</button>
 
-              <button class="add-to-cart bg-indigo-600 text-white px-6 py-2 rounded">Add to Cart</button>
-            </div>
-          `;
+               
 
-          modal.classList.remove('hidden');
+               </div>
+               <div class="flex mt-2 space-x-2 overflow-x-auto">
+                 ${images.map((img, i) => <img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />).join('')}
+               </div>
+             </div>
+             <div>
+               <h2 class="text-2xl font-bold">${name}</h2>
+               <p class="text-sm text-gray-600 mt-1">${description}</p>
+               <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+               <div class="mt-4 text-sm">
+                 <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+                 <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+                 <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+               </div>
+               <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+             </div>
+           </div>
+         `;
 
-          // ✅ Image navigation
-          modalContent.querySelector('#prev-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            document.getElementById('main-modal-image').src = images[currentImageIndex];
-          });
-          modalContent.querySelector('#next-img').addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            document.getElementById('main-modal-image').src = images[currentImageIndex];
-          });
+modal.classList.remove('hidden');
 
-          // ✅ Fullscreen zoom
-          modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
-            const img = document.getElementById('main-modal-image');
-            if (img.requestFullscreen) img.requestFullscreen();
-          });
+// 🆕 Add to cart from modal
+modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
+addToCart({ name, price: discountedPrice });
+});
 
-          // ✅ Quantity selector logic
-          let quantity = 1;
-          modalContent.querySelector('#increase-qty').addEventListener('click', () => {
-            quantity++;
-            modalContent.querySelector('#quantity').textContent = quantity;
-          });
-          modalContent.querySelector('#decrease-qty').addEventListener('click', () => {
-            if (quantity > 1) quantity--;
-            modalContent.querySelector('#quantity').textContent = quantity;
-          });
+// 🔁 Left/right arrow handlers
+modalContent.querySelector('#prev-img').addEventListener('click', () => {
+currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+document.getElementById('main-modal-image').src = images[currentImageIndex];
+});
 
-          // ✅ Add to cart with quantity
-          modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
-            addToCart({ name, price, quantity });
-            modal.classList.add('hidden');
-          });
-        });
-      });
+modalContent.querySelector('#next-img').addEventListener('click', () => {
+currentImageIndex = (currentImageIndex + 1) % images.length;
+document.getElementById('main-modal-image').src = images[currentImageIndex];
+});
 
-      // ✅ Close modal
-      document.getElementById('modal-close').addEventListener('click', () => {
-        document.getElementById('product-modal').classList.add('hidden');
-      });
-    } catch (error) {
-      console.error("Error loading products:", error);
-    }
-  }
+// ⛶ Fullscreen on image click
+modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
+const img = document.getElementById('main-modal-image');
+if (img.requestFullscreen) img.requestFullscreen();
+});
+});
+
+// Hover slideshow on product card
+let interval;
+let currentImage = 0;
+card.addEventListener('mouseenter', () => {
+if (images.length > 1) {
+interval = setInterval(() => {
+currentImage = (currentImage + 1) % images.length;
+const img = document.getElementById(imageId);
+if (img) img.src = images[currentImage];
+}, 1000);
+}
+});
+card.addEventListener('mouseleave', () => {
+clearInterval(interval);
+const img = document.getElementById(imageId);
+if (img) img.src = images[0];
+});
+
+grid.appendChild(card);
+});
+} catch (err) {
+console.error("Failed to load products:", err);
+document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
+}
+}
+
+window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
-  loadProducts();
+loadProducts();
 </script>
-
 <!-- Scroll Animation for Artisan Images -->
 <script>
 const observer = new IntersectionObserver((entries) => {
