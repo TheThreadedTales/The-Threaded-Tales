@@ -439,7 +439,7 @@ document.getElementById("modal-content").innerHTML = "";
 }
 });
 
-<script>
+
   async function loadProducts() {
     try {
       const response = await fetch('./handloom_products.json');
@@ -541,7 +541,7 @@ document.getElementById("modal-content").innerHTML = "";
       console.error("Error loading products:", error);
     }
   }
-
+</script>
   loadProducts();
 </script>
 
