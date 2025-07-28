@@ -176,14 +176,14 @@
     </button>
   </div>
 </div>
-  <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
-  <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
-    <div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-      <!-- ❌ Modal Close -->
-      <button id="modal-close" class="absolute top-2 right-2 text-gray-700 hover:text-red-600 text-2xl font-bold">&times;</button>
-      <div id="modal-content"></div>
-    </div>
+ <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
+<div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+  <div id="modal-content" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+    <!-- ❌ Modal Close -->
+    <button id="modal-close" class="absolute top-2 right-2 text-gray-700 hover:text-red-600 text-2xl font-bold">&times;</button>
   </div>
+</div>
+
 
 
 <!-- Artisans Section -->
@@ -402,8 +402,9 @@
       const products = await response.json();
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
+       const container = document.getElementById('product-container');
 
-      products.forEach((product, index) => {
+products.forEach((product, index) => {
   const { name, description, price: originalPrice, images = [], details = {} } = product;
   const discountedPrice = Math.floor(originalPrice * 0.5);
   const imageId = `product-image-${index}`;
@@ -430,29 +431,17 @@
     </div>
   `;
 
+  // Add to cart from card
   card.querySelector('.add-to-cart').addEventListener('click', () => {
     addToCart({ name, price: discountedPrice });
   });
 
+  // View Details Modal
   card.querySelector('.view-details').addEventListener('click', () => {
     const modal = document.getElementById('product-modal');
     const modalContent = document.getElementById('modal-content');
     let currentImageIndex = 0;
 
-    const updateMainImage = () => {
-      document.getElementById('main-modal-image').src = images[currentImageIndex];
-      highlightThumbnail(currentImageIndex);
-    };
-
-    const highlightThumbnail = (index) => {
-      const thumbnails = modalContent.querySelectorAll('.thumbnail-img');
-      thumbnails.forEach((thumb, i) => {
-        thumb.classList.toggle('ring-2', i === index);
-        thumb.classList.toggle('ring-blue-500', i === index);
-      });
-    };
-
-    // Parse bullet points
     const otherDetailsArray = (details["Other Details"] || "")
       .split(" , ")
       .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
@@ -484,7 +473,7 @@
           <!-- Thumbnails -->
           <div class="flex mt-2 space-x-2 overflow-x-auto">
             ${images.map((img, i) => `
-              <img src="${img}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" data-index="${i}" />
+              <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" data-index="${i}" />
             `).join('')}
           </div>
         </div>
@@ -508,7 +497,7 @@
           <div class="flex items-center mt-4 space-x-2">
             <label for="modalQty" class="text-gray-600">Quantity:</label>
             <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-            <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="add-to-cart bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
               Add to Cart
             </button>
           </div>
@@ -516,7 +505,10 @@
       </div>
     `;
 
-    // 🖼 Fullscreen handler
+    // ✅ Modal behavior scripts
+    modal.classList.remove('hidden');
+
+    // Fullscreen zoom
     setTimeout(() => {
       const mainImage = document.getElementById('main-modal-image');
       mainImage.addEventListener('click', () => {
@@ -528,32 +520,32 @@
       });
     }, 0);
 
-    // Show modal
-    modal.classList.remove('hidden');
-
-    // ⬅ Prev arrow
+    // Arrows
     modalContent.querySelector('#prev-img').addEventListener('click', () => {
       currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      updateMainImage();
+      document.getElementById('main-modal-image').src = images[currentImageIndex];
     });
 
-    // ➡ Next arrow
     modalContent.querySelector('#next-img').addEventListener('click', () => {
       currentImageIndex = (currentImageIndex + 1) % images.length;
-      updateMainImage();
+      document.getElementById('main-modal-image').src = images[currentImageIndex];
     });
 
-    // 🖱️ Thumbnail clicks
-    modalContent.querySelectorAll('.thumbnail-img').forEach((thumb, i) => {
-      thumb.addEventListener('click', () => {
-        currentImageIndex = i;
-        updateMainImage();
+    // Thumbnails click
+    modalContent.querySelectorAll('.w-16').forEach(thumb => {
+      thumb.addEventListener('click', (e) => {
+        currentImageIndex = parseInt(e.target.getAttribute('data-index'));
+        document.getElementById('main-modal-image').src = images[currentImageIndex];
       });
     });
   });
 
-  document.getElementById('product-container').appendChild(card);
+  container.appendChild(card);
 });
+
+     
+
+  
 
         // Hover slideshow on product card
         let interval;
