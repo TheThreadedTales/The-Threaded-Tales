@@ -436,7 +436,9 @@
 card.querySelector('.view-details').addEventListener('click', () => {
   const modal = document.getElementById('product-modal');
   const modalContent = document.getElementById('modal-content');
-  let currentImageIndex = 0;
+  const images = product.images;          // ✅ Add this
+  let currentImageIndex = 0;  
+ 
 
   const updateMainImage = () => {
     document.getElementById('main-modal-image').src = images[currentImageIndex];
