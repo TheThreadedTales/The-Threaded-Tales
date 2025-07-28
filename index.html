@@ -397,139 +397,156 @@
       document.getElementById("modal-content").innerHTML = "";
     }
   });
-
-  async function loadProducts() {
+ async function loadProducts() {
     try {
       const response = await fetch('./handloom_products.json');
       const products = await response.json();
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
-       const container = document.getElementById('product-container');
-      .catch(error => {
-  console.error("Error loading products:", error);
-});
 
+      products.forEach((product, index) => {
+        const { name, description, price: originalPrice, images = [], details = {} } = product;
+        const discountedPrice = Math.floor(originalPrice * 0.5);
+        const imageId = `product-image-${index}`;
 
-     // ✅ Final corrected code for product rendering + modal integration
-products.forEach(product => {
-  const card = document.createElement("div");
-  card.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
-
-  const images = product.images || ["/placeholder.jpg"];
-  const name = product.name;
-  const description = product.description;
-  const originalPrice = product.originalPrice;
-  const discountedPrice = product.discountedPrice;
-  const details = product.details || {};
-
-  card.innerHTML = `
-    <img src="${images[0]}" class="w-full h-48 object-cover rounded mb-2">
-    <h3 class="text-lg font-bold">${name}</h3>
-    <p class="text-sm text-gray-600">${description}</p>
-    <div class="mt-auto">
-      <p class="text-gray-900 font-semibold mt-2">₹${discountedPrice}</p>
-      <button class="mt-2 view-details bg-black text-white px-4 py-1 rounded">View Details</button>
-    </div>
-  `;
-// Optional: Add modal trigger
-      card.addEventListener('click', () => showProductModal(product, index));
-      grid.appendChild(card);
-    });
-  } catch (error) {
-    console.error("❌ Error loading products:", error);
-  }
-}
-  document.getElementById("products-grid").appendChild(card);
-
-  card.querySelector(".view-details").addEventListener("click", () => {
-    const modal = document.getElementById("product-modal");
-    const modalContent = document.getElementById("modal-content");
-    let currentImageIndex = 0;
-
-    const otherDetailsArray = (details["Other Details"] || "")
-      .split(" , ")
-      .map(
-        detail => `<li class="list-disc ml-6 text-gray-700 text-sm">${detail}</li>`
-      )
-      .join("");
-
-    modalContent.innerHTML = `
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-        <div>
-          <div class="relative">
-            <img src="${images[0]}" id="main-modal-image"
-              class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
-
-            <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+        const card = document.createElement('div');
+        card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+        card.innerHTML = `
+          <div class="relative h-72 overflow-hidden">
+            <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
           </div>
-
-          <div class="flex mt-2 space-x-2 overflow-x-auto">
-            ${images.map((img, i) => `
-              <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
-            `).join('')}
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">${name}</h3>
+            <p class="text-sm text-gray-600 mt-1">${description}</p>
+            <div class="mt-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+                <span class="line-through text-gray-400">₹${originalPrice}</span>
+                <span class="text-green-600 font-semibold">50% off</span>
+              </div>
+              <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+            </div>
+            <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+            <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
           </div>
+        `;
+
+        card.querySelector('.add-to-cart').addEventListener('click', () => {
+          addToCart({ name, price: discountedPrice });
+        });
+card.querySelector('.view-details').addEventListener('click', () => {
+  const modal = document.getElementById('product-modal');
+  const modalContent = document.getElementById('modal-content');
+  const images = product.images;          // ✅ Add this
+  let currentImageIndex = 0;  
+ 
+
+  const updateMainImage = () => {
+    document.getElementById('main-modal-image').src = images[currentImageIndex];
+  };
+
+  // Parse bullet points
+  const otherDetailsArray = (details["Other Details"] || "")
+    .split(" , ")
+    .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
+    .join('');
+
+  modalContent.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+      <!-- Left: Image with arrows + thumbnails -->
+      <div>
+        <div class="relative">
+          <img src="${images[0]}" id="main-modal-image"
+            class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
+
+          <!-- Left Arrow -->
+          <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <!-- Right Arrow -->
+          <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
 
-        <div class="text-sm text-gray-700 space-y-2">
-          <h2 class="text-2xl font-bold">${name}</h2>
-          <p>${description}</p>
-          <p class="text-xl font-semibold mt-2">₹${originalPrice}</p>
-
-          <div class="space-y-1 mt-3">
-            <p><strong>Fabric:</strong> ${details.fabric}</p>
-            <p><strong>Dimensions:</strong> ${details.dimensions}</p>
-            <p><strong>Wash Care:</strong> ${details.washCare}</p>
-            <div>
-              <strong>Other Details:</strong>
-              <ul class="mt-1">${otherDetailsArray}</ul>
-            </div>
-          </div>
-
-          <div class="flex items-center mt-4 space-x-2">
-            <label for="modalQty" class="text-gray-600">Quantity:</label>
-            <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-            <button class="add-to-cart bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
-              Add to Cart
-            </button>
-          </div>
+        <!-- Thumbnails -->
+        <div class="flex mt-2 space-x-2 overflow-x-auto">
+          ${images.map((img, i) => `
+            <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
+          `).join('')}
         </div>
       </div>
-    `;
 
-    modal.classList.remove("hidden");
+      <!-- Right: Details -->
+      <div class="text-sm text-gray-700 space-y-2">
+        <h2 class="text-2xl font-bold">${name}</h2>
+        <p>${description}</p>
+        <p class="text-xl font-semibold mt-2">₹${originalPrice}</p>
 
-    modalContent.querySelector(".add-to-cart").addEventListener("click", () => {
-      const qty = parseInt(document.getElementById("modalQty").value) || 1;
-      addToCart({ ...product, quantity: qty });
-    });
+        <div class="space-y-1 mt-3">
+          <p><strong>Fabric:</strong> ${details.fabric}</p>
+          <p><strong>Dimensions:</strong> ${details.dimensions}</p>
+          <p><strong>Wash Care:</strong> ${details.washCare}</p>
+          <div>
+            <strong>Other Details:</strong>
+            <ul class="mt-1">${otherDetailsArray}</ul>
+          </div>
+        </div>
 
-    modalContent.querySelector("#prev-img").addEventListener("click", () => {
-      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      document.getElementById("main-modal-image").src = images[currentImageIndex];
-    });
-
-    modalContent.querySelector("#next-img").addEventListener("click", () => {
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      document.getElementById("main-modal-image").src = images[currentImageIndex];
-    });
-
-    modalContent.querySelector("#main-modal-image").addEventListener("click", () => {
-      const img = document.getElementById("main-modal-image");
-      if (img.requestFullscreen) img.requestFullscreen();
-    });
+        <div class="flex items-center mt-4 space-x-2">
+          <label for="modalQty" class="text-gray-600">Quantity:</label>
+          <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
+          <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+// ✅ PLACE FULLSCREEN HANDLER IMMEDIATELY BELOW
+setTimeout(() => {
+  const mainImage = document.getElementById('main-modal-image');
+  mainImage.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      mainImage.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
   });
-});
+}, 0);
+  // Show modal
+  modal.classList.remove('hidden');
+      
 
+          // 🆕 Add to cart from modal
+          modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
+            addToCart({ name, price: discountedPrice });
+          });
+
+           modalContent.querySelector('#prev-img').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            document.getElementById('main-modal-image').src = images[currentImageIndex];
+          });   
+           modalContent.querySelector('#next-img').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('main-modal-image').src = images[currentImageIndex];
+          });
+
+          // ⛶ Fullscreen on image click
+          modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
+            const img = document.getElementById('main-modal-image');
+            if (img.requestFullscreen) img.requestFullscreen();
+          });
+        });
+ 
+
+
+   
   
 
         // Hover slideshow on product card
