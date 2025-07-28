@@ -405,6 +405,10 @@
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
        const container = document.getElementById('product-container');
+      .catch(error => {
+  console.error("Error loading products:", error);
+});
+
 
      // ✅ Final corrected code for product rendering + modal integration
 products.forEach(product => {
@@ -427,7 +431,14 @@ products.forEach(product => {
       <button class="mt-2 view-details bg-black text-white px-4 py-1 rounded">View Details</button>
     </div>
   `;
-
+// Optional: Add modal trigger
+      card.addEventListener('click', () => showProductModal(product, index));
+      grid.appendChild(card);
+    });
+  } catch (error) {
+    console.error("❌ Error loading products:", error);
+  }
+}
   document.getElementById("products-grid").appendChild(card);
 
   card.querySelector(".view-details").addEventListener("click", () => {
