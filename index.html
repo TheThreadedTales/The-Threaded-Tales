@@ -29,7 +29,7 @@
       transform: translateX(-100%);
     }
   }   
- 
+
     .tango {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
@@ -155,11 +155,9 @@
     <h2 class="text-4xl font-semibold">Our Products</h2>
     <p class="text-gray-600 mt-2">Explore the collection</p>
   </div>
-  <!-- ✅ MUST EXIST IN HTML -->
-<div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 mt-6"></div>
-
+  <div id="product-grid" class="grid md:grid-cols-4 gap-6"></div>
 </section>
-  
+
 
 <!-- Cart Button + Modal -->
 <button id="cart-button" class="fixed top-20 right-4 z-50 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 shadow-lg border border-black">
@@ -178,14 +176,14 @@
     </button>
   </div>
 </div>
- <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
-<div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
-  <div id="modal-content" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-    <!-- ❌ Modal Close -->
-    <button id="modal-close" class="absolute top-2 right-2 text-gray-700 hover:text-red-600 text-2xl font-bold">&times;</button>
+  <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
+  <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+    <div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+      <!-- ❌ Modal Close -->
+      <button id="modal-close" class="absolute top-2 right-2 text-gray-700 hover:text-red-600 text-2xl font-bold">&times;</button>
+      <div id="modal-content"></div>
+    </div>
   </div>
-</div>
-
 
 
 <!-- Artisans Section -->
@@ -300,7 +298,7 @@
 <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
   <div class="bg-white max-w-2xl w-full rounded-lg shadow-lg overflow-hidden relative">
     <button id="modal-close" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl">&times;</button>
-    
+
     <div id="modal-content" class="p-6 overflow-y-auto max-h-[80vh]">
       <!-- JS will inject product details here -->
     </div>
@@ -397,7 +395,8 @@
       document.getElementById("modal-content").innerHTML = "";
     }
   });
- async function loadProducts() {
+
+  async function loadProducts() {
     try {
       const response = await fetch('./handloom_products.json');
       const products = await response.json();
@@ -434,102 +433,73 @@
         card.querySelector('.add-to-cart').addEventListener('click', () => {
           addToCart({ name, price: discountedPrice });
         });
-card.querySelector('.view-details').addEventListener('click', () => {
-  const modal = document.getElementById('product-modal');
-  const modalContent = document.getElementById('modal-content');
-  let currentImageIndex = 0;
 
-  const updateMainImage = () => {
-    document.getElementById('main-modal-image').src = images[currentImageIndex];
-  };
+        // 🆕 View Details button click = open modal
+        card.querySelector('.view-details').addEventListener('click', () => {
+          const modal = document.getElementById('product-modal');
+          const modalContent = document.getElementById('modal-content');
+          let currentImageIndex = 0;
 
-  // Parse bullet points
-  const otherDetailsArray = (details["Other Details"] || "")
-    .split(" , ")
-    .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
-    .join('');
+          function renderModalImage() {
+            return `<img src="${images[currentImageIndex]}" 
+              id="main-modal-image"
+              class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
+          }
+        
 
-  modalContent.innerHTML = `
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-      <!-- Left: Image with arrows + thumbnails -->
-      <div>
-        <div class="relative">
-          <img src="${images[0]}" id="main-modal-image"
-            class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
+          modalContent.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+              <div>
+                <div class="relative">
+                  ${renderModalImage()}
+                  <!-- 🔁 Left Arrow (points left) -->
+<button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+</button>
 
-          <!-- Left Arrow -->
-          <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+<!-- 🔁 Right Arrow (points right) -->
+<button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+  </svg>
+</button>
 
-          <!-- Right Arrow -->
-          <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
+               
 
-        <!-- Thumbnails -->
-        <div class="flex mt-2 space-x-2 overflow-x-auto">
-          ${images.map((img, i) => `
-            <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
-          `).join('')}
-        </div>
-      </div>
-
-      <!-- Right: Details -->
-      <div class="text-sm text-gray-700 space-y-2">
-        <h2 class="text-2xl font-bold">${name}</h2>
-        <p>${description}</p>
-        <p class="text-xl font-semibold mt-2">₹${originalPrice}</p>
-
-        <div class="space-y-1 mt-3">
-          <p><strong>Fabric:</strong> ${details.fabric}</p>
-          <p><strong>Dimensions:</strong> ${details.dimensions}</p>
-          <p><strong>Wash Care:</strong> ${details.washCare}</p>
-          <div>
-            <strong>Other Details:</strong>
-            <ul class="mt-1">${otherDetailsArray}</ul>
-          </div>
-        </div> 
-         <div class="flex items-center mt-4 space-x-2">
-          <label for="modalQty" class="text-gray-600">Quantity:</label>
-          <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-          <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-// ✅ PLACE FULLSCREEN HANDLER IMMEDIATELY BELOW
-// ✅ PLACE FULLSCREEN HANDLER IMMEDIATELY BELOW
-setTimeout(() => {
-  const mainImage = document.getElementById('main-modal-image');
-  mainImage.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      mainImage.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  });
-}, 0);
-  // Show modal
-  modal.classList.remove('hidden');
+                </div>
+                <div class="flex mt-2 space-x-2 overflow-x-auto">
+                  ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+                </div>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">${name}</h2>
+                <p class="text-sm text-gray-600 mt-1">${description}</p>
+                <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+                <div class="mt-4 text-sm">
+                  <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+                  <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+                  <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+                </div>
+                <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+              </div>
+            </div>
+ 
+          modal.classList.remove('hidden');
 
           // 🆕 Add to cart from modal
           modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
             addToCart({ name, price: discountedPrice });
           });
 
-           modalContent.querySelector('#prev-img').addEventListener('click', () => {
+          // 🔁 Left/right arrow handlers
+          modalContent.querySelector('#prev-img').addEventListener('click', () => {
             currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
             document.getElementById('main-modal-image').src = images[currentImageIndex];
-          });   
-           modalContent.querySelector('#next-img').addEventListener('click', () => {
+          });
+
+          modalContent.querySelector('#next-img').addEventListener('click', () => {
             currentImageIndex = (currentImageIndex + 1) % images.length;
             document.getElementById('main-modal-image').src = images[currentImageIndex];
           });
@@ -540,11 +510,6 @@ setTimeout(() => {
             if (img.requestFullscreen) img.requestFullscreen();
           });
         });
- 
-
-
-   
-  
 
         // Hover slideshow on product card
         let interval;
@@ -594,7 +559,7 @@ setTimeout(() => {
 </script>
   <script>
 // Set the deadline (change date as needed)
-const deadline = new Date("2025-07-31T23:59:59").getTime();
+const deadline = new Date("2025-07-26T23:59:59").getTime();
 
 const countdownInterval = setInterval(() => {
   const now = new Date().getTime();
@@ -613,7 +578,7 @@ const countdownInterval = setInterval(() => {
 
   document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }, 1000);
-    
+
 </script>
 
 </body>
