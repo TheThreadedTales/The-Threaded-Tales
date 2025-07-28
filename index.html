@@ -433,73 +433,92 @@
         card.querySelector('.add-to-cart').addEventListener('click', () => {
           addToCart({ name, price: discountedPrice });
         });
+card.querySelector('.view-details').addEventListener('click', () => {
+  const modal = document.getElementById('product-modal');
+  const modalContent = document.getElementById('modal-content');
+  let currentImageIndex = 0;
 
-        // 🆕 View Details button click = open modal
-        card.querySelector('.view-details').addEventListener('click', () => {
-          const modal = document.getElementById('product-modal');
-          const modalContent = document.getElementById('modal-content');
-          let currentImageIndex = 0;
+  const updateMainImage = () => {
+    document.getElementById('main-modal-image').src = images[currentImageIndex];
+  };
 
-          function renderModalImage() {
-            return `<img src="${images[currentImageIndex]}" 
-              id="main-modal-image"
-              class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
-          }
-        
-         // Parse "Other Details" into bullet list
-const otherDetailsArray = (details["Other Details"] || "")
-  .split(" , ")
-  .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
-  .join('');
+  // Parse bullet points
+  const otherDetailsArray = (details["Other Details"] || "")
+    .split(" , ")
+    .map(detail => `<li class="list-disc ml-6">${detail}</li>`)
+    .join('');
 
-modalContent.innerHTML = `
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-    <div>
-      <div class="relative">
-        ${renderModalImage()}
+  modalContent.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+      <!-- Left: Image with arrows + thumbnails -->
+      <div>
+        <div class="relative">
+          <img src="${images[0]}" id="main-modal-image"
+            class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />
 
-        <!-- Arrows -->
-        <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-    </div>
+          <!-- Left Arrow -->
+          <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
-    <!-- Product Details -->
-    <div class="text-sm text-gray-700 space-y-2">
-      <h2 class="text-2xl font-bold">${name}</h2>
-      <p>${description}</p>
-      <p class="text-xl font-semibold mt-2">₹${originalPrice}</p>
+          <!-- Right Arrow -->
+          <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
 
-      <div class="space-y-1 mt-3">
-        <p><strong>Fabric:</strong> ${details.fabric}</p>
-        <p><strong>Dimensions:</strong> ${details.dimensions}</p>
-        <p><strong>Wash Care:</strong> ${details.washCare}</p>
-        <div>
-          <strong>Other Details:</strong>
-          <ul class="mt-1">${otherDetailsArray}</ul>
+        <!-- Thumbnails -->
+        <div class="flex mt-2 space-x-2 overflow-x-auto">
+          ${images.map((img, i) => `
+            <img src="${img}" class="w-16 h-16 object-cover rounded cursor-pointer border hover:ring-2 ${i === 0 ? 'ring-2 ring-blue-500' : ''}" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
+          `).join('')}
         </div>
       </div>
 
-      <div class="flex items-center mt-4 space-x-2">
-        <label for="modalQty" class="text-gray-600">Quantity:</label>
-        <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
-        <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
-          Add to Cart
-        </button>
+      <!-- Right: Details -->
+      <div class="text-sm text-gray-700 space-y-2">
+        <h2 class="text-2xl font-bold">${name}</h2>
+        <p>${description}</p>
+        <p class="text-xl font-semibold mt-2">₹${originalPrice}</p>
+
+        <div class="space-y-1 mt-3">
+          <p><strong>Fabric:</strong> ${details.fabric}</p>
+          <p><strong>Dimensions:</strong> ${details.dimensions}</p>
+          <p><strong>Wash Care:</strong> ${details.washCare}</p>
+          <div>
+            <strong>Other Details:</strong>
+            <ul class="mt-1">${otherDetailsArray}</ul>
+          </div>
+        </div>
+
+        <div class="flex items-center mt-4 space-x-2">
+          <label for="modalQty" class="text-gray-600">Quantity:</label>
+          <input type="number" id="modalQty" value="1" min="1" class="w-16 border rounded-md px-2 py-1">
+          <button onclick='addToCartFromModal(${JSON.stringify(product)})' class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-`;
-
-          modal.classList.remove('hidden');
+  `;
+// ✅ PLACE FULLSCREEN HANDLER IMMEDIATELY BELOW
+setTimeout(() => {
+  const mainImage = document.getElementById('main-modal-image');
+  mainImage.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      mainImage.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+}, 0);
+  // Show modal
+  modal.classList.remove('hidden');
+       modal.classList.remove('hidden');
 
           // 🆕 Add to cart from modal
           modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
