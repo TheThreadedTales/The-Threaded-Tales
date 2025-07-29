@@ -520,11 +520,20 @@ modalContent.innerHTML = `
                <h2 class="text-2xl font-bold">${name}</h2>
                <p class="text-sm text-gray-600 mt-1">${description}</p>
                <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
-               <div class="mt-4 text-sm">
-                 <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
-                 <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
-                 <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
-               </div>
+               <div class="mt-4 text-sm space-y-1">
+               <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+              <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+              <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+
+              ${
+              details["Other Details"]
+              ? `<div><strong>Other Features:</strong><ul class="list-disc list-inside text-gray-600 mt-1">` +
+               details["Other Details"].split(',').map(item => `<li>${item.trim()}</li>`).join('') +
+              `</ul></div>`
+             : ''
+              }
+              </div>
+
                <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
              </div>
            </div>
