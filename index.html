@@ -348,35 +348,35 @@ Follow us on
 <script>
 let cart = [];
 
-function addToCart(product, quantity = 1) {
-  const existing = cart.find(p => p.name === product.name);
-  if (existing) existing.qty += quantity;
-  else cart.push({ ...product, qty: quantity });
-  updateCartCount();
+function addToCart(product) {
+const existing = cart.find(p => p.name === product.name);
+if (existing) existing.qty += 1;
+else cart.push({ ...product, qty: 1 });
+updateCartCount();
 }
 
 function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
 }
 
 function openCart() {
-  document.getElementById('cart-modal').classList.remove('hidden');
-  renderCart();
+document.getElementById('cart-modal').classList.remove('hidden');
+renderCart();
 }
 
 function closeCart() {
-  document.getElementById('cart-modal').classList.add('hidden');
+document.getElementById('cart-modal').classList.add('hidden');
 }
 
 function renderCart() {
-  const list = document.getElementById('cart-items');
-  list.innerHTML = '';
-  let total = 0;
+const list = document.getElementById('cart-items');
+list.innerHTML = '';
+let total = 0;
 
-  cart.forEach((item, index) => {
-    total += item.price * item.qty;
-    const li = document.createElement('li');
-    li.innerHTML = `
+cart.forEach((item, index) => {
+total += item.price * item.qty;
+const li = document.createElement('li');
+li.innerHTML = `
        <div class="flex justify-between items-center">
          <div>
            <p><strong>${item.name}</strong></p>
@@ -389,34 +389,34 @@ function renderCart() {
          </div>
        </div>
      `;
-    list.appendChild(li);
-  });
+list.appendChild(li);
+});
 
-  const totalElem = document.createElement('li');
-  totalElem.innerHTML = `<hr class="my-2" />
+const totalElem = document.createElement('li');
+totalElem.innerHTML = `<hr class="my-2" />
      <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
-  list.appendChild(totalElem);
+list.appendChild(totalElem);
 }
 
 function changeQty(index, delta) {
-  if (cart[index]) {
-    cart[index].qty += delta;
-    if (cart[index].qty <= 0) cart.splice(index, 1);
-    updateCartCount();
-    renderCart();
-  }
+if (cart[index]) {
+cart[index].qty += delta;
+if (cart[index].qty <= 0) cart.splice(index, 1);
+updateCartCount();
+renderCart();
+}
 }
 
 function removeItem(index) {
-  cart.splice(index, 1);
-  updateCartCount();
-  renderCart();
+cart.splice(index, 1);
+updateCartCount();
+renderCart();
 }
 
 function checkoutOnWhatsApp() {
-  const summary = cart.map(item => `${item.name} (x${item.qty})`).join('%0A');
-  const url = `https://wa.me/918607115548?text=Hi%20Threaded%20Tales%2C%20I%20want%20to%20order:%0A${summary}`;
-  window.open(url, '_blank');
+const summary = cart.map(item => `${item.name} (x${item.qty})`).join('%0A');
+const url = `https://wa.me/918607115548?text=Hi%20Threaded%20Tales%2C%20I%20want%20to%20order:%0A${summary}`;
+window.open(url, '_blank');
 }
 
 document.getElementById('cart-button').addEventListener('click', openCart);
@@ -424,44 +424,232 @@ document.getElementById('close-cart').addEventListener('click', closeCart);
 document.getElementById('checkout-btn').addEventListener('click', checkoutOnWhatsApp);
 
 document.getElementById("modal-close").addEventListener("click", () => {
-  document.getElementById("product-modal").classList.add("hidden");
-  document.getElementById("modal-content").innerHTML = "";
+document.getElementById("product-modal").classList.add("hidden");
+document.getElementById("modal-content").innerHTML = "";
 });
 
 document.getElementById("product-modal").addEventListener("click", (e) => {
-  if (e.target === document.getElementById("product-modal")) {
-    document.getElementById("product-modal").classList.add("hidden");
-    document.getElementById("modal-content").innerHTML = "";
-  }
+if (e.target === document.getElementById("product-modal")) {
+document.getElementById("product-modal").classList.add("hidden");
+document.getElementById("modal-content").innerHTML = "";
+}
 });
 
-// ✅ Quantity logic for modal
-let currentQty = 1;
-function resetQuantity() {
-  currentQty = 1;
-  const qtyElem = document.getElementById('product-quantity');
-  if (qtyElem) qtyElem.textContent = currentQty;
+async function loadProducts() {
+try {
+const response = await fetch('./handloom_products.json');
+const products = await response.json();
+const grid = document.getElementById('product-grid');
+grid.innerHTML = '';
+
+products.forEach((product, index) => {
+const { name, description, price: originalPrice, images = [], details = {} } = product;
+const discountedPrice = Math.floor(originalPrice * 0.5);
+const imageId = `product-image-${index}`;
+
+const card = document.createElement('div');
+card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+card.innerHTML = `
+         <div class="relative h-72 overflow-hidden">
+           <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+         </div>
+         <div class="p-4">
+           <h3 class="text-xl font-semibold">${name}</h3>
+           <p class="text-sm text-gray-600 mt-1">${description}</p>
+           <div class="mt-3">
+             <div class="flex items-center space-x-2">
+               <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+               <span class="line-through text-gray-400">₹${originalPrice}</span>
+               <span class="text-green-600 font-semibold">50% off</span>
+             </div>
+             <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+           </div>
+           <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+           <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+         </div>
+       `;
+
+card.querySelector('.add-to-cart').addEventListener('click', () => {
+addToCart({ name, price: discountedPrice });
+});
+
+// 🆕 View Details button click = open modal
+card.querySelector('.view-details').addEventListener('click', () => {
+const modal = document.getElementById('product-modal');
+const modalContent = document.getElementById('modal-content');
+let currentImageIndex = 0;
+
+function renderModalImage() {
+return `<img src="${images[currentImageIndex]}" 
+             id="main-modal-image"
+             class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
 }
 
-document.addEventListener("click", function (e) {
-  if (e.target.id === 'increase-qty') {
-    currentQty++;
-    document.getElementById('product-quantity').textContent = currentQty;
-  }
-  if (e.target.id === 'decrease-qty') {
-    if (currentQty > 1) {
-      currentQty--;
-      document.getElementById('product-quantity').textContent = currentQty;
-    }
-  }
-  if (e.target.id === 'modal-add-to-cart') {
-    const productName = document.getElementById("modal-product-name").textContent;
-    const price = parseInt(document.getElementById("modal-product-price").textContent.replace('₹', ''));
-    addToCart({ name: productName, price: price }, currentQty);
-    resetQuantity();
-    document.getElementById("product-modal").classList.add("hidden");
-  }
+modalContent.innerHTML = `
+           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+             <div>
+               <div class="relative">
+                 ${renderModalImage()}
+                
+                  <!-- 🔁 Left Arrow (points left) -->
+<button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+</button>
+
+<!-- 🔁 Right Arrow (points right) -->
+<button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+  </svg>
+</button>
+
+               
+
+               </div>
+               <div class="flex mt-2 space-x-2 overflow-x-auto">
+                 ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+               </div>
+             </div>
+             <div>
+               <h2 class="text-2xl font-bold">${name}</h2>
+               <p class="text-sm text-gray-600 mt-1">${description}</p>
+               <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+               <div class="mt-4 text-sm space-y-1">
+               <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+              <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+              <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+
+              ${
+              details["Other Details"]
+              ? `<div><strong>Other Features:</strong><ul class="list-disc list-inside text-gray-600 mt-1">` +
+               details["Other Details"].split(',').map(item => `<li>${item.trim()}</li>`).join('') +
+              `</ul></div>`
+             : ''
+              }
+              </div>
+
+               <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+             </div>
+           </div>
+         `;
+
+modal.classList.remove('hidden');
+
+// 🆕 Add to cart from modal
+modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
+addToCart({ name, price: discountedPrice });
+});
+
+// 🔁 Left/right arrow handlers
+modalContent.querySelector('#prev-img').addEventListener('click', () => {
+currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+document.getElementById('main-modal-image').src = images[currentImageIndex];
+});
+
+modalContent.querySelector('#next-img').addEventListener('click', () => {
+currentImageIndex = (currentImageIndex + 1) % images.length;
+document.getElementById('main-modal-image').src = images[currentImageIndex];
+});
+
+// ⛶ Fullscreen on image click
+modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
+const img = document.getElementById('main-modal-image');
+if (img.requestFullscreen) img.requestFullscreen();
+});
+});
+
+// Hover slideshow on product card
+let interval;
+let currentImage = 0;
+card.addEventListener('mouseenter', () => {
+if (images.length > 1) {
+interval = setInterval(() => {
+currentImage = (currentImage + 1) % images.length;
+const img = document.getElementById(imageId);
+if (img) img.src = images[currentImage];
+}, 1000);
+}
+});
+card.addEventListener('mouseleave', () => {
+clearInterval(interval);
+const img = document.getElementById(imageId);
+if (img) img.src = images[0];
+});
+
+grid.appendChild(card);
+});
+} catch (err) {
+console.error("Failed to load products:", err);
+document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
+}
+}
+
+window.addEventListener('DOMContentLoaded', loadProducts);
+</script>
+loadProducts();
+</script>
+<!-- Scroll Animation for Artisan Images -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('show');
+}
+});
+}, {
+threshold: 0.2
+});
+
+document.querySelectorAll('.fade-in-up').forEach(el => {
+observer.observe(el);
 });
 </script>
-/body>
+<script>
+// Set the deadline (change date as needed)
+const deadline = new Date("2025-07-26T23:59:59").getTime();
+
+const countdownInterval = setInterval(() => {
+const now = new Date().getTime();
+const distance = deadline - now;
+
+if (distance < 0) {
+clearInterval(countdownInterval);
+document.getElementById("countdown").textContent = "Offer Ended";
+return;
+}
+
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
+
+</script>
+<script>
+  // ✅ Modal close functionality
+  document.getElementById('modal-close').addEventListener('click', function () {
+    document.getElementById('product-modal').classList.add('hidden');
+  });
+
+  // ✅ Quantity increase/decrease logic
+  document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('qty-increase')) {
+      const qtyInput = e.target.closest('.quantity-selector').querySelector('.qty-input');
+      let value = parseInt(qtyInput.value) || 1;
+      qtyInput.value = value + 1;
+    }
+
+    if (e.target.classList.contains('qty-decrease')) {
+      const qtyInput = e.target.closest('.quantity-selector').querySelector('.qty-input');
+      let value = parseInt(qtyInput.value) || 1;
+      if (value > 1) qtyInput.value = value - 1;
+    }
+  });
+</script>
+
+</body>
 </html>
