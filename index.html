@@ -184,6 +184,10 @@ Checkout on WhatsApp
 <div id="modal-content"></div>
 </div>
 </div>
+  <div id="cart-toast" class="fixed bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-500 z-50">
+  Added to Cart!
+</div>
+
 
 
 <!-- Artisans Section -->
@@ -470,7 +474,8 @@ card.innerHTML = `
        `;
 
 card.querySelector('.add-to-cart').addEventListener('click', () => {
-addToCart({ name, price: discountedPrice });
+   addToCart({ name, price: discountedPrice });
+   showAddToCartToast();
 });
 
 // 🆕 View Details button click = open modal
@@ -552,6 +557,16 @@ modalContent.querySelector('#next-img').addEventListener('click', () => {
 currentImageIndex = (currentImageIndex + 1) % images.length;
 document.getElementById('main-modal-image').src = images[currentImageIndex];
 });
+function showAddToCartToast() {
+  const toast = document.getElementById("cart-toast");
+  toast.classList.remove("opacity-0");
+  toast.classList.add("opacity-100");
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-100");
+    toast.classList.add("opacity-0");
+  }, 2000); // Hide after 2 seconds
+}
 
 // ⛶ Fullscreen on image click
 modalContent.querySelector('#main-modal-image').addEventListener('click', () => {
@@ -585,7 +600,17 @@ console.error("Failed to load products:", err);
 document.getElementById('product-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load products. Please try again later.</p>";
 }
 }
+// ✅ Toast function
+function showAddToCartToast() {
+  const toast = document.getElementById("cart-toast");
+  toast.classList.remove("opacity-0");
+  toast.classList.add("opacity-100");
 
+  setTimeout(() => {
+    toast.classList.remove("opacity-100");
+    toast.classList.add("opacity-0");
+  }, 2000); // Hide after 2 seconds
+}
 window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
 loadProducts();
@@ -608,7 +633,7 @@ observer.observe(el);
 </script>
 <script>
 // Set the deadline (change date as needed)
-const deadline = new Date("2025-07-26T23:59:59").getTime();
+const deadline = new Date("2025-07-30T23:59:59").getTime();
 
 const countdownInterval = setInterval(() => {
 const now = new Date().getTime();
