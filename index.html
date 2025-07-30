@@ -544,7 +544,8 @@ modal.classList.remove('hidden');
 
 // 🆕 Add to cart from modal
 modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
-addToCart({ name, price: discountedPrice });
+ addToCart({ name, price: discountedPrice });
+ showAddToCartToast(); 
 });
 
 // 🔁 Left/right arrow handlers
