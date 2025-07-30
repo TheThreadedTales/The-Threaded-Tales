@@ -446,6 +446,19 @@ document.getElementById("modal-content").innerHTML = "";
 }
 });
 
+// ➕ Helper function: gets default image for a product (handles variants)
+function getDefaultImage(product) {
+  if (product.variants && product.variants.length > 0) {
+    return product.variants[0].images[0];
+  }
+  return product.images[0];
+}
+
+// ➕ Helper function: formats price as currency
+function formatPrice(price) {
+  return `₹${price}`;
+}
+
 async function loadProducts() {
 try {
 const response = await fetch('./handloom_products.json');
@@ -462,7 +475,7 @@ const card = document.createElement('div');
 card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
 card.innerHTML = `
          <div class="relative h-72 overflow-hidden">
-           <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+           <img src="${getDefaultImage(product)}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
          </div>
          <div class="p-4">
            <h3 class="text-xl font-semibold">${name}</h3>
@@ -528,6 +541,17 @@ modalContent.innerHTML = `
                <h2 class="text-2xl font-bold">${name}</h2>
                <p class="text-sm text-gray-600 mt-1">${description}</p>
                <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+               ${product.variants ? `
+               <div class="mt-4">
+               <p class="text-sm font-semibold mb-2">Available Variants:</p>
+               <div id="variant-options" class="flex flex-wrap gap-2">${product.variants.map((v, vi) => `
+               <button 
+               class="variant-btn px-3 py-1 rounded border border-gray-400 hover:bg-gray-100 text-sm transition"
+               data-index="${vi}">${v.name}</button>
+              `).join('')}
+               </div>
+               </div>
+               ` : ''}
                <div class="mt-4 text-sm space-y-1">
                <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
               <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
