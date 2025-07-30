@@ -467,7 +467,7 @@ async function loadProducts() {
     grid.innerHTML = '';
 
   products.forEach((product, index) => {
-  const { name, description, price: originalPrice, images = [], details = {} } = product;
+  const { name, description, price: originalPrice, details = {} } = product;
   const discountedPrice = Math.floor(originalPrice * 0.5);
   const imageId = `product-image-${index}`;
 
