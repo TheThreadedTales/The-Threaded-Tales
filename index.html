@@ -445,119 +445,108 @@ document.getElementById("product-modal").classList.add("hidden");
 document.getElementById("modal-content").innerHTML = "";
 }
 });
-
 async function loadProducts() {
-  try {
-    const response = await fetch('./handloom_products.json');
-    const products = await response.json();
-    const grid = document.getElementById('product-grid');
-    grid.innerHTML = '';
+try {
+const response = await fetch('./handloom_products.json');
+const products = await response.json();
+const grid = document.getElementById('product-grid');
+grid.innerHTML = '';
 
-  products.forEach((product, index) => {
-  const { name, description, price: originalPrice,img[], details = {} } = product;
-  const discountedPrice = Math.floor(originalPrice * 0.5);
-  const imageId = `product-image-${index}`;
+products.forEach((product, index) => {
+const { name, description, price: originalPrice, images = [], details = {} } = product;
+const discountedPrice = Math.floor(originalPrice * 0.5);
+const imageId = `product-image-${index}`;
 
-  // 🔁 Handle default image safely whether from product.images or variants
+const card = document.createElement('div');
+card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+card.innerHTML = `
+         <div class="relative h-72 overflow-hidden">
+           <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+         </div>
+         <div class="p-4">
+           <h3 class="text-xl font-semibold">${name}</h3>
+           <p class="text-sm text-gray-600 mt-1">${description}</p>
+           <div class="mt-3">
+             <div class="flex items-center space-x-2">
+               <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+               <span class="line-through text-gray-400">₹${originalPrice}</span>
+               <span class="text-green-600 font-semibold">50% off</span>
+             </div>
+             <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
+           </div>
+           <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
+           <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+         </div>
+       `;
 
-  const card = document.createElement('div');
-  card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
-  card.innerHTML = `
-    <div class="relative h-72 overflow-hidden">
-      <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
-    </div>
-    <div class="p-4">
-      <h3 class="text-xl font-semibold">${name}</h3>
-      <p class="text-sm text-gray-600 mt-1">${description}</p>
-      <div class="mt-3">
-        <div class="flex items-center space-x-2">
-          <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
-          <span class="line-through text-gray-400">₹${originalPrice}</span>
-          <span class="text-green-600 font-semibold">50% off</span>
-        </div>
-        <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
-      </div>
-      <button class="view-details mt-3 w-full px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition">View Details</button>
-      <button class="add-to-cart mt-2 w-full px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
-    </div>
-  `;
+card.querySelector('.add-to-cart').addEventListener('click', () => {
+   addToCart({ name, price: discountedPrice });
+   showAddToCartToast();
+});
 
-  // Add to cart logic
-  card.querySelector('.add-to-cart').addEventListener('click', () => {
-    addToCart({ name, price: discountedPrice });
-    showAddToCartToast();
-  });
+// 🆕 View Details button click = open modal
+card.querySelector('.view-details').addEventListener('click', () => {
+const modal = document.getElementById('product-modal');
+const modalContent = document.getElementById('modal-content');
+let currentImageIndex = 0;
 
-      // 🆕 View Details button click = open modal
-      card.querySelector('.view-details').addEventListener('click', () => {
-        const modal = document.getElementById('product-modal');
-        const modalContent = document.getElementById('modal-content');
-        let currentImageIndex = 0;
+function renderModalImage() {
+return `<img src="${images[currentImageIndex]}" 
+             id="main-modal-image"
+             class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
+}
 
-        // 🛠️ NEW LOGIC TO SUPPORT VARIANTS
-        let modalImages = [];
-        if (product.variants && product.variants.length > 0) {
-          modalImages = product.variants[0].images;
-        } else {
-          modalImages = images;
-        }
+modalContent.innerHTML = `
+           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+             <div>
+               <div class="relative">
+                 ${renderModalImage()}
+                
+                  <!-- 🔁 Left Arrow (points left) -->
+<button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+  </svg>
+</button>
 
-        function renderModalImage() {
-          return `<img src="${modalImages[currentImageIndex]}" 
-                       id="main-modal-image"
-                       class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
-        }
+<!-- 🔁 Right Arrow (points right) -->
+<button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+  </svg>
+</button>
 
-        modalContent.innerHTML = `
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-            <div>
-              <div class="relative">
-                ${renderModalImage()}
-                <!-- 🔁 Left Arrow -->
-                <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <!-- 🔁 Right Arrow -->
-                <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+               
+
+               </div>
+               <div class="flex mt-2 space-x-2 overflow-x-auto">
+                 ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+               </div>
+             </div>
+             <div>
+               <h2 class="text-2xl font-bold">${name}</h2>
+               <p class="text-sm text-gray-600 mt-1">${description}</p>
+               <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+               <div class="mt-4 text-sm space-y-1">
+               <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
+              <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
+              <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+
+              ${
+              details["Other Details"]
+              ? `<div><strong>Other Features:</strong><ul class="list-disc list-inside text-gray-600 mt-1">` +
+               details["Other Details"].split(',').map(item => `<li>${item.trim()}</li>`).join('') +
+              `</ul></div>`
+             : ''
+              }
               </div>
-              <div class="flex mt-2 space-x-2 overflow-x-auto">
-                ${modalImages.map((img, i) => `
-                  <img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />
-                `).join('')}
-              </div>
-            </div>
-            <div>
-              <h2 class="text-2xl font-bold">${name}</h2>
-              <p class="text-sm text-gray-600 mt-1">${description}</p>
-              <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
-              <div class="mt-4 text-sm space-y-1">
-                <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
-                <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
-                <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
-                ${
-                  details["Other Details"]
-                    ? `<div><strong>Other Features:</strong><ul class="list-disc list-inside text-gray-600 mt-1">` +
-                      details["Other Details"].split(',').map(item => `<li>${item.trim()}</li>`).join('') +
-                      `</ul></div>`
-                    : ''
-                }
-              </div>
-              <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
-            </div>
-          </div>
-        `;
 
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        setupModalNavigation(modalImages);
-      });
+               <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
+             </div>
+           </div>
+         `;
 
+modal.classList.remove('hidden');
 
 // 🆕 Add to cart from modal
 modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
@@ -653,7 +642,7 @@ observer.observe(el);
 <script>
  
 // Set the deadline (change date as needed)
-const deadline = new Date("2025-07-30T23:59:59").getTime();
+const deadline = new Date("2025-08-08T23:59:59").getTime();
 
 const countdownInterval = setInterval(() => {
 const now = new Date().getTime();
