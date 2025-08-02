@@ -36,7 +36,27 @@
       "washCare": "Machine washable",
       "Other Details": "1.5KG Weight, One queen size bedsheet size 90*100 ,Two quilted pillow covers size 18*28 inches with chain, Two quilted cushions covers  with filing inside  size 12*12 inches, Premium Quality , Ideal for Gifting, Comes with luxurious packaging , Comes in 5 Variants:, Navy Blue Petals, Jaipuri Blues, Black Swirlls, Black Lilly, Minimalist Grey"
     }
-  }
+  },
+   {
+    "id": 3,
+    "name": "Kids Single Bed Comforter",
+    "price": 1100,
+     "images": [
+      "images/comfort1.jpeg",
+      "images/comfort2.jpeg",
+      "images/comfort3.jpeg",
+      "images/comfort4.jpeg",
+      "images/comfort5.jpeg"        
+        ],
+    "description": "Glace Cotton Super Soft Single Bed Comforter for Kids with attractive 5 different designs.",
+    "details": {
+      "fabric": "Premium Glace Cotton",
+      "dimensions": "90 x 100 inches",
+      "washCare": "Machine washable",
+      "Other Details": "1.5KG Weight, One Single Bed printed Comforter ,Available in Multiple Designs, Ultra Soft for more comfort, Premium Quality , Ideal for Gifting, Comes with luxurious packaging , Comes in 5 Variants."
+    }
+  },
 ]
 
   
+
