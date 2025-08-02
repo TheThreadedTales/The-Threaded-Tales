@@ -15,7 +15,7 @@
       "fabric": "Material Soft imported Furr like threads",
       "dimensions": "40 X 60 CMs",
       "washCare": "Easy Wash as per your convenience ",
-      "Other Details": "Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers"
+      "Other Details": " wEIGHT: 1KG(approx.), Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers"
     }
   },
   {
@@ -34,7 +34,7 @@
       "fabric": "Premium Cotton Blend(Heavy Fabric of 130GSM)",
       "dimensions": "90 x 100 inches",
       "washCare": "Machine washable",
-      "Other Details": "1.5KG Weight, One queen size bedsheet size 90*100 ,Two quilted pillow covers size 18*28 inches with chain, Two quilted cushions covers with filing inside size 12*12 inches, Premium Quality, Ideal for Gifting, Comes with luxurious packaging, Comes in 5 Variants - Navy Blue Petals, Jaipuri Blues, Black Swirlls, Black Lilly, Minimalist Grey"
+      "Other Details": " Weight: 1.5KG, One queen size bedsheet size 90*100 ,Two quilted pillow covers size 18*28 inches with chain, Two quilted cushions covers with filing inside size 12*12 inches, Premium Quality, Ideal for Gifting, Comes with luxurious packaging, Comes in 5 Variants - Navy Blue Petals, Jaipuri Blues, Black Swirlls, Black Lilly, Minimalist Grey"
     }
   },
   {
@@ -51,9 +51,29 @@
     "description": "Glace Cotton Super Soft Single Bed Comforter for Kids with attractive 5 different designs.",
     "details": {
       "fabric": "Premium Glace Cotton",
-      "dimensions": "90 x 100 inches",
+      "dimensions": "90 x 70 inches",
       "washCare": "Machine washable",
-      "Other Details": "1.5KG Weight, One Single Bed printed Comforter, Available in Multiple Designs, Ultra Soft for more comfort, Premium Quality, Ideal for Gifting, Comes with luxurious packaging, Comes in 5 Variants."
+      "Other Details": " Weight: 1.5KG, One Single Bed printed Comforter, Available in Multiple Designs, Ultra Soft for more comfort, Premium Quality, Ideal for Gifting, Comes with luxurious packaging, Comes in 5 Variants."
+    }
+  }
+    {
+    "id": 4,
+    "name": "Cotton Rope Tissue Holder/Organizer Box",
+    "price": 400,
+    "images": [
+      "images/tissue1.jpeg",
+      "images/tissue2.jpeg",
+      "images/tissue3.jpeg",
+      "images/tissue4.jpeg",
+      "images/tissue5.jpeg"
+    ],
+    "description": "Evironment Friendly Tissue Holder cum Organizer Box.",
+    "details": {
+      "fabric": "Thick Cotton Ropes and tightly stitched around all the portions",
+      "dimensions": "17 X 7 X 4 inches",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 350gm's, Available in 3 colours: Pearl White, Husky Borwn and Pleasant Lavender, Ideal for :dressing table, bedroom desktop, dining room tabletops, bathroom sink, office, picnic, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
     }
   }
 ]
+
