@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "category": "Mats & Rugs",
     "name": "Soft Feel Door Mat",
     "price": 500,
     "images": [
@@ -20,6 +21,7 @@
   },
   {
     "id": 2,
+    "category": "Beddings",
     "name": "5-Piece Luxe Bedding Ensemble",
     "price": 1100,
     "images": [
@@ -39,6 +41,7 @@
   },
   {
     "id": 3,
+    "category": "Comforters",
     "name": "Kids Single Bed Comforter",
     "price": 1100,
     "images": [
@@ -58,6 +61,7 @@
   },
   {
     "id": 4,
+    "category": "Organizers",
     "name": "Cotton Rope Tissue Holder/Organizer Box",
     "price": 400,
     "images": [
@@ -76,3 +80,4 @@
     }
   }
 ]
+
