@@ -124,30 +124,35 @@ cursor: zoom-in;
  <!-- 🧭 Top Catalogue Navigation -->
    <!-- 🧭 Fixed Catalogue Nav (Centered Layout) -->
 <nav class="w-full bg-white shadow-md sticky top-10 z-40">
-  <div class="max-w-6xl mx-auto grid grid-cols-3 items-center px-4 py-3 text-base md:text-xl font-semibold text-gray-800 gap-y-2 md:gap-0">
+  <div class="max-w-6xl mx-auto px-4 py-3 text-gray-800">
+    <div class="flex flex-col md:grid md:grid-cols-3 items-center text-base md:text-xl font-semibold gap-2 md:gap-0">
 
+      <!-- Left: Section Links -->
+      <div class="flex justify-center md:justify-start gap-4">
+        <a href="#our-story" class="hover:text-yellow-600 transition">Our Story</a>
+        <a href="#products" class="hover:text-yellow-600 transition">Our Products</a>
+        <a href="#artisans" class="hover:text-yellow-600 transition">Meet The Makers</a>
+      </div>
 
-    <!-- Left: Section Links -->
-    <div class="flex justify-start gap-4">
-      <a href="#our-story" class="hover:text-yellow-600 transition">Our Story</a>
-      <a href="#products" class="hover:text-yellow-600 transition">Our Products</a>
-      <a href="#artisans" class="hover:text-yellow-600 transition">Meet The Makers</a>
-    </div>
+      <!-- Center: Logo -->
+      <div class="flex flex-col items-center justify-center text-center mt-2 md:mt-0">
+        <img src="images/logo.jpeg" alt="Logo" class="h-8 mb-1" />
+        <span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
+      </div>
 
-    <!-- Center: Logo -->
-    <div class="flex flex-col items-center justify-center">
-      <img src="images/logo.jpeg" alt="Logo" class="h-10 mb-2" />
-      <span class="text-xs tracking-wide text-gray-600">THE THREADED TALES</span>
-    </div>
+      <!-- Right: Reviews, Contact, Cart -->
+      <div class="flex justify-center md:justify-end items-center gap-4 mt-2 md:mt-0">
+        <a href="#reviews" class="hover:text-yellow-600 transition">Reviews</a>
+        <a href="#contact" class="hover:text-yellow-600 transition">Contact</a>
+        <button class="border border-black rounded-full px-3 py-1 text-sm md:text-base">
+          🛒 Cart (0)
+        </button>
+      </div>
 
-    <!-- Right: Reviews, Contact, Icons -->
-    <div class="flex justify-end gap-4 items-center">
-      <a href="#reviews" class="hover:text-yellow-600 transition">Reviews</a>
-      <a href="#contact" class="hover:text-yellow-600 transition">Contact</a>
-     
     </div>
   </div>
 </nav>
+
 
 
 <!-- Hero Section -->
@@ -721,6 +726,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
