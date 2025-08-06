@@ -122,31 +122,35 @@ cursor: zoom-in;
 <!-- Your main site content starts here -->
 </div>
  <!-- 🧭 Top Catalogue Navigation -->
-    <nav class="w-full bg-white shadow-md sticky top-10 z-40">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 text-sm font-semibold text-gray-800">
-        
-        <!-- Left: Catalogue Links -->
-        <div class="flex gap-6">
-          <a href="#our-story" class="hover:text-yellow-600 transition">Our Story</a>
-          <a href="#products" class="hover:text-yellow-600 transition">Our Products</a>
-          <a href="#meet-makers" class="hover:text-yellow-600 transition">Meet the Makers</a>
-        </div>
+   <!-- 🧭 Fixed Catalogue Nav (Centered Layout) -->
+<nav class="w-full bg-white shadow-md sticky top-10 z-40">
+  <div class="max-w-6xl mx-auto grid grid-cols-3 items-center px-4 py-3 text-sm font-semibold text-gray-800">
 
-        <!-- Center: Logo -->
-        <div class="flex flex-col items-center">
-          <img src="images/logo.jpeg" alt="Logo" class="h-8 mb-1" />
-          <span class="text-xs tracking-wide text-gray-600">THE THREADED TALES</span>
-        </div>
+    <!-- Left: Section Links -->
+    <div class="flex justify-start gap-4">
+      <a href="#our-story" class="hover:text-yellow-600 transition">Our Story</a>
+      <a href="#products" class="hover:text-yellow-600 transition">Our Products</a>
+      <a href="#meet-makers" class="hover:text-yellow-600 transition">artisans</a>
+    </div>
 
-        <!-- Right: Nav + Icons -->
-        <div class="flex gap-6 items-center">
-          <a href="#reviews" class="hover:text-yellow-600 transition">Reviews</a>
-          <a href="#contact" class="hover:text-yellow-600 transition">Contact</a>
-   
-        </div>
+    <!-- Center: Logo -->
+    <div class="flex flex-col items-center justify-center">
+      <img src="images/logo.png" alt="Logo" class="h-8 mb-1" />
+      <span class="text-xs tracking-wide text-gray-600">THE THREADED TALES</span>
+    </div>
 
-      </div>
-    </nav>
+    <!-- Right: Reviews, Contact, Icons -->
+    <div class="flex justify-end gap-4 items-center">
+      <a href="#reviews" class="hover:text-yellow-600 transition">reviews</a>
+      <a href="#contact" class="hover:text-yellow-600 transition">Contact</a>
+      <button><i class="fas fa-search text-lg"></i></button>
+      <button><i class="fas fa-user text-lg"></i></button>
+      <button onclick="toggleCart()"><i class="fas fa-shopping-cart text-lg"></i></button>
+    </div>
+
+  </div>
+</nav>
+
 
 <!-- Hero Section -->
 <!-- Hero Section -->
@@ -250,7 +254,7 @@ Our weavers come from generations of artisans, each thread woven with pride and 
 </section>
 
 <!-- Testimonials -->
-<section class="py-16 px-6 md:px-20">
+<section id="reviews" class="py-16 px-6 md:px-20">
 <div class="text-center mb-10">
 <h2 class="text-4xl font-semibold">Our Offline Customer's Love</h2>
 </div>
@@ -719,6 +723,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
