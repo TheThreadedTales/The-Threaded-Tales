@@ -191,6 +191,16 @@ Handwoven with care, our products are created using cruelty-free processes and o
 </div>
 <div id="product-grid" class="grid md:grid-cols-4 gap-6"></div>
 </section>
+<div class="flex justify-end items-center gap-2 mb-4 px-4">
+  <label for="sort-select" class="text-sm font-medium text-gray-700">Sort by:</label>
+  <select id="sort-select" class="border border-gray-300 rounded px-2 py-1 text-sm">
+    <option value="default">Default</option>
+    <option value="price-asc">Price: Low to High</option>
+    <option value="price-desc">Price: High to Low</option>
+    <option value="name-asc">Name: A to Z</option>
+    <option value="name-desc">Name: Z to A</option>
+  </select>
+</div>
 
 
 <!-- Cart Button + Modal -->
@@ -221,18 +231,6 @@ Checkout on WhatsApp
  <div id="cart-toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0 z-50">
   Added to Cart!
 </div>
- <div class="flex justify-end items-center gap-2 mb-4 px-4">
-  <label for="sort-select" class="text-sm font-medium text-gray-700">Sort by:</label>
-  <select id="sort-select" class="border border-gray-300 rounded px-2 py-1 text-sm">
-    <option value="default">Default</option>
-    <option value="price-asc">Price: Low to High</option>
-    <option value="price-desc">Price: High to Low</option>
-    <option value="name-asc">Name: A to Z</option>
-    <option value="name-desc">Name: Z to A</option>
-  </select>
-</div>
-
-
 
 
 <!-- Artisans Section -->
@@ -498,6 +496,31 @@ const response = await fetch('./handloom_products.json');
 const products = await response.json();
 const grid = document.getElementById('product-grid');
 grid.innerHTML = '';
+const sortSelect = document.getElementById("sort-select");
+
+sortSelect.addEventListener("change", () => {
+  const sortBy = sortSelect.value;
+  let sortedProducts = [...products]; // `products` should be your global array
+
+  switch (sortBy) {
+    case "price-asc":
+      sortedProducts.sort((a, b) => a.price - b.price);
+      break;
+    case "price-desc":
+      sortedProducts.sort((a, b) => b.price - a.price);
+      break;
+    case "name-asc":
+      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "name-desc":
+      sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    default:
+      sortedProducts = [...products]; // original order
+  }
+
+  renderProducts(sortedProducts); // re-render the grid
+});
 
 products.forEach((product, index) => {
 const { name, description, price: originalPrice, images = [], details = {} } = product;
@@ -734,6 +757,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
