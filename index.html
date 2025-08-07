@@ -404,7 +404,7 @@ errorMessage.classList.remove("hidden");
 <!-- JS for Products + Cart -->
 <script>
 let cart = [];
-
+let allProducts = []; 
 function addToCart(product) {
 const existing = cart.find(p => p.name === product.name);
 if (existing) existing.qty += 1;
@@ -492,36 +492,15 @@ document.getElementById("modal-content").innerHTML = "";
 }
 });
 async function loadProducts() {
-try {
-const response = await fetch('./handloom_products.json');
-const products = await response.json();
-const grid = document.getElementById('product-grid');
-grid.innerHTML = '';
-const sortSelect = document.getElementById("sort-select");
+  try {
+    const response = await fetch('./handloom_products.json');
+    const products = await response.json();
+    allProducts = products; // ✅ Added this
+    const grid = document.getElementById('product-grid');
+    grid.innerHTML = '';
 
-sortSelect.addEventListener("change", () => {
-  const sortBy = sortSelect.value;
-  let sortedProducts = [...products]; // `products` should be your global array
-
-  switch (sortBy) {
-    case "price-asc":
-      sortedProducts.sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      sortedProducts.sort((a, b) => b.price - a.price);
-      break;
-    case "name-asc":
-      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "name-desc":
-      sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-      break;
-    default:
-      sortedProducts = [...products]; // original order
-  }
-
-  renderProducts(sortedProducts); // re-render the grid
-});
+    products.forEach((product, index) => {
+ 
 
 products.forEach((product, index) => {
 const { name, description, price: originalPrice, images = [], details = {} } = product;
@@ -758,6 +737,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
