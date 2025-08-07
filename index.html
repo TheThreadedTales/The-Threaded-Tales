@@ -499,8 +499,6 @@ async function loadProducts() {
     const grid = document.getElementById('product-grid');
     grid.innerHTML = '';
 
-    products.forEach((product, index) => {
- 
 
 products.forEach((product, index) => {
 const { name, description, price: originalPrice, images = [], details = {} } = product;
@@ -737,6 +735,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
