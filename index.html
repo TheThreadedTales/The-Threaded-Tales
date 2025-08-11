@@ -541,6 +541,10 @@ card.querySelector('.add-to-cart').addEventListener('click', () => {
 
 // 🆕 View Details button click = open modal
 card.querySelector('.view-details').addEventListener('click', () => {
+card.querySelector('h3').addEventListener('click', () => {
+card.querySelector('.view-details').click();
+});
+
 const modal = document.getElementById('product-modal');
 const modalContent = document.getElementById('modal-content');
 let currentImageIndex = 0;
@@ -742,6 +746,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
