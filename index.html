@@ -199,7 +199,7 @@ Stitched every thread with care, our products are created using cruelty-free pro
     <option value="name-desc">Name: Z to A</option>
   </select>
 </div>
-<div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+<div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-0 border border-gray-200"></div>
 </section>
 <!-- Cart Button + Modal -->
 <button id="cart-button" class="fixed top-20 right-4 z-50 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 shadow-lg border border-black">
@@ -505,7 +505,7 @@ const discountedPrice = Math.floor(originalPrice * 0.5);
 const imageId = `product-image-${index}`;
 
 const card = document.createElement('div');
-card.className = 'bg-white shadow-lg rounded-xl overflow-hidden transform hover:scale-105 transition w-full sm:w-[320px]';
+card.className = 'bg-white border border-gray-200 overflow-hidden transform hover:scale-105 transition w-full';
 card.innerHTML = `
   <div class="relative h-72 overflow-hidden">
     <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
@@ -744,6 +744,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
