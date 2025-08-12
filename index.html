@@ -202,7 +202,7 @@ Stitched every thread with care, our products are created using cruelty-free pro
 <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-0 border-4 border-gray-200"></div>
 </section>
 <!-- Cart Button + Modal -->
-<button id="cart-button" class="fixed top-20 right-4 z-50 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 shadow-lg border border-black">
+<button id="cart-button" class="hidden fixed top-20 right-4 z-50 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 shadow-lg border border-black">
 🛒 Cart (<span id="cart-count">0</span>)
 </button>
 
@@ -407,11 +407,34 @@ errorMessage.classList.remove("hidden");
 <script>
 let cart = [];
 let allProducts = []; 
+
+// ✅ Visibility toggle function
+function toggleCartVisibility() {
+  const cartModal = document.getElementById('cart-modal');
+  cartModal.classList.toggle('hidden');
+}
+
+// ✅ Update cart count display
+function updateCartCount() {
+  const cartCount = document.getElementById('cart-count'); // or your badge element
+  cartCount.textContent = cart.reduce((sum, p) => sum + p.qty, 0);
+}
+
+// ✅ Show/hide cart button based on items
+function updateCartButtonVisibility() {
+  const cartButton = document.getElementById('cart-button'); // replace with your ID
+  if (cart.length > 0) {
+    cartButton.classList.remove('hidden');
+  } else {
+    cartButton.classList.add('hidden');
+  }
+}
 function addToCart(product) {
 const existing = cart.find(p => p.name === product.name);
 if (existing) existing.qty += 1;
 else cart.push({ ...product, qty: 1 });
 updateCartCount();
+updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 item
 }
 
 function updateCartCount() {
@@ -746,6 +769,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
 
 </body>
 </html>
+
 
 
 
