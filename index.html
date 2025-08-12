@@ -104,6 +104,15 @@ cursor: zoom-in;
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<style>
+  #launch-offer-popup {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
 
 <body>
 <!-- Launch Offer Banner (Fixed Top Scrolling) -->
@@ -114,6 +123,23 @@ cursor: zoom-in;
 🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;&nbsp;&nbsp;
 🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
+</div>
+
+<!-- Launch Offer Popup -->
+<div id="launch-offer-popup" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
+  <div class="bg-white rounded-lg p-6 max-w-sm text-center shadow-xl relative">
+    <button id="close-offer-popup" class="absolute top-2 right-3 text-gray-500 hover:text-black text-2xl">&times;</button>
+    
+    <img src="images/launch-offer.jpg" alt="Launch Offer" class="w-full h-48 object-cover rounded-lg mb-4">
+    
+    <h2 class="text-2xl font-bold mb-2 text-red-600">🎉 Launch Offer 🎉</h2>
+    <p class="text-lg mb-4">Flat <span class="font-bold text-red-500">50% OFF</span> on all products for a limited time!</p>
+    
+    <a href="#products-section" 
+       class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full">
+       🛍 Shop Now
+    </a>
+  </div>
 </div>
 
 <!-- Push down rest of page content -->
@@ -752,7 +778,7 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
   });
 
   // ✅ Quantity increase/decrease logic
-  document.addEventListener('click', function (e) {
+document.addEventListener('click', function (e) {
     if (e.target.classList.contains('qty-increase')) {
       const qtyInput = e.target.closest('.quantity-selector').querySelector('.qty-input');
       let value = parseInt(qtyInput.value) || 1;
@@ -766,9 +792,33 @@ document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes
     }
   });
 </script>
+ <!-- ✅ Launch Offer Popup JS -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('launch-offer-popup');
+  const closeBtn = document.getElementById('close-offer-popup');
 
+  // Show popup after 1 second
+  setTimeout(() => {
+    popup.classList.remove('hidden');
+  }, 1000);
+
+  // Close popup on click of close button
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('hidden');
+  });
+
+  // Close if clicking outside the box
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      popup.classList.add('hidden');
+    }
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
