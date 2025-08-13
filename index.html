@@ -154,18 +154,20 @@ cursor: zoom-in;
     <div class="grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
 
       <!-- Left: Section Links -->
-      <div class="flex justify-start gap-4 relative">
-        <a href="#our-story" class="hover:text-yellow-600 transition">Our Story</a>
+      <div class="flex justify-start gap-2 relative">
+        <a href="#our-story" class="px-3 py-1 hover:bg-yellow-100 transition rounded-none">Our Story</a>
 
         <!-- Our Products with dropdown -->
         <div class="relative group">
-          <a href="#products" class="hover:text-gray-600 transition">Our Products</a>
+          <a href="#products" class="px-3 py-1 hover:bg-yellow-100 transition rounded-none inline-block">
+            Our Products
+          </a>
           <!-- Dropdown -->
-          <div class="absolute left-0 mt-1 w-40 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-            <a href="#category1" class="block px-4 py-2 hover:bg-yellow-100">Bedsheets</a>
-            <a href="#category2" class="block px-4 py-2 hover:bg-yellow-100">Doormats & Rugs</a>
-            <a href="#category3" class="block px-4 py-2 hover:bg-yellow-100">Comforters</a>
-            <a href="#category4" class="block px-4 py-2 hover:bg-yellow-100">Organizers</a>
+          <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+            <a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+            <a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+            <a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+            <a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
           </div>
         </div>
 
@@ -180,8 +182,8 @@ cursor: zoom-in;
 
       <!-- Right: Reviews, Contact -->
       <div class="flex justify-end gap-4">
-        <a href="#reviews" class="hover:text-yellow-600 transition">Reviews</a>
-        <a href="#contact" class="hover:text-yellow-600 transition">Contact</a>
+        <a href="#reviews" class="hover:text-gray-200 rounded-none">Reviews</a>
+        <a href="#contact" class="hover:text-gray-200 rounded-none">Contact</a>
       </div>
 
     </div>
@@ -878,6 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
