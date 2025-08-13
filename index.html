@@ -149,46 +149,80 @@ cursor: zoom-in;
 </div>
  <!-- 🧭 Top Catalogue Navigation -->
 <!-- Nav -->
-<nav class="w-full bg-white shadow-md sticky top-10 z-40">
-  <div class="max-w-6xl mx-auto px-4 py-2 text-gray-800">
-    <div class="grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
+<!-- Navbar -->
+<nav class="bg-white shadow relative z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      
+      <!-- Left Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#our-story" class="hover:bg-gray-200 px-3 py-2">Our Story</a>
 
-      <!-- Left: Section Links -->
-      <div class="flex justify-start gap-2 relative">
-        <a href="#our-story" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Our Story</a>
-
-        <!-- Our Products with dropdown -->
+        <!-- Our Products Dropdown -->
         <div class="relative group">
-          <a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-            Our Products
-          </a>
-          <!-- Dropdown -->
-          <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-            <a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-            <a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-            <a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-            <a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+          <button class="px-3 py-2 hover:bg-gray-200">Our Products</button>
+          <div class="absolute left-0 mt-2 w-48 bg-white shadow-lg border hidden group-hover:block">
+            <a href="#cat1" class="block px-4 py-2 hover:bg-gray-100">Category 1</a>
+            <a href="#cat2" class="block px-4 py-2 hover:bg-gray-100">Category 2</a>
+            <a href="#cat3" class="block px-4 py-2 hover:bg-gray-100">Category 3</a>
           </div>
         </div>
-
-        <a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
       </div>
 
-      <!-- Center: Logo -->
-      <div class="flex flex-col items-center text-center">
-        <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-        <span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
+      <!-- Center Logo -->
+      <div class="flex justify-center flex-1 md:flex-none">
+        <img src="images/logo.png" alt="Logo" class="h-10">
       </div>
 
-      <!-- Right: Reviews, Contact -->
-      <div class="flex justify-end gap-4">
-        <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-        <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact</a>
+      <!-- Right Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#meet-makers" class="hover:bg-gray-200 px-3 py-2">Meet The Makers</a>
+        <a href="#reviews" class="hover:bg-gray-200 px-3 py-2">Reviews</a>
+        <a href="#contact" class="hover:bg-gray-200 px-3 py-2">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="p-2 rounded hover:bg-gray-200 focus:outline-none">
+          ☰
+        </button>
       </div>
 
     </div>
   </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden flex-col space-y-1 bg-white border-t p-3">
+    <a href="#our-story" class="hover:bg-gray-200 px-3 py-2">Our Story</a>
+
+    <!-- Mobile Our Products Dropdown -->
+    <div>
+      <button id="mobile-products-btn" class="w-full text-left px-3 py-2 hover:bg-gray-200">Our Products ▼</button>
+      <div id="mobile-products-dropdown" class="hidden flex-col">
+        <a href="#cat1" class="block px-4 py-2 hover:bg-gray-100">Category 1</a>
+        <a href="#cat2" class="block px-4 py-2 hover:bg-gray-100">Category 2</a>
+        <a href="#cat3" class="block px-4 py-2 hover:bg-gray-100">Category 3</a>
+      </div>
+    </div>
+
+    <a href="#meet-makers" class="hover:bg-gray-200 px-3 py-2">Meet The Makers</a>
+    <a href="#reviews" class="hover:bg-gray-200 px-3 py-2">Reviews</a>
+    <a href="#contact" class="hover:bg-gray-200 px-3 py-2">Contact</a>
+  </div>
 </nav>
+
+<script>
+  // Mobile Menu Toggle
+  document.getElementById("mobile-menu-button").addEventListener("click", function () {
+    document.getElementById("mobile-menu").classList.toggle("hidden");
+  });
+
+  // Mobile Products Dropdown Toggle
+  document.getElementById("mobile-products-btn").addEventListener("click", function () {
+    document.getElementById("mobile-products-dropdown").classList.toggle("hidden");
+  });
+</script>
+
 <!-- Hero Section -->
 <!-- Hero Section -->
 <section class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: url('images/hero-bg.png.png');">
@@ -874,6 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
