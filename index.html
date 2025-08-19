@@ -50,15 +50,12 @@ position: relative;
 z-index: 10;
 }
 
-.hero-slide {
-  height: 100vh;           /* full screen height */
-  flex-shrink: 0;          /* don’t shrink */
-  width: 100%;             /* full width per slide */
-  background-size: cover;  /* cover nicely */
-  background-position: center;
+.hero-slider {
+  display: flex;
+  width: 300%;                /* 3 slides total → 100% each */
+  height: 100%;
+  transition: transform 1s ease-in-out; /* smooth sliding */
 }
-
-
 .hero-overlay {
 background-color: rgba(0, 0, 0, 0.3);
 position: absolute;
@@ -242,30 +239,28 @@ cursor: zoom-in;
 
            
 <!-- Hero Section -->
-<section id="heroSection" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-
-  <!-- Slider wrapper -->
-  <div id="heroSlider" class="absolute inset-0 flex transition-transform duration-1000 ease-in-out">
-    <div class="hero-slide flex-shrink-0 w-full bg-cover bg-center" style="background-image: url('images/images/hero-bg.png.png');"></div>
-    <div class="hero-slide flex-shrink-0 w-full bg-cover bg-center" style="background-image: url('images/hero-bg2.png');"></div>
-    <div class="hero-slide flex-shrink-0 w-full bg-cover bg-center" style="background-image: url('images/hero-bg3.png');"></div>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- 🔥 Slider wrapper -->
+  <div class="hero-slider absolute inset-0 flex transition-transform duration-1000 ease-in-out">
+    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg.png.png');"></div>
+    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg2.png');"></div>
+    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg3.png');"></div>
   </div>
 
-  <!-- Dark overlay -->
+  <!-- Overlay -->
   <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
-  <!-- Hero content -->
+  <!-- Text Content -->
   <div class="relative z-10 text-center px-4 text-white">
-    <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
-    <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
+    <h1 class="tango text-4xl md:text-6xl mb-2 text-white">The Threaded Tales</h1>
+    <span class="murray text-lg md:text-2xl block mb-4 text-white">by Elleganza Emporium</span>
 
+    <!-- Launch Offer + Timer -->
     <div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
-      🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown"></span>
+      🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
     </div>
 
-    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">
-      Shop Now
-    </a>
+    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Shop Now</a>
   </div>
 </section>
 
@@ -937,7 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
- // --- Search Functionality ---
+ 
 <!-- ✅ Search Overlay Logic -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -990,23 +985,20 @@ document.addEventListener("DOMContentLoaded", () => {
       searchResults.appendChild(div);
     });
   });
+   // ====== HERO SLIDESHOW ======
+  const slider = document.querySelector(".hero-slider");
+  const slides = document.querySelectorAll(".hero-slide");
+  let currentIndex = 0;
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }, 3000);
 });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.getElementById("heroSlider");
-    const slides = document.querySelectorAll(".hero-slide");
-    let index = 0;
-
-    setInterval(() => {
-      index = (index + 1) % slides.length;
-      slider.style.transform = `translateX(-${index * 100}%)`;
-    }, 4000); // Slide every 4 seconds
-  });
-</script>
-
 </body>
 </html>
+
 
 
 
