@@ -531,17 +531,18 @@ errorMessage.classList.remove("hidden");
   </div>
 </div>
 <div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex flex-col items-center p-4">
-  <div class="bg-white w-full max-w-lg rounded-lg shadow-lg p-4">
+  <div class="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 flex items-center">
     <input 
       type="text" 
       id="searchInput" 
       placeholder="Search products..." 
-      class="flex-1 border border-gray-300 rounded px-3 py-2"
+      class="flex-1 border border-gray-300 rounded px-3 py-2 text-black placeholder-gray-500"
     >
-    <button id="closeSearch" class="ml-3 text-2xl">✖</button>
+    <button id="closeSearch" class="ml-3 text-2xl text-black">✖</button>
   </div>
-  <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
+
 
 <!-- JS for Products + Cart -->
 <script>
@@ -992,6 +993,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
