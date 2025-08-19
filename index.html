@@ -181,15 +181,24 @@ cursor: zoom-in;
         <span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
       </div>
 
-      <!-- Right: Reviews, Contact -->
-      <div class="flex justify-end gap-4">
+      <!-- Right: Reviews, Search, Contact -->
+      <div class="flex justify-end items-center gap-4">
         <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
+        
+        <!-- 🔎 Desktop Search Bar -->
+        <div class="hidden md:block">
+          <input id="searchInput" 
+                 type="text" 
+                 placeholder="Search products..." 
+                 class="px-3 py-1 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        </div>
+
         <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
       </div>
     </div>
 
     <!-- Mobile layout -->
-    <div class="flex md:hidden justify-between items-center">
+    <div class="flex md:hidden justify-between items-center w-full">
       <!-- Our Products -->
       <div class="relative group">
         <a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
@@ -208,8 +217,13 @@ cursor: zoom-in;
         <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
       </div>
 
-      <!-- Contact -->
-      <a href="#contact" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+      <!-- 🔎 Mobile Search Bar (replaces Contact Us) -->
+      <div class="flex-1 px-2">
+        <input id="mobileSearchInput" 
+               type="text" 
+               placeholder="Search..." 
+               class="w-full px-2 py-1 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
+      </div>
 
       <!-- Toggle -->
       <button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
@@ -222,6 +236,7 @@ cursor: zoom-in;
       <a href="#our-story" class="block px-3 py-1 hover:bg-gray-200">Our Story</a>
       <a href="#artisans" class="block px-3 py-1 hover:bg-gray-200">Meet The Makers</a>
       <a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
+      <!-- Contact Us moved here -->
       <a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
     </div>
   </div>
@@ -918,8 +933,53 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+ <!-- ✅ Place this just before closing </body> -->
+<script>
+  function filterProducts(query) {
+    const productCards = document.querySelectorAll(".product-card");
+    query = query.toLowerCase();
+
+    let visibleCount = 0;
+    productCards.forEach(card => {
+      const name = card.querySelector(".product-name").textContent.toLowerCase();
+      const description = card.querySelector(".product-description").textContent.toLowerCase();
+
+      if (name.includes(query) || description.includes(query)) {
+        card.style.display = "block";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    // Optional: show "No products found" if none match
+    let noResult = document.getElementById("noResultMsg");
+    if (!noResult) {
+      noResult = document.createElement("p");
+      noResult.id = "noResultMsg";
+      noResult.className = "text-center text-gray-500 mt-4 hidden";
+      noResult.textContent = "No products found.";
+      document.querySelector("#productsContainer").appendChild(noResult);
+    }
+    noResult.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  // ✅ Desktop search
+  const desktopSearch = document.getElementById("searchInput");
+  if (desktopSearch) {
+    desktopSearch.addEventListener("input", e => filterProducts(e.target.value));
+  }
+
+  // ✅ Mobile search
+  const mobileSearch = document.getElementById("mobileSearchInput");
+  if (mobileSearch) {
+    mobileSearch.addEventListener("input", e => filterProducts(e.target.value));
+  }
+</script>
 </body>
 </html>
+
 
 
 
