@@ -184,7 +184,15 @@ cursor: zoom-in;
       <!-- Right: Reviews, Search, Contact -->
       <div class="flex justify-end gap-4">
         <!-- 🔍 Search Icon (Desktop) -->
-        <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+       <div class="hidden md:flex justify-center mt-10 mb-6 space-x-2">
+       <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+         </button>
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search products..." 
+    class="hidden border border-gray-300 rounded px-3 py-2 w-64">
+</div>
         
         <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
         <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
@@ -225,7 +233,6 @@ cursor: zoom-in;
       <a href="#our-story" class="block px-3 py-1 hover:bg-gray-200">Our Story</a>
       <a href="#artisans" class="block px-3 py-1 hover:bg-gray-200">Meet The Makers</a>
       <a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
-      <!-- Contact Us moved here -->
       <a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
     </div>
   </div>
@@ -924,6 +931,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
