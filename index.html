@@ -542,6 +542,28 @@ errorMessage.classList.remove("hidden");
     <button id="closeSearch" class="ml-3 text-2xl">✖</button>
   </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const productCards = document.querySelectorAll('#product-list > div'); 
+  // adjust selector if your product cards wrapper id is different
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+
+      productCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  }
+});
+</script>
 
 <!-- JS for Products + Cart -->
 <script>
@@ -934,70 +956,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
- <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchInput = document.getElementById("searchInput");
-  const closeSearch = document.getElementById("closeSearch");
-
-  // Open search when "s" key is pressed
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "s" || e.key === "S") {
-      e.preventDefault();
-      searchOverlay.classList.remove("hidden");
-      searchInput.focus();
-    }
-  });
-
-  // Close search
-  closeSearch.addEventListener("click", () => {
-    searchOverlay.classList.add("hidden");
-    searchInput.value = "";
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const searchOverlay   = document.getElementById('searchOverlay');
-  const searchInput     = document.getElementById('searchInput');
-  const closeSearch     = document.getElementById('closeSearch');
-  const searchDesktop   = document.getElementById('searchDesktop');
-  const searchMobile    = document.getElementById('searchMobile');
-
-  function openSearch() {
-    if (!searchOverlay) return;
-    searchOverlay.classList.remove('hidden');
-    if (searchInput) searchInput.focus();
-  }
-  function closeSearchOverlay() {
-    if (!searchOverlay) return;
-    searchOverlay.classList.add('hidden');
-    if (searchInput) searchInput.value = '';
-  }
-
-  // 🔗 Hook up the buttons
-  if (searchDesktop) searchDesktop.addEventListener('click', openSearch);
-  if (searchMobile)  searchMobile.addEventListener('click', openSearch);
-
-  // ✖ close button
-  if (closeSearch) closeSearch.addEventListener('click', closeSearchOverlay);
-
-  // ESC to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeSearchOverlay();
-  });
-
-  // Click outside (overlay background) to close
-  if (searchOverlay) {
-    searchOverlay.addEventListener('click', (e) => {
-      if (e.target === searchOverlay) closeSearchOverlay();
-    });
-  }
-});
-</script>
-
 </body>
 </html>
+
 
 
 
