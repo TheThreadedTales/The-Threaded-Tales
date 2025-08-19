@@ -934,8 +934,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchOverlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const closeSearch = document.getElementById("closeSearch");
+
+  // Open search when "s" key is pressed
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "s" || e.key === "S") {
+      e.preventDefault();
+      searchOverlay.classList.remove("hidden");
+      searchInput.focus();
+    }
+  });
+
+  // Close search
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.classList.add("hidden");
+    searchInput.value = "";
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
