@@ -44,48 +44,48 @@
 }
 
 /* ===== Hero Text on top of slides ===== */
-.hero-text {
-  position: absolute;          /* overlay on slides */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 20;
-  color: white;
-  width: 90%;                  /* keep it inside screen */
-}
-
-/* ===== Hero Section container ===== */
 .hero-section {
   position: relative;
-  overflow: hidden;
-  min-height: 100vh;
+  height: 100vh;           /* full screen height */
+  overflow: hidden;         /* hide excess slides */
 }
 
-/* ===== Slider wrapper ===== */
 .hero-slider {
   display: flex;
-  width: 300%;                 /* 3 slides × 100% */
+  width: 300%;             /* 3 slides */
   height: 100%;
-  transition: transform 0.7s ease-in-out;
+  transition: transform 1s ease-in-out;  /* smooth slide transition */
 }
 
-/* ===== Individual slides ===== */
 .hero-slide {
-  flex: 0 0 100%;              /* full width per slide */
+  flex: 0 0 100%;          /* each slide full width */
   height: 100%;
-  background-size: cover;      /* cover without stretching */
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* ===== Overlay for dim effect ===== */
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   inset: 0;
-  z-index: 10;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1;              /* below text */
 }
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;              /* above overlay and slides */
+  text-align: center;
+  color: white;
+  width: 90%;              /* prevent overflowing text */
+}
+
+
+/* ===== Hero Section container ===== */
+
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -1023,6 +1023,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
