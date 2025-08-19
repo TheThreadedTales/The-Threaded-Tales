@@ -530,8 +530,8 @@ errorMessage.classList.remove("hidden");
     </div>
   </div>
 </div>
-<div id="searchOverlay" class="hidden fixed inset-0 bg-white z-50 p-6 overflow-y-auto">
-  <div class="flex justify-between items-center mb-4">
+<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex flex-col items-center p-4">
+  <div class="bg-white w-full max-w-lg rounded-lg shadow-lg p-4">
     <input 
       type="text" 
       id="searchInput" 
@@ -939,18 +939,16 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- ✅ Search Overlay Logic -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const searchOverlay = document.getElementById("searchOverlay");  // overlay container
-  const searchInput = document.getElementById("searchInput");      // input box
-  const closeSearch = document.getElementById("closeSearch");      // ✖ button
-  const searchResults = document.getElementById("searchResults");  // results container
+  const searchOverlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const closeSearch = document.getElementById("closeSearch");
+  const searchResults = document.getElementById("searchResults");
 
-  // Buttons to open overlay (desktop + mobile)
   const openSearchBtns = [
     document.getElementById("searchDesktop"),
     document.getElementById("searchMobile")
   ].filter(Boolean);
 
-  // ✅ Open overlay when 🔍 clicked
   openSearchBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       searchOverlay.classList.remove("hidden");
@@ -958,21 +956,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ✅ Close overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.add("hidden");
     searchInput.value = "";
     searchResults.innerHTML = "";
   });
 
-  // ✅ Filter products live as user types
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
-
     if (!query) return;
 
-    // products[] must already be loaded earlier
     const matches = products.filter(p =>
       p.name.toLowerCase().includes(query) ||
       p.description.toLowerCase().includes(query)
@@ -987,21 +981,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
       div.textContent = product.name;
-
-      // ✅ Reuse your existing modal function
       div.addEventListener("click", () => {
-        openProductModal(product);  
+        openProductModal(product);
         searchOverlay.classList.add("hidden");
       });
-
       searchResults.appendChild(div);
     });
   });
 });
-
 </script>
 </body>
 </html>
+
 
 
 
