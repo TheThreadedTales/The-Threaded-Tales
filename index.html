@@ -184,15 +184,13 @@ cursor: zoom-in;
       <!-- Right: Reviews, Search, Contact -->
      <!-- Right: Reviews, Contact -->
       <div class="flex justify-end gap-4">
-       <!-- 🔍 Search Bar (Desktop) -->
-<div class="hidden md:flex items-center justify-center mt-10 mb-6">
-  <input 
-    id="searchInput"
-    type="text"
-    placeholder="Search products..."
-    class="border border-gray-300 rounded px-3 py-2 w-64"
-  />
+   <!-- 🔍 Search Icon (Desktop only) -->
+<div class="hidden md:flex justify-center mt-10 mb-6">
+  <button id="searchToggle" class="p-2 border border-gray-300 rounded-full hover:bg-gray-100">
+    🔍
+  </button>
 </div>
+
        <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
 <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
 </div>
@@ -826,27 +824,6 @@ document.getElementById('product-grid').innerHTML = "<p class='text-center text-
 }
 }
 
- // ✅ Desktop Search Filter
-const searchInput = document.getElementById("searchInput");
-
-if (searchInput) {
-  searchInput.addEventListener("input", function () {
-    const query = this.value.toLowerCase();
-    const products = document.querySelectorAll("#products-container .product-card");
-
-    products.forEach(product => {
-      const name = product.querySelector("h3").textContent.toLowerCase();
-      const desc = product.querySelector("p").textContent.toLowerCase();
-
-      if (name.includes(query) || desc.includes(query)) {
-        product.classList.remove("hidden");
-      } else {
-        product.classList.add("hidden");
-      }
-    });
-  });
-}
-
 // ✅ Toast function
 function showAddToCartToast() {
   const toast = document.getElementById("cart-toast");
@@ -950,9 +927,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+ // ✅ Toggle Search Bar (Desktop)
+const searchToggle = document.getElementById("searchToggle");
+
+if (searchToggle) {
+  searchToggle.addEventListener("click", () => {
+    let existingBar = document.getElementById("searchInput");
+
+    if (existingBar) {
+      // If bar exists, remove it (close search)
+      existingBar.parentElement.remove();
+    } else {
+      // Create search bar
+      const container = document.createElement("div");
+      container.className = "flex justify-center mt-6 mb-6";
+
+      container.innerHTML = `
+        <input 
+          id="searchInput"
+          type="text"
+          placeholder="Search products..."
+          class="border border-gray-300 rounded px-3 py-2 w-64"
+        />
+      `;
+
+      // Insert right after the search icon
+      searchToggle.parentElement.insertAdjacentElement("afterend", container);
+
+      // Attach search logic
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const products = document.querySelectorAll("#products-container .product-card");
+
+        products.forEach(product => {
+          const name = product.querySelector("h3").textContent.toLowerCase();
+          const desc = product.querySelector("p").textContent.toLowerCase();
+
+          if (name.includes(query) || desc.includes(query)) {
+            product.classList.remove("hidden");
+          } else {
+            product.classList.add("hidden");
+          }
+        });
+      });
+    }
+  });
+}
 </script>
 </body>
 </html>
+
 
 
 
