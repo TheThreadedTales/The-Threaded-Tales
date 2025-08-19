@@ -182,31 +182,16 @@ cursor: zoom-in;
       </div>
 
       <!-- Right: Reviews, Search, Contact -->
-      <div class="flex justify-end items-center gap-4">
-        <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-        
-        <!-- 🔎 Desktop Search Bar -->
-       <!-- Search (desktop) -->
-<div class="relative flex justify-center items-center my-6">
-  <!-- Magnifying Glass Button -->
-  <button id="searchToggle" class="p-2">
-    🔍
-  </button>
-
-  <!-- Hidden Search Input -->
-  <input 
-    id="searchInput" 
-    type="text" 
-    placeholder="Search products..." 
-    class="hidden ml-2 border border-gray-300 rounded-md px-3 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300"
-  />
-</div>
+     <!-- Right: Reviews, Contact -->
+      <div class="flex justify-end gap-4">
+       <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
 <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+</div>
 </div>
    
     <!-- Mobile layout -->
     <div class="flex md:hidden justify-between items-center">
-      <!-- Our Products -->
+     <!-- Our Products -->
       <div class="relative group">
         <a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
           Our Products
@@ -224,22 +209,8 @@ cursor: zoom-in;
         <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
       </div>
 
-      <!-- 🔎 Mobile Search Bar (replaces Contact Us) -->
-    <!-- Mobile Search -->
-<div class="relative flex items-center px-4 py-2">
-  <!-- Magnifying Glass Button -->
-  <button id="mobileSearchToggle" class="p-2">
-    🔍
-  </button>
-
-  <!-- Hidden Search Input -->
-  <input 
-    id="mobileSearchInput" 
-    type="text" 
-    placeholder="Search products..." 
-    class="hidden ml-2 border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-300"
-  />
-</div>
+  <!-- Contact -->
+      <a href="#contact" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
 
 
       <!-- Toggle -->
@@ -950,52 +921,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
- <!-- ✅ Place this just before closing </body> -->
-<script>
-  function filterProducts(query) {
-    const productCards = document.querySelectorAll(".product-card");
-    query = query.toLowerCase();
-
-    let visibleCount = 0;
-    productCards.forEach(card => {
-      const name = card.querySelector(".product-name").textContent.toLowerCase();
-      const description = card.querySelector(".product-description").textContent.toLowerCase();
-
-      if (name.includes(query) || description.includes(query)) {
-        card.style.display = "block";
-        visibleCount++;
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-    // Optional: show "No products found" if none match
-    let noResult = document.getElementById("noResultMsg");
-    if (!noResult) {
-      noResult = document.createElement("p");
-      noResult.id = "noResultMsg";
-      noResult.className = "text-center text-gray-500 mt-4 hidden";
-      noResult.textContent = "No products found.";
-      document.querySelector("#productsContainer").appendChild(noResult);
-    }
-    noResult.classList.toggle("hidden", visibleCount > 0);
-  }
-
-  // ✅ Desktop search
-  const desktopSearch = document.getElementById("searchInput");
-  if (desktopSearch) {
-    desktopSearch.addEventListener("input", e => filterProducts(e.target.value));
-  }
-
-  // ✅ Mobile search
-  const mobileSearch = document.getElementById("mobileSearchInput");
-  if (mobileSearch) {
-    mobileSearch.addEventListener("input", e => filterProducts(e.target.value));
-  }
-</script>
 </body>
 </html>
+
 
 
 
