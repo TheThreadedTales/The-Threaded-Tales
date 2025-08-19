@@ -182,16 +182,18 @@ cursor: zoom-in;
       </div>
 
       <!-- Right: Reviews, Search, Contact -->
-     <!-- Right: Reviews, Contact -->
       <div class="flex justify-end gap-4">
-       <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-</div>
-</div>
+        <!-- 🔍 Search Icon (Desktop) -->
+        <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+        
+        <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
+        <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+      </div>
+    </div>
    
     <!-- Mobile layout -->
     <div class="flex md:hidden justify-between items-center">
-     <!-- Our Products -->
+      <!-- Our Products -->
       <div class="relative group">
         <a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
           Our Products
@@ -209,9 +211,8 @@ cursor: zoom-in;
         <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
       </div>
 
-  <!-- Contact -->
-      <a href="#contact" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-
+      <!-- 🔍 Search Icon (Mobile replaces Contact) -->
+      <button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
 
       <!-- Toggle -->
       <button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
@@ -923,6 +924,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
