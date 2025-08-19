@@ -530,18 +530,19 @@ errorMessage.classList.remove("hidden");
     </div>
   </div>
 </div>
-<!-- Search Overlay -->
-<div id="searchOverlay" class="hidden fixed top-0 left-0 w-full bg-white shadow-md p-4 z-50">
-  <div class="flex justify-between items-center max-w-3xl mx-auto">
+<div id="searchOverlay" class="hidden fixed inset-0 bg-white z-50 p-6 overflow-y-auto">
+  <div class="flex justify-between items-center mb-4">
     <input 
       type="text" 
       id="searchInput" 
       placeholder="Search products..." 
       class="flex-1 border border-gray-300 rounded px-3 py-2"
     >
-    <button id="closeSearch" class="ml-3 text-2xl">❌</button>
+    <button id="closeSearch" class="ml-3 text-2xl">✖</button>
   </div>
+  <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 </div>
+
 <!-- JS for Products + Cart -->
 <script>
 let cart = [];
@@ -843,6 +844,7 @@ function showAddToCartToast() {
 window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
 loadProducts();
+ 
 </script>
 <!-- Scroll Animation for Artisan Images -->
 <script>
@@ -933,30 +935,74 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('searchInput');
-  const productCards = document.querySelectorAll('#product-list > div'); 
-  // adjust selector if your product cards wrapper id is different
+ // --- Search Functionality ---
+<!-- ✅ Search Overlay Logic -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchOverlay = document.getElementById("searchOverlay");  // overlay container
+  const searchInput = document.getElementById("searchInput");      // input box
+  const closeSearch = document.getElementById("closeSearch");      // ✖ button
+  const searchResults = document.getElementById("searchResults");  // results container
 
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase().trim();
+  // Buttons to open overlay (desktop + mobile)
+  const openSearchBtns = [
+    document.getElementById("searchDesktop"),
+    document.getElementById("searchMobile")
+  ].filter(Boolean);
 
-      productCards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(query)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
+  // ✅ Open overlay when 🔍 clicked
+  openSearchBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      searchOverlay.classList.remove("hidden");
+      searchInput.focus();
     });
-  }
+  });
+
+  // ✅ Close overlay
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.classList.add("hidden");
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+  });
+
+  // ✅ Filter products live as user types
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+    searchResults.innerHTML = "";
+
+    if (!query) return;
+
+    // products[] must already be loaded earlier
+    const matches = products.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      p.description.toLowerCase().includes(query)
+    );
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = "<p class='text-gray-500'>No products found</p>";
+      return;
+    }
+
+    matches.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
+      div.textContent = product.name;
+
+      // ✅ Reuse your existing modal function
+      div.addEventListener("click", () => {
+        openProductModal(product);  
+        searchOverlay.classList.add("hidden");
+      });
+
+      searchResults.appendChild(div);
+    });
+  });
 });
+
 </script>
 </body>
 </html>
+
 
 
 
