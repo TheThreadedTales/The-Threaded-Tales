@@ -52,10 +52,18 @@ z-index: 10;
 
 .hero-slider {
   display: flex;
-  width: 300%;                /* 3 slides total → 100% each */
+  width: 300%;       /* 100% per slide × 3 slides */
   height: 100%;
-  transition: transform 1s ease-in-out; /* smooth sliding */
 }
+
+.hero-slide {
+  flex: 0 0 100%;    /* each slide takes full container width */
+  height: 100%;
+  background-size: cover;     /* cover without stretching */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .hero-overlay {
 background-color: rgba(0, 0, 0, 0.3);
 position: absolute;
@@ -240,26 +248,23 @@ cursor: zoom-in;
            
 <!-- Hero Section -->
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- 🔥 Slider wrapper -->
-  <div class="hero-slider absolute inset-0 flex transition-transform duration-1000 ease-in-out">
-    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg.png.png');"></div>
-    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg2.png');"></div>
-    <div class="hero-slide min-w-full bg-cover bg-center" style="background-image: url('images/hero-bg3.png');"></div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-30 z-0"></div>
+
+  <!-- Slider -->
+  <div class="hero-slider flex transition-transform duration-700 ease-in-out w-full h-full relative z-10">
+    <div class="hero-slide" style="background-image: url('images/images/hero-bg.png.png');"></div>
+    <div class="hero-slide" style="background-image: url('images/hero-bg2.png');"></div>
+    <div class="hero-slide" style="background-image: url('images/hero-bg3.png');"></div>
   </div>
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-
-  <!-- Text Content -->
-  <div class="relative z-10 text-center px-4 text-white">
-    <h1 class="tango text-4xl md:text-6xl mb-2 text-white">The Threaded Tales</h1>
-    <span class="murray text-lg md:text-2xl block mb-4 text-white">by Elleganza Emporium</span>
-
-    <!-- Launch Offer + Timer -->
+  <!-- Text -->
+  <div class="hero-text z-20 text-center px-4 text-white">
+    <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
+    <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
     <div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
       🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
     </div>
-
     <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Shop Now</a>
   </div>
 </section>
@@ -998,6 +1003,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
