@@ -539,32 +539,9 @@ errorMessage.classList.remove("hidden");
       placeholder="Search products..." 
       class="flex-1 border border-gray-300 rounded px-3 py-2"
     >
-    <button id="closeSearch" class="ml-3 text-2xl">✖</button>
+    <button id="closeSearch" class="ml-3 text-2xl">❌</button>
   </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('searchInput');
-  const productCards = document.querySelectorAll('#product-list > div'); 
-  // adjust selector if your product cards wrapper id is different
-
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase().trim();
-
-      productCards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(query)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  }
-});
-</script>
-
 <!-- JS for Products + Cart -->
 <script>
 let cart = [];
@@ -956,8 +933,31 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const productCards = document.querySelectorAll('#product-list > div'); 
+  // adjust selector if your product cards wrapper id is different
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+
+      productCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
+
 
 
 
