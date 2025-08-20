@@ -67,38 +67,41 @@ z-index: 10;
     min-height: 75vh;              /* a bit shorter reduces the “zoomed” feel */
   }
 }
-
-
-
 .hero-overlay {
 background-color: rgba(0, 0, 0, 0.3);
 position: absolute;
 inset: 0;
 z-index: 0;
 }
-/* ✅ Hero slideshow styles */
+/* --- Hero slideshow (matches your existing markup) --- */
 .slideshow {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
+  z-index: 0; /* stays behind overlay + text */
 }
 
-.slide {
+.slideshow .slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   opacity: 0;
-  transform: translateX(-100%);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateX(100%);
+  transition: transform 600ms ease, opacity 600ms ease;
 }
 
-/* Show active slide */
-.slide.active {
+/* currently visible slide */
+.slideshow .slide.active {
   opacity: 1;
   transform: translateX(0);
-  z-index: 1;
+}
+
+/* slide moving out to the left */
+.slideshow .slide.exit {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 
 @keyframes slideInLeft {
@@ -276,7 +279,8 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 <!-- Hero Section -->
 <!-- Hero Section -->
 <!-- Hero Section -->
-<section id="hero" class="relative min-h-screen overflow-hidden">
+<section id="hero" class="relative min-h-screen overflow-hidden flex items-center justify-center">
+
 
   <!-- Slideshow wrapper -->
   <div class="absolute inset-0 slideshow">
@@ -1064,34 +1068,36 @@ searchResults.appendChild(div);
 });
 </script>
   <script>
-  // ✅ Hero Slideshow Auto-Change
-  let currentSlide = 0;
-  const slides = document.querySelectorAll(".slideshow .slide");
-  const totalSlides = slides.length;
+  document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('#hero .slideshow .slide');
+    if (!slides.length) return;
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.remove("active");
-      if (i === index) {
-        slide.classList.add("active");
-      }
-    });
-  }
+    let current = 0;
 
-  // Show first slide
-  showSlide(currentSlide);
+    function show(i) {
+      slides.forEach((s, idx) => {
+        s.classList.remove('active', 'exit');
+        if (idx === i) {
+          s.classList.add('active');
+        } else if (idx === (i - 1 + slides.length) % slides.length) {
+          s.classList.add('exit');
+        }
+      });
+    }
 
-  // Auto-change every 5s
-  setInterval(() => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
-  }, 5000);
+    // show first slide
+    show(current);
+
+    // auto-advance every 3 seconds
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      show(current);
+    }, 3000);
+  });
 </script>
 </body>
 </html>
 
-</body>
-</html>
 
 
 
