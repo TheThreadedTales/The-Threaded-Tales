@@ -55,13 +55,15 @@ z-index: 10;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  min-height: 100vh;   /* ensures full screen height */
 }
 
 /* 📱 Mobile adjustment */
 @media (max-width: 768px) {
   .hero-bg {
-    background-size: contain;   /* prevents zoom on small screens */
-    background-position: top;   /* keeps it aligned neatly */
+    background-size: contain;   /* stop zoom */
+    background-position: top center; 
+    background-color: #000;     /* fallback behind image */
   }
 }
 
@@ -1025,6 +1027,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
