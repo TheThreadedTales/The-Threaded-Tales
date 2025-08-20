@@ -58,15 +58,16 @@ z-index: 10;
   min-height: 100vh;   /* ensures full screen height */
 }
 
-/* 📱 Mobile adjustment */
+/* 📱 Mobile hero fix (applies only when .hero-bg is present) */
 @media (max-width: 768px) {
   .hero-bg {
-    background-size: cover;        /* keeps it proportional */
-    background-position: top;      /* show top part first */
-    background-attachment: scroll; /* prevents stretch on some devices */
-    min-height: 80vh;              /* shorter height to avoid zoom effect */
+    /* show more of the image on tall/narrow screens */
+    background-size: cover;        /* keep proportions */
+    background-position: top center; 
+    min-height: 75vh;              /* a bit shorter reduces the “zoomed” feel */
   }
 }
+
 
 
 .hero-overlay {
@@ -250,7 +251,8 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 </script>
 <!-- Hero Section -->
 <!-- Hero Section -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center">
+<section id="hero" class="relative min-h-screen hero-bg flex items-center justify-center" style="background-image: url('images/hero-bg.png.png');">
+
   <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
   <div class="relative z-10 text-center px-4 text-white">
@@ -1029,6 +1031,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
