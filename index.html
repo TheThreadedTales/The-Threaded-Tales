@@ -61,11 +61,13 @@ z-index: 10;
 /* 📱 Mobile adjustment */
 @media (max-width: 768px) {
   .hero-bg {
-    background-size: contain;   /* stop zoom */
-    background-position: top center; 
-    background-color: #000;     /* fallback behind image */
+    background-size: cover;        /* keeps it proportional */
+    background-position: top;      /* show top part first */
+    background-attachment: scroll; /* prevents stretch on some devices */
+    min-height: 80vh;              /* shorter height to avoid zoom effect */
   }
 }
+
 
 .hero-overlay {
 background-color: rgba(0, 0, 0, 0.3);
@@ -1027,6 +1029,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
