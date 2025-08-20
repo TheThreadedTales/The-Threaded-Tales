@@ -151,91 +151,93 @@ class="bg-blue-900 hover:bg-white-500 text-white font-bold py-2 px-4 rounded-ful
 <!-- Navbar -->
 <!-- Navbar -->
 <nav class="w-full bg-white shadow-md sticky top-10 z-40">
-  <div class="max-w-6xl mx-auto px-2 py-1 text-gray-800">
-    <!-- Desktop layout -->
-    <div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
-      
-      <!-- Left: Section Links -->
-      <div class="flex justify-start gap-2 relative">
-        <a href="#our-story" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Our Story</a>
+<div class="max-w-6xl mx-auto px-4 py-2 text-gray-800">
+<!-- Desktop layout -->
+<div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
 
-        <!-- Our Products with dropdown -->
-        <div class="relative group">
-          <a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-            Our Products
-          </a>
-          <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-            <a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-            <a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-            <a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-            <a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-          </div>
-        </div>
+<!-- Left: Section Links -->
+<div class="flex justify-start gap-2 relative">
+<a href="#our-story" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Our Story</a>
 
-        <a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
-      </div>
+<!-- Our Products with dropdown -->
+<div class="relative group">
+<a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
 
-      <!-- Center: Logo -->
-      <div class="flex flex-col items-center text-center">
-        <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-        <span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
-      </div>
+<a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
+</div>
 
-      <!-- Right: Reviews, Search, Contact -->
-      
-        <!-- 🔍 Search Icon (Desktop) -->
-       <div class="flex justify-end gap-4">
-       <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
-         </button>
-        <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-        <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-      </div>
-    </div>
-   
-    <!-- Mobile layout -->
-    <div class="flex md:hidden justify-between items-center">
-      <!-- Our Products -->
-      <div class="relative group">
-        <a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-          Our Products
-        </a>
-        <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-          <a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-          <a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-          <a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-          <a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-        </div>
-      </div>
+<!-- Center: Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+<span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
+</div>
 
-      <!-- Logo -->
-      <div class="flex flex-col items-center text-center">
-        <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-      </div>
+<!-- Right: Reviews, Search, Contact -->
 
-      <!-- 🔍 Search Icon (Mobile replaces Contact) -->
-      <button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+<!-- 🔍 Search Icon (Desktop) -->
+<div class="flex justify-end gap-4">
+<button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+</button>
+<a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
+<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+</div>
+</div>
 
-      <!-- Toggle -->
-      <button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
-        ☰
-      </button>
-    </div>
+<!-- Mobile layout -->
+<div class="flex md:hidden justify-between items-center">
+<!-- Our Products -->
+<div class="relative group">
+<a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
 
-    <!-- Mobile menu hidden initially -->
-    <div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
-      <a href="#our-story" class="block px-3 py-1 hover:bg-gray-200">Our Story</a>
-      <a href="#artisans" class="block px-3 py-1 hover:bg-gray-200">Meet The Makers</a>
-      <a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
-      <a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
-    </div>
-  </div>
+<!-- Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+</div>
+
+<!-- 🔍 Search Icon (Mobile replaces Contact) -->
+<button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+
+<!-- Toggle -->
+<button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
+☰
+</button>
+</div>
+
+<!-- Mobile menu hidden initially -->
+<div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
+<a href="#our-story" class="block px-3 py-1 hover:bg-gray-200">Our Story</a>
+<a href="#artisans" class="block px-3 py-1 hover:bg-gray-200">Meet The Makers</a>
+<a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
+<a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
+</div>
+</div>
 </nav>
 
 <script>
-  document.getElementById("mobileMenuToggle").addEventListener("click", function() {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  });
+document.getElementById("mobileMenuToggle").addEventListener("click", function() {
+document.getElementById("mobileMenu").classList.toggle("hidden");
+});
 </script>
+
+
 
 <!-- Hero Section -->
 <!-- Hero Section -->
@@ -528,6 +530,18 @@ Add to Cart
 </div>
 </div>
 </div>
+<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex flex-col items-center p-4">
+  <div class="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 flex items-center">
+<input 
+type="text" 
+id="searchInput" 
+placeholder="Search products..." 
+      class="flex-1 border border-gray-300 rounded px-3 py-2 text-black placeholder-gray-500">
+    <button id="closeSearch" class="ml-3 text-2xl text-black">✖</button>
+</div>
+  <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
+</div>
+
 
 <!-- JS for Products + Cart -->
 <script>
@@ -830,6 +844,7 @@ toast.classList.add("opacity-0");
 window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
 loadProducts();
+
 </script>
 <!-- Scroll Animation for Artisan Images -->
 <script>
@@ -920,61 +935,81 @@ popup.classList.add('hidden');
 });
 });
 </script>
- <script>
+// --- Search Functionality ---
+<!-- ✅ Search Overlay Logic -->
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchInput = document.getElementById("searchInput");
-  const closeSearch = document.getElementById("closeSearch");
-  const searchResults = document.getElementById("searchResults");
+const searchOverlay = document.getElementById("searchOverlay");
+const searchInput = document.getElementById("searchInput");
+const closeSearch = document.getElementById("closeSearch");
+const searchResults = document.getElementById("searchResults");
 
-  const openSearchBtns = [
-    document.getElementById("searchDesktop"),
-    document.getElementById("searchMobile")
-  ].filter(Boolean);
+const openSearchBtns = [
+document.getElementById("searchDesktop"),
+document.getElementById("searchMobile")
+].filter(Boolean);
 
-  openSearchBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      searchOverlay.classList.remove("hidden");
-      searchInput.focus();
-    });
-  });
+openSearchBtns.forEach(btn => {
+btn.addEventListener("click", () => {
+searchOverlay.classList.remove("hidden");
+searchInput.focus();
+});
+});
 
-  closeSearch.addEventListener("click", () => {
-    searchOverlay.classList.add("hidden");
-    searchInput.value = "";
-    searchResults.innerHTML = "";
-  });
+closeSearch.addEventListener("click", () => {
+searchOverlay.classList.add("hidden");
+searchInput.value = "";
+searchResults.innerHTML = "";
+});
 
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    searchResults.innerHTML = "";
-    if (!query) return;
+searchInput.addEventListener("input", () => {
+const query = searchInput.value.toLowerCase().trim();
+searchResults.innerHTML = "";
+if (!query) return;
 
-    const matches = products.filter(p =>
-      p.name.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query)
-    );
+const matches = products.filter(p =>
+p.name.toLowerCase().includes(query) ||
+p.description.toLowerCase().includes(query)
+);
 
-    if (matches.length === 0) {
-      searchResults.innerHTML = "<p class='text-gray-500'>No products found</p>";
-      return;
-    }
+if (matches.length === 0) {
+searchResults.innerHTML = "<p class='text-gray-500'>No products found</p>";
+return;
+}
 
-    matches.forEach(product => {
-      const div = document.createElement("div");
-      div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
-      div.textContent = product.name;
-      div.addEventListener("click", () => {
-        openProductModal(product);
-        searchOverlay.classList.add("hidden");
-      });
-      searchResults.appendChild(div);
-    });
-  });
+matches.forEach(product => {
+const div = document.createElement("div");
+div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
+div.textContent = product.name;
+div.addEventListener("click", () => {
+openProductModal(product);
+searchOverlay.classList.add("hidden");
+});
+searchResults.appendChild(div);
+});
+});
 });
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
