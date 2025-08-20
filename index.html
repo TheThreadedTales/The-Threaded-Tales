@@ -76,6 +76,30 @@ position: absolute;
 inset: 0;
 z-index: 0;
 }
+/* ✅ Hero slideshow styles */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Show active slide */
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 1;
+}
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -251,13 +275,23 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 </script>
 <!-- Hero Section -->
 <!-- Hero Section -->
-<section id="hero" class="relative min-h-screen hero-bg flex items-center justify-center" style="background-image: url('images/hero-bg.png.png');">
+<!-- Hero Section -->
+<section id="hero" class="relative min-h-screen overflow-hidden">
 
+  <!-- Slideshow wrapper -->
+  <div class="absolute inset-0 slideshow">
+    <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
+    <div class="slide" style="background-image: url('images/m1.png');"></div>
+    <div class="slide" style="background-image: url('images/m2.png');"></div>
+  </div>
+
+  <!-- Dark overlay -->
   <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
+  <!-- Hero content -->
   <div class="relative z-10 text-center px-4 text-white">
-    <h1 class="tango text-4xl md:text-6xl mb-2 text-white">The Threaded Tales</h1>
-    <span class="murray text-lg md:text-2xl block mb-4 text-white">by Elleganza Emporium</span>
+    <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
+    <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
 
     <!-- 🔥 Launch Offer + Timer -->
     <div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
@@ -1029,8 +1063,36 @@ searchResults.appendChild(div);
 });
 });
 </script>
+  <script>
+  // ✅ Hero Slideshow Auto-Change
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".slideshow .slide");
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      if (i === index) {
+        slide.classList.add("active");
+      }
+    });
+  }
+
+  // Show first slide
+  showSlide(currentSlide);
+
+  // Auto-change every 5s
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }, 5000);
+</script>
 </body>
 </html>
+
+</body>
+</html>
+
 
 
 
