@@ -241,21 +241,38 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 
 <!-- Hero Section -->
 <!-- Hero Section -->
-<section class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: url('images/hero-bg.png.png');">
-<div class="absolute inset-0 bg-black bg-opacity-30"></div>
+<section id="hero" class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style="background-image: url('images/hero-bg.png');">
+  <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
-<div class="relative z-10 text-center px-4 text-white">
-<h1 class="tango text-4xl md:text-6xl mb-2 text-white">The Threaded Tales</h1>
-<span class="murray text-lg md:text-2xl block mb-4 text-white">by Elleganza Emporium</span>
+  <div class="relative z-10 text-center px-4 text-white">
+    <h1 class="tango text-4xl md:text-6xl mb-2 text-white">The Threaded Tales</h1>
+    <span class="murray text-lg md:text-2xl block mb-4 text-white">by Elleganza Emporium</span>
 
-<!-- 🔥 Launch Offer + Timer -->
-<div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
-🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
-</div>
+    <!-- 🔥 Launch Offer + Timer -->
+    <div class="mt-4 bg-red-600 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
+      🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
+    </div>
 
-<a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Shop Now</a>
-</div>
+    <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white text-black rounded-full text-lg hover:bg-gray-200 transition">Shop Now</a>
+  </div>
 </section>
+
+<script>
+// --- Hero Background Slideshow ---
+const hero = document.getElementById("hero");
+const images = [
+  "images/hero-bg.png",
+  "images/hero1.png",
+  "images/hero.png"
+];
+let index = 0;
+
+setInterval(() => {
+  index = (index + 1) % images.length;
+  hero.style.backgroundImage = `url('${images[index]}')`;
+}, 3000); // every 3 seconds
+</script>
+
 
 <!-- Our Story Section -->
 <section id="our-story" class="relative py-20 bg-white overflow-hidden">
@@ -992,6 +1009,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
