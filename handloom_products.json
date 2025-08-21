@@ -99,9 +99,32 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 250gm's, Available in 2 Patterns: Peacock Beauty and Greeny Petals, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, bathroom sink, office, Premium Quality."
     }
-  },    
+  },
   {
     "id": 6,
+    "category": "Organizers",
+    "name": "3-Pcs Cotton Rope Woven Storage Baskets",
+    "price": 600,
+    "images": [
+      "images/basket1.jpeg",
+      "images/basket2.jpeg",
+      "images/basket3.jpeg",
+      "images/basket4.jpeg",
+      "images/basket5.jpeg",
+      "images/basket6.jpeg",
+      "images/basket7.jpeg",
+      "images/basket8.jpeg"
+    ],
+    "description": "Evironment Friendly and Animal Cruently Free 3-PcsCotton Rope Woven Storage Baskets. Each piece comes with different size.",
+    "details": {
+      "fabric": "Pure Cotton Ropes Woven in 3 different sizes.",
+      "dimensions": "9X3 Inches, 8.2 X 2.5 Inches and 7 X 2 Inches inches",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 520gm's, Available in 4 Colours: Natural Brown, Minimalist Grey, Soft Pink, Charcoal Black, Ideal for : Kitchen Shelves, bedroom desktop, dining room tabletops, bathroom sink, office, Premium Quality."
+    }
+  },
+  {
+    "id": 7,
     "category": "HandBags",
     "name": "Girls Cute Jute Cotton Bag",
     "price": 600,
@@ -122,6 +145,7 @@
     }
   }
 ]
+
 
 
 
