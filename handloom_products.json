@@ -99,7 +99,29 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 250gm's, Available in 2 Patterns: Peacock Beauty and Greeny Petals, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, bathroom sink, office, Premium Quality."
     }
-  }
+  },
+    {
+    "id": 6,
+    "category": "HandBags",
+    "name": "Girls Cute Jute Cotton Bag",
+    "price": 600,
+    "images": [
+      "images/bag1.jpeg",
+      "images/bag2.jpeg",
+      "images/bag3.jpeg",
+      "images/bag4.jpeg",
+      "images/bag5.jpeg",
+      "images/bag6.jpeg"
+    ],
+    "description": "Evironment Friendly and Animal Cruelty Free Jute Cotton Bags for Girls.",
+    "details": {
+      "fabric": "Thick Jute Cotton Ropes and tightly stitched around all the portions",
+      "dimensions": "32 X 15 cms",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 450gm's, Available in 3 colours: Piston Pink, Bloomy Sky and Yellow blossom, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
+    }
+  },
 ]
+
 
 
