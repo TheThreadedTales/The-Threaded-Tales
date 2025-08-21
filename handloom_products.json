@@ -78,6 +78,28 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 350gm's, Available in 3 colours: Pearl White, Husky Borwn and Pleasant Lavender, Ideal for :dressing table, bedroom desktop, dining room tabletops, bathroom sink, office, picnic, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
     }
+  },
+   {
+    "id": 5,
+    "category": "Table Mats",
+    "name": "Round Table Jute Mats",
+    "price": 300,
+    "images": [
+      "images/mat1.jpeg",
+      "images/mat2.jpeg",
+      "images/mat3.jpeg",
+      "images/mat4.jpeg",
+      "images/mat5.jpeg",
+      "images/mat6.jpeg"
+    ],
+    "description": "Evironment Friendly and Animal Cruently Free Jute based Table Mats. Tissue Holder cum Organizer Box.",
+    "details": {
+      "fabric": "Pure Jute upskilling your interior game",
+      "dimensions": "15 inches in diameter",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 250gm's, Available in 2 Patterns: Peacock Beauty and Greeny Petals, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, bathroom sink, office, Premium Quality."
+    }
   }
 ]
+
 
