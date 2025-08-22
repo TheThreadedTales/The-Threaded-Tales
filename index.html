@@ -56,15 +56,16 @@
 .hero-bg {
   background: url('./images/hero-bg.png.png') center center no-repeat;
   background-size: 100% 100%;   /* Stretch to always fit screen */
-  height: 80vh;                /* Full viewport height on desktop */
+  height: 90vh;                /* Full viewport height on desktop */
   width: 100%;                  /* Full width */
 }
 
 /* Mobile layout: shrink hero height */
 @media (max-width: 768px) {
   .hero-bg {
-     width: 80%;  
-    height: 70vh;    /* Try 70% of screen height */
+    background: url('./images/hero-bg.png.png') center center no-repeat;
+    background-size: 100% 100%; /* stretch to fit mobile */
+    height: 75vh;    /* Try 70% of screen height */
     min-height: 380px;  /* Prevent it from becoming too small */
   }
 }
@@ -1080,6 +1081,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
