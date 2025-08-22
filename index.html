@@ -53,14 +53,13 @@ margin-top: 0.2rem;
 /* Hero background (auto height, full image visible) */
 .hero-bg {
   background-image: url('./images/hero-bg.png.png');
-  background-size: contain;       /* 🔹 show entire image */
-  background-position: center top;
+  background-size: contain;       /* Show full image without cropping */
+  background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16/9;             /* 🔹 keep fixed proportion, adjust as per your hero image */
-  position: relative;
+  aspect-ratio: 16/9;             /* Adjust to your image ratio */
 }
+
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
@@ -1078,6 +1077,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
