@@ -82,7 +82,7 @@
    {
     "id": 5,
     "category": "Table Mats",
-    "name": "Round Table Jute Mats",
+    "name": "Round Jute Table Mat",
     "price": 300,
     "images": [
       "images/mat1.jpeg",
@@ -126,7 +126,7 @@
   {
     "id": 7,
     "category": "HandBags",
-    "name": "Girls Cute Jute Cotton Bag",
+    "name": "Cute Face Jute Cotton Handbag",
     "price": 600,
     "images": [
       "images/bag1.jpeg",
@@ -165,8 +165,29 @@
       "washCare": "Machine washable",
       "Other Details": "Weight: 1.2Kg's, Available in 3 Patterns: Floral Blue, Pink Heart, Classic Brown, Ideal for : Gifting, bedroom, Can Fit Upto Mattress of 78X78X12 Inches, Easy to Lay and remove, Premium Quality."
     }
+  }, 
+  {
+    "id": 9,
+    "category": "HandBags",
+    "name": "Rainbow Jute Cotton Handbag",
+    "price": 600,
+    "images": [
+      "images/rainbow1.jpeg",
+      "images/rainbow2.jpeg",
+      "images/rainbow3.jpeg",
+      "images/rainbow4.jpeg",
+      "images/rainbow5.jpeg"
+    ],
+    "description": "Upskill your fashion sense with Evironment Friendly and Animal Cruelty Free Jute Cotton Handbags.",
+    "details": {
+      "fabric": "Thick Jute Cotton Ropes and tightly stitched around all the portions",
+      "dimensions": "32 X 20 cms",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 460gm's, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
+    }
   }  
 ]
+
 
 
 
