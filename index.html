@@ -398,16 +398,36 @@ Stitched every thread with care, our products are created using cruelty-free pro
 </button>
 
 <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-  <div id="cart-box" class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-    <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-3xl">&times;</button>
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+    <!-- Close Button -->
+    <button id="close-cart" class="absolute top-2 right-4 text-gray-800 text-3xl">&times;</button>
+
+    <!-- Heading -->
     <h2 class="text-xl font-semibold mb-4">Your Cart</h2>
+
+    <!-- Cart Items -->
     <ul id="cart-items" class="mb-4 text-sm text-gray-700 space-y-2"></ul>
-    <div class="mb-4 p-2 text-sm text-gray-700 border-t border-gray-300">
+
+    <!-- Delivery Info -->
+    <div class="mb-4 p-2 text-sm text-black border-t border-gray-300 space-y-1">
       <p>🚀 2–7 days fast delivery available across India</p>
       <p>🛒 Free delivery on orders above ₹499</p>
     </div>
+
+    <!-- Cart Total -->
+    <div class="flex justify-between font-semibold text-lg mb-4">
+      <span>Total:</span>
+      <span id="cart-total">₹0</span>
+    </div>
+
+    <!-- Checkout Button -->
+    <button id="checkout"
+      class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+      Checkout via WhatsApp
+    </button>
   </div>
 </div>
+
 
 <!-- Updated Checkout Button -->
 <button id="checkout-btn" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
@@ -1116,6 +1136,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
