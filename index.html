@@ -50,22 +50,22 @@ margin-top: 0.2rem;
   z-index: 10;
 }
 
+/* Hero background (auto height, full image visible) */
 .hero-bg {
   background-image: url('./images/hero-bg.png.png');
-  background-size: contain;     /* 🔹 Show full image without zooming */
-  background-position: center;
+  background-size: contain;       /* 🔹 show entire image */
+  background-position: center top;
   background-repeat: no-repeat;
-  background-color: #000;       /* 🔹 fallback background to fill gaps */
-  min-height: 100vh;            /* full screen height */
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;             /* 🔹 keep fixed proportion, adjust as per your hero image */
+  position: relative;
 }
 
-/* 📱 Mobile hero fix */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .hero-bg {
-    background-size: contain;   /* keep full image visible */
-    background-position: top center;
-    background-color: #000;     /* black bars if aspect ratio mismatch */
-    min-height: 75vh;
+    aspect-ratio: 9/16;           /* 🔹 use mobile-friendly ratio */
   }
 }
 
@@ -76,7 +76,7 @@ margin-top: 0.2rem;
   z-index: 0;
 }
 
-/* --- Hero slideshow --- */
+/* Slideshow wrapper with natural ratio */
 .slideshow {
   position: absolute;
   inset: 0;
@@ -87,26 +87,24 @@ margin-top: 0.2rem;
 .slideshow .slide {
   position: absolute;
   inset: 0;
-  background-size: contain;   /* 🔹 prevent zoom-in */
+  background-size: contain;    /* 🔹 keep full image */
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #000;     /* fill empty space */
   opacity: 0;
   transform: translateX(100%);
   transition: transform 600ms ease, opacity 600ms ease;
 }
 
-/* currently visible slide */
 .slideshow .slide.active {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* slide moving out to the left */
 .slideshow .slide.exit {
   opacity: 0;
   transform: translateX(-100%);
 }
+
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -1080,6 +1078,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
