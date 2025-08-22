@@ -143,8 +143,31 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 450gm's, Available in 3 colours: Piston Pink, Bloomy Sky and Yellow blossom, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
     }
-  }
+  },
+  {
+    "id": 8,
+    "category": "Bedsheets",
+    "name": "Elastic Fitted Bedsheet with Pillow Covers",
+    "price": 1400,
+    "images": [
+      "images/elastic1.jpeg",
+      "images/elastic2.jpeg",
+      "images/elastic3.jpeg",
+      "images/elastic4.jpeg",
+      "images/elastic5.jpeg",
+      "images/elastic6.jpeg",
+      "images/elastic7.jpeg"
+    ],
+    "description": " Say Goodbye to time wastage with Evironment Friendly and Animal Cruently Free 3-Pcs Glaze Cotton Elastic Bedsheet. Each Bedsheet comes with 2 Pillow Covers",
+    "details": {
+      "fabric": "Pure Glaze Cotton with elastic on all the sides.",
+      "dimensions": "108 X 108 Inches",
+      "washCare": "Machine washable",
+      "Other Details": "Weight: 1.2Kg's, Available in 3 Patterns: Floral Blue, Pink Heart, Classic Brown, Ideal for : Gifting, bedroom, Can Fit Upto Mattress of 78X78X12 Inches, Easy to Lay and remove, Premium Quality."
+    }
+  }  
 ]
+
 
 
 
