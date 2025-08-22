@@ -586,8 +586,8 @@ Privacy Policy
 <button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
 </div>
 
-<button id="modal-add-to-cart" class="bg-blue-700 text-white px-6 py-2 rounded-md hover:bg-blue-800">
-Add to Cart
+<button id="modal-add-to-cart" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
+  Add to Cart
 </button>
 </div>
 </div>
@@ -759,7 +759,7 @@ card.innerHTML = `
      <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
   </div>
   <button class="add-to-cart mt-2 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-  Add to Cart
+  Add To Cart
   </button>
   <button class="view-details mt-3 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
   View Details
@@ -835,8 +835,11 @@ modalContent.innerHTML = `
              }
              </div>
 
-              <button class="add-to-cart mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-950 transition">Add to Cart</button>
-            </div>
+              <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+  Add To Cart
+</button>
+</div>
+
           </div>
         `;
 
@@ -1092,6 +1095,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
