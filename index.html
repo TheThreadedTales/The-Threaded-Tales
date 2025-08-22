@@ -15,61 +15,51 @@
 <!-- Custom Styles -->
 <style>
 .marquee {
-display: inline-block;
-padding-left: 100%;
-animation: scroll-marquee 15s linear infinite;
-white-space: nowrap;
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-marquee 15s linear infinite;
+  white-space: nowrap;
 }
 
 @keyframes scroll-marquee {
-0% {
-transform: translateX(0%);
-}
-100% {
-transform: translateX(-100%);
-}
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
 }   
 
 .tango {
-font-family: 'Playfair Display', serif;
-font-weight: 700;
-font-size: 4rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 4rem;
 }
 
 .murray {
-font-family: 'Cormorant Garamond', serif;
-font-size: 1.5rem;
-display: block;
-margin-top: 0.2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  display: block;
+  margin-top: 0.2rem;
 }
 
+/* ✅ Center hero text with flexbox */
 .hero-text {
   text-align: center;
   color: white;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  /* vertical + horizontal centering */
+  height: 100%;             /* take full parent height */
 }
 
-/* Hero background (auto height, full image visible) */
-  .hero-bg {
+/* ✅ Hero background – no duplicate background image */
+.hero-bg {
   position: relative;
-  background: url('./images/hero-bg.png.png') center/cover no-repeat;
-  aspect-ratio: 16 / 9;    /* Desktop default ratio */
   width: 100%;
-  height: auto;
-  max-height: 100vh;       /* Prevent overflow */
+  height: 100vh;          /* always fill screen */
+  max-height: 100vh;
+  overflow: hidden;       /* contain slideshow */
 }
-
-/* Mobile: adaptive instead of strict ratio */
-@media (max-width: 768px) {
-  .hero-bg {
-    aspect-ratio: auto;    /* Disable 16:9 ratio on mobile */
-    height: 100vh;         /* Fill full screen height */
-    min-height: 500px;     /* Maintain minimum */
-    max-height: 100vh;     /* Don’t exceed viewport */
-  }
-}
-
 
 .hero-overlay {
   background-color: rgba(0, 0, 0, 0.3);
@@ -78,7 +68,7 @@ margin-top: 0.2rem;
   z-index: 0;
 }
 
-/* Slideshow wrapper with natural ratio */
+/* ✅ Slideshow fills hero with cover */
 .slideshow {
   position: absolute;
   inset: 0;
@@ -89,7 +79,7 @@ margin-top: 0.2rem;
 .slideshow .slide {
   position: absolute;
   inset: 0;
-  background-size: contain;    /* 🔹 keep full image */
+  background-size: cover;     /* 🔹 fill hero instead of contain */
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -106,6 +96,8 @@ margin-top: 0.2rem;
   opacity: 0;
   transform: translateX(-100%);
 }
+
+
 
 
 @keyframes slideInLeft {
@@ -1079,6 +1071,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
