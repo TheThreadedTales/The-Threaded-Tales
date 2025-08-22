@@ -52,21 +52,24 @@ margin-top: 0.2rem;
 
 /* Hero background (auto height, full image visible) */
   .hero-bg {
-  background-image: url('./images/hero-bg.png.png');
-  background-size: cover;        /* always fills */
-  background-position: center;   /* keep subject centered */
-  background-repeat: no-repeat;
-  aspect-ratio: 16 / 9;          /* force 16:9 box */
-  width: 100%;                   /* full width */
-  max-height: 100vh;             /* never exceed screen height */
+  position: relative;
+  background: url('./images/hero-bg.png.png') center/cover no-repeat;
+  aspect-ratio: 16 / 9;    /* Desktop default ratio */
+  width: 100%;
+  height: auto;
+  max-height: 100vh;       /* Prevent overflow */
 }
 
-/* Mobile adjustments */
+/* Mobile: adaptive instead of strict ratio */
 @media (max-width: 768px) {
   .hero-bg {
-    aspect-ratio: 9/16;           /* 🔹 use mobile-friendly ratio */
+    aspect-ratio: auto;    /* Disable 16:9 ratio on mobile */
+    height: 100vh;         /* Fill full screen height */
+    min-height: 500px;     /* Maintain minimum */
+    max-height: 100vh;     /* Don’t exceed viewport */
   }
 }
+
 
 .hero-overlay {
   background-color: rgba(0, 0, 0, 0.3);
@@ -104,10 +107,6 @@ margin-top: 0.2rem;
   transform: translateX(-100%);
 }
 
-.hero-bg {
-  background: url('./images/hero-bg.png.png') center/cover no-repeat !important;
-  aspect-ratio: 16 / 9 !important;
-}
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -285,38 +284,37 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 });
 </script>
 <!-- Hero Section -->
-<!-- Hero Section -->
-<!-- Hero Section -->
-<section id="hero" class="relative min-h-screen overflow-hidden flex items-center justify-center">
+<section id="hero" class="relative overflow-hidden flex items-center justify-center">
 
+  <!-- Hero background wrapper with fixed ratio -->
+  <div class="hero-bg relative w-full">
+    <!-- Slideshow wrapper -->
+    <div class="absolute inset-0 slideshow">
+      <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
+      <div class="slide" style="background-image: url('images/B1.png');"></div>
+      <div class="slide" style="background-image: url('images/m2.png');"></div>
+    </div>
 
-  <!-- Slideshow wrapper -->
-  <div class="absolute inset-0 slideshow">
-    <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
-    <div class="slide" style="background-image: url('images/B1.png');"></div>
-    <div class="slide" style="background-image: url('images/m2.png');"></div>
-  </div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 
-  <!-- Dark overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+    <!-- Hero content -->
+    <div class="hero-text relative z-10 text-center px-4 text-white">
+      <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
+      <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
 
-  <!-- Hero content -->
-  <div class="relative z-10 text-center px-4 text-white">
-    <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
-    <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
+      <!-- Launch Offer + Timer -->
+      <div class="mt-4 bg-red-600/40 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
+        🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
+      </div>
 
-    <!-- 🔥 Launch Offer + Timer -->
-    <!-- 🔥 Launch Offer + Timer -->
-<div class="mt-4 bg-red-600/40 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
-  🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
-</div>
-
-<a href="#products" class="mt-6 inline-block px-6 py-3 bg-white/30 text-black bold rounded-full text-lg hover:bg-white transition">
-  Shop Now
-</a>
-
+      <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white/30 text-black bold rounded-full text-lg hover:bg-white transition">
+        Shop Now
+      </a>
+    </div>
   </div>
 </section>
+
 
 <!-- Our Story Section -->
 <section id="our-story" class="relative py-20 bg-white overflow-hidden">
@@ -1081,6 +1079,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
