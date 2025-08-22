@@ -54,12 +54,12 @@
 
 /* ✅ Hero background – no duplicate background image */
 .hero-bg {
-  position: relative;
-  width: 100%;
-  height: 100vh;          /* always fill screen */
-  max-height: 100vh;
-  overflow: hidden;       /* contain slideshow */
+  background: url('images/hero1.jpg') center center no-repeat;
+  background-size: 100% 100%;   /* Stretch to always fit screen */
+  height: 100vh;                /* Full viewport height */
+  width: 100%;                  /* Full width */
 }
+
 
 .hero-overlay {
   background-color: rgba(0, 0, 0, 0.3);
@@ -1071,6 +1071,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
