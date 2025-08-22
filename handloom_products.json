@@ -21,7 +21,7 @@
   },
   {
     "id": 2,
-    "category": "Beddings",
+    "category": "Bedsheets",
     "name": "5-Piece Luxe Bedding Ensemble",
     "price": 1100,
     "images": [
@@ -92,7 +92,7 @@
       "images/mat5.jpeg",
       "images/mat6.jpeg"
     ],
-    "description": "Evironment Friendly and Animal Cruently Free Jute based Table Mats. Tissue Holder cum Organizer Box.",
+    "description": "Evironment Friendly and Animal Cruently Free Jute based Table Mats.",
     "details": {
       "fabric": "Pure Jute upskilling your interior game",
       "dimensions": "15 inches in diameter",
@@ -185,8 +185,69 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 460gm's, Premium Quality, Ideal for Gifting, Comes with luxurious PVC packaging."
     }
-  }  
+  },
+  {
+    "id": 10,
+    "category": "Table Mats",
+    "name": "Luxurious Golden Flower Table Mats 6Pcs.",
+    "price": 1100,
+    "images": [
+      "images/flower1.jpeg",
+      "images/flower2.jpeg",
+      "images/flower3.jpeg",
+      "images/flower4.jpeg",
+      "images/flower5.jpeg",
+      "images/flower6.jpeg"
+    ],
+    "description": "Upgrade your dining to premium Luxury with Animal Cruently Free Luxurious Table Mats. Comes in the pair of 6 Pieces.",
+    "details": {
+      "fabric": "PVC Based Long Lasting Table Mats upskilling your interior game.",
+      "dimensions": "Impressive 16 X 16 Inches mat",
+      "washCare": "Suitable for every kind of wash.",
+      "Other Details": "Weight: 800gm's, Available in 2 Patterns: Golden Rose, Golden Bloom, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
+    }
+  },
+  {
+    "id": 11,
+    "category": "Table Mats",
+    "name": "Luxurious Golden Leaf Table Mats 6Pcs.",
+    "price": 1100,
+    "images": [
+      "images/leaf1.jpeg",
+      "images/leaf2.jpeg",
+      "images/leaf3.jpeg",
+      "images/leaf4.jpeg",
+      "images/leaf5.jpeg",
+      "images/leaf6.jpeg"
+    ],
+    "description": "Upgrade your dining to premium Luxury with Animal Cruently Free Luxurious Table Mats. Comes in the pair of 6 Pieces.",
+    "details": {
+      "fabric": "PVC Based Long Lasting Table Mats upskilling your interior game.",
+      "dimensions": "Impressive 16 X 16 Inches mat",
+      "washCare": "Suitable for every kind of wash.",
+      "Other Details": "Weight: 800gm's, Available in 2 Patterns: Golden Rose, Golden Bloom, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
+    }
+  },
+  {
+    "id": 12,
+    "category": "Table Mats",
+    "name": "Silver Flower Table Mats 6Pcs.",
+    "price": 300,
+    "images": [
+      "images/silver1.jpeg",
+      "images/silver2.jpeg",
+      "images/silver3.jpeg"
+    ],
+    "description": "Upgrade your dining to premium Luxury with Animal Cruently Free Luxurious Table Mats. Comes in the pair of 6 Pieces.",
+    "details": {
+      "fabric": "PVC Based Long Lasting Table Mats upskilling your interior game.",
+      "dimensions": "Impressive 16 X 16 Inches mat",
+      "washCare": "Suitable for every kind of wash.",
+      "Other Details": "Weight: 800gm's, Available in 2 Patterns: Golden Rose, Golden Bloom, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
+    }
+  }
 ]
+
 
 
 
