@@ -54,10 +54,18 @@
 
 /* ✅ Hero background – no duplicate background image */
 .hero-bg {
-  background: url('images/hero1.jpg') center center no-repeat;
+  background: url('./images/hero-bg.png.png') center center no-repeat;
   background-size: 100% 100%;   /* Stretch to always fit screen */
-  height: 100vh;                /* Full viewport height */
+  height: 100vh;                /* Full viewport height on desktop */
   width: 100%;                  /* Full width */
+}
+
+/* Mobile layout: shrink hero height */
+@media (max-width: 768px) {
+  .hero-bg {
+    height: 70vh;    /* Try 70% of screen height */
+    min-height: 400px;  /* Prevent it from becoming too small */
+  }
 }
 
 
@@ -1071,6 +1079,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
