@@ -98,9 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(res => res.json())
     .then(products => {
       // Filter products by category (case-insensitive)
-      const filtered = products.filter(
-        p => p.category.toLowerCase() === selectedCategory.toLowerCase()
-      );
+      // Filter products by category (case-insensitive, ignores spacing issues)
+const normalize = str => str.toLowerCase().trim();
+const filtered = products.filter(
+  p => normalize(p.category) === normalize(selectedCategory)
+);
+
 
       const container = document.getElementById("shop-by-categories");
       container.innerHTML = "";
