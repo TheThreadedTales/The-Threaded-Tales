@@ -46,7 +46,109 @@
         ← Back to Home
       </a>
     </div>
+<nav class="w-full bg-white shadow-md sticky top-20 z-40">
+<div class="max-w-6xl mx-auto px-2 py-1 text-gray-800">
+<!-- Desktop layout -->
+<div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
 
+<!-- Left: Section Links -->
+<div class="flex justify-start gap-2 relative">
+<a href="#our-story" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Our Story</a>
+
+<!-- Our Products with dropdown -->
+<div class="relative group">
+<a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
+
+<a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
+</div>
+
+<!-- Center: Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+<span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
+</div>
+
+<!-- Right: Reviews, Search, Contact -->
+
+<!-- 🔍 Search Icon (Desktop) -->
+<div class="flex justify-end gap-4">
+<button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+  </svg>
+</button>
+<a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
+<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+</div>
+</div>
+
+<!-- Mobile layout -->
+<div class="flex md:hidden justify-between items-center">
+<!-- Our Products -->
+<div class="relative group">
+<a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="#category1" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="#category2" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="#category3" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="#category4" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
+
+<!-- Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+</div>
+
+<!-- 🔍 Search Icon (Mobile replaces Contact) -->
+<button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+
+<!-- Toggle -->
+<button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
+☰
+</button>
+</div>
+
+<!-- Mobile menu hidden initially -->
+<div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
+<a href="#our-story" class="block px-3 py-1 hover:bg-gray-200">Our Story</a>
+<a href="#artisans" class="block px-3 py-1 hover:bg-gray-200">Meet The Makers</a>
+<a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
+<a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
+</div>
+</div>
+</nav>
+
+<script>
+document.getElementById("mobileMenuToggle").addEventListener("click", function() {
+document.getElementById("mobileMenu").classList.toggle("hidden");
+});
+</script>
+<!-- Hero Section -->
+<section id="hero" class="relative overflow-hidden flex items-center justify-center">
+
+  <!-- Hero background wrapper with fixed ratio -->
+  <div class="hero-bg relative w-full">
+    <!-- Slideshow wrapper -->
+    <div class="absolute inset-0 slideshow">
+      <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
+      <div class="slide" style="background-image: url('images/B1.png');"></div>
+      <div class="slide" style="background-image: url('images/m2.png');"></div>
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
     <!-- Dynamic Category Title -->
     <h1 id="category-title" class="text-3xl font-bold mb-6 text-center"></h1>
 
