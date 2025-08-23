@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   selectedCategory = decodeURIComponent(selectedCategory);
 
   // Fetch products.json
-  fetch("handloom_products.json")
+  fetch("./handloom_products.json")
     .then(res => res.json())
     .then(products => {
       // Filter products by category (case-insensitive)
