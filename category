@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category | The Threaded Tales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar (copied from index.html) -->
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold tracking-wide">🧵 The Threaded Tales</a>
+      <button id="cart-btn" class="relative">
+        🛒
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-16 max-w-7xl mx-auto px-4">
+    
+    <!-- Back Button -->
+    <div class="mb-6">
+      <a href="index.html" class="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-black transition">
+        ← Back to Home
+      </a>
+    </div>
+
+    <!-- Dynamic Category Title -->
+    <h1 id="category-title" class="text-3xl font-bold mb-6 text-center"></h1>
+
+    <!-- Products Grid -->
+    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  </main>
+
+  <!-- ✅ Product Details Modal (same as your index.html) -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl relative p-6">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="relative">
+          <img id="modal-main-image" src="" alt="" class="w-full h-64 object-contain cursor-zoom-in">
+          <div class="flex mt-2 space-x-2 overflow-x-auto" id="modal-thumbnails"></div>
+        </div>
+        <div>
+          <h2 id="modal-product-name" class="text-xl font-semibold mb-2"></h2>
+          <p id="modal-product-description" class="text-gray-600 mb-4"></p>
+          <p id="modal-product-price" class="text-lg font-bold mb-4"></p>
+          <div class="flex items-center mb-4">
+            <button id="decrease-qty" class="px-3 py-1 border">-</button>
+            <span id="product-qty" class="px-4">1</span>
+            <button id="increase-qty" class="px-3 py-1 border">+</button>
+          </div>
+          <button id="add-to-cart" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Cart Modal (same as your index.html) -->
+  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+      <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
+      <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+      <div id="cart-items" class="space-y-4"></div>
+      <div class="flex justify-between font-semibold mt-4">
+        <span>Total:</span>
+        <span id="cart-total">₹0</span>
+      </div>
+      <button id="checkout-btn" class="w-full mt-4 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+        Checkout on WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- ✅ Scripts -->
+  <script>
+    // --- Helper: get query parameter ---
+    function getQueryParam(param) {
+      return new URLSearchParams(window.location.search).get(param);
+    }
+
+    const productsContainer = document.getElementById("products-container");
+    const categoryTitle = document.getElementById("category-title");
+
+    let selectedCategory = getQueryParam("category");
+    if (selectedCategory) {
+      categoryTitle.textContent = selectedCategory;
+      document.title = selectedCategory + " | The Threaded Tales";
+    }
+
+    // --- Load products from JSON ---
+    fetch("products.json")
+      .then(res => res.json())
+      .then(data => {
+        let filtered = data.filter(p => p.category === selectedCategory);
+        if (filtered.length === 0) {
+          productsContainer.innerHTML = "<p class='text-center text-gray-600'>No products found in this category.</p>";
+          return;
+        }
+
+        filtered.forEach(product => {
+          let div = document.createElement("div");
+          div.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition cursor-pointer";
+          div.innerHTML = `
+            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover mb-3 rounded">
+            <h3 class="text-lg font-semibold">${product.name}</h3>
+            <p class="text-gray-600">₹${product.price}</p>
+          `;
+          div.addEventListener("click", () => openProductModal(product));
+          productsContainer.appendChild(div);
+        });
+      });
+
+    // --- Modal + Cart (copied from your index.html logic) ---
+    let currentProduct = null;
+    let qty = 1;
+    const modal = document.getElementById("product-modal");
+    const modalName = document.getElementById("modal-product-name");
+    const modalDesc = document.getElementById("modal-product-description");
+    const modalPrice = document.getElementById("modal-product-price");
+    const modalImage = document.getElementById("modal-main-image");
+    const modalThumbs = document.getElementById("modal-thumbnails");
+    const qtyDisplay = document.getElementById("product-qty");
+
+    function openProductModal(product) {
+      currentProduct = product;
+      qty = 1;
+      qtyDisplay.textContent = qty;
+      modalName.textContent = product.name;
+      modalDesc.textContent = product.description;
+      modalPrice.textContent = "₹" + product.price;
+      modalImage.src = product.images[0];
+      modalThumbs.innerHTML = "";
+      product.images.forEach(img => {
+        let thumb = document.createElement("img");
+        thumb.src = img;
+        thumb.className = "w-16 h-16 object-cover border cursor-pointer";
+        thumb.onclick = () => modalImage.src = img;
+        modalThumbs.appendChild(thumb);
+      });
+      modal.classList.remove("hidden");
+    }
+
+    document.getElementById("close-modal").onclick = () => modal.classList.add("hidden");
+    document.getElementById("increase-qty").onclick = () => { qty++; qtyDisplay.textContent = qty; };
+    document.getElementById("decrease-qty").onclick = () => { if (qty>1) qty--; qtyDisplay.textContent = qty; };
+
+    // --- Cart functionality ---
+    let cart = [];
+    const cartModal = document.getElementById("cart-modal");
+    const cartBtn = document.getElementById("cart-btn");
+    const closeCart = document.getElementById("close-cart");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    document.getElementById("add-to-cart").onclick = () => {
+      let existing = cart.find(c => c.id === currentProduct.id);
+      if (existing) existing.qty += qty;
+      else cart.push({...currentProduct, qty});
+      updateCart();
+      modal.classList.add("hidden");
+    };
+
+    cartBtn.onclick = () => cartModal.classList.remove("hidden");
+    closeCart.onclick = () => cartModal.classList.add("hidden");
+
+    function updateCart() {
+      cartItems.innerHTML = "";
+      let total = 0, count = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        count += item.qty;
+        let div = document.createElement("div");
+        div.className = "flex justify-between items-center border-b pb-2";
+        div.innerHTML = `
+          <span>${item.name} (x${item.qty})</span>
+          <span>₹${item.price * item.qty}</span>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotal.textContent = "₹" + total;
+      cartCount.textContent = count;
+    }
+
+    document.getElementById("checkout-btn").onclick = () => {
+      if (cart.length === 0) return;
+      let msg = "Hello, I want to order:\n";
+      cart.forEach(item => msg += `- ${item.name} (x${item.qty}) = ₹${item.price * item.qty}\n`);
+      msg += "Total: " + cartTotal.textContent;
+      window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg), "_blank");
+    };
+  </script>
+</body>
+</html>
