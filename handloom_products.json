@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "category": "Mats & Rugs",
+    "category": "DOORMATS & RUGS",
     "name": "Soft Feel Door Mat",
     "price": 500,
     "images": [
@@ -21,7 +21,7 @@
   },
   {
     "id": 2,
-    "category": "Bedsheets",
+    "category": "BEDSHEETS",
     "name": "5-Piece Luxe Bedding Ensemble",
     "price": 1100,
     "images": [
@@ -41,7 +41,7 @@
   },
   {
     "id": 3,
-    "category": "Comforters",
+    "category": "COMFORTERS",
     "name": "Kids Single Bed Comforter",
     "price": 1100,
     "images": [
@@ -247,6 +247,7 @@
     }
   }
 ]
+
 
 
 
