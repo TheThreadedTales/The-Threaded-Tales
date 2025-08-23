@@ -16,10 +16,10 @@
     ],
     "description": "Super Soft Fluffy Door Mat for you and your loved ones.",
     "details": {
-      "fabric": "Material Soft imported Furr like threads",
+      "fabric": "Material Soft imported Furry Threads",
       "dimensions": "40 X 60 CMs",
       "washCare": "Easy Wash as per your convenience ",
-      "Other Details": " Available in 3 Colours:, Dark Brown, Minimalist Grey, Bloomy Blue, WEIGHT: 1KG(approx.), Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers"
+      "Other Details": " Available in 3 Colours:, Dark Brown, Minimalist Grey, Bloomy Blue, WEIGHT: 500gm's(approx.), Non Slip Backing , No Shedding."
     }
   },
   {
@@ -271,8 +271,49 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 1Kg's, Available in 3 Colours: Minimalist Grey, Natural Brown, Brown, Ideal for : Bedrooms, Living Rooms, Pooja Rooms, Super Soft, Fluffy Feel, Premium Quality."
     }
+  },
+  {
+    "id": 14,
+    "category": "DOORMATS & RUGS",
+    "name": " Ultra Soft Premium Door Mat",
+    "price": 440,
+    "images": [
+      "images/Doormat1.jpeg",
+      "images/Doormat2.jpeg",
+      "images/Doormat3.jpeg",
+      "images/Doormat4.jpeg",
+      "images/Doormat5.jpeg",
+    ],
+    "description": "Super Soft Fluffy Door Mat for you and your loved ones.",
+    "details": {
+      "fabric": "Material Soft imported Furr like threads",
+      "dimensions": "40 X 60 CMs",
+      "washCare": "Easy Wash as per your convenience ",
+      "Other Details": " WEIGHT: 1KG(approx.), Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers, Anti Skid."
+    }
+  },
+  {
+    "id": 15,
+    "category": "DOORMATS & RUGS",
+    "name": " Temple Pattern Doormat",
+    "price": 600,
+    "images": [
+      "images/temple1.jpeg",
+      "images/temple2.jpeg",
+      "images/temple3.jpeg",
+      "images/temple4.jpeg",
+      "images/temple5.jpeg",
+    ],
+    "description": "Outshine with this Anti Skid super soft and elegantly temple patterned Doormat.",
+    "details": {
+      "fabric": "Soft Micro Yarn",
+      "dimensions": "40 X 60 CMs",
+      "washCare": "Easy Wash as per your convenience ",
+      "Other Details": " Available in 3 Colours: Piston Black, Bloody Maroon, Blossom Blue, WEIGHT: 400GM'S(approx.), Non Slip Backing , No Shedding ,pREMIUM qUALITY ,Anti Skid."
+    }
   }
 ]
+
 
 
 
