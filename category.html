@@ -94,7 +94,7 @@
     }
 
     // --- Load products from JSON ---
-    fetch("products.json")
+    fetch("handloom_products.json")
       .then(res => res.json())
       .then(data => {
         let filtered = data.filter(p => p.category === selectedCategory);
