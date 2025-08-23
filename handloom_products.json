@@ -2,8 +2,8 @@
   {
     "id": 1,
     "category": "DOORMATS & RUGS",
-    "name": "Soft Feel Door Mat",
-    "price": 500,
+    "name": " Premium Soft Feel Door Mat",
+    "price": 900,
     "images": [
       "images/Doormat1.jpeg",
       "images/Doormat2.jpeg",
@@ -246,7 +246,31 @@
       "Other Details": "Weight: 800gm's, Available in 2 Patterns: Golden Rose, Golden Bloom, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
     }
   }
+    {
+    "id": 13,
+    "category": "Bed Runners",
+    "name": "Premium Soft Feel Bedside Runner",
+    "price": 1300,
+    "images": [
+      "images/runner1.jpeg",
+      "images/runner2.jpeg",
+      "images/runner3.jpeg",
+      "images/runner4.jpeg",
+      "images/runner5.jpeg",
+      "images/runner6.jpeg",
+      "images/runner7.jpeg",
+      "images/runner8.jpeg"
+    ],
+    "description": "Feel the real Luxury with Animal Cruently Free Soft feel Bedside Runner. Upgrade your room decor with this luxe product.",
+    "details": {
+      "fabric": "Material Soft imported Furr like threads.",
+      "dimensions": "22 X 55 Inches",
+      "washCare": "Machine washable with Mild Detergent",
+      "Other Details": "Weight: 1Kg's, Available in 3 Colours: Minimalist Grey, Natural Brown, Brown, Ideal for : Bedrooms, Living Rooms, Pooja Rooms, Super Soft, Fluffy Feel, Premium Quality."
+    }
+  }
 ]
+
 
 
 
