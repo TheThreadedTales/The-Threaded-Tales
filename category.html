@@ -85,13 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedCategory = params.get("category");
 
   if (!selectedCategory) {
-    document.getElementById("shop-by-categories").innerHTML =
+    document.getElementById("products-container").innerHTML =
       "<p class='text-center text-gray-600'>No category selected.</p>";
     return;
   }
 
   // Decode URL text (handles %20, %26, etc.)
   selectedCategory = decodeURIComponent(selectedCategory);
+  document.getElementById("category-title").textContent = selectedCategory;
+
 
   // Fetch products.json
   fetch("./handloom_products.json")
@@ -105,7 +107,7 @@ const filtered = products.filter(
 );
 
 
-      const container = document.getElementById("shop-by-categories");
+      const container = document.getElementById("products-container");
       container.innerHTML = "";
 
       if (filtered.length === 0) {
@@ -132,7 +134,7 @@ const filtered = products.filter(
     })
     .catch(err => {
       console.error("Error loading products:", err);
-      document.getElementById("shop-by-categories").innerHTML =
+      document.getElementById("products-container").innerHTML =
         "<p class='text-center text-red-600'>Failed to load products.</p>";
     });
 });
