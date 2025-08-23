@@ -3,20 +3,23 @@
     "id": 1,
     "category": "DOORMATS & RUGS",
     "name": " Premium Soft Feel Door Mat",
-    "price": 900,
+    "price": 440,
     "images": [
-      "images/Doormat1.jpeg",
-      "images/Doormat2.jpeg",
-      "images/Doormat3.jpeg",
-      "images/Doormat4.jpeg",
-      "images/Doormat5.jpeg"
+      "images/rabbit1.jpeg",
+      "images/rabbit2.jpeg",
+      "images/rabbit3.jpeg",
+      "images/rabbit4.jpeg",
+      "images/rabbit5.jpeg",
+      "images/rabbit6.jpeg",
+      "images/rabbit7.jpeg",
+      "images/rabbit8.jpeg"
     ],
     "description": "Super Soft Fluffy Door Mat for you and your loved ones.",
     "details": {
       "fabric": "Material Soft imported Furr like threads",
       "dimensions": "40 X 60 CMs",
       "washCare": "Easy Wash as per your convenience ",
-      "Other Details": " wEIGHT: 1KG(approx.), Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers"
+      "Other Details": " Available in 3 Colours:, Dark Brown, Minimalist Grey, Bloomy Blue, WEIGHT: 1KG(approx.), Non Slip Backing , No Shedding , Fluffy Velvet , 1.4' Long Fibers"
     }
   },
   {
@@ -270,6 +273,7 @@
     }
   }
 ]
+
 
 
 
