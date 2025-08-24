@@ -318,12 +318,12 @@
     "name": " Bubble Perfumed AC Blanket(Double Bed)",
     "price": 2600,
     "images": [
-      "images/AC(1).jpeg",
-      "images/AC(2).jpeg",
-      "images/AC(3).jpeg",
-      "images/AC(4).jpeg",
-      "images/AC(5).jpeg",
-      "images/AC(6).jpeg"     
+      "images/AC (1).jpeg",
+      "images/AC (2).jpeg",
+      "images/AC (3).jpeg",
+      "images/AC (4).jpeg",
+      "images/AC (5).jpeg",
+      "images/AC (6).jpeg"     
     ],
     "description": "Premium Luxe Bubble Scented AC Blanket. Super Soft & Fluffy AC Blankets you and your loved ones. Also Available ifor Single Bed",
     "details": {
@@ -334,6 +334,7 @@
     }
   }
 ]
+
 
 
 
