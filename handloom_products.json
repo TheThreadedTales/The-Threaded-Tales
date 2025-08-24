@@ -2,7 +2,7 @@
   {
     "id": 1,
     "category": "DOORMATS & RUGS",
-    "name": " Premium Soft Feel Door Mat",
+    "name": " Premium Soft Feel Door Mat/ Bath Mat",
     "price": 440,
     "images": [
       "images/rabbit1.jpeg",
@@ -276,7 +276,7 @@
     "id": 14,
     "category": "DOORMATS & RUGS",
     "name": " Ultra Soft Premium Door Mat",
-    "price": 440,
+    "price": 900,
     "images": [
       "images/Doormat1.jpeg",
       "images/Doormat2.jpeg",
@@ -295,7 +295,7 @@
   {
     "id": 15,
     "category": "DOORMATS & RUGS",
-    "name": " Temple Pattern Doormat",
+    "name": " Temple Pattern Doormat/ Bath Mat",
     "price": 600,
     "images": [
       "images/temple1.jpeg",
@@ -334,28 +334,6 @@
     }
   }
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
