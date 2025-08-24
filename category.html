@@ -142,52 +142,85 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 });
 </script>
 <!-- Hero Section -->
-<section id="hero" class="relative overflow-hidden flex items-center justify-center">
-
-  <!-- Hero background wrapper with fixed ratio -->
-  <div class="hero-bg relative w-full">
-    <!-- Slideshow wrapper -->
-    <div class="absolute inset-0 slideshow">
-      <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
-      <div class="slide" style="background-image: url('images/B1.png');"></div>
-      <div class="slide" style="background-image: url('images/m2.png');"></div>
+<!-- Cart Modal -->
+  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+      <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
+      <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+      <div id="cart-items" class="space-y-4 max-h-64 overflow-y-auto"></div>
+      <div class="mt-4 border-t pt-4 flex justify-between items-center">
+        <span class="text-lg font-semibold">Total:</span>
+        <span id="cart-total" class="text-lg font-bold">₹0</span>
+      </div>
+      <button id="checkout-btn" class="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">Checkout on WhatsApp</button>
     </div>
+  </div>
 
-<div id="products-container" class="grid grid-cols-2 md:grid-cols-4 gap-0 border-4 border-gray-200"></div>
-</section>
-<!-- Cart Button + Modal -->
-<button id="cart-button" class="hidden fixed top-20 right-4 z-50 bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 shadow-lg border border-black">
-🛒 Cart (<span id="cart-count">0</span>)
-</button>
+  <!-- Product Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-3xl w-full relative">
+      <button id="close-product-modal" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="relative">
+          <img id="modal-main-image" src="" alt="" class="w-full h-80 object-cover rounded-lg cursor-zoom-in">
+          <button id="prev-image" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">&#8592;</button>
+          <button id="next-image" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">&#8594;</button>
+          <div id="modal-thumbnails" class="flex space-x-2 mt-2 overflow-x-auto"></div>
+        </div>
+        <div>
+          <h2 id="modal-product-name" class="text-2xl font-bold"></h2>
+          <p id="modal-product-description" class="text-gray-600 mt-2"></p>
+          <div class="mt-4">
+            <span class="line-through text-gray-400" id="modal-original-price"></span>
+            <span class="text-red-600 font-bold text-xl ml-2" id="modal-discounted-price"></span>
+          </div>
+          <div class="flex items-center mt-4">
+            <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
+            <span id="product-qty" class="px-4">1</span>
+            <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
+          </div>
+          <button id="add-to-cart" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-<div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-<button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-3xl">&times;</button>
-<h2 class="text-xl font-semibold mb-4">Your Cart</h2>
-<ul id="cart-items" class="mb-4 text-sm text-gray-700 space-y-2"></ul>
-<div class="mb-4 p-2 text-sm text-gray-700 border-t border-gray-300">
-<p>🚀 2–7 days fast delivery available across India</p>
-<p>🛒 Free delivery on orders above ₹499</p>
-</div>
-<!-- Updated Checkout Button -->
-<button id="checkout-btn" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
-Checkout on WhatsApp
-</button>
-</div>
-</div>
-<!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
-<div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
-<div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-<!-- ❌ Modal Close -->
-<button id="modal-close" class="absolute top-1 right-2 text-gray-700 hover:text-red-600 text-3xl font-bold">&times;</button>
-<div id="modal-content"></div>
-</div>
-</div>
-<div id="cart-toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0 z-50">
-Added to Cart!
-</div>
- <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
-  </main>
+  <script src="products.js"></script>
+  <script src="scripts.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const categoryName = params.get("category");
+
+      if (categoryName) {
+        document.getElementById("category-title").innerText = categoryName;
+
+        const container = document.getElementById("products-container");
+        const filteredProducts = products.filter(p => p.category === categoryName);
+
+        filteredProducts.forEach(product => {
+          const div = document.createElement("div");
+          div.className = "bg-white rounded-lg shadow hover:shadow-lg overflow-hidden cursor-pointer";
+          div.innerHTML = `
+            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-64 object-cover">
+            <div class="p-4 text-center">
+              <h3 class="text-lg font-semibold">${product.name}</h3>
+              <p>
+                <span class="line-through text-gray-400">₹${product.price}</span>
+                <span class="text-red-600 font-bold ml-2">₹${Math.floor(product.price / 2)}</span>
+              </p>
+            </div>
+          `;
+          div.addEventListener("click", () => openProductModal(product));
+          container.appendChild(div);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
 
 
 
@@ -206,146 +239,4 @@ Privacy Policy
 </a>
 </div>
 </footer>
-  <!-- ✅ Scripts -->
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Get ?category= from URL
-  const params = new URLSearchParams(window.location.search);
-  let selectedCategory = params.get("category");
-
-  if (!selectedCategory) {
-    document.getElementById("products-container").innerHTML =
-      "<p class='text-center text-gray-600'>No category selected.</p>";
-    return;
-  }
-
-  // Decode URL text (handles %20, %26, etc.)
-  selectedCategory = decodeURIComponent(selectedCategory);
-  document.getElementById("category-title").textContent = selectedCategory;
-
-
-  // Fetch products.json
-  fetch("./handloom_products.json")
-    .then(res => res.json())
-    .then(products => {
-      // Filter products by category (case-insensitive)
-      // Filter products by category (case-insensitive, ignores spacing issues)
-const normalize = str => str.toLowerCase().trim();
-const filtered = products.filter(
-  p => normalize(p.category) === normalize(selectedCategory)
-);
-
-
-      const container = document.getElementById("products-container");
-      container.innerHTML = "";
-
-      if (filtered.length === 0) {
-        container.innerHTML =
-          `<p class="text-center text-gray-600">No products found for <strong>${selectedCategory}</strong>.</p>`;
-        return;
-      }
-
-      // Render products
-      filtered.forEach(product => {
-        const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow hover:shadow-lg overflow-hidden";
-
-        card.innerHTML = `
-          <img src="${product.images[0]}" alt="${product.name}" class="w-full h-64 object-cover">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">${product.name}</h3>
-            <p class="text-gray-700">₹${product.price}</p>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-    })
-    .catch(err => {
-      console.error("Error loading products:", err);
-      document.getElementById("products-container").innerHTML =
-        "<p class='text-center text-red-600'>Failed to load products.</p>";
-    });
-});
-    // --- Modal + Cart (copied from your index.html logic) ---
-    let currentProduct = null;
-    let qty = 1;
-    const modal = document.getElementById("product-modal");
-    const modalName = document.getElementById("modal-product-name");
-    const modalDesc = document.getElementById("modal-product-description");
-    const modalPrice = document.getElementById("modal-product-price");
-    const modalImage = document.getElementById("modal-main-image");
-    const modalThumbs = document.getElementById("modal-thumbnails");
-    const qtyDisplay = document.getElementById("product-qty");
-
-    function openProductModal(product) {
-      currentProduct = product;
-      qty = 1;
-      qtyDisplay.textContent = qty;
-      modalName.textContent = product.name;
-      modalDesc.textContent = product.description;
-      modalPrice.textContent = "₹" + product.price;
-      modalImage.src = product.images[0];
-      modalThumbs.innerHTML = "";
-      product.images.forEach(img => {
-        let thumb = document.createElement("img");
-        thumb.src = img;
-        thumb.className = "w-16 h-16 object-cover border cursor-pointer";
-        thumb.onclick = () => modalImage.src = img;
-        modalThumbs.appendChild(thumb);
-      });
-      modal.classList.remove("hidden");
-    }
-
-    document.getElementById("close-modal").onclick = () => modal.classList.add("hidden");
-    document.getElementById("increase-qty").onclick = () => { qty++; qtyDisplay.textContent = qty; };
-    document.getElementById("decrease-qty").onclick = () => { if (qty>1) qty--; qtyDisplay.textContent = qty; };
-
-    // --- Cart functionality ---
-    let cart = [];
-    const cartModal = document.getElementById("cart-modal");
-    const cartBtn = document.getElementById("cart-btn");
-    const closeCart = document.getElementById("close-cart");
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const cartCount = document.getElementById("cart-count");
-
-    document.getElementById("add-to-cart").onclick = () => {
-      let existing = cart.find(c => c.id === currentProduct.id);
-      if (existing) existing.qty += qty;
-      else cart.push({...currentProduct, qty});
-      updateCart();
-      modal.classList.add("hidden");
-    };
-
-    cartBtn.onclick = () => cartModal.classList.remove("hidden");
-    closeCart.onclick = () => cartModal.classList.add("hidden");
-
-    function updateCart() {
-      cartItems.innerHTML = "";
-      let total = 0, count = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        count += item.qty;
-        let div = document.createElement("div");
-        div.className = "flex justify-between items-center border-b pb-2";
-        div.innerHTML = `
-          <span>${item.name} (x${item.qty})</span>
-          <span>₹${item.price * item.qty}</span>
-        `;
-        cartItems.appendChild(div);
-      });
-      cartTotal.textContent = "₹" + total;
-      cartCount.textContent = count;
-    }
-
-    document.getElementById("checkout-btn").onclick = () => {
-      if (cart.length === 0) return;
-      let msg = "Hello, I want to order:\n";
-      cart.forEach(item => msg += `- ${item.name} (x${item.qty}) = ₹${item.price * item.qty}\n`);
-      msg += "Total: " + cartTotal.textContent;
-      window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg), "_blank");
-    };
-  </script>
-</body>
-</html>
+ 
