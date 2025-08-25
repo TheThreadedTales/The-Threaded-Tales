@@ -1,296 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-@keyframes marquee {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-.marquee {
-  display: inline-block;
-  animation: marquee 15s linear infinite;
-}
-</style>  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Category | The Threaded Tales</title>
+  <title>The Threaded Tales - Category</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .marquee { display:inline-block; white-space:nowrap; animation:scroll 12s linear infinite;}
+    @keyframes scroll { 0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+    .zoom:hover { transform: scale(1.2); }
+  </style>
 </head>
-  <!-- Launch Offer Banner -->
+<body class="bg-gray-50">
+
+  <!-- ✅ Launch Offer Banner -->
   <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
-    <div class="marquee whitespace-nowrap font-semibold text-lg">
-      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;
-      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+    <div class="marquee font-semibold text-lg">
+      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp; 🎉 Shop Now & Save Big! 🎉
     </div>
   </div>
 
-  <!-- Navbar -->
-  <nav class="w-full bg-white shadow-md sticky top-10 z-40">
-<div class="max-w-6xl mx-auto px-2 py-1 text-gray-800">
-<!-- Desktop layout -->
-<div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
+  <!-- ✅ Navbar -->
+  <nav class="bg-white shadow-md fixed top-10 w-full z-40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold">The Threaded Tales</a>
+      <button id="open-cart" class="relative bg-gray-200 px-4 py-2 rounded-lg">
+        🛒 <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1 rounded-full hidden">0</span>
+      </button>
+    </div>
+  </nav>
 
-<!-- Left: Section Links -->
-<div class="flex justify-start gap-2 relative">
-<a href="#our-story" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Our Story</a>
+  <!-- ✅ Category Title -->
+  <div class="pt-28 text-center">
+    <h1 id="category-title" class="text-3xl font-bold mb-6"></h1>
+  </div>
 
-<!-- Our Products with dropdown -->
-<div class="relative group">
-<a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-Our Products
-</a>
-<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-</div>
-</div>
-  
-<a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
-</div>
-
-<!-- Center: Logo -->
-<div class="flex flex-col items-center text-center">
-<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-<span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
-</div>
-
-<!-- Right: Reviews, Search, Contact -->
-
-<!-- 🔍 Search Icon (Desktop) -->
-<div class="flex justify-end gap-4">
-<button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-  </svg>
-</button>
-<a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-</div>
-</div>
-
-<!-- Mobile layout -->
-<div class="flex md:hidden justify-between items-center">
-<!-- Our Products -->
-<div class="relative group">
-<a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-Our Products
-</a>
-<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-</div>
-</div>
-
-<!-- Logo -->
-<div class="flex flex-col items-center text-center">
-<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-</div>
-
-<!-- 🔍 Search Icon (Mobile replaces Contact) -->
-<button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
-
-<!-- Toggle -->
-<button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
-☰
-</button>
-</div>
-
-<!-- Mobile menu hidden initially -->
-<div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
-<a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
-<a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
-</div>
-</div>
-</nav>
-
-<script>
-document.getElementById("mobileMenuToggle").addEventListener("click", function() {
-document.getElementById("mobileMenu").classList.toggle("hidden");
-});
-</script>
-
-  <!-- Page Header -->
-  <section class="pt-28 pb-6 text-center">
-    <a href="index.html" class="inline-block bg-white text-black px-3 py-1 text-sm rounded shadow hover:bg-gray-800 hover:text-white transition">
-      ← Back
-    </a>
-    <h2 id="category-title" class="text-3xl font-bold mt-2"></h2>
+  <!-- ✅ Product Grid -->
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="category-products">
+    <!-- Products load here -->
   </section>
-
-  <!-- Products Section -->
-  <section id="products" class="container mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></section>
 
   <!-- ✅ Product Details Modal -->
   <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
-    <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 relative">
-      <button id="close-modal" class="absolute top-2 right-2 text-2xl">✖</button>
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- Left: Image Gallery -->
-        <div class="relative">
-          <img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
-          <button id="prev-image" class="absolute top-1/2 left-0 bg-gray-800 text-white px-2">◀</button>
-          <button id="next-image" class="absolute top-1/2 right-0 bg-gray-800 text-white px-2">▶</button>
-          <div id="modal-thumbnails" class="flex mt-2 space-x-2"></div>
-        </div>
-        <!-- Right: Product Info -->
+    <div class="bg-white rounded-lg p-6 w-full max-w-3xl relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-700 text-2xl">&times;</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <h3 id="modal-title" class="text-2xl font-bold"></h3>
-          <p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
-          <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
-          <div class="flex items-center space-x-2 mt-4">
-            <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
-            <span id="modal-quantity">1</span>
-            <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
+          <img id="modal-main-img" src="" class="w-full h-80 object-cover rounded-lg zoom cursor-pointer" />
+          <div id="modal-thumbnails" class="flex gap-2 mt-2"></div>
+        </div>
+        <div>
+          <h2 id="modal-title" class="text-2xl font-bold mb-2"></h2>
+          <p id="modal-price" class="text-xl text-red-600 mb-2"></p>
+          <ul id="modal-description" class="list-disc list-inside mb-4 text-gray-700"></ul>
+          <div class="flex items-center mb-4">
+            <button id="qty-minus" class="px-2 bg-gray-200">-</button>
+            <span id="qty" class="px-4">1</span>
+            <button id="qty-plus" class="px-2 bg-gray-200">+</button>
           </div>
-          <button id="add-to-cart" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">Add to Cart</button>
+          <button id="add-to-cart" class="bg-yellow-500 text-white px-4 py-2 rounded-lg">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ✅ Cart Modal -->
-  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-      <button id="close-cart" class="absolute top-2 right-4">✖</button>
+  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md relative">
+      <button id="close-cart" class="absolute top-2 right-2 text-gray-800 text-xl">&times;</button>
       <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-      <div id="cart-items" class="space-y-4"></div>
-      <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
-      <button id="checkout" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">Checkout on WhatsApp</button>
+      <div id="cart-items" class="space-y-3"></div>
+      <p class="font-bold mt-4">Total: ₹<span id="cart-total">0</span></p>
+      <button id="checkout" class="bg-green-600 text-white px-4 py-2 rounded-lg mt-4 w-full">Checkout via WhatsApp</button>
     </div>
   </div>
 
-  <!-- ✅ Toast -->
-  <div id="toast" class="fixed bottom-2 right-1 bg-black-600 text-white px-4 py-2 rounded-lg shadow hidden">Added to cart!</div>
-
   <script>
-    let productsData = [];
-    let currentProduct = null;
-    let currentImageIndex = 0;
-    let cart = [];
+    // ✅ Load Products JSON
+    let products = [];
+    fetch("handloom_products.json").then(res=>res.json()).then(data=>{ products = data; renderCategoryProducts(); });
 
-    // Fetch JSON & filter products
-    async function loadProducts() {
-      const res = await fetch("handloom_products.json");
-      const data = await res.json();
-      productsData = data;
+    // ✅ Get category from URL
+    const params = new URLSearchParams(window.location.search);
+    let category = decodeURIComponent(params.get("category") || "").replace("&&","&").trim();
 
-      const params = new URLSearchParams(window.location.search);
-      const category = params.get("category");
-      document.getElementById("category-title").textContent = category;
+    document.getElementById("category-title").textContent = category;
 
-      const filtered = productsData.filter(p => p.category === category);
-      const container = document.getElementById("products");
+    // ✅ Render category products
+    function renderCategoryProducts(){
+      const container = document.getElementById("category-products");
       container.innerHTML = "";
-      filtered.forEach(product => {
-        const discounted = Math.floor(product.price / 2);
-        const card = document.createElement("div");
-        card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
-        card.innerHTML = `
-          <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover rounded">
-          <h3 class="text-lg font-bold mt-2">${product.name}</h3>
-          <p class="text-gray-600 line-through">₹${product.price}</p>
-          <p class="text-yellow-600 font-bold">₹${discounted}</p>
-          <div class="flex justify-between mt-3">
-            <button class="view-details bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">View Details</button>
-            <button class="quick-add bg-yellow-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
+      const filtered = products.filter(p => p.category === category);
+      filtered.forEach(p=>{
+        const discountPrice = Math.round(p.price * 0.5);
+        container.innerHTML += `
+          <div class="bg-white rounded-lg shadow-md p-4">
+            <img src="${p.images[0]}" class="w-full h-40 object-cover rounded-lg mb-2">
+            <h3 class="font-bold">${p.name}</h3>
+            <p class="text-red-600 font-semibold">₹${discountPrice} <span class="line-through text-gray-500 text-sm">₹${p.price}</span></p>
+            <div class="mt-2 flex gap-2">
+              <button onclick="openProductModal(${p.id})" class="bg-blue-500 text-white px-3 py-1 rounded">View</button>
+              <button onclick="addProductToCart(${p.id},1)" class="bg-yellow-500 text-white px-3 py-1 rounded">Add to Cart</button>
+            </div>
           </div>
         `;
-        container.appendChild(card);
       });
     }
 
-    // Modal functions
-    function openModal(product) {
-      currentProduct = product;
-      currentImageIndex = 0;
-      document.getElementById("modal-main-image").src = product.images[0];
-      document.getElementById("modal-title").textContent = product.name;
-      document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
-      document.getElementById("modal-description").innerHTML = product.description.split("•").map(i=>`<li>${i.trim()}</li>`).join("");
-      document.getElementById("modal-quantity").textContent = 1;
-      const thumbs = document.getElementById("modal-thumbnails");
-      thumbs.innerHTML = "";
-      product.images.forEach((img, idx) => {
-        const t = document.createElement("img");
-        t.src = img; t.className="w-16 h-16 object-cover border cursor-pointer";
-        t.onclick = () => { currentImageIndex=idx; document.getElementById("modal-main-image").src=img; };
-        thumbs.appendChild(t);
-      });
+    // ✅ Product Modal
+    let currentProduct = null, qty=1;
+    function openProductModal(id){
+      currentProduct = products.find(p=>p.id===id);
+      qty=1;
+      document.getElementById("qty").textContent=qty;
+      document.getElementById("modal-title").textContent=currentProduct.name;
+      document.getElementById("modal-price").innerHTML=`₹${Math.round(currentProduct.price*0.5)} <span class="line-through text-gray-500">₹${currentProduct.price}</span>`;
+      document.getElementById("modal-description").innerHTML=currentProduct.description.split(".").map(d=>d?`<li>${d.trim()}</li>`:"").join("");
+      document.getElementById("modal-main-img").src=currentProduct.images[0];
+      const thumbs=document.getElementById("modal-thumbnails"); thumbs.innerHTML="";
+      currentProduct.images.forEach(img=>{ thumbs.innerHTML+=`<img src="${img}" onclick="document.getElementById('modal-main-img').src='${img}'" class="w-12 h-12 object-cover cursor-pointer border">`;});
       document.getElementById("product-modal").classList.remove("hidden");
     }
-    document.getElementById("close-modal").onclick = () => document.getElementById("product-modal").classList.add("hidden");
-    document.getElementById("prev-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex-1+currentProduct.images.length)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
-    document.getElementById("next-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex+1)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
+    document.getElementById("close-modal").onclick=()=>document.getElementById("product-modal").classList.add("hidden");
+    document.getElementById("qty-minus").onclick=()=>{if(qty>1)qty--;document.getElementById("qty").textContent=qty;}
+    document.getElementById("qty-plus").onclick=()=>{qty++;document.getElementById("qty").textContent=qty;}
+    document.getElementById("add-to-cart").onclick=()=>{addProductToCart(currentProduct.id,qty);document.getElementById("product-modal").classList.add("hidden");};
 
-    // Cart
-    function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      cartItems.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, idx) => {
-        const discounted = Math.floor(item.price/2);
-        total += discounted * item.qty;
-        const div = document.createElement("div");
-        div.className="flex justify-between items-center border-b pb-2";
-        div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
-        cartItems.appendChild(div);
+    // ✅ Cart Functions
+    let cart=[];
+    function addProductToCart(id,quantity){
+      const prod=products.find(p=>p.id===id);
+      const existing=cart.find(i=>i.id===id);
+      if(existing){existing.qty+=quantity;}else{cart.push({id:prod.id,name:prod.name,price:Math.round(prod.price*0.5),qty:quantity});}
+      updateCart();
+      document.getElementById("cart-modal").classList.remove("hidden");
+    }
+    function updateCart(){
+      const container=document.getElementById("cart-items"); container.innerHTML="";
+      let total=0;
+      cart.forEach(item=>{
+        total+=item.price*item.qty;
+        container.innerHTML+=`
+          <div class="flex justify-between items-center">
+            <span>${item.name} (x${item.qty})</span>
+            <span>₹${item.price*item.qty}</span>
+          </div>
+        `;
       });
-      document.getElementById("cart-total").textContent = "Total: ₹"+total;
-      document.getElementById("cart-count").textContent = cart.length;
-      document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
+      document.getElementById("cart-total").textContent=total;
+      document.getElementById("cart-count").textContent=cart.reduce((a,c)=>a+c.qty,0);
+      document.getElementById("cart-count").classList.remove("hidden");
     }
-
-    // Toast
-    function showToast() {
-      const toast=document.getElementById("toast");
-      toast.classList.remove("hidden");
-      setTimeout(()=>toast.classList.add("hidden"),2000);
-    }
-
-    // Event delegation
-    document.addEventListener("click", e=>{
-      if(e.target.classList.contains("view-details")){
-        const product=productsData.find(p=>p.id==e.target.dataset.id);
-        openModal(product);
-      }
-      if(e.target.classList.contains("quick-add")){
-        const product=productsData.find(p=>p.id==e.target.dataset.id);
-        cart.push({...product, qty:1});
-        updateCart();
-        showToast();
-      }
-    });
-
-    document.getElementById("add-to-cart").onclick = () => {
-      cart.push({...currentProduct, qty:parseInt(document.getElementById("modal-quantity").textContent)});
-      updateCart(); showToast();
-      document.getElementById("product-modal").classList.add("hidden");
-    };
-
-    document.getElementById("increase-qty").onclick=()=>document.getElementById("modal-quantity").textContent=parseInt(document.getElementById("modal-quantity").textContent)+1;
-    document.getElementById("decrease-qty").onclick=()=>{let q=parseInt(document.getElementById("modal-quantity").textContent);if(q>1)document.getElementById("modal-quantity").textContent=q-1;};
-
-    // Cart modal toggles
-    document.getElementById("cart-button").onclick=()=>document.getElementById("cart-modal").classList.remove("hidden");
+    document.getElementById("open-cart").onclick=()=>document.getElementById("cart-modal").classList.remove("hidden");
     document.getElementById("close-cart").onclick=()=>document.getElementById("cart-modal").classList.add("hidden");
-
-    // Checkout
     document.getElementById("checkout").onclick=()=>{
-      let msg="Order Details:%0A";
-      cart.forEach(i=>msg+=`${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
-      window.open("https://wa.me/91XXXXXXXXXX?text="+msg,"_blank");
-    };
-
-    loadProducts();
+      let text="Hi Threaded Tales, I want to order:\n";
+      cart.forEach(item=>{text+=`${item.name} x${item.qty} = ₹${item.price*item.qty}\n`;});
+      text+=`Total: ₹${document.getElementById("cart-total").textContent}`;
+      window.open("https://wa.me/919671850555?text="+encodeURIComponent(text));
+    }
   </script>
 </body>
 </html>
