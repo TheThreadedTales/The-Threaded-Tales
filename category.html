@@ -1,386 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-@keyframes marquee {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-.marquee {
-  display: inline-block;
-  animation: marquee 15s linear infinite;
-}
-</style>  
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Category | The Threaded Tales</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-  
-<body class="bg-gray-50 text-gray-900">
-<div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
-<div class="marquee whitespace-nowrap font-semibold text-lg">
-🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;&nbsp;&nbsp;
-🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;&nbsp;&nbsp;
-🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;&nbsp;&nbsp;
-</div>
-</div>
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- ✅ Category Top Bar -->
-<div class="flex items-center justify-between mt-24 px-6 mb-6 relative z-10">
-  
-  <!-- Back Button + Title -->
-  <div class="flex items-center gap-4">
-    <a href="index.html" class="inline-block bg-white text-black px-3 py-1 text-sm rounded shadow hover:bg-gray-800 hover:text-white transition">
-      ← Back
-    </a>
-    <h1 id="category-title" class="text-2xl font-semibold"></h1>
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold">🧵 The Threaded Tales</a>
+      <button id="cart-btn" class="relative">
+        🛒
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Heading -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <h1 id="category-title" class="text-3xl font-bold text-gray-800 mb-6"></h1>
+    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </section>
+
+  <!-- ✅ Product Details Modal (same as homepage) -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+      <button id="close-product-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Left: Images -->
+        <div class="relative">
+          <img id="modal-main-img" src="" alt="" class="w-full h-80 object-contain cursor-zoom-in"/>
+          <button id="prev-img" class="absolute top-1/2 left-2 bg-gray-800 text-white p-2 rounded-full">❮</button>
+          <button id="next-img" class="absolute top-1/2 right-2 bg-gray-800 text-white p-2 rounded-full">❯</button>
+          <div id="modal-thumbnails" class="flex gap-2 mt-2 overflow-x-auto"></div>
+        </div>
+        <!-- Right: Info -->
+        <div>
+          <h2 id="modal-title" class="text-xl font-bold mb-2"></h2>
+          <p id="modal-price" class="text-lg text-green-600 mb-2"></p>
+          <p id="modal-description" class="text-sm text-gray-600 mb-4"></p>
+          <div class="flex items-center mb-4">
+            <button id="decrease-qty" class="px-2 py-1 border">-</button>
+            <span id="product-qty" class="px-4">1</span>
+            <button id="increase-qty" class="px-2 py-1 border">+</button>
+          </div>
+          <button id="add-to-cart" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">Add to Cart</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Sort Dropdown -->
-  <div>
-    <label for="sort-products" class="mr-2 text-sm font-medium">Sort by:</label>
-    <select id="sort-products" class="border rounded px-2 py-1 text-sm focus:ring focus:ring-gray-300">
-      <option value="default">Default</option>
-      <option value="price-low-high">Price: Low to High</option>
-      <option value="price-high-low">Price: High to Low</option>
-      <option value="name-az">Name: A to Z</option>
-      <option value="name-za">Name: Z to A</option>
-    </select>
+  <!-- ✅ Cart Modal -->
+  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+      <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
+      <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+      <div id="cart-items" class="space-y-4"></div>
+      <p class="text-lg font-semibold mt-4">Total: ₹<span id="cart-total">0</span></p>
+      <button id="checkout" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Checkout on WhatsApp</button>
+    </div>
   </div>
-</div>
 
+  <!-- ✅ Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg hidden">Added to Cart!</div>
 
-<nav class="w-full bg-white shadow-md sticky top-10 z-40">
-<div class="max-w-6xl mx-auto px-3 py-2 text-gray-800">
-<!-- Desktop layout -->
-<div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
-
-<!-- Left: Section Links -->
-
-
-<!-- Our Products with dropdown -->
-<div class="relative group">
-<a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-Our Products
-</a>
-<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-</div>
-</div>
-
-
-
-<!-- Center: Logo -->
-<div class="flex flex-col items-center text-center">
-<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-<span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
-</div>
-
-<!-- Right: Reviews, Search, Contact -->
-
-<!-- 🔍 Search Icon (Desktop) -->
-<div class="flex justify-end gap-4">
-<button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-  </svg>
-</button>
-<a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-</div>
-</div>
-
-<!-- Mobile layout -->
-<div class="flex md:hidden justify-between items-center">
-<!-- Our Products -->
-<div class="relative group">
-<a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-Our Products
-</a>
-<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-</div>
-</div>
-
-<!-- Logo -->
-<div class="flex flex-col items-center text-center">
-<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-</div>
-
-<!-- 🔍 Search Icon (Mobile replaces Contact) -->
-<button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
-
-<!-- Toggle -->
-<button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
-☰
-</button>
-</div>
-
-<!-- Mobile menu hidden initially -->
-<div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
-<a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
-<a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
-</div>
-</div>
-</nav>
-
-<script>
-document.getElementById("mobileMenuToggle").addEventListener("click", function() {
-document.getElementById("mobileMenu").classList.toggle("hidden");
-});
-</script>
-<div id="products-container" class="grid grid-cols-2 md:grid-cols-4 gap-0 border-4 border-gray-200"></div>
-</section>
-
-
-
-
-  <!-- Testimonials -->
-<section id="reviews" class="py-16 px-6 md:px-20">
-<div class="text-center mb-10">
-<h2 class="text-4xl font-semibold">Our Offline Customer's Love</h2>
-</div>
-<div class="grid md:grid-cols-3 gap-6">
-<div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“The quality is unmatched. It feels so special knowing this was organically dyed..”</div>
-<div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“Love the natural colors and the softness. Definitely buying more!”</div>
-<div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“Beautiful packaging and amazing story behind the products. Support local!”</div>
-</div>
-</section>
-
-
-
-<!-- Contact -->
-<!-- Contact Section -->
-<section id="contact" class="py-16 px-6 md:px-20 bg-white">
-<div class="text-center mb-10">
-<h2 class="text-4xl font-semibold">Get in Touch</h2>
-<p class="text-gray-600 mt-2">We’d love to hear from you!</p>
-</div>
-
-<form action="https://formspree.io/f/mrblbeoj" method="POST" class="max-w-xl mx-auto space-y-4">
-<input type="text" name="name" placeholder="Your Name" required class="w-full p-3 border rounded" />
-<input type="email" name="email" placeholder="Your Email" required class="w-full p-3 border rounded" />
-<textarea name="message" placeholder="Your Message" required class="w-full p-3 border rounded"></textarea>
-<button type="submit" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
-Send Message
-</button>
-</form>
-
-<!-- Thank You Message -->
-<div id="thank-you" class="hidden text-green-600 font-semibold text-center mt-4">
-✅ Message sent successfully!
-</div>
-
-<!-- Error Message -->
-<div id="error-message" class="hidden text-red-600 font-semibold text-center mt-4">
-❌ Oops! Something went wrong. Please try again later.
-</div>
-
-<!-- Submission Script -->
-<script>
-const form = document.querySelector("form");
-const thankYou = document.getElementById("thank-you");
-const errorMessage = document.getElementById("error-message");
-
-form.addEventListener("submit", async (e) => {
-e.preventDefault();
-thankYou.classList.add("hidden");
-errorMessage.classList.add("hidden");
-
-const formData = new FormData(form);
-
-const res = await fetch(form.action, {
-method: "POST",
-body: formData,
-headers: {
-'Accept': 'application/json'
-}
-});
-
-if (res.ok) {
-form.reset();
-thankYou.classList.remove("hidden");
-} else {
-errorMessage.classList.remove("hidden");
-}
-});
-</script>
-</section>
-
-<!-- ✅ Scripts -->
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Get ?category= from URL
-  const params = new URLSearchParams(window.location.search);
-  let selectedCategory = params.get("category");
+    let products = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentImages = [];
+    let currentIndex = 0;
+    let selectedProduct = null;
 
-  if (!selectedCategory) {
-    document.getElementById("products-container").innerHTML =
-      "<p class='text-center text-gray-600'>No category selected.</p>";
-    return;
-  }
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("category");
+    document.getElementById("category-title").innerText = category ? category : "All Products";
 
-  // Decode URL text (handles %20, %26, etc.)
-  selectedCategory = decodeURIComponent(selectedCategory);
-  document.getElementById("category-title").textContent = selectedCategory;
+    // Fetch products and filter by category
+    fetch("handloom_products.json")
+      .then(res => res.json())
+      .then(data => {
+        products = data;
+        let filtered = category ? products.filter(p => p.category.toUpperCase() === category.toUpperCase()) : products;
+        renderProducts(filtered);
+      });
 
-
-  // Fetch products.json
-  fetch("./handloom_products.json")
-    .then(res => res.json())
-    .then(products => {
-      // Filter products by category (case-insensitive)
-      // Filter products by category (case-insensitive, ignores spacing issues)
-const normalize = str => str.toLowerCase().trim();
-const filtered = products.filter(
-  p => normalize(p.category) === normalize(selectedCategory)
-);
-
-
+    function renderProducts(list) {
       const container = document.getElementById("products-container");
       container.innerHTML = "";
-
-      if (filtered.length === 0) {
-        container.innerHTML =
-          `<p class="text-center text-gray-600">No products found for <strong>${selectedCategory}</strong>.</p>`;
-        return;
-      }
-
-      // Render products
-      filtered.forEach(product => {
-        const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow hover:shadow-lg overflow-hidden";
-
-        card.innerHTML = `
-          <img src="${product.images[0]}" alt="${product.name}" class="w-full h-64 object-cover">
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">${product.name}</h3>
-            <p class="text-gray-700">₹${product.price}</p>
-          </div>
+      list.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "bg-white rounded-lg shadow hover:shadow-lg p-4 cursor-pointer";
+        div.innerHTML = `
+          <img src="${p.images[0]}" alt="${p.name}" class="w-full h-48 object-cover mb-2 rounded">
+          <h3 class="font-bold">${p.name}</h3>
+          <p class="text-green-600 font-semibold">₹${p.price}</p>
         `;
-
-        container.appendChild(card);
+        div.addEventListener("click", () => openProductModal(p));
+        container.appendChild(div);
       });
-    })
-    .catch(err => {
-      console.error("Error loading products:", err);
-      document.getElementById("products-container").innerHTML =
-        "<p class='text-center text-red-600'>Failed to load products.</p>";
-    });
-});
-    // --- Modal + Cart (copied from your index.html logic) ---
-    let currentProduct = null;
-    let qty = 1;
-    const modal = document.getElementById("product-modal");
-    const modalName = document.getElementById("modal-product-name");
-    const modalDesc = document.getElementById("modal-product-description");
-    const modalPrice = document.getElementById("modal-product-price");
-    const modalImage = document.getElementById("modal-main-image");
-    const modalThumbs = document.getElementById("modal-thumbnails");
-    const qtyDisplay = document.getElementById("product-qty");
-
-    function openProductModal(product) {
-      currentProduct = product;
-      qty = 1;
-      qtyDisplay.textContent = qty;
-      modalName.textContent = product.name;
-      modalDesc.textContent = product.description;
-      modalPrice.textContent = "₹" + product.price;
-      modalImage.src = product.images[0];
-      modalThumbs.innerHTML = "";
-      product.images.forEach(img => {
-        let thumb = document.createElement("img");
-        thumb.src = img;
-        thumb.className = "w-16 h-16 object-cover border cursor-pointer";
-        thumb.onclick = () => modalImage.src = img;
-        modalThumbs.appendChild(thumb);
-      });
-      modal.classList.remove("hidden");
     }
 
-    document.getElementById("close-modal").onclick = () => modal.classList.add("hidden");
-    document.getElementById("increase-qty").onclick = () => { qty++; qtyDisplay.textContent = qty; };
-    document.getElementById("decrease-qty").onclick = () => { if (qty>1) qty--; qtyDisplay.textContent = qty; };
+    // Product Modal Functions
+    function openProductModal(product) {
+      selectedProduct = product;
+      currentImages = product.images;
+      currentIndex = 0;
+      document.getElementById("modal-main-img").src = currentImages[0];
+      document.getElementById("modal-title").innerText = product.name;
+      document.getElementById("modal-price").innerText = "₹" + product.price;
+      document.getElementById("modal-description").innerText = product.description;
+      document.getElementById("product-qty").innerText = 1;
+      renderThumbnails();
+      document.getElementById("product-modal").classList.remove("hidden");
+    }
 
-    // --- Cart functionality ---
-    let cart = [];
-    const cartModal = document.getElementById("cart-modal");
-    const cartBtn = document.getElementById("cart-btn");
-    const closeCart = document.getElementById("close-cart");
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const cartCount = document.getElementById("cart-count");
+    function renderThumbnails() {
+      const thumbs = document.getElementById("modal-thumbnails");
+      thumbs.innerHTML = "";
+      currentImages.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "w-16 h-16 object-cover border cursor-pointer " + (i===currentIndex ? "border-black" : "");
+        img.addEventListener("click", () => { currentIndex = i; updateMainImg(); });
+        thumbs.appendChild(img);
+      });
+    }
 
-    document.getElementById("add-to-cart").onclick = () => {
-      let existing = cart.find(c => c.id === currentProduct.id);
-      if (existing) existing.qty += qty;
-      else cart.push({...currentProduct, qty});
+    function updateMainImg() {
+      document.getElementById("modal-main-img").src = currentImages[currentIndex];
+      renderThumbnails();
+    }
+
+    // Event Listeners for Modal
+    document.getElementById("close-product-modal").addEventListener("click", () => {
+      document.getElementById("product-modal").classList.add("hidden");
+    });
+    document.getElementById("prev-img").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateMainImg();
+    });
+    document.getElementById("next-img").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateMainImg();
+    });
+    document.getElementById("increase-qty").addEventListener("click", () => {
+      document.getElementById("product-qty").innerText++;
+    });
+    document.getElementById("decrease-qty").addEventListener("click", () => {
+      let qty = parseInt(document.getElementById("product-qty").innerText);
+      if (qty > 1) document.getElementById("product-qty").innerText = qty - 1;
+    });
+    document.getElementById("add-to-cart").addEventListener("click", () => {
+      let qty = parseInt(document.getElementById("product-qty").innerText);
+      addToCart(selectedProduct, qty);
+      document.getElementById("product-modal").classList.add("hidden");
+      showToast();
+    });
+
+    // Cart Functions
+    function addToCart(product, qty) {
+      const existing = cart.find(item => item.id === product.id);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ ...product, qty });
+      }
       updateCart();
-      modal.classList.add("hidden");
-    };
-
-    cartBtn.onclick = () => cartModal.classList.remove("hidden");
-    closeCart.onclick = () => cartModal.classList.add("hidden");
+    }
 
     function updateCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.reduce((sum, i) => sum + i.qty, 0);
+      const cartItems = document.getElementById("cart-items");
       cartItems.innerHTML = "";
-      let total = 0, count = 0;
+      let total = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        count += item.qty;
-        let div = document.createElement("div");
+        const div = document.createElement("div");
         div.className = "flex justify-between items-center border-b pb-2";
         div.innerHTML = `
-          <span>${item.name} (x${item.qty})</span>
-          <span>₹${item.price * item.qty}</span>
+          <div>
+            <h4 class="font-bold">${item.name}</h4>
+            <p>₹${item.price} × ${item.qty}</p>
+          </div>
+          <button class="text-red-500">Remove</button>
         `;
+        div.querySelector("button").addEventListener("click", () => {
+          cart = cart.filter(c => c.id !== item.id);
+          updateCart();
+        });
         cartItems.appendChild(div);
       });
-      cartTotal.textContent = "₹" + total;
-      cartCount.textContent = count;
+      document.getElementById("cart-total").innerText = total;
     }
 
-    document.getElementById("checkout-btn").onclick = () => {
-      if (cart.length === 0) return;
-      let msg = "Hello, I want to order:\n";
-      cart.forEach(item => msg += `- ${item.name} (x${item.qty}) = ₹${item.price * item.qty}\n`);
-      msg += "Total: " + cartTotal.textContent;
-      window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg), "_blank");
-    };
+    // Toast
+    function showToast() {
+      const toast = document.getElementById("toast");
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 2000);
+    }
+
+    // Open/Close Cart
+    document.getElementById("cart-btn").addEventListener("click", () => {
+      document.getElementById("cart-modal").classList.remove("hidden");
+      updateCart();
+    });
+    document.getElementById("close-cart").addEventListener("click", () => {
+      document.getElementById("cart-modal").classList.add("hidden");
+    });
+
+    // Checkout on WhatsApp
+    document.getElementById("checkout").addEventListener("click", () => {
+      let msg = "Hello, I'd like to order:\n";
+      cart.forEach(item => {
+        msg += `${item.name} - ₹${item.price} × ${item.qty}\n`;
+      });
+      msg += `\nTotal: ₹${document.getElementById("cart-total").innerText}`;
+      window.open("https://wa.me/91XXXXXXXXXX?text=" + encodeURIComponent(msg), "_blank");
+    });
+
+    // Initialize cart count
+    updateCart();
   </script>
 </body>
 </html>
-
-
-  
-
-
-
-<footer class="bg-black text-white text-center py-4">
-<p>© 2025 The Threaded Tales. All rights reserved.</p>
-<footer class="bg-black text-white text-center py-4">
-<p>For Support & Queries : elleganzaemporium@gmail.com</p>
-<div class="mt-2 text-sm flex justify-center space-x-4">
-<span>Follow us on</span>
-<a href="https://www.instagram.com/elleganzaemporium?igsh=MWpiZWZneDdwYm51aQ==" class="underline hover:text-gray-400 transition"  target="_blank" rel="noopener noreferrer">
-Instagram
-</a>
-<span>|</span>
-<a href="privacy-policy.html" class="underline hover:text-gray-400 transition">
-Privacy Policy
-</a>
-</div>
-</footer>
- 
