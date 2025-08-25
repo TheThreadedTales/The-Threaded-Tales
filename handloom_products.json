@@ -149,7 +149,7 @@
   },
   {
     "id": 8,
-    "category": "Bedsheets",
+    "category": "BEDSHEETS",
     "name": "Elastic Fitted Bedsheet with Pillow Covers",
     "price": 1400,
     "images": [
@@ -334,6 +334,7 @@
     }
   }
 ]
+
 
 
 
