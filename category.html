@@ -2,52 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Category | The Threaded Tales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category - The Threaded Tales</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
+  <!-- Launch Offer Banner -->
+  <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
+    <div class="marquee whitespace-nowrap font-semibold text-lg">
+      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;
+      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+    </div>
+  </div>
+
   <!-- Navbar -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold">🧵 The Threaded Tales</a>
-      <button id="cart-btn" class="relative">
+  <nav class="bg-white shadow-md fixed w-full top-10 z-40">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold">The Threaded Tales</h1>
+      <div class="space-x-6 hidden md:flex">
+        <a href="index.html" class="hover:text-yellow-600">Home</a>
+        <a href="#products" class="hover:text-yellow-600">Products</a>
+        <a href="#about" class="hover:text-yellow-600">About</a>
+        <a href="#contact" class="hover:text-yellow-600">Contact</a>
+      </div>
+      <button id="cart-button" class="relative">
         🛒
-        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full hidden">0</span>
       </button>
     </div>
-  </header>
+  </nav>
 
-  <!-- Page Heading -->
-  <section class="max-w-7xl mx-auto px-4 py-8">
-    <h1 id="category-title" class="text-3xl font-bold text-gray-800 mb-6"></h1>
-    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  <!-- Page Header -->
+  <section class="pt-28 pb-6 text-center">
+    <a href="index.html" class="text-blue-600 underline">← Back to Home</a>
+    <h2 id="category-title" class="text-3xl font-bold mt-2"></h2>
   </section>
 
-  <!-- ✅ Product Details Modal (same as homepage) -->
+  <!-- Products Section -->
+  <section id="products" class="container mx-auto px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></section>
+
+  <!-- ✅ Product Details Modal -->
   <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
-    <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
-      <button id="close-product-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-2xl">&times;</button>
+    <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-2xl">✖</button>
       <div class="grid md:grid-cols-2 gap-6">
-        <!-- Left: Images -->
+        <!-- Left: Image Gallery -->
         <div class="relative">
-          <img id="modal-main-img" src="" alt="" class="w-full h-80 object-contain cursor-zoom-in"/>
-          <button id="prev-img" class="absolute top-1/2 left-2 bg-gray-800 text-white p-2 rounded-full">❮</button>
-          <button id="next-img" class="absolute top-1/2 right-2 bg-gray-800 text-white p-2 rounded-full">❯</button>
-          <div id="modal-thumbnails" class="flex gap-2 mt-2 overflow-x-auto"></div>
+          <img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
+          <button id="prev-image" class="absolute top-1/2 left-0 bg-gray-800 text-white px-2">◀</button>
+          <button id="next-image" class="absolute top-1/2 right-0 bg-gray-800 text-white px-2">▶</button>
+          <div id="modal-thumbnails" class="flex mt-2 space-x-2"></div>
         </div>
-        <!-- Right: Info -->
+        <!-- Right: Product Info -->
         <div>
-          <h2 id="modal-title" class="text-xl font-bold mb-2"></h2>
-          <p id="modal-price" class="text-lg text-green-600 mb-2"></p>
-          <p id="modal-description" class="text-sm text-gray-600 mb-4"></p>
-          <div class="flex items-center mb-4">
-            <button id="decrease-qty" class="px-2 py-1 border">-</button>
-            <span id="product-qty" class="px-4">1</span>
-            <button id="increase-qty" class="px-2 py-1 border">+</button>
+          <h3 id="modal-title" class="text-2xl font-bold"></h3>
+          <p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
+          <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
+          <div class="flex items-center space-x-2 mt-4">
+            <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
+            <span id="modal-quantity">1</span>
+            <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
           </div>
-          <button id="add-to-cart" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">Add to Cart</button>
+          <button id="add-to-cart" class="mt-6 bg-yellow-600 text-white px-6 py-2 rounded-lg">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -56,175 +73,137 @@
   <!-- ✅ Cart Modal -->
   <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-      <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
-      <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+      <button id="close-cart" class="absolute top-2 right-4">✖</button>
+      <h2 class="text-xl font-bold mb-4">Your Cart</h2>
       <div id="cart-items" class="space-y-4"></div>
-      <p class="text-lg font-semibold mt-4">Total: ₹<span id="cart-total">0</span></p>
-      <button id="checkout" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Checkout on WhatsApp</button>
+      <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
+      <button id="checkout" class="bg-green-600 text-white px-4 py-2 rounded-lg mt-4">Checkout on WhatsApp</button>
     </div>
   </div>
 
-  <!-- ✅ Toast Notification -->
-  <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg hidden">Added to Cart!</div>
+  <!-- ✅ Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow hidden">Added to cart!</div>
 
   <script>
-    let products = [];
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let currentImages = [];
-    let currentIndex = 0;
-    let selectedProduct = null;
+    let productsData = [];
+    let currentProduct = null;
+    let currentImageIndex = 0;
+    let cart = [];
 
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get("category");
-    document.getElementById("category-title").innerText = category ? category : "All Products";
+    // Fetch JSON & filter products
+    async function loadProducts() {
+      const res = await fetch("products.json");
+      const data = await res.json();
+      productsData = data;
 
-    // Fetch products and filter by category
-    fetch("handloom_products.json")
-      .then(res => res.json())
-      .then(data => {
-        products = data;
-        let filtered = category ? products.filter(p => p.category.toUpperCase() === category.toUpperCase()) : products;
-        renderProducts(filtered);
-      });
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("category");
+      document.getElementById("category-title").textContent = category;
 
-    function renderProducts(list) {
-      const container = document.getElementById("products-container");
+      const filtered = productsData.filter(p => p.category === category);
+      const container = document.getElementById("products");
       container.innerHTML = "";
-      list.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "bg-white rounded-lg shadow hover:shadow-lg p-4 cursor-pointer";
-        div.innerHTML = `
-          <img src="${p.images[0]}" alt="${p.name}" class="w-full h-48 object-cover mb-2 rounded">
-          <h3 class="font-bold">${p.name}</h3>
-          <p class="text-green-600 font-semibold">₹${p.price}</p>
+      filtered.forEach(product => {
+        const discounted = Math.floor(product.price / 2);
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
+        card.innerHTML = `
+          <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover rounded">
+          <h3 class="text-lg font-bold mt-2">${product.name}</h3>
+          <p class="text-gray-600 line-through">₹${product.price}</p>
+          <p class="text-yellow-600 font-bold">₹${discounted}</p>
+          <div class="flex justify-between mt-3">
+            <button class="view-details bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">View Details</button>
+            <button class="quick-add bg-yellow-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
+          </div>
         `;
-        div.addEventListener("click", () => openProductModal(p));
-        container.appendChild(div);
+        container.appendChild(card);
       });
     }
 
-    // Product Modal Functions
-    function openProductModal(product) {
-      selectedProduct = product;
-      currentImages = product.images;
-      currentIndex = 0;
-      document.getElementById("modal-main-img").src = currentImages[0];
-      document.getElementById("modal-title").innerText = product.name;
-      document.getElementById("modal-price").innerText = "₹" + product.price;
-      document.getElementById("modal-description").innerText = product.description;
-      document.getElementById("product-qty").innerText = 1;
-      renderThumbnails();
-      document.getElementById("product-modal").classList.remove("hidden");
-    }
-
-    function renderThumbnails() {
+    // Modal functions
+    function openModal(product) {
+      currentProduct = product;
+      currentImageIndex = 0;
+      document.getElementById("modal-main-image").src = product.images[0];
+      document.getElementById("modal-title").textContent = product.name;
+      document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
+      document.getElementById("modal-description").innerHTML = product.description.split("•").map(i=>`<li>${i.trim()}</li>`).join("");
+      document.getElementById("modal-quantity").textContent = 1;
       const thumbs = document.getElementById("modal-thumbnails");
       thumbs.innerHTML = "";
-      currentImages.forEach((src, i) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.className = "w-16 h-16 object-cover border cursor-pointer " + (i===currentIndex ? "border-black" : "");
-        img.addEventListener("click", () => { currentIndex = i; updateMainImg(); });
-        thumbs.appendChild(img);
+      product.images.forEach((img, idx) => {
+        const t = document.createElement("img");
+        t.src = img; t.className="w-16 h-16 object-cover border cursor-pointer";
+        t.onclick = () => { currentImageIndex=idx; document.getElementById("modal-main-image").src=img; };
+        thumbs.appendChild(t);
       });
+      document.getElementById("product-modal").classList.remove("hidden");
     }
+    document.getElementById("close-modal").onclick = () => document.getElementById("product-modal").classList.add("hidden");
+    document.getElementById("prev-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex-1+currentProduct.images.length)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
+    document.getElementById("next-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex+1)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
 
-    function updateMainImg() {
-      document.getElementById("modal-main-img").src = currentImages[currentIndex];
-      renderThumbnails();
-    }
-
-    // Event Listeners for Modal
-    document.getElementById("close-product-modal").addEventListener("click", () => {
-      document.getElementById("product-modal").classList.add("hidden");
-    });
-    document.getElementById("prev-img").addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      updateMainImg();
-    });
-    document.getElementById("next-img").addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      updateMainImg();
-    });
-    document.getElementById("increase-qty").addEventListener("click", () => {
-      document.getElementById("product-qty").innerText++;
-    });
-    document.getElementById("decrease-qty").addEventListener("click", () => {
-      let qty = parseInt(document.getElementById("product-qty").innerText);
-      if (qty > 1) document.getElementById("product-qty").innerText = qty - 1;
-    });
-    document.getElementById("add-to-cart").addEventListener("click", () => {
-      let qty = parseInt(document.getElementById("product-qty").innerText);
-      addToCart(selectedProduct, qty);
-      document.getElementById("product-modal").classList.add("hidden");
-      showToast();
-    });
-
-    // Cart Functions
-    function addToCart(product, qty) {
-      const existing = cart.find(item => item.id === product.id);
-      if (existing) {
-        existing.qty += qty;
-      } else {
-        cart.push({ ...product, qty });
-      }
-      updateCart();
-    }
-
+    // Cart
     function updateCart() {
-      localStorage.setItem("cart", JSON.stringify(cart));
-      document.getElementById("cart-count").innerText = cart.reduce((sum, i) => sum + i.qty, 0);
       const cartItems = document.getElementById("cart-items");
       cartItems.innerHTML = "";
       let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
+      cart.forEach((item, idx) => {
+        const discounted = Math.floor(item.price/2);
+        total += discounted * item.qty;
         const div = document.createElement("div");
-        div.className = "flex justify-between items-center border-b pb-2";
-        div.innerHTML = `
-          <div>
-            <h4 class="font-bold">${item.name}</h4>
-            <p>₹${item.price} × ${item.qty}</p>
-          </div>
-          <button class="text-red-500">Remove</button>
-        `;
-        div.querySelector("button").addEventListener("click", () => {
-          cart = cart.filter(c => c.id !== item.id);
-          updateCart();
-        });
+        div.className="flex justify-between items-center border-b pb-2";
+        div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
         cartItems.appendChild(div);
       });
-      document.getElementById("cart-total").innerText = total;
+      document.getElementById("cart-total").textContent = "Total: ₹"+total;
+      document.getElementById("cart-count").textContent = cart.length;
+      document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
     }
 
     // Toast
     function showToast() {
-      const toast = document.getElementById("toast");
+      const toast=document.getElementById("toast");
       toast.classList.remove("hidden");
-      setTimeout(() => toast.classList.add("hidden"), 2000);
+      setTimeout(()=>toast.classList.add("hidden"),2000);
     }
 
-    // Open/Close Cart
-    document.getElementById("cart-btn").addEventListener("click", () => {
-      document.getElementById("cart-modal").classList.remove("hidden");
-      updateCart();
-    });
-    document.getElementById("close-cart").addEventListener("click", () => {
-      document.getElementById("cart-modal").classList.add("hidden");
-    });
-
-    // Checkout on WhatsApp
-    document.getElementById("checkout").addEventListener("click", () => {
-      let msg = "Hello, I'd like to order:\n";
-      cart.forEach(item => {
-        msg += `${item.name} - ₹${item.price} × ${item.qty}\n`;
-      });
-      msg += `\nTotal: ₹${document.getElementById("cart-total").innerText}`;
-      window.open("https://wa.me/91XXXXXXXXXX?text=" + encodeURIComponent(msg), "_blank");
+    // Event delegation
+    document.addEventListener("click", e=>{
+      if(e.target.classList.contains("view-details")){
+        const product=productsData.find(p=>p.id==e.target.dataset.id);
+        openModal(product);
+      }
+      if(e.target.classList.contains("quick-add")){
+        const product=productsData.find(p=>p.id==e.target.dataset.id);
+        cart.push({...product, qty:1});
+        updateCart();
+        showToast();
+      }
     });
 
-    // Initialize cart count
-    updateCart();
+    document.getElementById("add-to-cart").onclick = () => {
+      cart.push({...currentProduct, qty:parseInt(document.getElementById("modal-quantity").textContent)});
+      updateCart(); showToast();
+      document.getElementById("product-modal").classList.add("hidden");
+    };
+
+    document.getElementById("increase-qty").onclick=()=>document.getElementById("modal-quantity").textContent=parseInt(document.getElementById("modal-quantity").textContent)+1;
+    document.getElementById("decrease-qty").onclick=()=>{let q=parseInt(document.getElementById("modal-quantity").textContent);if(q>1)document.getElementById("modal-quantity").textContent=q-1;};
+
+    // Cart modal toggles
+    document.getElementById("cart-button").onclick=()=>document.getElementById("cart-modal").classList.remove("hidden");
+    document.getElementById("close-cart").onclick=()=>document.getElementById("cart-modal").classList.add("hidden");
+
+    // Checkout
+    document.getElementById("checkout").onclick=()=>{
+      let msg="Order Details:%0A";
+      cart.forEach(i=>msg+=`${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
+      window.open("https://wa.me/91XXXXXXXXXX?text="+msg,"_blank");
+    };
+
+    loadProducts();
   </script>
 </body>
 </html>
