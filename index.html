@@ -1017,6 +1017,10 @@ let value = parseInt(qtyInput.value) || 1;
 if (value > 1) qtyInput.value = value - 1;
 }
 });
+// ✅ Restore cart state on page load
+updateCartCount();
+renderCart();
+updateCartButtonVisibility();
 </script>
 <!-- ✅ Launch Offer Popup JS -->
 <script>
@@ -1131,6 +1135,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
