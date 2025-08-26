@@ -45,7 +45,7 @@
   {
     "id": 3,
     "category": "COMFORTERS",
-    "name": "Kids Single Bed Comforter     ",
+    "name": "Kids Single Bed Comforter(5 Variants Available)  ",
     "price": 1100,
     "images": [
       "images/comfort1.jpeg",
@@ -85,7 +85,7 @@
    {
     "id": 5,
     "category": "Table Mats",
-    "name": "Round Jute Table Mat",
+    "name": "Round Jute Table Mat(2 Variants Available)",
     "price": 300,
     "images": [
       "images/mat1.jpeg",
@@ -275,7 +275,7 @@
   {
     "id": 14,
     "category": "DOORMATS & RUGS",
-    "name": " Ultra Soft Premium Door Mat",
+    "name": " Ultra Soft Anti Skid Premium Door Mat",
     "price": 900,
     "images": [
       "images/Doormat1.jpeg",
@@ -334,6 +334,7 @@
     }
   }
 ]
+
 
 
 
