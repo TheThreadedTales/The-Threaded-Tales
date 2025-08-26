@@ -14,6 +14,10 @@
   animation: scroll-marquee 15s linear infinite;
   white-space: nowrap;
 }
+ @keyframes scroll-marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}  
  </style>
   <!-- Launch Offer Banner -->
   <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
