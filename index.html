@@ -38,6 +38,31 @@
   display: block;
   margin-top: 0.2rem;
 }
+#searchResults {
+  position: absolute;
+  top: 60px; /* adjust depending on your navbar height */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 9999;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#searchResults div {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+#searchResults div:hover {
+  background-color: #f9f9f9;
+}
 
 /* ✅ Center hero text with flexbox */
 .hero-text {
@@ -1103,9 +1128,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
       div.textContent = product.name;
-      div.addEventListener("click", () => {
-        openProductModal(product);
-        searchOverlay.classList.add("hidden");
+       div.addEventListener("click", () => {
+        openProductModal(product); // assumes you have this function
+        searchResults.innerHTML = "";
+        document.getElementById("searchInput").value = "";
+      });
       });
       searchResults.appendChild(div);
     });
@@ -1144,6 +1171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
