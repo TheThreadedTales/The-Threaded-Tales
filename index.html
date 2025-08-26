@@ -674,6 +674,7 @@ function addToCart(product) {
 const existing = cart.find(p => p.name === product.name);
 if (existing) existing.qty += 1;
 else cart.push({ ...product, qty: 1 });
+localStorage.setItem("cart", JSON.stringify(cart));
 updateCartCount();
 updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 item
 }
@@ -1018,9 +1019,12 @@ if (value > 1) qtyInput.value = value - 1;
 }
 });
 // ✅ Restore cart state on page load
-updateCartCount();
-renderCart();
-updateCartButtonVisibility();
+window.addEventListener('DOMContentLoaded', () => {
+  updateCartCount();
+  renderCart();
+  updateCartButtonVisibility();
+});
+
 </script>
 <!-- ✅ Launch Offer Popup JS -->
 <script>
@@ -1135,6 +1139,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
