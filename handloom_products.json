@@ -45,7 +45,7 @@
   {
     "id": 3,
     "category": "COMFORTERS",
-    "name": "Kids Single Bed Comforter",
+    "name": "Kids Single Bed Comforter     ",
     "price": 1100,
     "images": [
       "images/comfort1.jpeg",
@@ -334,6 +334,7 @@
     }
   }
 ]
+
 
 
 
