@@ -646,8 +646,8 @@ placeholder="Search products..."
 
 <!-- JS for Products + Cart -->
 <script>
-let cart = [];
-let allProducts = []; 
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let allProducts = [];
 
 // ✅ Visibility toggle function
 function toggleCartVisibility() {
@@ -725,15 +725,19 @@ function changeQty(index, delta) {
 if (cart[index]) {
 cart[index].qty += delta;
 if (cart[index].qty <= 0) cart.splice(index, 1);
+localStorage.setItem("cart", JSON.stringify(cart));
 updateCartCount();
 renderCart();
+updateCartButtonVisibility();
 }
 }
 
 function removeItem(index) {
 cart.splice(index, 1);
+localStorage.setItem("cart", JSON.stringify(cart));
 updateCartCount();
 renderCart();
+updateCartButtonVisibility();
 }
 
 function checkoutOnWhatsApp() {
@@ -1127,6 +1131,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
