@@ -1058,56 +1058,61 @@ popup.classList.add('hidden');
 <!-- ✅ Search Overlay Logic -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-const searchOverlay = document.getElementById("searchOverlay");
-const searchInput = document.getElementById("searchInput");
-const closeSearch = document.getElementById("closeSearch");
-const searchResults = document.getElementById("searchResults");
+  const searchOverlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const closeSearch = document.getElementById("closeSearch");
+  const searchResults = document.getElementById("searchResults");
 
-const openSearchBtns = [
-document.getElementById("searchDesktop"),
-document.getElementById("searchMobile")
-].filter(Boolean);
+  const openSearchBtns = [
+    document.getElementById("searchDesktop"),
+    document.getElementById("searchMobile")
+  ].filter(Boolean);
 
-openSearchBtns.forEach(btn => {
-btn.addEventListener("click", () => {
-searchOverlay.classList.remove("hidden");
-searchInput.focus();
-});
-});
+  // Open search overlay
+  openSearchBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      searchOverlay.classList.remove("hidden");
+      searchInput.focus();
+    });
+  });
 
-closeSearch.addEventListener("click", () => {
-searchOverlay.classList.add("hidden");
-searchInput.value = "";
-searchResults.innerHTML = "";
-});
+  // Close search overlay
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.classList.add("hidden");
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+  });
 
-searchInput.addEventListener("input", () => {
-const query = searchInput.value.toLowerCase().trim();
-searchResults.innerHTML = "";
-if (!query) return;
+  // Search products from allProducts
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+    searchResults.innerHTML = "";
+    if (!query) return;
 
-const matches = products.filter(p =>
-p.name.toLowerCase().includes(query) ||
-p.description.toLowerCase().includes(query)
-);
+    const matches = allProducts.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      p.description.toLowerCase().includes(query)
+    );
 
-if (matches.length === 0) {
-searchResults.innerHTML = "<p class='text-gray-500'>No products found</p>";
-return;
-}
+    if (matches.length === 0) {
+      searchResults.innerHTML = "<p class='text-gray-500'>No products found</p>";
+      return;
+    }
 
-matches.forEach(product => {
-const div = document.createElement("div");
-div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
-div.textContent = product.name;
-div.addEventListener("click", () => {
-openProductModal(product);
-searchOverlay.classList.add("hidden");
+    matches.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
+      div.textContent = product.name;
+      div.addEventListener("click", () => {
+        openProductModal(product);
+        searchOverlay.classList.add("hidden");
+      });
+      searchResults.appendChild(div);
+    });
+  });
 });
-searchResults.appendChild(div);
-});
-});
-});
+</script>
+
 </script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -1139,6 +1144,7 @@ searchResults.appendChild(div);
 </script>
 </body>
 </html>
+
 
 
 
