@@ -1184,6 +1184,31 @@ if (typeof openProductModal === "function") {
   });
 </script>
 <script>
+ // make product modal globally usable (for search + product clicks)
+window.openProductModal = function (productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) {
+    console.warn("Product not found for modal:", productId);
+    return;
+  }
+
+  // modal elements
+  const modal = document.getElementById("product-modal");
+  const modalTitle = modal.querySelector(".modal-title");
+  const modalDesc = modal.querySelector(".modal-description");
+  const modalPrice = modal.querySelector(".modal-price");
+  const modalImg = modal.querySelector(".modal-main-img");
+
+  // populate content
+  modalTitle.textContent = product.name;
+  modalDesc.textContent = product.description;
+  modalPrice.textContent = "₹" + product.price;
+  modalImg.src = product.images[0];
+
+  // finally show modal
+  modal.classList.remove("hidden");
+};
+
   // ✅ open modal by productId (used by search results too)
   window.openProductModal = function (productId) {
     if (!window.allProducts) {
@@ -1248,3 +1273,4 @@ if (typeof openProductModal === "function") {
 </script>
 </body>
 </html>
+
