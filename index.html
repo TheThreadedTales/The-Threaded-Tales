@@ -1082,13 +1082,8 @@ popup.classList.add('hidden');
 
 <!-- ✅ Search Overlay Logic -->
 <script>
- document.addEventListener("DOMContentLoaded", () => {
-  // Safety: ensure allProducts exists
-  if (typeof allProducts === "undefined" || !Array.isArray(allProducts)) {
-    console.error("search: allProducts is not defined or not an array. Make sure product JSON is loaded before this script.");
-    return;
-  }
-
+ // 🔎 Search Overlay Logic
+document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
   const closeSearch = document.getElementById("closeSearch");
@@ -1097,112 +1092,66 @@ popup.classList.add('hidden');
   const openSearchBtns = [
     document.getElementById("searchDesktop"),
     document.getElementById("searchMobile")
-  ].filter(Boolean);
+  ];
 
-  // small helper: safely escape HTML for inserted text
-  function escapeHtml(str) {
-    if (!str) return "";
-    return String(str).replace(/[&<>"']/g, (m) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    }[m]));
-  }
-
-  // helper: get first available image from product (supports images or variant arrays)
-  function getFirstImage(product) {
-    if (product.images && product.images.length) return product.images[0];
-    if (product.variants && product.variants.length) {
-      for (const v of product.variants) {
-        if (v.images && v.images.length) return v.images[0];
-      }
-    }
-    return "images/placeholder.png"; // fallback - change if you have a different placeholder
-  }
-
-  // Open overlay
   openSearchBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      searchOverlay.classList.remove("hidden");
-      searchInput.focus();
-    });
-  });
-
-  // Close overlay
-  function closeOverlay() {
-    searchOverlay.classList.add("hidden");
-    searchInput.value = "";
-    searchResults.innerHTML = "";
-  }
-
-  closeSearch.addEventListener("click", closeOverlay);
-
-  // Close on Escape anywhere
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeOverlay();
-  });
-
-  // If user presses Enter on input, open first match
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const first = searchResults.querySelector(".search-item");
-      if (first) first.click();
+    if (btn) {
+      btn.addEventListener("click", () => {
+        searchOverlay.classList.remove("hidden");
+        searchInput.focus();
+      });
     }
   });
 
-  // Main search logic
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.classList.add("hidden");
+  });
+
+  // ✅ Search products
   searchInput.addEventListener("input", () => {
-    const query = (searchInput.value || "").toLowerCase().trim();
+    const query = searchInput.value.toLowerCase();
     searchResults.innerHTML = "";
 
     if (!query) return;
 
-    const matches = allProducts.filter(p => {
-      const name = (p.name || "").toLowerCase();
-      const desc = (p.description || "").toLowerCase();
-      return name.includes(query) || desc.includes(query);
-    });
+    const filtered = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query) ||
+      (product.description && product.description.toLowerCase().includes(query))
+    );
 
-    if (matches.length === 0) {
-      searchResults.innerHTML = `<p class="no-results">No products found</p>`;
-      return;
-    }
-
-    // Render matches (each match becomes a grid cell because your #searchResults has grid classes)
-    matches.forEach(product => {
-      const thumb = getFirstImage(product);
-      const priceText = (product.price != null) ? `₹${Number(product.price).toLocaleString('en-IN')}` : "";
-
+    filtered.forEach(product => {
       const item = document.createElement("div");
-      item.className = "search-item";
+      item.className =
+        "flex items-center p-2 cursor-pointer hover:bg-gray-100 border-b";
 
       item.innerHTML = `
-        <img class="search-thumb" src="${escapeHtml(thumb)}" alt="${escapeHtml(product.name || '')}">
-        <div class="search-meta">
-          <span class="search-name">${escapeHtml(product.name || '')}</span>
-          <span class="search-price">${escapeHtml(priceText)}</span>
+        <img src="${product.images[0]}" alt="${product.name}" class="w-12 h-12 object-cover rounded mr-3">
+        <div>
+          <p class="font-medium">${product.name}</p>
+          <p class="text-sm text-gray-500">₹${product.price}</p>
         </div>
       `;
 
+      // ✅ ensure modal opens from search result too
       item.addEventListener("click", () => {
-        // if openProductModal exists, use it; otherwise just log id so dev can debug
-        if (typeof openProductModal === "function") {
-          openProductModal(product.id);
+        if (typeof window.openProductModal === "function") {
+          window.openProductModal(Number(product.id)); // force numeric id
         } else {
-          console.warn("search: openProductModal not found. product id:", product.id);
+          console.warn("openProductModal not found. Product id:", product.id);
         }
-        closeOverlay();
+        searchOverlay.classList.add("hidden");
       });
 
       searchResults.appendChild(item);
     });
   });
-
-  // quick debug info in console
-  console.log(`Search initialized — ${allProducts.length} products available.`);
 });
+
+// ✅ Make openProductModal global without changing existing code
+if (typeof openProductModal === "function") {
+  window.openProductModal = openProductModal;
+}
+
 
 </script>
 
@@ -1236,6 +1185,7 @@ popup.classList.add('hidden');
 </script>
 </body>
 </html>
+
 
 
 
