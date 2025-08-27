@@ -1093,6 +1093,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("searchMobile")
   ];
 
+  let selectedIndex = -1; // tracks currently highlighted result
+  let currentResults = [];
+
   // Open search overlay
   openSearchBtns.forEach(btn => {
     if (btn) {
@@ -1100,6 +1103,8 @@ document.addEventListener("DOMContentLoaded", () => {
         searchOverlay.classList.remove("hidden");
         searchInput.value = "";
         searchResults.innerHTML = "";
+        selectedIndex = -1;
+        currentResults = [];
         searchInput.focus();
       });
     }
@@ -1109,44 +1114,81 @@ document.addEventListener("DOMContentLoaded", () => {
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.add("hidden");
     searchResults.innerHTML = "";
+    selectedIndex = -1;
+    currentResults = [];
   });
 
-  // Filter products on input
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
+  // Render matched products
+  function renderResults(matchedProducts) {
     searchResults.innerHTML = "";
-
-    if (query.length === 0) return;
-
-    const matchedProducts = allProducts.filter(product =>
-      product.name.toLowerCase().includes(query) ||
-      (product.category && product.category.toLowerCase().includes(query))
-    );
+    currentResults = matchedProducts;
+    selectedIndex = -1;
 
     if (matchedProducts.length === 0) {
       searchResults.innerHTML = `<div class="p-2 text-gray-500">No products found.</div>`;
       return;
     }
 
-    matchedProducts.forEach(product => {
+    matchedProducts.forEach((product, index) => {
       const div = document.createElement("div");
       div.className = "p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2";
       div.innerHTML = `
         <img src="${product.images[0]}" class="w-12 h-12 object-cover rounded">
         <span class="text-gray-800">${product.name}</span>
       `;
-      div.addEventListener("click", () => {
-        searchOverlay.classList.add("hidden");
-
-        // Find the exact product object by ID to ensure modal works
-        const modalProduct = allProducts.find(p => p.id === product.id);
-        if (modalProduct) {
-          openProductModal(modalProduct);
-        }
-      });
+      div.addEventListener("click", () => openModalForProduct(product));
       searchResults.appendChild(div);
     });
+  }
+
+  function openModalForProduct(product) {
+    searchOverlay.classList.add("hidden");
+    const modalProduct = allProducts.find(p => p.id === product.id);
+    if (modalProduct) openProductModal(modalProduct);
+  }
+
+  // Filter products on input
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      searchResults.innerHTML = "";
+      currentResults = [];
+      selectedIndex = -1;
+      return;
+    }
+
+    const matchedProducts = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query) ||
+      (product.category && product.category.toLowerCase().includes(query))
+    );
+
+    renderResults(matchedProducts);
   });
+
+  // Keyboard navigation
+  searchInput.addEventListener("keydown", (e) => {
+    const items = searchResults.children;
+    if (!currentResults.length) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      selectedIndex = (selectedIndex + 1) % currentResults.length;
+      highlightItem(items);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
+      highlightItem(items);
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (selectedIndex >= 0) openModalForProduct(currentResults[selectedIndex]);
+    }
+  });
+
+  function highlightItem(items) {
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.toggle("bg-gray-200", i === selectedIndex);
+    }
+  }
 });
 </script>
 
@@ -1181,6 +1223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
