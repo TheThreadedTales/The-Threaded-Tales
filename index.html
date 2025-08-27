@@ -1183,22 +1183,68 @@ if (typeof openProductModal === "function") {
     }, 3000);
   });
 </script>
+<script>
+  // ✅ open modal by productId (used by search results too)
+  window.openProductModal = function (productId) {
+    if (!window.allProducts) {
+      console.error("No products loaded yet.");
+      return;
+    }
+
+    const product = window.allProducts.find(p => p.id === productId);
+    if (!product) {
+      console.error("Product not found:", productId);
+      return;
+    }
+
+    const modal = document.getElementById("product-modal");
+    const modalContent = document.getElementById("modal-content");
+
+    // Build modal content dynamically
+    let currentImageIndex = 0;
+    function renderImage() {
+      return `<img src="${product.images[currentImageIndex]}" 
+                  id="main-modal-image"
+                  class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
+    }
+
+    modalContent.innerHTML = `
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <div class="relative">
+            ${renderImage()}
+            <button id="prev-img" class="absolute top-1/2 left-2 ...">‹</button>
+            <button id="next-img" class="absolute top-1/2 right-2 ...">›</button>
+          </div>
+          <div class="flex mt-2 space-x-2 overflow-x-auto">
+            ${product.images.map((img, i) => 
+              `<img src="${img}" class="w-20 h-20 object-cover rounded cursor-pointer ${i === 0 ? 'border-2 border-blue-600' : ''}" 
+                     onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`
+            ).join('')}
+          </div>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">${product.name}</h2>
+          <p class="text-sm text-gray-600 mt-1">${product.description}</p>
+          <div class="mt-2 text-lg font-semibold text-green-700">₹${Math.floor(product.price*0.5)} 
+            <span class="text-sm text-gray-500 line-through ml-2">₹${product.price}</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    modal.classList.remove("hidden");
+
+    // Add event listeners
+    document.getElementById("prev-img").onclick = () => {
+      currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
+      document.getElementById("main-modal-image").src = product.images[currentImageIndex];
+    };
+    document.getElementById("next-img").onclick = () => {
+      currentImageIndex = (currentImageIndex + 1) % product.images.length;
+      document.getElementById("main-modal-image").src = product.images[currentImageIndex];
+    };
+  };
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
