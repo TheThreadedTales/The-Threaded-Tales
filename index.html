@@ -1148,8 +1148,40 @@ popup.classList.add('hidden');
     }, 3000);
   });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sortSelect = document.getElementById("sort-select");
+
+  sortSelect.addEventListener("change", () => {
+    const selected = sortSelect.value;
+
+    // Make a copy of the products array
+    let sortedProducts = [...products];
+
+    switch (selected) {
+      case "price-asc":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      case "name-asc":
+        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      default:
+        sortedProducts = [...products]; // default order
+    }
+
+    loadProducts(sortedProducts); // render the sorted list
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
