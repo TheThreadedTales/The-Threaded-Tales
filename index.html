@@ -1149,38 +1149,35 @@ popup.classList.add('hidden');
   });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const sortSelect = document.getElementById("sort-select");
+const sortSelect = document.getElementById("sort-select");
 
-  sortSelect.addEventListener("change", () => {
-    const selected = sortSelect.value;
+sortSelect.addEventListener("change", () => {
+  let sortedProducts = [...products]; // make a copy
 
-    // Make a copy of the products array
-    let sortedProducts = [...products];
+  switch(sortSelect.value) {
+    case "price-asc":
+      sortedProducts.sort((a, b) => a.price - b.price);
+      break;
+    case "price-desc":
+      sortedProducts.sort((a, b) => b.price - a.price);
+      break;
+    case "name-asc":
+      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "name-desc":
+      sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    default:
+      // keep original order
+      break;
+  }
 
-    switch (selected) {
-      case "price-asc":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      case "name-asc":
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "name-desc":
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      default:
-        sortedProducts = [...products]; // default order
-    }
-
-    loadProducts(sortedProducts); // render the sorted list
-  });
+  loadProducts(sortedProducts); // re-render products
 });
 </script>
 </body>
 </html>
+
 
 
 
