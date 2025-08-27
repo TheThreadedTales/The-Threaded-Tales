@@ -118,6 +118,9 @@
     document.getElementById("mobileMenu").classList.toggle("hidden");
   });
   </script>
+<button id="cart-button" class="fixed top-5 right-5 bg-yellow-600 text-white px-4 py-2 rounded-lg">
+  Cart (<span id="cart-count" class="hidden">0</span>)
+</button>
 
   <!-- Page Header -->
   <section class="pt-28 pb-6 text-center">
@@ -170,129 +173,169 @@
   <!-- ✅ Toast -->
   <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow hidden">Added to cart!</div>
 
-  <script>
-    let productsData = [];
-    let currentProduct = null;
-    let currentImageIndex = 0;
-    let cart = [];
-    document.addEventListener("DOMContentLoaded", () => {
+ <script>
+let productsData = [];
+let currentProduct = null;
+let currentImageIndex = 0;
+let cart = [];
+
+// Load products once DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
 });
 
-    // Fetch JSON & filter products
-    async function loadProducts() {
-      const res = await fetch("handloom_products.json");
-      const data = await res.json();
-      productsData = data;
+// Fetch JSON & filter products
+async function loadProducts() {
+  const res = await fetch("handloom_products.json");
+  const data = await res.json();
+  productsData = data;
 
-      const params = new URLSearchParams(window.location.search);
-      const category = params.get("category");
-      document.getElementById("category-title").textContent = category;
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+  document.getElementById("category-title").textContent = category;
 
-      const filtered = productsData.filter(p => p.category === category);
-      const container = document.getElementById("products");
-      container.innerHTML = "";
-      filtered.forEach(product => {
-        const discounted = Math.floor(product.price / 2);
-        const card = document.createElement("div");
-        card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
-        card.innerHTML = `
-          <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover rounded">
-          <h3 class="text-lg font-bold mt-2">${product.name}</h3>
-          <p class="text-gray-600 line-through">₹${product.price}</p>
-          <p class="text-yellow-600 font-bold">₹${discounted}</p>
-          <div class="flex justify-between mt-3">
-            <button class="view-details bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">View Details</button>
-            <button class="quick-add bg-yellow-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
+  const filtered = productsData.filter(p => p.category === category);
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+  filtered.forEach(product => {
+    const discounted = Math.floor(product.price / 2);
+    const card = document.createElement("div");
+    card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
+    card.innerHTML = `
+      <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover rounded">
+      <h3 class="text-lg font-bold mt-2">${product.name}</h3>
+      <p class="text-gray-600 line-through">₹${product.price}</p>
+      <p class="text-yellow-600 font-bold">₹${discounted}</p>
+      <div class="flex justify-between mt-3">
+        <button class="view-details bg-blue-600 text-white px-3 py-1 rounded" data-id="${product.id}">View Details</button>
+        <button class="quick-add bg-yellow-600 text-white px-3 py-1 rounded" data-id="${product.id}">Add to Cart</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
 
-    // Modal functions
-    function openModal(product) {
-      currentProduct = product;
-      currentImageIndex = 0;
-      document.getElementById("modal-main-image").src = product.images[0];
-      document.getElementById("modal-title").textContent = product.name;
-      document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
-      document.getElementById("modal-description").innerHTML = product.description.split("•").map(i=>`<li>${i.trim()}</li>`).join("");
-      document.getElementById("modal-quantity").textContent = 1;
-      const thumbs = document.getElementById("modal-thumbnails");
-      thumbs.innerHTML = "";
-      product.images.forEach((img, idx) => {
-        const t = document.createElement("img");
-        t.src = img; t.className="w-16 h-16 object-cover border cursor-pointer";
-        t.onclick = () => { currentImageIndex=idx; document.getElementById("modal-main-image").src=img; };
-        thumbs.appendChild(t);
-      });
-      document.getElementById("product-modal").classList.remove("hidden");
-    }
-    document.getElementById("close-modal").onclick = () => document.getElementById("product-modal").classList.add("hidden");
-    document.getElementById("prev-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex-1+currentProduct.images.length)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
-    document.getElementById("next-image").onclick = () => { if(currentProduct){ currentImageIndex=(currentImageIndex+1)%currentProduct.images.length; document.getElementById("modal-main-image").src=currentProduct.images[currentImageIndex]; } };
+// Modal functions
+function openModal(product) {
+  currentProduct = product;
+  currentImageIndex = 0;
 
-    // Cart
-    function updateCart() {
-      const cartItems = document.getElementById("cart-items");
-      cartItems.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, idx) => {
-        const discounted = Math.floor(item.price/2);
-        total += discounted * item.qty;
-        const div = document.createElement("div");
-        div.className="flex justify-between items-center border-b pb-2";
-        div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
-        cartItems.appendChild(div);
-      });
-      document.getElementById("cart-total").textContent = "Total: ₹"+total;
-      document.getElementById("cart-count").textContent = cart.length;
-      document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
-    }
+  document.getElementById("modal-main-image").src = product.images[0];
+  document.getElementById("modal-title").textContent = product.name;
+  document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
+  document.getElementById("modal-description").innerHTML = product.description.split("•").map(i=>`<li>${i.trim()}</li>`).join("");
+  document.getElementById("modal-quantity").textContent = 1;
 
-    // Toast
-    function showToast() {
-      const toast=document.getElementById("toast");
-      toast.classList.remove("hidden");
-      setTimeout(()=>toast.classList.add("hidden"),2000);
-    }
-
-    // Event delegation
-    document.addEventListener("click", e=>{
-      if(e.target.classList.contains("view-details")){
-        const product=productsData.find(p=>p.id==e.target.dataset.id);
-        openModal(product);
-      }
-      if(e.target.classList.contains("quick-add")){
-        const product=productsData.find(p=>p.id==e.target.dataset.id);
-        cart.push({...product, qty:1});
-        updateCart();
-        showToast();
-      }
-    });
-
-    document.getElementById("add-to-cart").onclick = () => {
-      cart.push({...currentProduct, qty:parseInt(document.getElementById("modal-quantity").textContent)});
-      updateCart(); showToast();
-      document.getElementById("product-modal").classList.add("hidden");
+  const thumbs = document.getElementById("modal-thumbnails");
+  thumbs.innerHTML = "";
+  product.images.forEach((img, idx) => {
+    const t = document.createElement("img");
+    t.src = img;
+    t.className="w-16 h-16 object-cover border cursor-pointer";
+    t.onclick = () => { 
+      currentImageIndex = idx; 
+      document.getElementById("modal-main-image").src = img; 
     };
+    thumbs.appendChild(t);
+  });
 
-    document.getElementById("increase-qty").onclick=()=>document.getElementById("modal-quantity").textContent=parseInt(document.getElementById("modal-quantity").textContent)+1;
-    document.getElementById("decrease-qty").onclick=()=>{let q=parseInt(document.getElementById("modal-quantity").textContent);if(q>1)document.getElementById("modal-quantity").textContent=q-1;};
+  document.getElementById("product-modal").classList.remove("hidden");
+}
 
-    // Cart modal toggles
-    document.getElementById("cart-button").onclick=()=>document.getElementById("cart-modal").classList.remove("hidden");
-    document.getElementById("close-cart").onclick=()=>document.getElementById("cart-modal").classList.add("hidden");
+// Modal controls
+document.getElementById("close-modal").onclick = () => document.getElementById("product-modal").classList.add("hidden");
+document.getElementById("prev-image").onclick = () => {
+  if(currentProduct){
+    currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
+    document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
+  }
+};
+document.getElementById("next-image").onclick = () => {
+  if(currentProduct){
+    currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
+    document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
+  }
+};
 
-    // Checkout
-    document.getElementById("checkout").onclick=()=>{
-      let msg="Order Details:%0A";
-      cart.forEach(i=>msg+=`${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
-      window.open("https://wa.me/919671850555?text="+msg,"_blank");
-    };
+// Cart functions
+function updateCart() {
+  const cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+  let total = 0;
+  cart.forEach(item => {
+    const discounted = Math.floor(item.price/2);
+    total += discounted * item.qty;
+    const div = document.createElement("div");
+    div.className="flex justify-between items-center border-b pb-2";
+    div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
+    cartItems.appendChild(div);
+  });
+  document.getElementById("cart-total").textContent = "Total: ₹"+total;
+  if(document.getElementById("cart-count")){
+    document.getElementById("cart-count").textContent = cart.length;
+    document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
+  }
+}
 
-    loadProducts();
-  </script>
+// Toast
+function showToast() {
+  const toast = document.getElementById("toast");
+  toast.classList.remove("hidden");
+  setTimeout(()=>toast.classList.add("hidden"), 2000);
+}
+
+// Event delegation for dynamic buttons
+document.addEventListener("click", e => {
+  // View details opens modal
+  if(e.target.classList.contains("view-details")){
+    const product = productsData.find(p => p.id == e.target.dataset.id);
+    openModal(product);
+  }
+
+  // Quick add button
+  if(e.target.classList.contains("quick-add")){
+    const product = productsData.find(p => p.id == e.target.dataset.id);
+    const existing = cart.find(item => item.id === product.id);
+    if(existing) existing.qty++;
+    else cart.push({...product, qty:1});
+    updateCart();
+    showToast();
+  }
+});
+
+// Modal Add to Cart
+document.getElementById("add-to-cart").onclick = () => {
+  if(!currentProduct) return; // Safety check
+  const qty = parseInt(document.getElementById("modal-quantity").textContent);
+  const existing = cart.find(item => item.id === currentProduct.id);
+  if(existing) existing.qty += qty;
+  else cart.push({...currentProduct, qty});
+  updateCart();
+  showToast();
+  document.getElementById("product-modal").classList.add("hidden");
+};
+
+// Quantity controls
+document.getElementById("increase-qty").onclick = () => {
+  const q = parseInt(document.getElementById("modal-quantity").textContent);
+  document.getElementById("modal-quantity").textContent = q + 1;
+};
+document.getElementById("decrease-qty").onclick = () => {
+  let q = parseInt(document.getElementById("modal-quantity").textContent);
+  if(q > 1) document.getElementById("modal-quantity").textContent = q - 1;
+};
+
+// Cart modal toggles
+document.getElementById("cart-button").onclick = () => document.getElementById("cart-modal").classList.remove("hidden");
+document.getElementById("close-cart").onclick = () => document.getElementById("cart-modal").classList.add("hidden");
+
+// WhatsApp checkout
+document.getElementById("checkout").onclick = () => {
+  let msg = "Order Details:%0A";
+  cart.forEach(i => msg += `${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
+  window.open("https://wa.me/919671850555?text=" + msg, "_blank");
+};
+</script>
+
 </body>
 </html>
