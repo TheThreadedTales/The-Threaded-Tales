@@ -330,7 +330,13 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 
     <!-- Dark overlay -->
     <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-
+<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-start pt-20 overflow-auto">
+  <div class="w-full max-w-xl mx-auto bg-white rounded-lg p-4 relative">
+    <button id="closeSearch" class="absolute top-2 right-4 text-gray-800 hover:text-black text-xl font-bold">×</button>
+    <input type="text" id="searchInput" placeholder="Search products..." class="w-full border p-2 mb-4 rounded">
+    <div id="searchResults" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
+  </div>
+</div>
     <!-- Hero content -->
     <div class="hero-text relative z-10 text-center px-4 text-white">
       <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
@@ -651,18 +657,6 @@ Privacy Policy
 </div>
 </div>
 </div>
-<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex flex-col items-center p-4">
-  <div class="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 flex items-center">
-<input 
-type="text" 
-id="searchInput" 
-placeholder="Search products..." 
-      class="flex-1 border border-gray-300 rounded px-3 py-2 text-black placeholder-gray-500">
-   <button id="closeSearch" class="ml-3">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-</button>
 
 </div>
   <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
@@ -799,7 +793,53 @@ products.forEach((product, index) => {
 const { name, description, price: originalPrice, images = [], details = {} } = product;
 const discountedPrice = Math.floor(originalPrice * 0.5);
 const imageId = `product-image-${index}`;
+const searchOverlay = document.getElementById("searchOverlay");
+const searchInput = document.getElementById("searchInput");
+const closeSearch = document.getElementById("closeSearch");
+const searchResults = document.getElementById("searchResults");
 
+const openSearchBtns = [
+  document.getElementById("searchDesktop"),
+  document.getElementById("searchMobile")
+];
+
+openSearchBtns.forEach(btn => {
+  if(btn){
+    btn.addEventListener("click", () => {
+      searchOverlay.classList.remove("hidden");
+      searchInput.value = "";
+      searchResults.innerHTML = "";
+      searchInput.focus();
+    });
+  }
+});
+
+closeSearch.addEventListener("click", () => {
+  searchOverlay.classList.add("hidden");
+});
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  searchResults.innerHTML = "";
+
+  if(query.length === 0) return;
+
+  const filtered = products.filter(p => p.name.toLowerCase().includes(query) || (p.category && p.category.toLowerCase().includes(query)));
+
+  filtered.forEach(p => {
+    const resultItem = document.createElement("div");
+    resultItem.className = "flex items-center space-x-3 cursor-pointer p-2 hover:bg-gray-100 rounded";
+    resultItem.innerHTML = `
+      <img src="${p.images[0]}" class="w-12 h-12 object-cover rounded">
+      <span class="text-gray-800">${p.name}</span>
+    `;
+    resultItem.addEventListener("click", () => {
+      openProductModal(p.id); // your existing modal function
+      searchOverlay.classList.add("hidden");
+    });
+    searchResults.appendChild(resultItem);
+  });
+});
 const card = document.createElement('div');
 card.className = 'bg-white border border-gray-200 overflow-hidden transform hover:scale-105 transition w-full';
 card.innerHTML = `
@@ -1221,6 +1261,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
