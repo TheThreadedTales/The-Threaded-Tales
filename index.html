@@ -1093,21 +1093,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("searchMobile")
   ];
 
-  let selectedIndex = -1; // tracks currently highlighted result
+  let selectedIndex = -1;
   let currentResults = [];
 
   // Open search overlay
   openSearchBtns.forEach(btn => {
-    if (btn) {
-      btn.addEventListener("click", () => {
-        searchOverlay.classList.remove("hidden");
-        searchInput.value = "";
-        searchResults.innerHTML = "";
-        selectedIndex = -1;
-        currentResults = [];
-        searchInput.focus();
-      });
-    }
+    if (btn) btn.addEventListener("click", () => {
+      searchOverlay.classList.remove("hidden");
+      searchInput.value = "";
+      searchResults.innerHTML = "";
+      selectedIndex = -1;
+      currentResults = [];
+      searchInput.focus();
+    });
   });
 
   // Close search overlay
@@ -1118,54 +1116,50 @@ document.addEventListener("DOMContentLoaded", () => {
     currentResults = [];
   });
 
-  // Render matched products
-  function renderResults(matchedProducts) {
+  // Render search results
+  function renderResults(products) {
     searchResults.innerHTML = "";
-    currentResults = matchedProducts;
+    currentResults = products;
     selectedIndex = -1;
 
-    if (matchedProducts.length === 0) {
+    if (!products.length) {
       searchResults.innerHTML = `<div class="p-2 text-gray-500">No products found.</div>`;
       return;
     }
 
-    matchedProducts.forEach((product, index) => {
+    products.forEach((product, index) => {
       const div = document.createElement("div");
       div.className = "p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2";
       div.innerHTML = `
         <img src="${product.images[0]}" class="w-12 h-12 object-cover rounded">
         <span class="text-gray-800">${product.name}</span>
       `;
-      div.addEventListener("click", () => openModalForProduct(product));
+      div.addEventListener("click", () => {
+        openProductModal(product);  // opens your modal
+        searchOverlay.classList.add("hidden"); // hide search overlay
+      });
       searchResults.appendChild(div);
     });
   }
 
-  function openModalForProduct(product) {
-    searchOverlay.classList.add("hidden");
-    const modalProduct = allProducts.find(p => p.id === product.id);
-    if (modalProduct) openProductModal(modalProduct);
-  }
-
-  // Filter products on input
+  // Input filtering
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim().toLowerCase();
     if (!query) {
       searchResults.innerHTML = "";
       currentResults = [];
-      selectedIndex = -1;
       return;
     }
 
-    const matchedProducts = allProducts.filter(product =>
-      product.name.toLowerCase().includes(query) ||
-      (product.category && product.category.toLowerCase().includes(query))
+    const matched = allProducts.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      (p.category && p.category.toLowerCase().includes(query))
     );
 
-    renderResults(matchedProducts);
+    renderResults(matched);
   });
 
-  // Keyboard navigation
+  // Keyboard navigation (Arrow + Enter)
   searchInput.addEventListener("keydown", (e) => {
     const items = searchResults.children;
     if (!currentResults.length) return;
@@ -1173,23 +1167,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
       selectedIndex = (selectedIndex + 1) % currentResults.length;
-      highlightItem(items);
+      highlight(items);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
-      highlightItem(items);
+      highlight(items);
     } else if (e.key === "Enter") {
       e.preventDefault();
-      if (selectedIndex >= 0) openModalForProduct(currentResults[selectedIndex]);
+      if (selectedIndex >= 0) {
+        openProductModal(currentResults[selectedIndex]);
+        searchOverlay.classList.add("hidden");
+      }
     }
   });
 
-  function highlightItem(items) {
+  function highlight(items) {
     for (let i = 0; i < items.length; i++) {
       items[i].classList.toggle("bg-gray-200", i === selectedIndex);
     }
   }
 });
+
 </script>
 
 
@@ -1223,6 +1221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
