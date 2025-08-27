@@ -252,7 +252,7 @@
   {
     "id": 13,
     "category": "DOORMATS & RUGS",
-    "name": "Premium Soft Feel Bedside Runner",
+    "name": "Premium Ultra Soft Feel Bedside Runner",
     "price": 1300,
     "images": [
       "images/runner1.jpeg",
@@ -334,9 +334,32 @@
     }
   },
   {
-    "id": 17,
+    "id": 16,
     "category": "BEDSHEETS",
-    "name": " Quilted 5-Pieces Elastic Bedding Ensemble",
+    "name": " King Sized Elastic Fitted Bedsheet",
+    "price": 800,
+    "images": [
+      "images/king1.jpeg",
+      "images/king2.jpeg",
+      "images/king3.jpeg",
+      "images/king4.jpeg",
+      "images/king5.jpeg",
+      "images/king6.jpeg",
+      "images/king7.jpeg",
+      "images/king8.jpeg"
+    ],
+    "description": "Save you Time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
+    "details": {
+      "fabric": "Pure Cotton",
+      "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.1KG(approx.), Available in 4 Variants: Floral White, Flying Butterflies, Smilling Faces, Concentric Circles. , Comes with PVC Packaging, Ideal for Gifting."
+    }
+  },
+  {
+    "id": 18,
+    "category": "BEDSHEETS",
+    "name": " Queen Sized 5-Pieces Elastic Bedding Ensemble",
     "price": 1200,
     "images": [
       "images/e1.jpeg",
@@ -350,15 +373,16 @@
       "images/e9.jpeg",
       "images/e10.jpeg"
     ],
-    "description": "Save you Time and evironment with environment friendly 5pcs Elastic Bedding Ensemble which comes with 2 Quilted Pillow Covers and 2 Quilted Filled Cushions ",
+    "description": "Save your Time and evironment with environment friendly 5pcs Elastic Bedding Ensemble which comes with 2 Quilted Pillow Covers and 2 Quilted Filled Cushions ",
     "details": {
       "fabric": "Super Soft 140 GSM Cotton",
       "dimensions": " 90 X 100 In. for Bedsheet, 28 X 18 In. for pillow covers with chain and 12 X 12 for filled cushions. ",
       "washCare": " Mild Wash/Regular Wash",
       "Other Details": " WEIGHT: 1.5KG(approx.), Available in 4 Variants: Leafy Black, Floral White, Blue Pop, Guava Green. All Pillow Covers(with chain) and Cushions are Quilted with perfection, Comes in Suitcase with Handle Packaging."
     }
-  }
+  }  
 ]
+
 
 
 
