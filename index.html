@@ -1098,9 +1098,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btn) {
       btn.addEventListener("click", () => {
         searchOverlay.classList.remove("hidden");
-        searchInput.focus();
-        searchResults.innerHTML = "";
         searchInput.value = "";
+        searchResults.innerHTML = "";
+        searchInput.focus();
       });
     }
   });
@@ -1137,13 +1137,18 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       div.addEventListener("click", () => {
         searchOverlay.classList.add("hidden");
-        openProductModal(product); // uses your existing modal function
+
+        // Find the exact product object by ID to ensure modal works
+        const modalProduct = allProducts.find(p => p.id === product.id);
+        if (modalProduct) {
+          openProductModal(modalProduct);
+        }
       });
       searchResults.appendChild(div);
     });
   });
 });
-  </script>
+</script>
 
 
   <script>
@@ -1176,6 +1181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
