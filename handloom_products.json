@@ -332,8 +332,34 @@
       "washCare": "Dry Clean, Mild Wash ",
       "Other Details": " WEIGHT: 2KG(approx.), Available in 3 colours: Charcoal Grey, Slimmy Grey/Blue, Organic Biege, Available in Single Bed variant also , Premium Quality, Sufer Soft and Comfortable."
     }
+  },
+  {
+    "id": 17,
+    "category": "BEDSHEETS",
+    "name": " Quilted 5-Pieces Elastic Bedding Ensemble",
+    "price": 1200,
+    "images": [
+      "images/e1.jpeg",
+      "images/e2.jpeg",
+      "images/e3.jpeg",
+      "images/e4.jpeg",
+      "images/e5.jpeg",
+      "images/e6.jpeg",
+      "images/e7.jpeg",
+      "images/e8.jpeg",
+      "images/e9.jpeg",
+      "images/e10.jpeg"
+    ],
+    "description": "Save you Time and evironment with environment friendly 5pcs Elastic Bedding Ensemble which comes with 2 Quilted Pillow Covers and 2 Quilted Filled Cushions ",
+    "details": {
+      "fabric": "Super Soft 140 GSM Cotton",
+      "dimensions": " 90 X 100 In. for Bedsheet, 28 X 18 In. for pillow covers with chain and 12 X 12 for filled cushions. ",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.5KG(approx.), Available in 4 Variants: Leafy Black, Floral White, Blue Pop, Guava Green. All Pillow Covers(with chain) and Cushions are Quilted with perfection, Comes in Suitcase with Handle Packaging."
+    }
   }
 ]
+
 
 
 
