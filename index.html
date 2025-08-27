@@ -1081,8 +1081,8 @@ popup.classList.add('hidden');
 </script>
 
 <!-- ✅ Search Overlay Logic -->
+
 <script>
- // 🔎 Search Overlay Logic
 document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
@@ -1094,6 +1094,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("searchMobile")
   ];
 
+  // open overlay
   openSearchBtns.forEach(btn => {
     if (btn) {
       btn.addEventListener("click", () => {
@@ -1103,57 +1104,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // close overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.add("hidden");
   });
 
-  // ✅ Search products
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
+  // search logic
+  searchInput.addEventListener("input", e => {
+    const query = e.target.value.toLowerCase();
     searchResults.innerHTML = "";
 
     if (!query) return;
 
-    const filtered = allProducts.filter(product =>
-      product.name.toLowerCase().includes(query) ||
-      (product.description && product.description.toLowerCase().includes(query))
-    );
+    products.forEach(product => {
+      if (product.name.toLowerCase().includes(query)) {
+        const item = document.createElement("div");
+        item.className = "flex items-center p-2 hover:bg-gray-100 cursor-pointer";
 
-    filtered.forEach(product => {
-      const item = document.createElement("div");
-      item.className =
-        "flex items-center p-2 cursor-pointer hover:bg-gray-100 border-b";
+        item.innerHTML = `
+          <img src="${product.images[0]}" alt="${product.name}" class="w-12 h-12 object-cover rounded mr-2">
+          <span>${product.name}</span>
+        `;
 
-      item.innerHTML = `
-        <img src="${product.images[0]}" alt="${product.name}" class="w-12 h-12 object-cover rounded mr-3">
-        <div>
-          <p class="font-medium">${product.name}</p>
-          <p class="text-sm text-gray-500">₹${product.price}</p>
-        </div>
-      `;
+        // ✅ Use your existing modal function
+        item.addEventListener("click", () => {
+          if (typeof openProductModal === "function") {
+            openProductModal(product.id);   // pass correct product id
+          } else {
+            console.warn("openProductModal not found. Product id:", product.id);
+          }
+          searchOverlay.classList.add("hidden"); // close overlay after click
+        });
 
-      // ✅ ensure modal opens from search result too
-      item.addEventListener("click", () => {
-        if (typeof window.openProductModal === "function") {
-          window.openProductModal(Number(product.id)); // force numeric id
-        } else {
-          console.warn("openProductModal not found. Product id:", product.id);
-        }
-        searchOverlay.classList.add("hidden");
-      });
-
-      searchResults.appendChild(item);
+        searchResults.appendChild(item);
+      }
     });
   });
 });
-
-// ✅ Make openProductModal global without changing existing code
-if (typeof openProductModal === "function") {
-  window.openProductModal = openProductModal;
-}
-
-
 </script>
+
+
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -1273,4 +1263,5 @@ window.openProductModal = function (productId) {
 </script>
 </body>
 </html>
+
 
