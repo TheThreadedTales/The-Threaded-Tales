@@ -45,7 +45,20 @@
 #searchResults div:hover {
   background-color: #f9f9f9;
 }
-
+#searchResults div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+#searchResults img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 0.375rem;
+}
 .tango {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
@@ -1076,7 +1089,7 @@ popup.classList.add('hidden');
 
 <!-- ✅ Search Overlay Logic -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
   const closeSearch = document.getElementById("closeSearch");
@@ -1118,21 +1131,30 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // ✅ Render clickable results
+    // ✅ Render results with thumbnail
     matches.forEach(product => {
+      const thumb = product.images && product.images.length > 0 
+        ? product.images[0] 
+        : "images/placeholder.png"; // fallback image
+
       const div = document.createElement("div");
-      div.className = "p-2 border-b cursor-pointer hover:bg-gray-100";
+      div.className = "flex items-center gap-3 p-2 border-b cursor-pointer hover:bg-gray-100 rounded";
       div.innerHTML = `
-        <strong>${product.name}</strong><br>
-        <span class="text-gray-500">₹${product.price}</span>
+        <img src="${thumb}" alt="${product.name}" class="w-12 h-12 object-cover rounded">
+        <div>
+          <strong class="block">${product.name}</strong>
+          <span class="text-gray-500">₹${product.price}</span>
+        </div>
       `;
+
       div.addEventListener("click", () => {
-        openProductModal(product.id); // ✅ use id
+        openProductModal(product.id); // ✅ open modal
         searchResults.innerHTML = "";
         searchInput.value = "";
         searchOverlay.classList.add("hidden"); // close overlay after selection
       });
-      searchResults.appendChild(div); // ✅ correctly inside loop
+
+      searchResults.appendChild(div);
     });
   });
 });
@@ -1168,6 +1190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
