@@ -1081,68 +1081,69 @@ popup.classList.add('hidden');
 </script>
 
 <!-- ✅ Search Overlay Logic -->
+  <script>
 
-<script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
   const closeSearch = document.getElementById("closeSearch");
   const searchResults = document.getElementById("searchResults");
-
   const openSearchBtns = [
     document.getElementById("searchDesktop"),
     document.getElementById("searchMobile")
   ];
 
-  // open overlay
+  // Open search overlay
   openSearchBtns.forEach(btn => {
     if (btn) {
       btn.addEventListener("click", () => {
         searchOverlay.classList.remove("hidden");
         searchInput.focus();
+        searchResults.innerHTML = "";
+        searchInput.value = "";
       });
     }
   });
 
-  // close overlay
+  // Close search overlay
   closeSearch.addEventListener("click", () => {
     searchOverlay.classList.add("hidden");
+    searchResults.innerHTML = "";
   });
 
-  // search logic
-  searchInput.addEventListener("input", e => {
-    const query = e.target.value.toLowerCase();
+  // Filter products on input
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
     searchResults.innerHTML = "";
 
-    if (!query) return;
+    if (query.length === 0) return;
 
-    products.forEach(product => {
-      if (product.name.toLowerCase().includes(query)) {
-        const item = document.createElement("div");
-        item.className = "flex items-center p-2 hover:bg-gray-100 cursor-pointer";
+    const matchedProducts = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query) ||
+      (product.category && product.category.toLowerCase().includes(query))
+    );
 
-        item.innerHTML = `
-          <img src="${product.images[0]}" alt="${product.name}" class="w-12 h-12 object-cover rounded mr-2">
-          <span>${product.name}</span>
-        `;
+    if (matchedProducts.length === 0) {
+      searchResults.innerHTML = `<div class="p-2 text-gray-500">No products found.</div>`;
+      return;
+    }
 
-        // ✅ Use your existing modal function
-        item.addEventListener("click", () => {
-          if (typeof openProductModal === "function") {
-            openProductModal(product.id);   // pass correct product id
-          } else {
-            console.warn("openProductModal not found. Product id:", product.id);
-          }
-          searchOverlay.classList.add("hidden"); // close overlay after click
-        });
-
-        searchResults.appendChild(item);
-      }
+    matchedProducts.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2";
+      div.innerHTML = `
+        <img src="${product.images[0]}" class="w-12 h-12 object-cover rounded">
+        <span class="text-gray-800">${product.name}</span>
+      `;
+      div.addEventListener("click", () => {
+        searchOverlay.classList.add("hidden");
+        openProductModal(product); // uses your existing modal function
+      });
+      searchResults.appendChild(div);
     });
   });
 });
-</script>
-
+  </script>
 
 
   <script>
@@ -1173,95 +1174,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   });
 </script>
-<script>
- // make product modal globally usable (for search + product clicks)
-window.openProductModal = function (productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) {
-    console.warn("Product not found for modal:", productId);
-    return;
-  }
-
-  // modal elements
-  const modal = document.getElementById("product-modal");
-  const modalTitle = modal.querySelector(".modal-title");
-  const modalDesc = modal.querySelector(".modal-description");
-  const modalPrice = modal.querySelector(".modal-price");
-  const modalImg = modal.querySelector(".modal-main-img");
-
-  // populate content
-  modalTitle.textContent = product.name;
-  modalDesc.textContent = product.description;
-  modalPrice.textContent = "₹" + product.price;
-  modalImg.src = product.images[0];
-
-  // finally show modal
-  modal.classList.remove("hidden");
-};
-
-  // ✅ open modal by productId (used by search results too)
-  window.openProductModal = function (productId) {
-    if (!window.allProducts) {
-      console.error("No products loaded yet.");
-      return;
-    }
-
-    const product = window.allProducts.find(p => p.id === productId);
-    if (!product) {
-      console.error("Product not found:", productId);
-      return;
-    }
-
-    const modal = document.getElementById("product-modal");
-    const modalContent = document.getElementById("modal-content");
-
-    // Build modal content dynamically
-    let currentImageIndex = 0;
-    function renderImage() {
-      return `<img src="${product.images[currentImageIndex]}" 
-                  id="main-modal-image"
-                  class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
-    }
-
-    modalContent.innerHTML = `
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <div class="relative">
-            ${renderImage()}
-            <button id="prev-img" class="absolute top-1/2 left-2 ...">‹</button>
-            <button id="next-img" class="absolute top-1/2 right-2 ...">›</button>
-          </div>
-          <div class="flex mt-2 space-x-2 overflow-x-auto">
-            ${product.images.map((img, i) => 
-              `<img src="${img}" class="w-20 h-20 object-cover rounded cursor-pointer ${i === 0 ? 'border-2 border-blue-600' : ''}" 
-                     onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`
-            ).join('')}
-          </div>
-        </div>
-        <div>
-          <h2 class="text-2xl font-bold">${product.name}</h2>
-          <p class="text-sm text-gray-600 mt-1">${product.description}</p>
-          <div class="mt-2 text-lg font-semibold text-green-700">₹${Math.floor(product.price*0.5)} 
-            <span class="text-sm text-gray-500 line-through ml-2">₹${product.price}</span>
-          </div>
-        </div>
-      </div>
-    `;
-
-    modal.classList.remove("hidden");
-
-    // Add event listeners
-    document.getElementById("prev-img").onclick = () => {
-      currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length;
-      document.getElementById("main-modal-image").src = product.images[currentImageIndex];
-    };
-    document.getElementById("next-img").onclick = () => {
-      currentImageIndex = (currentImageIndex + 1) % product.images.length;
-      document.getElementById("main-modal-image").src = product.images[currentImageIndex];
-    };
-  };
-</script>
 </body>
 </html>
+
 
 
