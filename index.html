@@ -332,7 +332,7 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
     <div class="absolute inset-0 bg-black bg-opacity-30"></div>
 <div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-start pt-20 overflow-auto">
   <div class="w-full max-w-xl mx-auto bg-white rounded-lg p-4 relative">
-    <button id="closeSearch" class="absolute top-2 right-4 text-gray-800 hover:text-black text-3xl font-bold">×</button>
+    <button id="closeSearch" class="absolute top-2 right-3 text-black-800 hover:text-black text-4xl font-bold">×</button>
     <input type="text" id="searchInput" placeholder="Search products..." class="w-full border p-2 mb-4 rounded">
     <div id="searchResults" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
   </div>
@@ -1120,117 +1120,6 @@ popup.classList.add('hidden');
 });
 </script>
 
-<!-- ✅ Search Overlay Logic -->
-  <script>
-
-document.addEventListener("DOMContentLoaded", () => {
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchInput = document.getElementById("searchInput");
-  const closeSearch = document.getElementById("closeSearch");
-  const searchResults = document.getElementById("searchResults");
-  const openSearchBtns = [
-    document.getElementById("searchDesktop"),
-    document.getElementById("searchMobile")
-  ];
-
-  let selectedIndex = -1;
-  let currentResults = [];
-
-  // Open search overlay
-  openSearchBtns.forEach(btn => {
-    if (btn) btn.addEventListener("click", () => {
-      searchOverlay.classList.remove("hidden");
-      searchInput.value = "";
-      searchResults.innerHTML = "";
-      selectedIndex = -1;
-      currentResults = [];
-      searchInput.focus();
-    });
-  });
-
-  // Close search overlay
-  closeSearch.addEventListener("click", () => {
-    searchOverlay.classList.add("hidden");
-    searchResults.innerHTML = "";
-    selectedIndex = -1;
-    currentResults = [];
-  });
-
-  // Render search results
-  function renderResults(products) {
-    searchResults.innerHTML = "";
-    currentResults = products;
-    selectedIndex = -1;
-
-    if (!products.length) {
-      searchResults.innerHTML = `<div class="p-2 text-gray-500">No products found.</div>`;
-      return;
-    }
-
-    products.forEach((product, index) => {
-      const div = document.createElement("div");
-      div.className = "p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2";
-      div.innerHTML = `
-        <img src="${product.images[0]}" class="w-12 h-12 object-cover rounded">
-        <span class="text-gray-800">${product.name}</span>
-      `;
-      div.addEventListener("click", () => {
-        openProductModal(product);  // opens your modal
-        searchOverlay.classList.add("hidden"); // hide search overlay
-      });
-      searchResults.appendChild(div);
-    });
-  }
-
-  // Input filtering
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
-    if (!query) {
-      searchResults.innerHTML = "";
-      currentResults = [];
-      return;
-    }
-
-    const matched = allProducts.filter(p =>
-      p.name.toLowerCase().includes(query) ||
-      (p.category && p.category.toLowerCase().includes(query))
-    );
-
-    renderResults(matched);
-  });
-
-  // Keyboard navigation (Arrow + Enter)
-  searchInput.addEventListener("keydown", (e) => {
-    const items = searchResults.children;
-    if (!currentResults.length) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      selectedIndex = (selectedIndex + 1) % currentResults.length;
-      highlight(items);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      selectedIndex = (selectedIndex - 1 + currentResults.length) % currentResults.length;
-      highlight(items);
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (selectedIndex >= 0) {
-        openProductModal(currentResults[selectedIndex]);
-        searchOverlay.classList.add("hidden");
-      }
-    }
-  });
-
-  function highlight(items) {
-    for (let i = 0; i < items.length; i++) {
-      items[i].classList.toggle("bg-gray-200", i === selectedIndex);
-    }
-  }
-});
-
-</script>
-
-
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     const slides = document.querySelectorAll('#hero .slideshow .slide');
@@ -1261,6 +1150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
