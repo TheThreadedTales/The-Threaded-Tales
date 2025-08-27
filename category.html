@@ -175,6 +175,9 @@
     let currentProduct = null;
     let currentImageIndex = 0;
     let cart = [];
+    document.addEventListener("DOMContentLoaded", () => {
+  loadProducts();
+});
 
     // Fetch JSON & filter products
     async function loadProducts() {
