@@ -164,7 +164,7 @@
     </div>
   </div>
 
- <!-- ✅ Cart Modal -->
+  <!-- ✅ Cart Modal -->
   <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
       <button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
@@ -172,8 +172,8 @@
       <div id="cart-items" class="space-y-4"></div>
       <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
       <button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">Checkout on WhatsApp</button>
-
-
+      </div>
+    </div>
 <!-- ✅ Toast (centered, works with your current JS) -->
 <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 
   bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50">
@@ -292,9 +292,25 @@ document.getElementById("next-image").onclick = () => {
   }
 };
 
- function updateCart() { const cartItems = document.getElementById("cart-items"); cartItems.innerHTML = ""; let total = 0; cart.forEach(item => { const discounted = Math.floor(item.price/2); total += discounted * item.qty; const div = document.createElement("div"); div.className="flex justify-between items-center border-b pb-2"; div.innerHTML = <span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>; cartItems.appendChild(div); }); document.getElementById("cart-total").textContent = "Total: ₹"+total; if(document.getElementById("cart-count")){ document.getElementById("cart-count").textContent = cart.length; document.getElementById("cart-count").classList.toggle("hidden", cart.length===0); } }
-
-
+   // Cart functions
+function updateCart() {
+  const cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+  let total = 0;
+  cart.forEach(item => {
+    const discounted = Math.floor(item.price/2);
+    total += discounted * item.qty;
+    const div = document.createElement("div");
+    div.className="flex justify-between items-center border-b pb-2";
+    div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
+    cartItems.appendChild(div);
+    });
+  document.getElementById("cart-total").textContent = "Total: ₹"+total;
+  if(document.getElementById("cart-count")){
+    document.getElementById("cart-count").textContent = cart.length;
+    document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
+  }
+  }
 // Toast
 function showToast() {
   const toast = document.getElementById("toast");
