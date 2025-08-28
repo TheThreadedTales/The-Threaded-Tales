@@ -164,16 +164,21 @@
     </div>
   </div>
 
-  <!-- ✅ Cart Modal -->
-  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-      <button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
-      <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-      <div id="cart-items" class="space-y-4"></div>
-      <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
-      <button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">Checkout on WhatsApp</button>
+  <!-- Cart Modal -->
+<div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+    <button id="close-cart" class="absolute top-2 right-4 text-gray-800 hover:text-black text-2xl">&times;</button>
+    <h2 class="text-xl font-semibold mb-4">Your Cart</h2>
+    <div id="cart-items" class="space-y-4 max-h-64 overflow-y-auto"></div>
+    <div class="mt-4 flex justify-between items-center">
+      <span class="font-semibold">Total:</span>
+      <span id="cart-total" class="font-bold">₹0</span>
     </div>
+    <div class="mt-2 text-sm text-gray-500">+ Delivery charges (if applicable)</div>
+    <button id="checkout-btn" class="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Checkout on WhatsApp</button>
   </div>
+</div>
+
 
 <!-- ✅ Toast (centered, works with your current JS) -->
 <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 
@@ -293,25 +298,91 @@ document.getElementById("next-image").onclick = () => {
   }
 };
 
-// Cart functions
-function updateCart() {
-  const cartItems = document.getElementById("cart-items");
-  cartItems.innerHTML = "";
-  let total = 0;
-  cart.forEach(item => {
-    const discounted = Math.floor(item.price/2);
-    total += discounted * item.qty;
-    const div = document.createElement("div");
-    div.className="flex justify-between items-center border-b pb-2";
-    div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
-    cartItems.appendChild(div);
-  });
-  document.getElementById("cart-total").textContent = "Total: ₹"+total;
-  if(document.getElementById("cart-count")){
-    document.getElementById("cart-count").textContent = cart.length;
-    document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
+// ================== CART FUNCTIONALITY ================== //
+const cart = [];
+const cartModal = document.getElementById("cart-modal");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartTotal = document.getElementById("cart-total");
+const checkoutBtn = document.getElementById("checkout-btn");
+const closeCart = document.getElementById("close-cart");
+
+// Open Cart (you can hook this to a button/icon in navbar)
+document.getElementById("cart-btn")?.addEventListener("click", () => {
+  cartModal.classList.remove("hidden");
+});
+
+// Close Cart
+closeCart.addEventListener("click", () => {
+  cartModal.classList.add("hidden");
+});
+
+// Add to Cart
+function addToCart(product) {
+  const existing = cart.find(item => item.id === product.id);
+  if (existing) {
+    existing.quantity += product.quantity;
+  } else {
+    cart.push({ ...product });
   }
+  renderCart();
 }
+
+// Render Cart
+function renderCart() {
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+
+    const div = document.createElement("div");
+    div.classList.add("flex", "justify-between", "items-center", "border-b", "pb-2");
+
+    div.innerHTML = `
+      <div>
+        <h4 class="font-medium">${item.name}</h4>
+        <p class="text-sm text-gray-600">₹${item.price} x ${item.quantity}</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="px-2 bg-gray-200 rounded" onclick="updateQuantity(${index}, -1)">-</button>
+        <span>${item.quantity}</span>
+        <button class="px-2 bg-gray-200 rounded" onclick="updateQuantity(${index}, 1)">+</button>
+        <button class="text-red-500 ml-2" onclick="removeFromCart(${index})">x</button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+
+  cartTotal.textContent = `₹${total}`;
+}
+
+// Update Quantity
+function updateQuantity(index, change) {
+  cart[index].quantity += change;
+  if (cart[index].quantity <= 0) cart.splice(index, 1);
+  renderCart();
+}
+
+// Remove Item
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+
+// Checkout on WhatsApp
+checkoutBtn.addEventListener("click", () => {
+  if (cart.length === 0) return alert("Your cart is empty!");
+
+  let message = "Hello, I want to place an order:\n\n";
+  cart.forEach(item => {
+    message += `${item.name} - ₹${item.price} x ${item.quantity}\n`;
+  });
+  message += `\nTotal: ${cartTotal.textContent}\n+ Delivery charges (if applicable)`;
+
+  const url = `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+});
+
 
 // Toast
 function showToast() {
