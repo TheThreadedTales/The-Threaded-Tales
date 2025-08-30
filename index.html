@@ -130,9 +130,16 @@
   opacity: 0;
   transform: translateX(-100%);
 }
+.product-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-in-out;
+}
 
-
-
+.product-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -670,6 +677,15 @@ Privacy Policy
   <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
 
+<!-- Products Grid -->
+<div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+<!-- Toggle Button -->
+<div class="flex justify-center mt-6">
+  <button id="toggle-products-btn" class="px-6 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition hidden">
+    Show More
+  </button>
+</div>
 
 <!-- JS for Products + Cart -->
 <script>
@@ -1183,27 +1199,64 @@ sortSelect.addEventListener("change", () => {
   loadProducts(sortedProducts); // re-render products
 });
 </script>
+<script>
+  const productsContainer = document.getElementById("products-container");
+const toggleBtn = document.getElementById("toggle-products-btn");
+
+let productsPerPage = 10;
+let showingAll = false;
+
+function renderProducts(limit) {
+  productsContainer.innerHTML = "";
+  products.slice(0, limit).forEach((product, index) => {
+    const card = document.createElement("div");
+    card.className = "product-card bg-white rounded-lg shadow-md overflow-hidden transition";
+    card.innerHTML = `
+      <img src="${product.images[0]}" alt="${product.name}" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">${product.name}</h3>
+        <p class="text-gray-600">₹${product.price}</p>
+      </div>
+    `;
+    card.addEventListener("click", () => openModal(product));
+    productsContainer.appendChild(card);
+
+    // Animate with staggered delay
+    setTimeout(() => card.classList.add("show"), index * 100);
+  });
+}
+
+// Initial render (10 products)
+renderProducts(productsPerPage);
+
+// Show button only if more than 10 products
+if (products.length > productsPerPage) {
+  toggleBtn.classList.remove("hidden");
+}
+
+// Button toggle
+toggleBtn.addEventListener("click", () => {
+  if (showingAll) {
+    // Collapse back to 10
+    const cards = productsContainer.querySelectorAll(".product-card");
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.remove("show"), i * 50);
+    });
+
+    setTimeout(() => {
+      renderProducts(productsPerPage);
+      toggleBtn.textContent = "Show More";
+      showingAll = false;
+    }, cards.length * 50 + 400);
+
+  } else {
+    // Show all with animation
+    renderProducts(products.length);
+    toggleBtn.textContent = "Show Less";
+    showingAll = true;
+  }
+});
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
