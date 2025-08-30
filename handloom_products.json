@@ -23,26 +23,6 @@
     }
   },
   {
-    "id": 2,
-    "category": "BEDSHEETS",
-    "name": "5-Piece Luxe Bedding Ensemble",
-    "price": 1100,
-    "images": [
-      "images/Navy Blue Petals.jpeg",
-      "images/Jaipuri Blues.jpeg",
-      "images/Black Swirlls.jpeg",
-      "images/Black Lilly.jpeg",
-      "images/Minimalist Grey.jpeg"
-    ],
-    "description": "Premium Queen Size Bedsheet with 2 Pillow covers and 2 Cushion Covers.",
-    "details": {
-      "fabric": "Premium Cotton Blend(Heavy Fabric of 130GSM)",
-      "dimensions": "90 x 100 inches",
-      "washCare": "Machine washable",
-      "Other Details": " Weight: 1.5KG, One queen size bedsheet size 90*100 ,Two quilted pillow covers size 18*28 inches with chain, Two quilted cushions covers with filing inside size 12*12 inches, Premium Quality, Ideal for Gifting, Comes with luxurious packaging, Comes in 5 Variants - Navy Blue Petals, Jaipuri Blues, Black Swirlls, Black Lilly, Minimalist Grey"
-    }
-  },
-  {
     "id": 3,
     "category": "COMFORTERS",
     "name": "Kids Single Bed Comforter(5 Variants Available)",
@@ -345,7 +325,7 @@
       "images/king7.jpeg",
       "images/king8.jpeg"
     ],
-    "description": "Save you Time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
+    "description": "Save your time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
     "details": {
       "fabric": "Pure Cotton",
       "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
@@ -377,8 +357,30 @@
       "washCare": " Mild Wash/Regular Wash",
       "Other Details": " WEIGHT: 1.5KG(approx.), Available in 4 Variants: Leafy Black, Floral White, Blue Pop, Guava Green. All Pillow Covers(with chain) and Cushions are Quilted with perfection, Comes in Suitcase with Handle Packaging."
     }
-  }  
+  },
+  {
+    "id": 19,
+    "category": "BEDSHEETS",
+    "name": " King Sized Elastic Fitted Classic Bedsheet",
+    "price": 800,
+    "images": [
+      "images/simple1.jpeg",
+      "images/simple2.jpeg",
+      "images/simple3.jpeg",
+      "images/simple4.jpeg",
+      "images/simple5.jpeg",
+      "images/simple6.jpeg"
+    ],
+    "description": "Save your time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
+    "details": {
+      "fabric": "Pure Cotton",
+      "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.1KG(approx.), Available in 2 Color Variants: Classic Blue, Classic Dark Orange, Ideal for Gifting and Daily Use."
+    }
+  }
 ]
+
 
 
 
