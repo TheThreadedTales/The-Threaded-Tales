@@ -271,7 +271,15 @@ function openModal(product) {
   document.getElementById("modal-main-image").src = product.images[0];
   document.getElementById("modal-title").textContent = product.name;
   document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
-  document.getElementById("modal-description").innerHTML = product.description.split("•").map(i=>`<li>${i.trim()}</li>`).join("");
+ document.getElementById("modal-description").innerHTML = `
+  <ul class="list-disc pl-5 space-y-1">
+    ${product.description ? product.description.split("•").map(i => `<li>${i.trim()}</li>`).join("") : ""}
+  </ul>
+  ${product.fabric ? `<p><strong>Fabric:</strong> ${product.fabric}</p>` : ""}
+  ${product.dimensions ? `<p><strong>Dimensions:</strong> ${product.dimensions}</p>` : ""}
+  ${product.washCare ? `<p><strong>Wash Care:</strong> ${product.washCare}</p>` : ""}
+  ${product.other ? `<p><strong>Other:</strong> ${product.other}</p>` : ""}
+`;
   document.getElementById("modal-quantity").textContent = 1;
 
   const thumbs = document.getElementById("modal-thumbnails");
