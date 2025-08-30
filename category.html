@@ -137,10 +137,19 @@
 
 
     <!-- ✅ Product Details Modal -->
-  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
-    <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 relative">
-      <button id="close-modal" class="absolute top-2 right-2 text-4xl">×</button>
-      <div class="grid md:grid-cols-2 gap-6">
+  <!-- ✅ Product Details Modal -->
+<div id="product-modal" 
+     class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden overflow-y-auto">
+  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 relative my-8">
+    
+    <!-- ✅ Fixed Close Button -->
+    <button id="close-modal" 
+            class="fixed top-4 right-6 text-4xl z-50 text-gray-800 hover:text-black">
+      ×
+    </button>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
         <!-- Left: Image Gallery -->
         <div class="relative">
           <img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
