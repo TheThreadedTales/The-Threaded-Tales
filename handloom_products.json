@@ -195,9 +195,6 @@
     "name": "Luxurious Golden Flower Table Mats 6Pcs.",
     "price": 1100,
     "images": [
-      "images/flower1.jpeg",
-      "images/flower2.jpeg",
-      "images/flower3.jpeg",
       "images/flower4.jpeg",
       "images/flower5.jpeg",
       "images/flower6.jpeg"
@@ -207,7 +204,7 @@
       "fabric": "PVC Based Long Lasting Table Mats upskilling your interior game.",
       "dimensions": "Impressive 16 X 16 Inches mat",
       "washCare": "Suitable for every kind of wash.",
-      "Other Details": "Weight: 800gm's, Available in 2 Patterns: Golden Rose, Golden Bloom, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
+      "Other Details": "Weight: 800gm's, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, Premium Quality, Long Lasting PVC."
     }
   },
   {
@@ -382,6 +379,7 @@
     }
   }  
 ]
+
 
 
 
