@@ -483,11 +483,14 @@ Checkout on WhatsApp
 <div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
 <!-- ❌ Modal Close -->
 <!-- FIXED CLOSE BUTTON -->
-<button id="modal-close" 
-        class="fixed md:absolute top-3 right-3 w-10 h-10 flex items-center justify-center 
-               text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
-  ×
-</button>
+ <div class="relative bg-white rounded-2xl shadow-lg w-[95%] md:w-[80%] max-h-[90vh] overflow-y-auto p-4">
+
+    <!-- CLOSE BUTTON (inside modal, top-right corner) -->
+    <button id="close-modal"
+            class="absolute top-3 right-3 w-10 h-10 flex items-center justify-center 
+                   text-2xl bg-white/40 hover:bg-white rounded-full shadow-md z-50">
+      ×
+    </button>
 
 <div id="modal-content"></div>
 </div>
@@ -1183,6 +1186,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
