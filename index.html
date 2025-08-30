@@ -504,6 +504,16 @@ Checkout on WhatsApp
 <div id="cart-toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0 z-50">
 Added to Cart!
 </div>
+
+  <!-- Products Grid -->
+<div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+<!-- Toggle Button -->
+<div class="flex justify-center mt-6">
+  <button id="toggle-products-btn" class="px-6 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition hidden">
+    Show More
+  </button>
+</div>
 <!-- Artisans Section -->
 <section class="py-16 bg-gray-50 px-6 md:px-20" id="artisans">
 <div class="text-center mb-10">
@@ -675,16 +685,6 @@ Privacy Policy
 
 </div>
   <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
-</div>
-
-<!-- Products Grid -->
-<div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-
-<!-- Toggle Button -->
-<div class="flex justify-center mt-6">
-  <button id="toggle-products-btn" class="px-6 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition hidden">
-    Show More
-  </button>
 </div>
 
 <!-- JS for Products + Cart -->
@@ -1259,4 +1259,5 @@ toggleBtn.addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
