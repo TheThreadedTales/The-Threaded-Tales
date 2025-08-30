@@ -325,7 +325,7 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
     <div class="absolute inset-0 slideshow">
       <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
       <div class="slide" style="background-image: url('images/m2.jpg');"></div>
-      <div class="slide" style="background-image: url('images/B1.png');"></div>
+      <div class="slide" style="background-image: url('images/B1.jpg');"></div>
     </div>
 
     <!-- Dark overlay -->
@@ -480,22 +480,23 @@ Checkout on WhatsApp
 </div>
 <!-- 🧵 PRODUCT MODAL (DYNAMIC CONTENT INJECTED) -->
 <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
-<div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
-<!-- ❌ Modal Close -->
-<!-- FIXED CLOSE BUTTON -->
-  
-  <div class="relative bg-white rounded-2xl shadow-lg w-[95%] md:w-[80%] max-h-[90vh] overflow-y-auto p-6">
+  <div id="modal-box" class="bg-white p-6 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
 
-    <!-- CLOSE BUTTON -->
-    <button id="close-modal"
-      class="absolute -top-3 -right-3 w-8 h-8 flex items-center justify-center 
-             text-xl font-bold bg-white hover:bg-gray-200 rounded-full shadow-md z-50">
-      ×
-    </button>
+    <div class="relative bg-white rounded-2xl shadow-lg w-[95%] md:w-[80%] max-h-[90vh] overflow-y-auto p-6">
 
-<div id="modal-content"></div>
+      <!-- CLOSE BUTTON (Sticky + Circular) -->
+      <button id="modal-close"
+        class="sticky top-2 left-full -translate-x-10 w-8 h-8 
+               flex items-center justify-center text-xl font-bold 
+               bg-white hover:bg-gray-200 rounded-full shadow-md z-50">
+        ×
+      </button>
+
+      <div id="modal-content"></div>
+    </div>
+  </div>
 </div>
-</div>
+
 <div id="cart-toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0 z-50">
 Added to Cart!
 </div>
@@ -1187,6 +1188,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
