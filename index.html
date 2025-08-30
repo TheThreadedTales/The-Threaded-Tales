@@ -130,17 +130,6 @@
   opacity: 0;
   transform: translateX(-100%);
 }
-.product-card {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease-in-out;
-}
-
-.product-card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
 100% { transform: translateX(0); opacity: 0.25; }
@@ -508,12 +497,6 @@ Added to Cart!
   <!-- Products Grid -->
 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
-<!-- Toggle Button -->
-<div class="flex justify-center mt-6">
-  <button id="toggle-products-btn" class="px-6 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition hidden">
-    Show More
-  </button>
-</div>
 <!-- Artisans Section -->
 <section class="py-16 bg-gray-50 px-6 md:px-20" id="artisans">
 <div class="text-center mb-10">
@@ -1199,68 +1182,5 @@ sortSelect.addEventListener("change", () => {
   loadProducts(sortedProducts); // re-render products
 });
 </script>
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const productGrid = document.getElementById("product-grid");
-  const maxVisible = 10;
-  let showingAll = false;
-
-  // Function to render products with slicing
-  function renderProducts(products) {
-    productGrid.innerHTML = "";
-    const visibleProducts = showingAll ? products : products.slice(0, maxVisible);
-
-    visibleProducts.forEach(product => {
-      const productCard = createProductCard(product); // your existing card creator
-      productGrid.appendChild(productCard);
-    });
-  }
-
-  // Function to create toggle button dynamically
-  function createToggleButton(products) {
-    let toggleBtn = document.getElementById("toggle-products-btn");
-
-    if (!toggleBtn) {
-      toggleBtn = document.createElement("button");
-      toggleBtn.id = "toggle-products-btn";
-      toggleBtn.className =
-        "mt-6 mx-auto block px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition";
-      productGrid.insertAdjacentElement("afterend", toggleBtn);
-    }
-
-    // Update button text
-    toggleBtn.textContent = showingAll ? "Show Less" : "Show More";
-
-    // Show button only if products > maxVisible
-    toggleBtn.style.display = products.length > maxVisible ? "block" : "none";
-
-    toggleBtn.onclick = () => {
-      showingAll = !showingAll;
-      renderProducts(products);
-      createToggleButton(products);
-      smoothScroll(productGrid); // smooth scroll animation when toggling
-    };
-  }
-
-  // Smooth scroll effect
-  function smoothScroll(target) {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  // Assume you already load products from JSON → update this part
-  fetch("products.json")
-    .then(res => res.json())
-    .then(data => {
-      allProducts = data; // store globally if needed
-      renderProducts(allProducts);
-      createToggleButton(allProducts);
-    });
-});
-</script>
-
 </body>
 </html>
-
-
-
-
