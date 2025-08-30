@@ -378,8 +378,28 @@
       "washCare": " Mild Wash/Regular Wash",
       "Other Details": " WEIGHT: 1.1KG(approx.), Available in 2 Color Variants: Classic Blue, Classic Dark Orange, Ideal for Gifting and Daily Use."
     }
+  },
+  {
+    "id": 20,
+    "category": "BEDSHEETS",
+    "name": " King Sized Elastic Fitted Feather Bedsheet",
+    "price": 900,
+    "images": [
+      "images/feather1.jpeg",
+      "images/feather2.jpeg",
+      "images/feather3.jpeg",
+      "images/feather4.jpeg"
+    ],
+    "description": "Upgrade your Beddings and Save your time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
+    "details": {
+      "fabric": "Pure Cotton",
+      "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.1KG(approx.), Rich In Look, Ideal for Gifting and Daily Use."
+    }
   }
 ]
+
 
 
 
