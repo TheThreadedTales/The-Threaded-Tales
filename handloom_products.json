@@ -23,6 +23,25 @@
     }
   },
   {
+    "id": 2,
+    "category": "BEDSHEETS",
+    "name": " Kids Unicorn Printed Elastic Fitted Bedsheet",
+    "price": 900,
+    "images": [
+      "images/kids1.jpeg",
+      "images/kids2.jpeg",
+      "images/kids3.jpeg",
+      "images/kids4.jpeg"
+    ],
+    "description": "Unlock the new wave of joy of your kids with High Quality Unicorn Printed elastic fitted premium bedsheet which comes with 2 Pillow Covers. ",
+    "details": {
+      "fabric": "Superior Quality Cotton",
+      "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.1KG(approx.), Perfect for Kids, High quality Printing and Bedsheet, Rich In Softness, Ideal for Gifting and Daily Use."
+    }
+  },
+  {
     "id": 3,
     "category": "COMFORTERS",
     "name": "Kids Single Bed Comforter(5 Variants Available)",
@@ -456,8 +475,31 @@
       "washCare": "Machine washable with Mild Detergent",
       "Other Details": "Weight: 250gm's per Mat, Available in 4 Patterns, Ideal for :Dinner Table, bedroom desktop, dining room tabletops, bathroom sink, office, Premium Quality."
     }
-  }
+  },
+  {
+    "id": 24,
+    "category": "BEDSHEETS",
+    "name": " Royal Elastic Fitted Bedsheet",
+    "price": 900,
+    "images": [
+      "images/royal1.jpeg",
+      "images/royal2.jpeg",
+      "images/royal3.jpeg",
+      "images/royal4.jpeg",
+      "images/royal5.jpeg",
+      "images/royal6.jpeg",
+      "images/royal7.jpeg"
+    ],
+    "description": "Cherish your Bedroom with Royal Elastic Fitted Bedsheet. Save your time and evironment with environment friendly and Animal Cruelty Free Elastic King Sized Bedsheet Ensemble which comes with 2 Pillow Covers. ",
+    "details": {
+      "fabric": "Pure Cotton",
+      "dimensions": " 72 X 78 X 10 In. for Bedsheet, 28 X 18 In. for pillow covers.",
+      "washCare": " Mild Wash/Regular Wash",
+      "Other Details": " WEIGHT: 1.1KG(approx.), Available in 2 Color Variants: Royal Navy Blue, Royal Navy Maroon, Ideal for Gifting and Daily Use."
+    }
+  },
 ]
+
 
 
 
