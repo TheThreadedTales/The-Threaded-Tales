@@ -482,8 +482,8 @@
     "name": " Royal Elastic Fitted Bedsheet",
     "price": 900,
     "images": [
-      "images/royal1.jpeg",
       "images/royal2.jpeg",
+      "images/royal1.jpeg",
       "images/royal3.jpeg",
       "images/royal4.jpeg",
       "images/royal5.jpeg",
@@ -497,8 +497,49 @@
       "washCare": " Mild Wash/Regular Wash",
       "Other Details": " WEIGHT: 1.1KG(approx.), Available in 2 Color Variants: Royal Navy Blue, Royal Navy Maroon, Ideal for Gifting and Daily Use."
     }
+  },
+  {
+    "id": 25,
+    "category": "COMFORTERS",
+    "name": "Minimalist Double Bed Comforter(2 Variants Available)",
+    "price": 2400,
+    "images": [
+      "images/comf1.jpeg",
+      "images/comf2.jpeg",
+      "images/comf3.jpeg",
+      "images/comf4.jpeg",
+      "images/comf5.jpeg"
+    ],
+    "description": "Glace Cotton Super Soft Single Bed Comforter for Kids with attractive 5 different designs.",
+    "details": {
+      "fabric": "Premium Microfiber",
+      "dimensions": "95 x 85 inches",
+      "washCare": "Machine washable",
+      "Other Details": " Weight: 1.3KG(Approx), Available in 2 Designs, Ultra Soft for more comfort, Premium Quality, Ideal for Gifting, Comes with luxurious packaging."
+    }
+  },
+  {
+    "id": 26,
+    "category": "COMFORTERS",
+    "name": "Free Designed Double Bed Comforter(2 Variants Available)",
+    "price": 2300,
+    "images": [
+      "images/comd1.jpeg",
+      "images/comd2.jpeg",
+      "images/comd3.jpeg",
+      "images/comd4.jpeg",
+      "images/comd5.jpeg"
+    ],
+    "description": "Glace Cotton Super Soft Single Bed Comforter for Kids with attractive 5 different designs.",
+    "details": {
+      "fabric": "Premium Microfiber",
+      "dimensions": "95 x 85 inches",
+      "washCare": "Machine washable",
+      "Other Details": " Weight: 1.3KG(Approx), Available in 2 Designs, Ultra Soft for more comfort, Premium Quality, Ideal for Gifting, Comes with luxurious packaging."
+    }
   }
 ]
+
 
 
 
