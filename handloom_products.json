@@ -460,7 +460,7 @@
   {
     "id": 23,
     "category": "Table Mats",
-    "name": "Rangoli Round Jute Table Mat(2 Pcs.)",
+    "name": "Exclusive Rangoli Round Jute Table Mat(2 Pcs.)",
     "price": 700,
     "images": [
       "images/rangoli1.jpeg",
@@ -468,7 +468,7 @@
       "images/rangoli3.jpeg",
       "images/rangoli4.jpeg"
     ],
-    "description": "Evironment Friendly and Animal Cruently Free Jute based Table Mats.",
+    "description": "Evironment Friendly and Animal Cruently Free Exclusive and ambient Jute based Table Mats.",
     "details": {
       "fabric": "Pure Jute upskilling your interior game",
       "dimensions": "15 inches in diameter",
@@ -539,6 +539,7 @@
     }
   }
 ]
+
 
 
 
