@@ -271,20 +271,17 @@ function openModal(product) {
   document.getElementById("modal-main-image").src = product.images[0];
   document.getElementById("modal-title").textContent = product.name;
   document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
-  document.getElementById("modal-description").innerHTML = `
-  <p class="text-gray-700 mb-3">${product.description}</p>
-
-  <p class="text-sm text-gray-600"><span class="font-semibold">Fabric:</span> ${product.fabric || "-"}</p>
-  <p class="text-sm text-gray-600"><span class="font-semibold">Dimensions:</span> ${product.dimensions || "-"}</p>
-  <p class="text-sm text-gray-600 mb-3"><span class="font-semibold">Wash Care:</span> ${product.washCare || "-"}</p>
-
-  ${
-    product.features
-      ? `<ul class="list-disc list-inside mb-4 text-gray-700">
-           ${product.features.map(f => `<li>${f}</li>`).join("")}
-         </ul>`
-      : ""
-  }
+  // Product description
+document.getElementById("modal-description").innerHTML = `
+  <p class="mb-2">${product.description}</p>
+  <ul class="list-disc pl-5 text-gray-700">
+    ${product.details ? `
+      <li><strong>Fabric:</strong> ${product.details.fabric || ""}</li>
+      <li><strong>Dimensions:</strong> ${product.details.dimensions || ""}</li>
+      <li><strong>Wash Care:</strong> ${product.details.washCare || ""}</li>
+      <li><strong>Other Details:</strong> ${product.details["Other Details"] || ""}</li>
+    ` : ""}
+  </ul>
 `;
 
   document.getElementById("modal-quantity").textContent = 1;
