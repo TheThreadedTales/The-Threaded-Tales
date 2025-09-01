@@ -272,6 +272,7 @@ function openModal(product) {
   document.getElementById("modal-title").textContent = product.name;
   document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
   // Product description
+// Product description + details
 document.getElementById("modal-description").innerHTML = `
   <p class="mb-2">${product.description}</p>
   <ul class="list-disc pl-5 text-gray-700">
@@ -279,7 +280,14 @@ document.getElementById("modal-description").innerHTML = `
       <li><strong>Fabric:</strong> ${product.details.fabric || ""}</li>
       <li><strong>Dimensions:</strong> ${product.details.dimensions || ""}</li>
       <li><strong>Wash Care:</strong> ${product.details.washCare || ""}</li>
-      <li><strong>Other Details:</strong> ${product.details["Other Details"] || ""}</li>
+      <li><strong>Other Details:</strong>
+        <ul class="list-disc pl-5">
+          ${(product.details["Other Details"] || "")
+            .split(",")
+            .map(d => `<li>${d.trim()}</li>`)
+            .join("")}
+        </ul>
+      </li>
     ` : ""}
   </ul>
 `;
