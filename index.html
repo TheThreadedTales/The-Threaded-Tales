@@ -639,31 +639,32 @@ Privacy Policy
 
 <!-- Right: Product Info -->
 <div>
-<h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
-<p id="modal-product-description" class="text-gray-800 mb-4"></p>
+  <h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
+  <p id="modal-product-description" class="text-gray-800 mb-4"></p>
 
-<div class="text-lg font-semibold text-green-600" id="modal-product-price"></div>
-<div class="text-gray-500 line-through text-sm mb-3" id="modal-product-original-price"></div>
+  <!-- ✅ Price block -->
+  <div class="text-lg font-semibold text-green-600" id="modal-product-price"></div>
+  <div class="text-gray-500 line-through text-sm mb-3" id="modal-product-original-price"></div>
 
-<ul class="text-sm space-y-1 mb-4">
-<li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
-<li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
-<li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
-</ul>
+  <!-- ✅ Quantity Selector + Add to Cart immediately after price -->
+  <div class="flex items-center justify-between gap-4 my-4">
+    <div class="flex items-center space-x-4">
+      <button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
+      <span id="product-quantity" class="px-4 text-lg font-medium">1</span>
+      <button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
+    </div>
 
-<!-- ✅ Quantity Selector -->
-<div class="flex items-center justify-start space-x-4 my-4">
-<button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
-<span id="product-quantity" class="px-4 text-lg font-medium">1</span>
-<button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
-</div>
+    <button id="modal-add-to-cart" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
+      Add to Cart
+    </button>
+  </div>
 
-<button id="modal-add-to-cart" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
-  Add to Cart
-</button>
-</div>
-</div>
-</div>
+  <!-- ✅ Details list stays below -->
+  <ul class="text-sm space-y-1 mb-4">
+    <li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
+    <li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
+    <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
+  </ul>
 </div>
 
 </div>
@@ -1191,4 +1192,5 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
