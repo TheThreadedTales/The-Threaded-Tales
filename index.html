@@ -931,18 +931,25 @@ modalContent.innerHTML = `
               <p class="text-sm text-gray-600 mt-1">${description}</p>
               <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
               <div class="mt-4 text-sm space-y-1">
-              <p><strong>Fabric:</strong> ${details.fabric || 'N/A'}</p>
-             <p><strong>Dimensions:</strong> ${details.dimensions || 'N/A'}</p>
-             <p><strong>Wash Care:</strong> ${details.washCare || 'N/A'}</p>
+              <div class="mt-4 text-sm space-y-1 text-gray-800">
+  <p><span class="font-semibold">Fabric:</span> ${details.fabric || 'N/A'}</p>
+  <p><span class="font-semibold">Dimensions:</span> ${details.dimensions || 'N/A'}</p>
+  <p><span class="font-semibold">Wash Care:</span> ${details.washCare || 'N/A'}</p>
 
-             ${
-             details["Other Details"]
-             ? `<div><strong>Other Features:</strong><ul class="list-disc list-inside text-gray-600 mt-1">` +
-              details["Other Details"].split(',').map(item => `<li>${item.trim()}</li>`).join('') +
-             `</ul></div>`
-            : ''
-             }
-             </div>
+  ${
+    details["Other Details"]
+    ? `<div><span class="font-semibold">Other Details:</span>
+        <ul class="list-disc list-inside text-gray-700 mt-1">
+          ${
+            details["Other Details"].split(',')
+              .map(item => `<li>${item.trim()}</li>`)
+              .join('')
+          }
+        </ul>
+      </div>`
+    : ''
+  }
+</div>
 
               <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
   Add To Cart
@@ -1049,7 +1056,7 @@ observer.observe(el);
 <script>
 
 // Set the deadline (change date as needed)
-const deadline = new Date("2025-08-31T23:59:59").getTime();
+const deadline = new Date("2025-09-07T23:59:59").getTime();
 
 const countdownInterval = setInterval(() => {
 const now = new Date().getTime();
@@ -1184,3 +1191,4 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
