@@ -270,7 +270,7 @@ function openModal(product) {
 
   document.getElementById("modal-main-image").src = product.images[0];
   document.getElementById("modal-title").textContent = product.name;
-  document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-yellow-600 font-bold">₹${Math.floor(product.price/2)}</span>`;
+  document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-green-700 font-bold">₹${Math.floor(product.price/2)}</span>`;
   // Product description
 // Product description + details
 document.getElementById("modal-description").innerHTML = `
