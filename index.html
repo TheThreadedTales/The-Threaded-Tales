@@ -643,20 +643,20 @@ Privacy Policy
   <p id="modal-product-description" class="text-gray-800 mb-4"></p>
 
   <!-- ✅ Price block -->
-  <div class="flex items-center space-x-2 mb-2">
+  <div class="flex items-center space-x-2 mb-4">
     <span id="modal-product-price" class="text-lg font-semibold text-green-600"></span>
     <span id="modal-product-original-price" class="text-gray-500 line-through text-sm"></span>
   </div>
 
-  <!-- ✅ Quantity Selector + Add to Cart (moved here) -->
-  <div class="flex items-center justify-between gap-4 mb-4">
+  <!-- ✅ Quantity Selector + Add to Cart (below price, more spacing) -->
+  <div class="flex items-center justify-between gap-6 mb-6">
     <div class="flex items-center space-x-4">
       <button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
       <span id="product-quantity" class="px-4 text-lg font-medium">1</span>
       <button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
     </div>
 
-    <button id="modal-add-to-cart" class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
+    <button id="modal-add-to-cart" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
       Add to Cart
     </button>
   </div>
@@ -668,7 +668,6 @@ Privacy Policy
     <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
   </ul>
 </div>
-
 
 </div>
   <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
@@ -1195,6 +1194,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
