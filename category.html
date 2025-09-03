@@ -442,6 +442,19 @@ document.getElementById("checkout").onclick = () => {
   cart.forEach(i => msg += `${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
   window.open("https://wa.me/919671850555?text=" + msg, "_blank");
 };
+ // Close modal when clicking outside product modal content
+document.getElementById("product-modal").addEventListener("click", function(e) {
+  if (e.target === this) {
+    this.classList.add("hidden");
+  }
+});
+
+// Close modal when clicking outside cart modal content
+document.getElementById("cart-modal").addEventListener("click", function(e) {
+  if (e.target === this) {
+    this.classList.add("hidden");
+  }
+});
 </script>
 
 </body>
