@@ -146,84 +146,92 @@
 
 
     <!-- ✅ Product Details Modal -->
-  <!-- ✅ Product Details Modal -->
-<!-- ✅ Product Details Modal -->
+<!-- ✅ Product Modal -->
 <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
   <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">  
     <!-- FIXED CLOSE BUTTON -->
-   <!-- FIXED CLOSE BUTTON -->
-<button id="close-modal" 
+    <button id="close-modal" 
         class="fixed md:absolute top-4 right-4 w-10 h-10 flex items-center justify-center 
                text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
-  ×
-</button>
+      ×
+    </button>
+
     <!-- Prevent horizontal scroll -->
     <div class="grid md:grid-cols-2 gap-6 overflow-x-hidden">
         <!-- Left: Image Gallery -->
         <div class="relative">
           <img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
           <button id="prev-image" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
-&#10094;
-</button>
+            &#10094;
+          </button>
           <button id="next-image" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
-&#10095;
-</button>
-         <!-- ✅ Scrollable thumbnail slider -->
-<div class="relative mt-2">
-  <!-- Left arrow -->
-  <button type="button" 
-          onclick="scrollThumbnails(-1)" 
-          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
-    &#10094;
-  </button>
+            &#10095;
+          </button>
 
-  <!-- Thumbnails wrapper -->
-  <div id="modal-thumbnails" 
-       class="flex space-x-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth">
-    <!-- thumbnails injected dynamically -->
-  </div>
+          <!-- ✅ Scrollable thumbnail slider -->
+          <div class="relative mt-2">
+            <!-- Left arrow -->
+            <button type="button" 
+                    onclick="scrollThumbnails(-1)" 
+                    class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+              &#10094;
+            </button>
 
-  <!-- Right arrow -->
-  <button type="button" 
-          onclick="scrollThumbnails(1)" 
-          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
-    &#10095;
-  </button>
-</div>
+            <!-- Thumbnails wrapper -->
+            <div id="modal-thumbnails" 
+                 class="flex space-x-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth">
+              <!-- thumbnails injected dynamically -->
+            </div>
 
+            <!-- Right arrow -->
+            <button type="button" 
+                    onclick="scrollThumbnails(1)" 
+                    class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+              &#10095;
+            </button>
+          </div>
         </div>
+
         <!-- Right: Product Info -->
-       <div>
-  <h3 id="modal-title" class="text-2xl font-bold"></h3>
-  <p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
+        <div>
+          <h3 id="modal-title" class="text-2xl font-bold"></h3>
+          <p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
 
-  <!-- ✅ Grouped quantity + button -->
-  <div class="flex items-center space-x-4 mt-4">
-    <div class="flex items-center space-x-2">
-      <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
-      <span id="modal-quantity">1</span>
-      <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
+          <!-- ✅ Grouped quantity + button -->
+          <div class="flex items-center space-x-4 mt-4">
+            <div class="flex items-center space-x-2">
+              <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
+              <span id="modal-quantity">1</span>
+              <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
+            </div>
+
+            <button id="add-to-cart" class="add-to-cart px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+              Add to Cart
+            </button>
+          </div>
+
+          <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
+        </div>
     </div>
+  </div>
+</div> <!-- ✅ Product modal fully closed here -->
 
-    <button id="add-to-cart" class="add-to-cart px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-      Add to Cart
+
+<!-- ✅ Cart Modal moved OUTSIDE -->
+<div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+    <button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
+    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+    <div id="cart-items" class="space-y-4"></div>
+    <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
+    <button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+      Checkout on WhatsApp
     </button>
   </div>
-
-  <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
 </div>
 
-  <!-- ✅ Cart Modal -->
-  <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-      <button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
-      <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-      <div id="cart-items" class="space-y-4"></div>
-      <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
-      <button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">Checkout on WhatsApp</button>
-      </div>
-    </div>
-<!-- ✅ Toast (centered, works with your current JS) -->
+
+<!-- ✅ Toast stays outside both modals -->
 <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 
   bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50">
   Added to cart!
