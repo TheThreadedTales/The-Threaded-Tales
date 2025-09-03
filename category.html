@@ -454,6 +454,12 @@ document.getElementById("checkout").onclick = () => {
 document.getElementById("product-modal").addEventListener("click", function(e) {
   if (e.target === this) {
     this.classList.add("hidden");
+// Close modal when clicking outside cart modal content
+document.getElementById("cart-modal").addEventListener("click", function(e) {
+  if (e.target === this) {
+    this.classList.add("hidden");
+  }
+});
   }
 });
 
