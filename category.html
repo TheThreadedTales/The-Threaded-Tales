@@ -18,6 +18,15 @@
   0% { transform: translateX(0%); }
   100% { transform: translateX(-100%); }
 }  
+  /* ✅ Hide scrollbar for thumbnail slider */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome/Safari */
+}
+
  </style>
   <!-- Launch Offer Banner -->
   <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
@@ -159,7 +168,29 @@
           <button id="next-image" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
 &#10095;
 </button>
-          <div id="modal-thumbnails" class="flex mt-2 space-x-2"></div>
+         <!-- ✅ Scrollable thumbnail slider -->
+<div class="relative mt-2">
+  <!-- Left arrow -->
+  <button type="button" 
+          onclick="scrollThumbnails(-1)" 
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+    &#10094;
+  </button>
+
+  <!-- Thumbnails wrapper -->
+  <div id="modal-thumbnails" 
+       class="flex space-x-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth">
+    <!-- thumbnails injected dynamically -->
+  </div>
+
+  <!-- Right arrow -->
+  <button type="button" 
+          onclick="scrollThumbnails(1)" 
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+    &#10095;
+  </button>
+</div>
+
         </div>
         <!-- Right: Product Info -->
        <div>
@@ -329,6 +360,11 @@ document.getElementById("next-image").onclick = () => {
     document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
   }
 };
+// ✅ Thumbnail scroll arrows
+function scrollThumbnails(direction) {
+  const slider = document.getElementById("modal-thumbnails");
+  slider.scrollBy({ left: direction * 120, behavior: "smooth" });
+}
 
    // Cart functions
 function updateCart() {
