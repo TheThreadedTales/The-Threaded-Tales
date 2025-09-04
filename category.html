@@ -396,10 +396,10 @@ function updateCart() {
         <h4 class="font-semibold">${item.name}</h4>
         <p>₹${discounted} x ${item.qty} = ₹${discounted * item.qty}</p>
         <div class="flex items-center space-x-2 mt-2">
-          <button class="px-2 py-1 bg-gray-200 rounded decrease-qty" data-id="${item.id}">-</button>
+          <button class="px-2 py-1 bg-gray-200 rounded decrease-qty" data-name="${item.name}">-</button>
           <span>${item.qty}</span>
-          <button class="px-2 py-1 bg-gray-200 rounded increase-qty" data-id="${item.id}">+</button>
-          <button class="text-red-500 ml-4 remove-item" data-id="${item.id}">Remove</button>
+          <button class="px-2 py-1 bg-gray-200 rounded increase-qty" data-name="${item.name}">+</button>
+          <button class="text-red-500 ml-4 remove-item" data-name="${item.name}">Remove</button>
         </div>
       </div>
     `;
@@ -414,11 +414,11 @@ function updateCart() {
     document.getElementById("cart-count").classList.toggle("hidden", cart.length === 0);
   }
 
-  // ✅ Attach events for + / - and remove buttons
+  // ✅ Attach events
   document.querySelectorAll(".increase-qty").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      const product = cart.find(p => p.id === id);
+      const name = btn.getAttribute("data-name");
+      const product = cart.find(p => p.name === name);
       if (product) {
         product.qty++;
         updateCart();
@@ -428,12 +428,12 @@ function updateCart() {
 
   document.querySelectorAll(".decrease-qty").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      const product = cart.find(p => p.id === id);
+      const name = btn.getAttribute("data-name");
+      const product = cart.find(p => p.name === name);
       if (product && product.qty > 1) {
         product.qty--;
       } else {
-        cart = cart.filter(p => p.id !== id);
+        cart = cart.filter(p => p.name !== name);
       }
       updateCart();
     });
@@ -441,8 +441,8 @@ function updateCart() {
 
   document.querySelectorAll(".remove-item").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      cart = cart.filter(item => item.id !== id);
+      const name = btn.getAttribute("data-name");
+      cart = cart.filter(item => item.name !== name);
       updateCart();
     });
   });
