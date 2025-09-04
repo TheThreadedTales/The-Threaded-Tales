@@ -378,25 +378,76 @@ function scrollThumbnails(direction) {
   slider.scrollBy({ left: direction * 120, behavior: "smooth" });
 }
 
-   // Cart functions
+ // Cart functions
 function updateCart() {
   const cartItems = document.getElementById("cart-items");
   cartItems.innerHTML = "";
   let total = 0;
+
   cart.forEach(item => {
-    const discounted = Math.floor(item.price/2);
+    const discounted = Math.floor(item.price / 2);
     total += discounted * item.qty;
+
     const div = document.createElement("div");
-    div.className="flex justify-between items-center border-b pb-2";
-    div.innerHTML = `<span>${item.name} x${item.qty}</span><span>₹${discounted*item.qty}</span>`;
+    div.className = "flex justify-between items-center border-b pb-4";
+
+    div.innerHTML = `
+      <div>
+        <h4 class="font-semibold">${item.name}</h4>
+        <p>₹${discounted} x ${item.qty} = ₹${discounted * item.qty}</p>
+        <div class="flex items-center space-x-2 mt-2">
+          <button class="px-2 py-1 bg-gray-200 rounded decrease-qty" data-id="${item.id}">-</button>
+          <span>${item.qty}</span>
+          <button class="px-2 py-1 bg-gray-200 rounded increase-qty" data-id="${item.id}">+</button>
+          <button class="text-red-500 ml-4 remove-item" data-id="${item.id}">Remove</button>
+        </div>
+      </div>
+    `;
+
     cartItems.appendChild(div);
-    });
-  document.getElementById("cart-total").textContent = "Total: ₹"+total;
-  if(document.getElementById("cart-count")){
+  });
+
+  document.getElementById("cart-total").textContent = "Total: ₹" + total;
+
+  if (document.getElementById("cart-count")) {
     document.getElementById("cart-count").textContent = cart.length;
-    document.getElementById("cart-count").classList.toggle("hidden", cart.length===0);
+    document.getElementById("cart-count").classList.toggle("hidden", cart.length === 0);
   }
-  }
+
+  // ✅ Attach events for + / - and remove buttons
+  document.querySelectorAll(".increase-qty").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      const product = cart.find(p => p.id === id);
+      if (product) {
+        product.qty++;
+        updateCart();
+      }
+    });
+  });
+
+  document.querySelectorAll(".decrease-qty").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      const product = cart.find(p => p.id === id);
+      if (product && product.qty > 1) {
+        product.qty--;
+      } else {
+        cart = cart.filter(p => p.id !== id);
+      }
+      updateCart();
+    });
+  });
+
+  document.querySelectorAll(".remove-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    });
+  });
+}
+
 // Toast
 function showToast() {
   const toast = document.getElementById("toast");
