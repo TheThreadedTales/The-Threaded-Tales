@@ -796,6 +796,12 @@ document.getElementById("product-modal").classList.add("hidden");
 document.getElementById("modal-content").innerHTML = "";
 }
 });
+// ✅ Close cart modal when clicking outside its content
+document.getElementById("cart-modal").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("cart-modal")) {
+    document.getElementById("cart-modal").classList.add("hidden");
+  }
+});
 async function loadProducts() {
 try {
 const response = await fetch('./handloom_products.json');
@@ -1199,6 +1205,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
