@@ -1,254 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Category - The Threaded Tales</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Category - The Threaded Tales</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
- <style>
+<style>
 .marquee {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-marquee 15s linear infinite;
-  white-space: nowrap;
+display: inline-block;
+padding-left: 100%;
+animation: scroll-marquee 15s linear infinite;
+white-space: nowrap;
 }
- @keyframes scroll-marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+@keyframes scroll-marquee {
+0% { transform: translateX(0%); }
+100% { transform: translateX(-100%); }
 }  
-  /* ✅ Hide scrollbar for thumbnail slider */
+/* ✅ Hide scrollbar for thumbnail slider */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: none;     /* Firefox */
+-ms-overflow-style: none;  /* IE/Edge */
+scrollbar-width: none;     /* Firefox */
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;             /* Chrome/Safari */
+display: none;             /* Chrome/Safari */
 }
 
- </style>
-  <!-- Launch Offer Banner -->
-  <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
-    <div class="marquee whitespace-nowrap font-semibold text-lg">
-      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;
-      🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
-    </div>
-  </div>
+</style>
+<!-- Launch Offer Banner -->
+<div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
+<div class="marquee whitespace-nowrap font-semibold text-lg">
+🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉 &nbsp;&nbsp;
+🎉 Launch Offer: Flat 50% Off on All Products for a Limited Time! 🎉
+</div>
+</div>
 
-  <!-- ✅ Updated Navbar from index.html -->
-  <nav class="w-full bg-white shadow-md sticky top-10 z-40">
-    <div class="max-w-6xl mx-auto px-2 py-1 text-gray-800">
-      <!-- Desktop layout -->
-      <div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
-        <!-- Left: Section Links -->
-        <div class="flex justify-start gap-2 relative">
-           <a href="index.html" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">← Back to Home</a>
+<!-- ✅ Updated Navbar from index.html -->
+<nav class="w-full bg-white shadow-md sticky top-10 z-40">
+<div class="max-w-6xl mx-auto px-2 py-1 text-gray-800">
+<!-- Desktop layout -->
+<div class="hidden md:grid grid-cols-3 items-center text-sm md:text-base font-normal relative">
+<!-- Left: Section Links -->
+<div class="flex justify-start gap-2 relative">
+<a href="index.html" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">← Back to Home</a>
 
-          <!-- Our Products with dropdown -->
-          <div class="relative group">
-            <a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-              Our Products
-            </a>
-            <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-              <a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-              <a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-              <a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-              <a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-              <a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-              <a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-            </div>
-          </div>
+<!-- Our Products with dropdown -->
+<div class="relative group">
+<a href="#products" class="px-3 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
+<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
+<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
 
-        </div>
+</div>
 
-        <!-- Center: Logo -->
-        <div class="flex flex-col items-center text-center">
-          <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-          <span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
-        </div>
+<!-- Center: Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+<span class="text-xs md:text-sm tracking-wide text-gray-600">THE THREADED TALES</span>
+</div>
 
-        <!-- Right: Reviews, Search, Contact -->
-        <div class="flex justify-end gap-4">
-          <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-            </svg>
-          </button>
-          <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
-          <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
-        </div>
-      </div>
+<!-- Right: Reviews, Search, Contact -->
+<div class="flex justify-end gap-4">
+<button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+</svg>
+</button>
+<a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
+<a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
+</div>
+</div>
 
-      <!-- Mobile layout -->
-      <div class="flex md:hidden justify-between items-center">
-        <!-- Our Products -->
-        <div class="relative group">
-          <a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
-            Our Products
-          </a>
-          <div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
-            <a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
-            <a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
-            <a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
-            <a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
-            <a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
-            <a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
-          </div>
-        </div>
+<!-- Mobile layout -->
+<div class="flex md:hidden justify-between items-center">
+<!-- Our Products -->
+<div class="relative group">
+<a href="#products" class="px-2 py-1 hover:bg-gray-200 transition rounded-none inline-block">
+Our Products
+</a>
+<div class="absolute left-0 mt-1 w-44 bg-white shadow-lg rounded-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
+<a href="category.html?category=BEDSHEETS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Bedsheets</a>
+<a href="category.html?category=DOORMATS%20%26%20RUGS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Doormats & Rugs</a>
+<a href="category.html?category=COMFORTERS" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Comforters</a>
+<a href="category.html?category=Table%20Mats" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Table Mats</a>
+<a href="category.html?category=HandBags" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Hand Bags</a>
+<a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
+</div>
+</div>
 
-        <!-- Logo -->
-        <div class="flex flex-col items-center text-center">
-          <img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
-        </div>
+<!-- Logo -->
+<div class="flex flex-col items-center text-center">
+<img src="images/logo.jpeg" alt="Logo" class="h-7 mb-1" />
+</div>
 
-        <!-- 🔍 Search Icon (Mobile replaces Contact) -->
-        <button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
+<!-- 🔍 Search Icon (Mobile replaces Contact) -->
+<button id="searchMobile" class="px-2 py-1 hover:bg-gray-200 transition rounded-none">🔍</button>
 
-        <!-- Toggle -->
-        <button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
-        ☰
-        </button>
-      </div>
+<!-- Toggle -->
+<button id="mobileMenuToggle" class="px-2 py-1 border border-gray-100 rounded-none text-3xl leading-none">
+☰
+</button>
+</div>
 
-      <!-- Mobile menu hidden initially -->
-      <div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
-        <a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
-        <a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
-      </div>
-    </div>
-  </nav>
+<!-- Mobile menu hidden initially -->
+<div id="mobileMenu" class="hidden md:hidden flex-col mt-2 space-y-2">
+<a href="#reviews" class="block px-3 py-1 hover:bg-gray-200">Reviews</a>
+<a href="#contact" class="block px-3 py-1 hover:bg-gray-200">Contact Us</a>
+</div>
+</div>
+</nav>
 
-  <script>
-  document.getElementById("mobileMenuToggle").addEventListener("click", function() {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  });
-  </script>
+<script>
+document.getElementById("mobileMenuToggle").addEventListener("click", function() {
+document.getElementById("mobileMenu").classList.toggle("hidden");
+});
+</script>
 <!-- Floating Cart Button -->
 <button id="cart-button" 
-  class="fixed bottom-5 right-5 bg-black text-white p-4 rounded-full shadow-lg">
-  🛒 <span id="cart-count" class="ml-1 bg-white text-yellow-600 px-2 py-0.5 rounded-full text-sm">0</span>
+class="fixed bottom-5 right-5 bg-black text-white p-4 rounded-full shadow-lg">
+🛒 <span id="cart-count" class="ml-1 bg-white text-yellow-600 px-2 py-0.5 rounded-full text-sm">0</span>
 </button>
 
 
-  <!-- Page Header -->
-  <section class="pt-12 pb-6 text-center">
-    <h2 id="category-title" class="text-3xl font-bold mt-2"></h2>
-  </section>
+<!-- Page Header -->
+<section class="pt-12 pb-6 text-center">
+<h2 id="category-title" class="text-3xl font-bold mt-2"></h2>
+</section>
 
-  <!-- Products Section -->
- <!-- Products Section -->
+<!-- Products Section -->
+<!-- Products Section -->
 <!-- Products Section -->
 <!-- Products Section -->
 <section id="products" class="grid grid-cols-2 md:grid-cols-4 gap-0 border-4 border-gray-200 px-2 py-6">
-  <!-- Products injected dynamically -->
+<!-- Products injected dynamically -->
 </section>
 
 
-    <!-- ✅ Product Details Modal -->
+<!-- ✅ Product Details Modal -->
 <!-- ✅ Product Modal -->
 <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">  
-    <!-- FIXED CLOSE BUTTON -->
-    <button id="close-modal" 
-        class="fixed md:absolute top-4 right-4 w-10 h-10 flex items-center justify-center 
-               text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
-      ×
-    </button>
+<div class="bg-white rounded-lg shadow-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">  
+<!-- FIXED CLOSE BUTTON -->
+<button id="close-modal" 
+class="fixed md:absolute top-4 right-4 w-10 h-10 flex items-center justify-center 
+              text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
+×
+</button>
 
-    <!-- Prevent horizontal scroll -->
-    <div class="grid md:grid-cols-2 gap-6 overflow-x-hidden">
-        <!-- Left: Image Gallery -->
-        <div class="relative">
-          <img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
-          <button id="prev-image" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
-            &#10094;
-          </button>
-          <button id="next-image" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
-            &#10095;
-          </button>
+<!-- Prevent horizontal scroll -->
+<div class="grid md:grid-cols-2 gap-6 overflow-x-hidden">
+<!-- Left: Image Gallery -->
+<div class="relative">
+<img id="modal-main-image" src="" alt="" class="w-full h-96 object-contain rounded-lg cursor-zoom-in">
+<button id="prev-image" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
+&#10094;
+</button>
+<button id="next-image" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow hover:bg-gray-200">
+&#10095;
+</button>
 
-          <!-- ✅ Scrollable thumbnail slider -->
-          <div class="relative mt-2">
-            <!-- Left arrow -->
-            <button type="button" 
-                    onclick="scrollThumbnails(-1)" 
-                    class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
-              &#10094;
-            </button>
+<!-- ✅ Scrollable thumbnail slider -->
+<div class="relative mt-2">
+<!-- Left arrow -->
+<button type="button" 
+onclick="scrollThumbnails(-1)" 
+class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+&#10094;
+</button>
 
-            <!-- Thumbnails wrapper -->
-            <div id="modal-thumbnails" 
-                 class="flex space-x-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth">
-              <!-- thumbnails injected dynamically -->
-            </div>
+<!-- Thumbnails wrapper -->
+<div id="modal-thumbnails" 
+class="flex space-x-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth">
+<!-- thumbnails injected dynamically -->
+</div>
 
-            <!-- Right arrow -->
-            <button type="button" 
-                    onclick="scrollThumbnails(1)" 
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
-              &#10095;
-            </button>
-          </div>
-        </div>
+<!-- Right arrow -->
+<button type="button" 
+onclick="scrollThumbnails(1)" 
+class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow rounded-full p-1 z-10">
+&#10095;
+</button>
+</div>
+</div>
 
-        <!-- Right: Product Info -->
-        <div>
-          <h3 id="modal-title" class="text-2xl font-bold"></h3>
-          <p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
+<!-- Right: Product Info -->
+<div>
+<h3 id="modal-title" class="text-2xl font-bold"></h3>
+<p id="modal-price" class="text-xl text-yellow-600 mt-2"></p>
 
-          <!-- ✅ Grouped quantity + button -->
-          <div class="flex items-center space-x-4 mt-4">
-            <div class="flex items-center space-x-2">
-              <button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
-              <span id="modal-quantity">1</span>
-              <button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
-            </div>
+<!-- ✅ Grouped quantity + button -->
+<div class="flex items-center space-x-4 mt-4">
+<div class="flex items-center space-x-2">
+<button id="decrease-qty" class="px-3 py-1 bg-gray-200">-</button>
+<span id="modal-quantity">1</span>
+<button id="increase-qty" class="px-3 py-1 bg-gray-200">+</button>
+</div>
 
-            <button id="add-to-cart" class="add-to-cart px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-              Add to Cart
-            </button>
-          </div>
+<button id="add-to-cart" class="add-to-cart px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+Add to Cart
+</button>
+</div>
 
-          <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
-          
-          <!-- ✅ Mini Cart Preview inside product modal -->
-          <div id="mini-cart" class="mt-6 border-t pt-4 hidden">
-            <h4 class="text-lg font-semibold mb-2">Your Cart</h4>
-            <div id="mini-cart-items" class="space-y-2 text-sm"></div>
-            <p id="mini-cart-total" class="font-bold mt-2">Total: ₹0</p>
-            <button id="mini-checkout" class="mt-3 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition">
-              Checkout on WhatsApp
-            </button>
-          </div>
-        </div>
-    </div>
-  </div>
+<ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
+</div>
+</div>
+</div>
 </div> <!-- ✅ Product modal fully closed here -->
 
 
 <!-- ✅ Cart Modal moved OUTSIDE -->
 <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-    <button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
-    <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-    <div id="cart-items" class="space-y-4"></div>
-    <p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
-    <div class="mb-4 p-2 text-sm text-gray-700 border-t border-gray-300">
+<div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+<button id="close-cart" class="absolute top-2 right-4 text-4xl">×</button>
+<h2 class="text-xl font-bold mb-4">Your Cart</h2>
+<div id="cart-items" class="space-y-4"></div>
+<p id="cart-total" class="font-bold mt-4">Total: ₹0</p>
+<div class="mb-4 p-2 text-sm text-gray-700 border-t border-gray-300">
 <p>🚀 2–7 days fast delivery available across India</p>
 <p>🛒 Free delivery on orders above ₹499</p>
 </div>
-    <button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-      Checkout on WhatsApp
-    </button>
-  </div>
+<button id="checkout" class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+Checkout on WhatsApp
+</button>
+</div>
 </div>
 
 
 <!-- ✅ Toast stays outside both modals -->
 <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 
-  bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50">
-  Added to cart!
+ bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50">
+Added to cart!
 </div>
 <!-- Testimonials -->
 <section id="reviews" class="py-16 px-6 md:px-20">
@@ -261,7 +251,7 @@
 <div class="bg-white shadow-lg rounded-xl p-6 text-sm text-gray-700">“Beautiful packaging and amazing story behind the products. Support local!”</div>
 </div>
 </section>
-  <!-- Contact -->
+<!-- Contact -->
 <!-- Contact Section -->
 <!-- Contact Section -->
 <section id="contact" class="py-16 px-6 md:px-20 bg-white">
@@ -323,23 +313,23 @@ errorMessage.classList.remove("hidden");
 
 <!-- ✅ Footer -->
 <footer class="bg-black text-white text-center py-6 mt-12">
-  <p class="mb-2">© 2025 The Threaded Tales. All rights reserved.</p>
-  <p class="mb-2">For Support & Queries : elleganzaemporium@gmail.com</p>
-  <div class="mt-2 text-sm flex justify-center space-x-4">
-    <span>Follow us on</span>
+<p class="mb-2">© 2025 The Threaded Tales. All rights reserved.</p>
+<p class="mb-2">For Support & Queries : elleganzaemporium@gmail.com</p>
+<div class="mt-2 text-sm flex justify-center space-x-4">
+<span>Follow us on</span>
     <a href="https://www.instagram.com/_thethreadedtales_?igsh=MWpiZWZneDdwYm51aQ==" 
-       class="underline hover:text-gray-400 transition" 
-       target="_blank" rel="noopener noreferrer">
-      Instagram
-    </a>
-    <span>|</span>
-    <a href="privacy-policy.html" class="underline hover:text-gray-400 transition">
-      Privacy Policy
-    </a>
-  </div>
+class="underline hover:text-gray-400 transition" 
+target="_blank" rel="noopener noreferrer">
+Instagram
+</a>
+<span>|</span>
+<a href="privacy-policy.html" class="underline hover:text-gray-400 transition">
+Privacy Policy
+</a>
+</div>
 </footer>
 
- <script>
+<script>
 let productsData = [];
 let currentProduct = null;
 let currentImageIndex = 0;
@@ -347,292 +337,250 @@ let cart = [];
 
 // Load products once DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  loadProducts();
+loadProducts();
 });
 
 // Fetch JSON & filter products
 async function loadProducts() {
-  const res = await fetch("handloom_products.json");
-  const data = await res.json();
-  productsData = data;
+const res = await fetch("handloom_products.json");
+const data = await res.json();
+productsData = data;
 
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get("category");
-  document.getElementById("category-title").textContent = category;
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+document.getElementById("category-title").textContent = category;
 
-  const filtered = productsData.filter(p => p.category === category);
-  const container = document.getElementById("products");
-  container.innerHTML = "";
-  filtered.forEach(product => {
-    const discounted = Math.floor(product.price / 2);
-    const card = document.createElement("div");
-    card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
-    card.innerHTML = `
-     <img src="${product.images[0]}" alt="${product.name}" 
-     class="w-full h-48 object-cover rounded">
+const filtered = productsData.filter(p => p.category === category);
+const container = document.getElementById("products");
+container.innerHTML = "";
+filtered.forEach(product => {
+const discounted = Math.floor(product.price / 2);
+const card = document.createElement("div");
+card.className = "bg-white p-4 rounded-lg shadow hover:shadow-lg transition";
+card.innerHTML = `
+    <img src="${product.images[0]}" alt="${product.name}" 
+    class="w-full h-48 object-cover rounded">
 <!-- ✅ Product name now clickable (opens modal) -->
 <h3 class="text-lg font-bold mt-2 view-details cursor-pointer transition 
-           hover:text-yellow-600 hover:underline hover:decoration-black"
-    data-id="${product.id}">
-  ${product.name}
+          hover:text-yellow-600 hover:underline hover:decoration-black"
+   data-id="${product.id}">
+ ${product.name}
 </h3>
 
 
 <!-- ✅ Price + Discount Tags in one row -->
 <div class="flex justify-between items-center mt-1">
-  <div>
-    <p class="text-gray-500 line-through text-sm">₹${product.price}</p>
-    <p class="text-yellow-600 font-bold">₹${discounted}</p>
-  </div>
-  <div class="flex gap-2">
-    <span class="text-green-600 font-semibold text-sm">50% off</span>
-    <span class="bg-red-100 text-red-600 text-xs font-semibold px-2 py-0.5 rounded">
-      Launch Offer 🎉
-    </span>
-  </div>
+ <div>
+   <p class="text-gray-500 line-through text-sm">₹${product.price}</p>
+   <p class="text-yellow-600 font-bold">₹${discounted}</p>
+ </div>
+ <div class="flex gap-2">
+   <span class="text-green-600 font-semibold text-sm">50% off</span>
+   <span class="bg-red-100 text-red-600 text-xs font-semibold px-2 py-0.5 rounded">
+     Launch Offer 🎉
+   </span>
+ </div>
 </div>
 
 <!-- ✅ Side-by-side buttons -->
 <div class="mt-4 grid grid-cols-2 gap-2">
-  <button class="view-details px-3 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition" 
-          data-id="${product.id}">
-    View Details
-  </button>
-  <button class="quick-add px-3 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition" 
-          data-id="${product.id}">
-    Add to Cart
-  </button>
+ <button class="view-details px-3 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition" 
+         data-id="${product.id}">
+   View Details
+ </button>
+ <button class="quick-add px-3 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition" 
+         data-id="${product.id}">
+   Add to Cart
+ </button>
 </div>
 
-    `;
-    container.appendChild(card);
-  });
+   `;
+container.appendChild(card);
+});
 }
 
 // Modal functions
 function openModal(product) {
-  currentProduct = product;
-  currentImageIndex = 0;
+currentProduct = product;
+currentImageIndex = 0;
 
-  document.getElementById("modal-main-image").src = product.images[0];
-  document.getElementById("modal-title").textContent = product.name;
-  document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-green-700 font-bold">₹${Math.floor(product.price/2)}</span>`;
-  // Product description
+document.getElementById("modal-main-image").src = product.images[0];
+document.getElementById("modal-title").textContent = product.name;
+document.getElementById("modal-price").innerHTML = `<span class="line-through text-gray-500">₹${product.price}</span> <span class="text-green-700 font-bold">₹${Math.floor(product.price/2)}</span>`;
+// Product description
 // Product description + details
 document.getElementById("modal-description").innerHTML = `
-  <p class="mb-2">${product.description}</p>
-  <ul class="list-disc pl-5 text-gray-700">
-    ${product.details ? `
-      <li><strong>Fabric:</strong> ${product.details.fabric || ""}</li>
-      <li><strong>Dimensions:</strong> ${product.details.dimensions || ""}</li>
-      <li><strong>Wash Care:</strong> ${product.details.washCare || ""}</li>
-      <li><strong>Other Details:</strong>
-        <ul class="list-disc pl-5">
-          ${(product.details["Other Details"] || "")
-            .split(",")
-            .map(d => `<li>${d.trim()}</li>`)
-            .join("")}
-        </ul>
-      </li>
-    ` : ""}
-  </ul>
+ <p class="mb-2">${product.description}</p>
+ <ul class="list-disc pl-5 text-gray-700">
+   ${product.details ? `
+     <li><strong>Fabric:</strong> ${product.details.fabric || ""}</li>
+     <li><strong>Dimensions:</strong> ${product.details.dimensions || ""}</li>
+     <li><strong>Wash Care:</strong> ${product.details.washCare || ""}</li>
+     <li><strong>Other Details:</strong>
+       <ul class="list-disc pl-5">
+         ${(product.details["Other Details"] || "")
+           .split(",")
+           .map(d => `<li>${d.trim()}</li>`)
+           .join("")}
+       </ul>
+     </li>
+   ` : ""}
+ </ul>
 `;
 
-  document.getElementById("modal-quantity").textContent = 1;
+document.getElementById("modal-quantity").textContent = 1;
 
-  const thumbs = document.getElementById("modal-thumbnails");
-  thumbs.innerHTML = "";
-  product.images.forEach((img, idx) => {
-    const t = document.createElement("img");
-    t.src = img;
-    t.className="w-16 h-16 object-cover border cursor-pointer";
-    t.onclick = () => { 
-      currentImageIndex = idx; 
-      document.getElementById("modal-main-image").src = img; 
-    };
-    thumbs.appendChild(t);
-  });
+const thumbs = document.getElementById("modal-thumbnails");
+thumbs.innerHTML = "";
+product.images.forEach((img, idx) => {
+const t = document.createElement("img");
+t.src = img;
+t.className="w-16 h-16 object-cover border cursor-pointer";
+t.onclick = () => { 
+currentImageIndex = idx; 
+document.getElementById("modal-main-image").src = img; 
+};
+thumbs.appendChild(t);
+});
 
-  document.getElementById("product-modal").classList.remove("hidden");
+document.getElementById("product-modal").classList.remove("hidden");
 }
 
 // Modal controls
 document.getElementById("close-modal").onclick = () => document.getElementById("product-modal").classList.add("hidden");
 document.getElementById("prev-image").onclick = () => {
-  if(currentProduct){
-    currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
-    document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
-  }
+if(currentProduct){
+currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
+document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
+}
 };
 document.getElementById("next-image").onclick = () => {
-  if(currentProduct){
-    currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
-    document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
-  }
+if(currentProduct){
+currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
+document.getElementById("modal-main-image").src = currentProduct.images[currentImageIndex];
+}
 };
 // ✅ Thumbnail scroll arrows
 function scrollThumbnails(direction) {
-  const slider = document.getElementById("modal-thumbnails");
-  slider.scrollBy({ left: direction * 120, behavior: "smooth" });
+const slider = document.getElementById("modal-thumbnails");
+slider.scrollBy({ left: direction * 120, behavior: "smooth" });
 }
 
- // Cart functions
+// Cart functions
 function updateCart() {
-  const cartItems = document.getElementById("cart-items");
-  cartItems.innerHTML = "";
-  let total = 0;
+const cartItems = document.getElementById("cart-items");
+cartItems.innerHTML = "";
+let total = 0;
 
-  cart.forEach(item => {
-    const discounted = Math.floor(item.price / 2);
-    total += discounted * item.qty;
+cart.forEach(item => {
+const discounted = Math.floor(item.price / 2);
+total += discounted * item.qty;
 
-    const div = document.createElement("div");
-    div.className = "flex justify-between items-center border-b pb-4";
+const div = document.createElement("div");
+div.className = "flex justify-between items-center border-b pb-4";
 
-    div.innerHTML = `
-      <div>
-        <h4 class="font-semibold">${item.name}</h4>
-        <p>₹${discounted} x ${item.qty} = ₹${discounted * item.qty}</p>
-        <div class="flex items-center space-x-2 mt-2">
-          <button class="px-2 py-1 bg-gray-200 rounded decrease-qty" data-name="${item.name}">-</button>
-          <span>${item.qty}</span>
-          <button class="px-2 py-1 bg-gray-200 rounded increase-qty" data-name="${item.name}">+</button>
-          <button class="text-red-500 ml-4 remove-item" data-name="${item.name}">Remove</button>
-        </div>
-      </div>
-    `;
+div.innerHTML = `
+     <div>
+       <h4 class="font-semibold">${item.name}</h4>
+       <p>₹${discounted} x ${item.qty} = ₹${discounted * item.qty}</p>
+       <div class="flex items-center space-x-2 mt-2">
+         <button class="px-2 py-1 bg-gray-200 rounded decrease-qty" data-name="${item.name}">-</button>
+         <span>${item.qty}</span>
+         <button class="px-2 py-1 bg-gray-200 rounded increase-qty" data-name="${item.name}">+</button>
+         <button class="text-red-500 ml-4 remove-item" data-name="${item.name}">Remove</button>
+       </div>
+     </div>
+   `;
 
-    cartItems.appendChild(div);
-  });
+cartItems.appendChild(div);
+});
 
-  document.getElementById("cart-total").textContent = "Total: ₹" + total;
+document.getElementById("cart-total").textContent = "Total: ₹" + total;
 
-  if (document.getElementById("cart-count")) {
-    document.getElementById("cart-count").textContent = cart.length;
-    document.getElementById("cart-count").classList.toggle("hidden", cart.length === 0);
-  }
-
-  // ✅ Attach events
-  document.querySelectorAll(".increase-qty").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const name = btn.getAttribute("data-name");
-      const product = cart.find(p => p.name === name);
-      if (product) {
-        product.qty++;
-        updateCart();
-      }
-    });
-  });
-
-  document.querySelectorAll(".decrease-qty").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const name = btn.getAttribute("data-name");
-      const product = cart.find(p => p.name === name);
-      if (product && product.qty > 1) {
-        product.qty--;
-      } else {
-        cart = cart.filter(p => p.name !== name);
-      }
-      updateCart();
-    });
-  });
-
-  document.querySelectorAll(".remove-item").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const name = btn.getAttribute("data-name");
-      cart = cart.filter(item => item.name !== name);
-      updateCart();
-    });
-  });
-  // ✅ Mini Cart updater (inside product modal)
-function updateMiniCart() {
-  const miniCartItems = document.getElementById("mini-cart-items");
-  const miniCartTotal = document.getElementById("mini-cart-total");
-
-  if (!miniCartItems || !miniCartTotal) return; // safety if modal not open
-
-  miniCartItems.innerHTML = "";
-  let total = 0;
-
-  cart.forEach(item => {
-    const discounted = Math.floor(item.price / 2);
-    total += discounted * item.qty;
-
-    const div = document.createElement("div");
-    div.className = "flex justify-between items-center text-sm border-b pb-2";
-
-    div.innerHTML = `
-      <span>${item.name} x${item.qty}</span>
-      <span>₹${discounted * item.qty}</span>
-    `;
-
-    miniCartItems.appendChild(div);
-  });
-
-  miniCartTotal.textContent = "Total: ₹" + total;
+if (document.getElementById("cart-count")) {
+document.getElementById("cart-count").textContent = cart.length;
+document.getElementById("cart-count").classList.toggle("hidden", cart.length === 0);
 }
+
+// ✅ Attach events
+document.querySelectorAll(".increase-qty").forEach(btn => {
+btn.addEventListener("click", () => {
+const name = btn.getAttribute("data-name");
+const product = cart.find(p => p.name === name);
+if (product) {
+product.qty++;
+updateCart();
+}
+});
+});
+
+document.querySelectorAll(".decrease-qty").forEach(btn => {
+btn.addEventListener("click", () => {
+const name = btn.getAttribute("data-name");
+const product = cart.find(p => p.name === name);
+if (product && product.qty > 1) {
+product.qty--;
+} else {
+cart = cart.filter(p => p.name !== name);
+}
+updateCart();
+});
+});
+
+document.querySelectorAll(".remove-item").forEach(btn => {
+btn.addEventListener("click", () => {
+const name = btn.getAttribute("data-name");
+cart = cart.filter(item => item.name !== name);
+updateCart();
+});
+});
 }
 
 // Toast
 function showToast() {
-  const toast = document.getElementById("toast");
-  toast.classList.remove("hidden");
-  setTimeout(()=>toast.classList.add("hidden"), 2000);
+const toast = document.getElementById("toast");
+toast.classList.remove("hidden");
+setTimeout(()=>toast.classList.add("hidden"), 2000);
 }
 
 // Event delegation for dynamic buttons
 document.addEventListener("click", e => {
-  // View details opens modal
-  if(e.target.classList.contains("view-details")){
-    const product = productsData.find(p => p.id == e.target.dataset.id);
-    openModal(product);
-  }
+// View details opens modal
+if(e.target.classList.contains("view-details")){
+const product = productsData.find(p => p.id == e.target.dataset.id);
+openModal(product);
+}
 
-  // Quick add button
-  if(e.target.classList.contains("quick-add")){
-    const product = productsData.find(p => p.id == e.target.dataset.id);
-    const existing = cart.find(item => item.id === product.id);
-    if(existing) existing.qty++;
-    else cart.push({...product, qty:1});
-    updateCart();
-    showToast();
-  }
+// Quick add button
+if(e.target.classList.contains("quick-add")){
+const product = productsData.find(p => p.id == e.target.dataset.id);
+const existing = cart.find(item => item.id === product.id);
+if(existing) existing.qty++;
+else cart.push({...product, qty:1});
+updateCart();
+showToast();
+}
 });
 
 // Modal Add to Cart
-// Modal Add to Cart
 document.getElementById("add-to-cart").onclick = () => {
-  if (!currentProduct) return; // Safety check
-
-  const qty = parseInt(document.getElementById("modal-quantity").textContent);
-  const existing = cart.find(item => item.id === currentProduct.id);
-
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cart.push({ ...currentProduct, qty });
-  }
-
-  updateCart();
-  updateMiniCart();
-  showToast();
-
-  // ✅ Close product modal
-  document.getElementById("product-modal").classList.add("hidden");
-
-  // ✅ Open cart modal
-  document.getElementById("cart-modal").classList.remove("hidden");
+if(!currentProduct) return; // Safety check
+const qty = parseInt(document.getElementById("modal-quantity").textContent);
+const existing = cart.find(item => item.id === currentProduct.id);
+if(existing) existing.qty += qty;
+else cart.push({...currentProduct, qty});
+updateCart();
+showToast();
 };
-
 
 // Quantity controls
 document.getElementById("increase-qty").onclick = () => {
-  const q = parseInt(document.getElementById("modal-quantity").textContent);
-  document.getElementById("modal-quantity").textContent = q + 1;
+const q = parseInt(document.getElementById("modal-quantity").textContent);
+document.getElementById("modal-quantity").textContent = q + 1;
 };
 document.getElementById("decrease-qty").onclick = () => {
-  let q = parseInt(document.getElementById("modal-quantity").textContent);
-  if(q > 1) document.getElementById("modal-quantity").textContent = q - 1;
+let q = parseInt(document.getElementById("modal-quantity").textContent);
+if(q > 1) document.getElementById("modal-quantity").textContent = q - 1;
 };
 
 // Cart modal toggles
@@ -641,21 +589,21 @@ document.getElementById("close-cart").onclick = () => document.getElementById("c
 
 // WhatsApp checkout
 document.getElementById("checkout").onclick = () => {
-  let msg = "Order Details:%0A";
-  cart.forEach(i => msg += `${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
-  window.open("https://wa.me/919671850555?text=" + msg, "_blank");
+let msg = "Order Details:%0A";
+cart.forEach(i => msg += `${i.name} x${i.qty} - ₹${Math.floor(i.price/2)*i.qty}%0A`);
+window.open("https://wa.me/919671850555?text=" + msg, "_blank");
 };
- // Close modal when clicking outside product modal content
+// Close modal when clicking outside product modal content
 document.getElementById("product-modal").addEventListener("click", function(e) {
-  if (e.target === this) {
-    this.classList.add("hidden");
+if (e.target === this) {
+this.classList.add("hidden");
 // Close modal when clicking outside cart modal content
 document.getElementById("cart-modal").addEventListener("click", function(e) {
-  if (e.target === this) {
-    this.classList.add("hidden");
-  }
+if (e.target === this) {
+this.classList.add("hidden");
+}
 });
-  }
+}
 });
 
 </script>
