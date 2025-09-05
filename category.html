@@ -211,6 +211,16 @@
           </div>
 
           <ul id="modal-description" class="list-disc pl-5 mt-4 space-y-1 text-gray-700"></ul>
+          
+          <!-- ✅ Mini Cart Preview inside product modal -->
+          <div id="mini-cart" class="mt-6 border-t pt-4 hidden">
+            <h4 class="text-lg font-semibold mb-2">Your Cart</h4>
+            <div id="mini-cart-items" class="space-y-2 text-sm"></div>
+            <p id="mini-cart-total" class="font-bold mt-2">Total: ₹0</p>
+            <button id="mini-checkout" class="mt-3 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition">
+              Checkout on WhatsApp
+            </button>
+          </div>
         </div>
     </div>
   </div>
@@ -534,6 +544,33 @@ function updateCart() {
       updateCart();
     });
   });
+  // ✅ Mini Cart updater (inside product modal)
+function updateMiniCart() {
+  const miniCartItems = document.getElementById("mini-cart-items");
+  const miniCartTotal = document.getElementById("mini-cart-total");
+
+  if (!miniCartItems || !miniCartTotal) return; // safety if modal not open
+
+  miniCartItems.innerHTML = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    const discounted = Math.floor(item.price / 2);
+    total += discounted * item.qty;
+
+    const div = document.createElement("div");
+    div.className = "flex justify-between items-center text-sm border-b pb-2";
+
+    div.innerHTML = `
+      <span>${item.name} x${item.qty}</span>
+      <span>₹${discounted * item.qty}</span>
+    `;
+
+    miniCartItems.appendChild(div);
+  });
+
+  miniCartTotal.textContent = "Total: ₹" + total;
+}
 }
 
 // Toast
@@ -577,6 +614,7 @@ document.getElementById("add-to-cart").onclick = () => {
   }
 
   updateCart();
+  updateMiniCart();
   showToast();
 
   // ✅ Close product modal
