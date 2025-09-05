@@ -667,15 +667,12 @@ Privacy Policy
     <li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
     <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
   </ul>
-   <!-- ✅ Embedded Cart inside Product Modal -->
-  <div id="modal-cart" class="mt-6 border-t pt-4">
-    <h3 class="text-lg font-semibold mb-2">Your Cart</h3>
-    <div id="modal-cart-items" class="space-y-2"></div>
-    <div class="flex justify-between font-bold mt-2">
-      <span>Total:</span>
-      <span id="modal-cart-total">₹0</span>
-    </div>
-  </div>
+   <!-- ✅ Full Cart replicated inside Product Modal -->
+<div id="modal-cart" class="mt-6 border-t pt-4">
+  <h3 class="text-lg font-semibold mb-2">Your Cart</h3>
+  <ul id="modal-cart-items" class="space-y-4"></ul>
+</div>
+
 </div>
 
 </div>
@@ -737,27 +734,38 @@ document.getElementById('cart-modal').classList.add('hidden');
 
 function renderCart() {
   const list = document.getElementById('cart-items');
-  list.innerHTML = '';
-  let total = 0;
+  const modalList = document.getElementById('modal-cart-items');
 
-  cart.forEach((item, index) => {
-    total += item.price * item.qty;
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <div class="flex justify-between items-center">
-        <div>
-          <p><strong>${item.name}</strong></p>
-          <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
-          <div class="mt-2 space-x-2">
-            <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
-            <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
-            <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
+  [list, modalList].forEach(targetList => {
+    if (!targetList) return;
+    targetList.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price * item.qty;
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="flex justify-between items-center">
+          <div>
+            <p><strong>${item.name}</strong></p>
+            <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
+            <div class="mt-2 space-x-2">
+              <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
+              <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
+              <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-    list.appendChild(li);
+      `;
+      targetList.appendChild(li);
+    });
+
+    const totalElem = document.createElement('li');
+    totalElem.innerHTML = `<hr class="my-2" />
+      <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
+    targetList.appendChild(totalElem);
   });
+}
 
   const totalElem = document.createElement('li');
   totalElem.innerHTML = `<hr class="my-2" />
@@ -1243,6 +1251,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
