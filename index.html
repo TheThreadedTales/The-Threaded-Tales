@@ -708,9 +708,14 @@ updateCartCount();
 updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 item
 }
 
+// ✅ Update cart count display (shows total quantity, not just unique products)
 function updateCartCount() {
-document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+  const cartCount = document.getElementById('cart-count');
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  cartCount.textContent = totalQty;
+  cartCount.classList.toggle("hidden", totalQty === 0); // hides badge if cart empty
 }
+
 
 function openCart() {
 document.getElementById('cart-modal').classList.remove('hidden');
@@ -1194,6 +1199,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
