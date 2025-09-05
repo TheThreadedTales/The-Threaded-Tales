@@ -682,7 +682,7 @@ Add to Cart
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let allProducts = [];
-
+let selectedProduct = null; 
 // ✅ Visibility toggle function
 function toggleCartVisibility() {
 const cartModal = document.getElementById('cart-modal');
@@ -806,6 +806,14 @@ document.getElementById("product-modal").classList.add("hidden");
 document.getElementById("modal-content").innerHTML = "";
 }
 });
+// ✅ Add-to-cart button inside Product Modal
+document.getElementById("modal-add-to-cart").addEventListener("click", () => {
+  if (selectedProduct) {
+    addToCart(selectedProduct);
+    renderCart(); // refresh both modal + main cart
+  }
+});
+
 // ✅ Close cart modal when clicking outside its content
 document.getElementById("cart-modal").addEventListener("click", (e) => {
   if (e.target === document.getElementById("cart-modal")) {
@@ -982,6 +990,15 @@ modalContent.innerHTML = `
 
          </div>
        `;
+// ✅ Store the product being viewed in modal
+selectedProduct = { 
+  name, 
+  price: discountedPrice, 
+  originalPrice, 
+  description, 
+  details, 
+  images 
+};
 
 modal.classList.remove('hidden');
 
@@ -1215,4 +1232,5 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
