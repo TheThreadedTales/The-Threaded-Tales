@@ -563,15 +563,29 @@ document.addEventListener("click", e => {
 });
 
 // Modal Add to Cart
+// Modal Add to Cart
 document.getElementById("add-to-cart").onclick = () => {
-  if(!currentProduct) return; // Safety check
+  if (!currentProduct) return; // Safety check
+
   const qty = parseInt(document.getElementById("modal-quantity").textContent);
   const existing = cart.find(item => item.id === currentProduct.id);
-  if(existing) existing.qty += qty;
-  else cart.push({...currentProduct, qty});
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ ...currentProduct, qty });
+  }
+
   updateCart();
   showToast();
+
+  // ✅ Close product modal
+  document.getElementById("product-modal").classList.add("hidden");
+
+  // ✅ Open cart modal
+  document.getElementById("cart-modal").classList.remove("hidden");
 };
+
 
 // Quantity controls
 document.getElementById("increase-qty").onclick = () => {
