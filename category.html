@@ -498,7 +498,7 @@ cartItems.appendChild(div);
 document.getElementById("cart-total").textContent = "Total: ₹" + total;
 
 if (document.getElementById("cart-count")) {
-document.getElementById("cart-count").textContent = cart.length;
+document.getElementById("cart-count").textContent = cart.reduce((sum, i) => sum + i.qty, 0);
 document.getElementById("cart-count").classList.toggle("hidden", cart.length === 0);
 }
 
@@ -597,12 +597,12 @@ window.open("https://wa.me/919671850555?text=" + msg, "_blank");
 document.getElementById("product-modal").addEventListener("click", function(e) {
 if (e.target === this) {
 this.classList.add("hidden");
+}
+});
 // Close modal when clicking outside cart modal content
 document.getElementById("cart-modal").addEventListener("click", function(e) {
 if (e.target === this) {
 this.classList.add("hidden");
-}
-});
 }
 });
 
