@@ -15,37 +15,37 @@
 <!-- Custom Styles -->
 <style>
 .marquee {
-  display: inline-block;
-  padding-left: 100%;
-  animation: scroll-marquee 15s linear infinite;
-  white-space: nowrap;
+display: inline-block;
+padding-left: 100%;
+animation: scroll-marquee 15s linear infinite;
+white-space: nowrap;
 }
 
 @keyframes scroll-marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+0% { transform: translateX(0%); }
+100% { transform: translateX(-100%); }
 }   
 /* Make search results appear *inside* overlay, scrollable */
 /* Search results item styling */
 #searchResults div.search-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  background: #ffffff;
-  transition: background .12s ease;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+padding: 0.5rem;
+cursor: pointer;
+border-radius: 0.375rem;
+background: #ffffff;
+transition: background .12s ease;
 }
 #searchResults div.search-item:hover {
-  background: #f7fafc;
+background: #f7fafc;
 }
 #searchResults img.search-thumb {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 0.375rem;
-  flex-shrink: 0;
+width: 48px;
+height: 48px;
+object-fit: cover;
+border-radius: 0.375rem;
+flex-shrink: 0;
 }
 #searchResults .search-meta { line-height: 1; }
 #searchResults .search-name { font-weight: 600; display: block; }
@@ -53,82 +53,82 @@
 #searchResults p.no-results { color: #6b7280; padding: 0.5rem; }
 
 .tango {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 4rem;
+font-family: 'Playfair Display', serif;
+font-weight: 700;
+font-size: 4rem;
 }
 
 .murray {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  display: block;
-  margin-top: 0.2rem;
+font-family: 'Cormorant Garamond', serif;
+font-size: 1.5rem;
+display: block;
+margin-top: 0.2rem;
 }
 /* ✅ Center hero text with flexbox */
 .hero-text {
-  text-align: center;
-  color: white;
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;  /* vertical + horizontal centering */
-  height: 100%;             /* take full parent height */
+text-align: center;
+color: white;
+position: relative;
+z-index: 10;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;  /* vertical + horizontal centering */
+height: 100%;             /* take full parent height */
 }
 
 /* ✅ Hero background – no duplicate background image */
 .hero-bg {
-  background: url('./images/hero-bg.png.png') center center no-repeat;
-  background-size: 100% 100%;   /* Stretch to always fit screen */
-  height: 82vh;                /* Full viewport height on desktop */
-  width: 100%;                  /* Full width */
+background: url('./images/hero-bg.png.png') center center no-repeat;
+background-size: 100% 100%;   /* Stretch to always fit screen */
+height: 82vh;                /* Full viewport height on desktop */
+width: 100%;                  /* Full width */
 }
 
 /* Mobile layout: shrink hero height */
 @media (max-width: 768px) {
-  .hero-bg {
-    width: 70%;
-    height: 75vh;    /* Try 70% of screen height */
-    min-height: 350px;  /* Prevent it from becoming too small */
-  }
+.hero-bg {
+width: 70%;
+height: 75vh;    /* Try 70% of screen height */
+min-height: 350px;  /* Prevent it from becoming too small */
+}
 }
 
 
 .hero-overlay {
-  background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+background-color: rgba(0, 0, 0, 0.3);
+position: absolute;
+inset: 0;
+z-index: 0;
 }
 
 /* ✅ Slideshow fills hero with cover */
 .slideshow {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
+position: absolute;
+inset: 0;
+overflow: hidden;
+z-index: 0;
 }
 
 .slideshow .slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;     /* 🔹 fill hero instead of contain */
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: transform 600ms ease, opacity 600ms ease;
+position: absolute;
+inset: 0;
+background-size: cover;     /* 🔹 fill hero instead of contain */
+background-position: center;
+background-repeat: no-repeat;
+opacity: 0;
+transform: translateX(100%);
+transition: transform 600ms ease, opacity 600ms ease;
 }
 
 .slideshow .slide.active {
-  opacity: 1;
-  transform: translateX(0);
+opacity: 1;
+transform: translateX(0);
 }
 
 .slideshow .slide.exit {
-  opacity: 0;
-  transform: translateX(-100%);
+opacity: 0;
+transform: translateX(-100%);
 }
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -200,12 +200,12 @@ to { opacity: 1; }
 
 <h2 class="text-2xl font-bold mb-2 text-red-600">🎉 Launch Offer 🎉</h2>
 <p class="text-lg mb-4">
-  Flat <span class="font-bold text-red-500">50% OFF</span> on all products for a limited time!
+Flat <span class="font-bold text-red-500">50% OFF</span> on all products for a limited time!
 </p>
 
 <a href="#products" id="shop-now-btn"
-   class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
-  🛍 Shop Now
+class="bg-white text-black border border-black px-6 py-2 rounded-md hover:bg-black hover:text-white transition">
+🛍 Shop Now
 </a>
 
 </div>
@@ -242,7 +242,7 @@ Our Products
 <a href="category.html?category=Organizers" class="block px-4 py-2 hover:bg-gray-200 rounded-none">Organizers</a>
 </div>
 </div>
-  
+
 <a href="#artisans" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Meet The Makers</a>
 </div>
 
@@ -257,9 +257,9 @@ Our Products
 <!-- 🔍 Search Icon (Desktop) -->
 <div class="flex justify-end gap-4">
 <button id="searchDesktop" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+</svg>
 </button>
 <a href="#reviews" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Reviews</a>
 <a href="#contact" class="px-3 py-1 hover:bg-gray-200 transition rounded-none">Contact Us</a>
@@ -315,39 +315,39 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 <!-- Hero Section -->
 <section id="hero" class="relative overflow-hidden flex items-center justify-center">
 
-  <!-- Hero background wrapper with fixed ratio -->
-  <div class="hero-bg relative w-full">
-    <!-- Slideshow wrapper -->
-    <div class="absolute inset-0 slideshow">
-      <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
-      <div class="slide" style="background-image: url('images/m2.jpg');"></div>
-      <div class="slide" style="background-image: url('images/B1.jpg');"></div>
-    </div>
-
-    <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-start pt-20 overflow-auto">
-  <div class="w-full max-w-xl mx-auto bg-white rounded-lg p-4 relative">
-    <button id="closeSearch" class="absolute top-2 right-3 text-black-800 hover:text-black text-4xl font-bold">×</button>
-    <input type="text" id="searchInput" placeholder="Search products..." class="w-full border p-2 mb-4 rounded">
-    <div id="searchResults" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
-  </div>
+<!-- Hero background wrapper with fixed ratio -->
+<div class="hero-bg relative w-full">
+<!-- Slideshow wrapper -->
+<div class="absolute inset-0 slideshow">
+<div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
+<div class="slide" style="background-image: url('images/m2.jpg');"></div>
+<div class="slide" style="background-image: url('images/B1.jpg');"></div>
 </div>
-    <!-- Hero content -->
-    <div class="hero-text relative z-10 text-center px-4 text-white">
-      <h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
-      <span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
 
-      <!-- Launch Offer + Timer -->
-      <div class="mt-4 bg-red-600/40 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
-        🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
-      </div>
+<!-- Dark overlay -->
+<div class="absolute inset-0 bg-black bg-opacity-30"></div>
+<div id="searchOverlay" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-start pt-20 overflow-auto">
+<div class="w-full max-w-xl mx-auto bg-white rounded-lg p-4 relative">
+<button id="closeSearch" class="absolute top-2 right-3 text-black-800 hover:text-black text-4xl font-bold">×</button>
+<input type="text" id="searchInput" placeholder="Search products..." class="w-full border p-2 mb-4 rounded">
+<div id="searchResults" class="space-y-3 max-h-[60vh] overflow-y-auto"></div>
+</div>
+</div>
+<!-- Hero content -->
+<div class="hero-text relative z-10 text-center px-4 text-white">
+<h1 class="tango text-4xl md:text-6xl mb-2">The Threaded Tales</h1>
+<span class="murray text-lg md:text-2xl block mb-4">by Elleganza Emporium</span>
 
-      <a href="#products" class="mt-6 inline-block px-6 py-3 bg-white/30 text-black bold rounded-full text-lg hover:bg-white transition">
-        Shop Now
-      </a>
-    </div>
-  </div>
+<!-- Launch Offer + Timer -->
+<div class="mt-4 bg-red-600/40 text-white font-semibold text-sm px-4 py-2 rounded inline-block">
+🎉 Launch Offer: Flat 50% Off! Ends in <span id="countdown" class="font-bold"></span>
+</div>
+
+<a href="#products" class="mt-6 inline-block px-6 py-3 bg-white/30 text-black bold rounded-full text-lg hover:bg-white transition">
+Shop Now
+</a>
+</div>
+</div>
 </section>
 
 
@@ -365,74 +365,74 @@ Stitched every thread with care, our products are created using cruelty-free pro
 
 
 <section id="shop-by-categories" class="py-12 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center mb-10">SHOP BY CATEGORIES</h2>
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-10">SHOP BY CATEGORIES</h2>
 
-    <!-- Categories Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Categories Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
 
-      <!-- Category Card -->
-      <a href="category.html?category=BEDSHEETS" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/Minimalist Grey.jpeg" alt="BEDSHEETS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">BEDSHEETS</h3>
-          </div>
-        </div>
-      </a>
+<!-- Category Card -->
+<a href="category.html?category=BEDSHEETS" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/Minimalist Grey.jpeg" alt="BEDSHEETS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">BEDSHEETS</h3>
+</div>
+</div>
+</a>
 
-      <!-- Category Card -->
-      <a href="category.html?category=DOORMATS%20%26%20RUGS" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/Doormat1.jpeg" alt="DOORMATS & RUGS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">DOORMATS & RUGS</h3>
-          </div>
-        </div>
-      </a>
+<!-- Category Card -->
+<a href="category.html?category=DOORMATS%20%26%20RUGS" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/Doormat1.jpeg" alt="DOORMATS & RUGS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">DOORMATS & RUGS</h3>
+</div>
+</div>
+</a>
 
-      <!-- Category Card -->
-      <a href="category.html?category=COMFORTERS" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/comfort1.jpeg" alt="COMFORTERS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">COMFORTERS</h3>
-          </div>
-        </div>
-      </a>
+<!-- Category Card -->
+<a href="category.html?category=COMFORTERS" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/comfort1.jpeg" alt="COMFORTERS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">COMFORTERS</h3>
+</div>
+</div>
+</a>
 
-      <!-- Category Card -->
-      <a href="category.html?category=Organizers" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/tissue1.jpeg" alt="Organizers" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">Organizers</h3>
-          </div>
-        </div>
-      </a>
+<!-- Category Card -->
+<a href="category.html?category=Organizers" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/tissue1.jpeg" alt="Organizers" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">Organizers</h3>
+</div>
+</div>
+</a>
 
-      <!-- New Category -->
-      <a href="category.html?category=Table%20Mats" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/mat1.jpeg" alt="Table Mats" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">Table Mats</h3>
-          </div>
-        </div>
-      </a>
+<!-- New Category -->
+<a href="category.html?category=Table%20Mats" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/mat1.jpeg" alt="Table Mats" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">Table Mats</h3>
+</div>
+</div>
+</a>
 
-      <a href="category.html?category=HandBags" class="group block">
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-          <img src="images/bag1.jpeg" alt="HandBags" class="w-full h-56 object-cover group-hover:scale-105 transition">
-          <div class="p-4 text-center">
-            <h3 class="text-lg font-semibold text-gray-800">HandBags</h3>
-          </div>
-        </div>
-      </a>
+<a href="category.html?category=HandBags" class="group block">
+<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+<img src="images/bag1.jpeg" alt="HandBags" class="w-full h-56 object-cover group-hover:scale-105 transition">
+<div class="p-4 text-center">
+<h3 class="text-lg font-semibold text-gray-800">HandBags</h3>
+</div>
+</div>
+</a>
 
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
 
@@ -480,21 +480,21 @@ Checkout on WhatsApp
 <!-- ❌ Modal Close -->
 <!-- FIXED CLOSE BUTTON -->
 <button id="modal-close" 
-        class="fixed md:absolute top-3 right-3 w-10 h-10 flex items-center justify-center 
-               text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
-  ×
+class="fixed md:absolute top-3 right-3 w-10 h-10 flex items-center justify-center 
+              text-2xl bg-white/50 hover:bg-white rounded-full shadow-md z-50">
+×
 </button>
 
-      <div id="modal-content"></div>
-    </div>
-  </div>
+<div id="modal-content"></div>
+</div>
+</div>
 </div>
 
 <div id="cart-toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0 z-50">
 Added to Cart!
 </div>
 
-  <!-- Products Grid -->
+<!-- Products Grid -->
 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
 <!-- Artisans Section -->
@@ -639,38 +639,38 @@ Privacy Policy
 
 <!-- Right: Product Info -->
 <div>
-  <h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
-  <p id="modal-product-description" class="text-gray-800 mb-4"></p>
+<h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
+<p id="modal-product-description" class="text-gray-800 mb-4"></p>
 
-  <!-- ✅ Price block -->
-  <div class="flex items-center space-x-2 mb-4">
-    <span id="modal-product-price" class="text-lg font-semibold text-green-600"></span>
-    <span id="modal-product-original-price" class="text-gray-500 line-through text-sm"></span>
-  </div>
+<!-- ✅ Price block -->
+<div class="flex items-center space-x-2 mb-4">
+<span id="modal-product-price" class="text-lg font-semibold text-green-600"></span>
+<span id="modal-product-original-price" class="text-gray-500 line-through text-sm"></span>
+</div>
 
-  <!-- ✅ Quantity Selector + Add to Cart (below price, more spacing) -->
-  <div class="flex items-center justify-between gap-6 mb-6">
-    <div class="flex items-center space-x-4">
-      <button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
-      <span id="product-quantity" class="px-4 text-lg font-medium">1</span>
-      <button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
-    </div>
+<!-- ✅ Quantity Selector + Add to Cart (below price, more spacing) -->
+<div class="flex items-center justify-between gap-6 mb-6">
+<div class="flex items-center space-x-4">
+<button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
+<span id="product-quantity" class="px-4 text-lg font-medium">1</span>
+<button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
+</div>
 
-    <button id="modal-add-to-cart" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
-      Add to Cart
-    </button>
-  </div>
+<button id="modal-add-to-cart" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
+Add to Cart
+</button>
+</div>
 
-  <!-- ✅ Details list stays below -->
-  <ul class="text-sm space-y-1 mb-4">
-    <li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
-    <li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
-    <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
-  </ul>
+<!-- ✅ Details list stays below -->
+<ul class="text-sm space-y-1 mb-4">
+<li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
+<li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
+<li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
+</ul>
 </div>
 
 </div>
-  <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
+<div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
 
 <!-- JS for Products + Cart -->
@@ -710,10 +710,10 @@ updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 it
 
 // ✅ Update cart count display (shows total quantity, not just unique products)
 function updateCartCount() {
-  const cartCount = document.getElementById('cart-count');
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  cartCount.textContent = totalQty;
-  cartCount.classList.toggle("hidden", totalQty === 0); // hides badge if cart empty
+const cartCount = document.getElementById('cart-count');
+const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+cartCount.textContent = totalQty;
+cartCount.classList.toggle("hidden", totalQty === 0); // hides badge if cart empty
 }
 
 
@@ -725,6 +725,7 @@ renderCart();
 function closeCart() {
 document.getElementById('cart-modal').classList.add('hidden');
 }
+
 function renderCart() {
 const list = document.getElementById('cart-items');
 list.innerHTML = '';
@@ -734,59 +735,24 @@ cart.forEach((item, index) => {
 total += item.price * item.qty;
 const li = document.createElement('li');
 li.innerHTML = `
-      <div class="flex justify-between items-center">
-        <div>
-          <p><strong>${item.name}</strong></p>
-          <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
-          <div class="mt-2 space-x-2">
-            <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
-            <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
-            <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
-          </div>
-        </div>
-      </div>
-    `;
+     <div class="flex justify-between items-center">
+       <div>
+         <p><strong>${item.name}</strong></p>
+         <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
+         <div class="mt-2 space-x-2">
+           <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
+           <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
+           <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
+         </div>
+       </div>
+     </div>
+   `;
 list.appendChild(li);
 });
-    const totalElem = document.createElement('li');
-    totalElem.innerHTML = `<hr class="my-2" />
-      <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
-    targetList.appendChild(totalElem);
-  });
-}
-
-  const totalElem = document.createElement('li');
-  totalElem.innerHTML = `<hr class="my-2" />
-    <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
-  list.appendChild(totalElem);
-
-  // ✅ Also update embedded cart inside product modal
-  const modalCartItems = document.getElementById("modal-cart-items");
-  const modalCartTotal = document.getElementById("modal-cart-total");
-
-  if (modalCartItems && modalCartTotal) {
-    modalCartItems.innerHTML = "";
-    let modalTotal = 0;
-
-    cart.forEach((item, index) => {
-      modalTotal += item.price * item.qty;
-      const div = document.createElement("div");
-      div.className = "flex justify-between items-center text-sm border-b pb-1";
-      div.innerHTML = `
-        <span>${item.name} (x${item.qty})</span>
-        <span>₹${item.price * item.qty}</span>
-      `;
-      modalCartItems.appendChild(div);
-    });
-
-    modalCartTotal.textContent = "₹" + modalTotal;
-  }
-}
-
 
 const totalElem = document.createElement('li');
 totalElem.innerHTML = `<hr class="my-2" />
-    <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
+   <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
 list.appendChild(totalElem);
 }
 
@@ -854,73 +820,73 @@ const closeSearch = document.getElementById("closeSearch");
 const searchResults = document.getElementById("searchResults");
 
 const openSearchBtns = [
-  document.getElementById("searchDesktop"),
-  document.getElementById("searchMobile")
+document.getElementById("searchDesktop"),
+document.getElementById("searchMobile")
 ];
 
 openSearchBtns.forEach(btn => {
-  if(btn){
-    btn.addEventListener("click", () => {
-      searchOverlay.classList.remove("hidden");
-      searchInput.value = "";
-      searchResults.innerHTML = "";
-      searchInput.focus();
-    });
-  }
+if(btn){
+btn.addEventListener("click", () => {
+searchOverlay.classList.remove("hidden");
+searchInput.value = "";
+searchResults.innerHTML = "";
+searchInput.focus();
+});
+}
 });
 
 closeSearch.addEventListener("click", () => {
-  searchOverlay.classList.add("hidden");
+searchOverlay.classList.add("hidden");
 });
 
 searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  searchResults.innerHTML = "";
+const query = searchInput.value.toLowerCase();
+searchResults.innerHTML = "";
 
-  if(query.length === 0) return;
+if(query.length === 0) return;
 
-  const filtered = products.filter(p => p.name.toLowerCase().includes(query) || (p.category && p.category.toLowerCase().includes(query)));
+const filtered = products.filter(p => p.name.toLowerCase().includes(query) || (p.category && p.category.toLowerCase().includes(query)));
 
-  filtered.forEach(p => {
-    const resultItem = document.createElement("div");
-    resultItem.className = "flex items-center space-x-3 cursor-pointer p-2 hover:bg-gray-100 rounded";
-    resultItem.innerHTML = `
-      <img src="${p.images[0]}" class="w-12 h-12 object-cover rounded">
-      <span class="text-gray-800">${p.name}</span>
-    `;
-    resultItem.addEventListener("click", () => {
-      openProductModal(p.id); // your existing modal function
-      searchOverlay.classList.add("hidden");
-    });
-    searchResults.appendChild(resultItem);
-  });
+filtered.forEach(p => {
+const resultItem = document.createElement("div");
+resultItem.className = "flex items-center space-x-3 cursor-pointer p-2 hover:bg-gray-100 rounded";
+resultItem.innerHTML = `
+     <img src="${p.images[0]}" class="w-12 h-12 object-cover rounded">
+     <span class="text-gray-800">${p.name}</span>
+   `;
+resultItem.addEventListener("click", () => {
+openProductModal(p.id); // your existing modal function
+searchOverlay.classList.add("hidden");
+});
+searchResults.appendChild(resultItem);
+});
 });
 const card = document.createElement('div');
 card.className = 'bg-white border border-gray-200 overflow-hidden transform hover:scale-105 transition w-full';
 card.innerHTML = `
- <div class="relative h-72 overflow-hidden">
-   <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+<div class="relative h-72 overflow-hidden">
+  <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+</div>
+<div class="p-4">
+  <h3 
+    class="text-xl font-semibold cursor-pointer hover:underline"
+    onclick='openProductModal(${JSON.stringify(product)})'>
+    ${name}
+  </h3>
+  <div class="mt-3">
+    <div class="flex items-center space-x-2">
+      <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
+      <span class="line-through text-gray-400">₹${originalPrice}</span>
+      <span class="text-green-600 font-semibold">50% off</span>
+    </div>
+    <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
  </div>
- <div class="p-4">
-   <h3 
-     class="text-xl font-semibold cursor-pointer hover:underline"
-     onclick='openProductModal(${JSON.stringify(product)})'>
-     ${name}
-   </h3>
-   <div class="mt-3">
-     <div class="flex items-center space-x-2">
-       <span class="text-xl font-bold text-black">₹${discountedPrice}</span>
-       <span class="line-through text-gray-400">₹${originalPrice}</span>
-       <span class="text-green-600 font-semibold">50% off</span>
-     </div>
-     <span class="mt-1 inline-block text-xs font-semibold text-red-600 bg-red-100 px-2 py-0.5 rounded">Launch Offer🎉</span>
-  </div>
-  <button class="add-to-cart mt-2 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-  Add To Cart
-  </button>
-  <button class="view-details mt-3 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-  View Details
-  </button>
+ <button class="add-to-cart mt-2 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+ Add To Cart
+ </button>
+ <button class="view-details mt-3 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+ View Details
+ </button>
 </div>
 `;
 
@@ -943,69 +909,69 @@ let currentImageIndex = 0;
 
 function renderModalImage() {
 return `<img src="${images[currentImageIndex]}" 
-            id="main-modal-image"
-            class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
+           id="main-modal-image"
+           class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`; // 🔍 zoom on hover
 }
 
 modalContent.innerHTML = `
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-            <div>
-              <div class="relative">
-                ${renderModalImage()}
-               
-                 <!-- 🔁 Left Arrow (points left) -->
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+           <div>
+             <div class="relative">
+               ${renderModalImage()}
+              
+                <!-- 🔁 Left Arrow (points left) -->
 <button id="prev-img" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
- </svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+</svg>
 </button>
 
 <!-- 🔁 Right Arrow (points right) -->
 <button id="next-img" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 text-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:bg-gray-300 transition">
- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
- </svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+</svg>
 </button>
 
-              
+             
 
-              </div>
-              <div class="flex mt-2 space-x-2 overflow-x-auto">
-                ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
-              </div>
-            </div>
-            <div>
-              <h2 class="text-2xl font-bold">${name}</h2>
-              <p class="text-sm text-gray-600 mt-1">${description}</p>
-              <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
-              <div class="mt-4 text-sm space-y-1">
-              <div class="mt-4 text-sm space-y-1 text-gray-800">
-  <p><span class="font-semibold">Fabric:</span> ${details.fabric || 'N/A'}</p>
-  <p><span class="font-semibold">Dimensions:</span> ${details.dimensions || 'N/A'}</p>
-  <p><span class="font-semibold">Wash Care:</span> ${details.washCare || 'N/A'}</p>
+             </div>
+             <div class="flex mt-2 space-x-2 overflow-x-auto">
+               ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+             </div>
+           </div>
+           <div>
+             <h2 class="text-2xl font-bold">${name}</h2>
+             <p class="text-sm text-gray-600 mt-1">${description}</p>
+             <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+             <div class="mt-4 text-sm space-y-1">
+             <div class="mt-4 text-sm space-y-1 text-gray-800">
+ <p><span class="font-semibold">Fabric:</span> ${details.fabric || 'N/A'}</p>
+ <p><span class="font-semibold">Dimensions:</span> ${details.dimensions || 'N/A'}</p>
+ <p><span class="font-semibold">Wash Care:</span> ${details.washCare || 'N/A'}</p>
 
-  ${
-    details["Other Details"]
-    ? `<div><span class="font-semibold">Other Details:</span>
-        <ul class="list-disc list-inside text-gray-700 mt-1">
-          ${
-            details["Other Details"].split(',')
-              .map(item => `<li>${item.trim()}</li>`)
-              .join('')
-          }
-        </ul>
-      </div>`
-    : ''
-  }
+ ${
+   details["Other Details"]
+   ? `<div><span class="font-semibold">Other Details:</span>
+       <ul class="list-disc list-inside text-gray-700 mt-1">
+         ${
+           details["Other Details"].split(',')
+             .map(item => `<li>${item.trim()}</li>`)
+             .join('')
+         }
+       </ul>
+     </div>`
+   : ''
+ }
 </div>
 
-              <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-  Add To Cart
+             <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+ Add To Cart
 </button>
 </div>
 
-          </div>
-        `;
+         </div>
+       `;
 
 modal.classList.remove('hidden');
 
@@ -1147,9 +1113,9 @@ if (value > 1) qtyInput.value = value - 1;
 });
 // ✅ Restore cart state on page load
 window.addEventListener('DOMContentLoaded', () => {
-  updateCartCount();
-  renderCart();
-  updateCartButtonVisibility();
+updateCartCount();
+renderCart();
+updateCartButtonVisibility();
 });
 
 </script>
@@ -1182,70 +1148,60 @@ popup.classList.add('hidden');
 });
 </script>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const slides = document.querySelectorAll('#hero .slideshow .slide');
-    if (!slides.length) return;
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+const slides = document.querySelectorAll('#hero .slideshow .slide');
+if (!slides.length) return;
 
-    let current = 0;
+let current = 0;
 
-    function show(i) {
-      slides.forEach((s, idx) => {
-        s.classList.remove('active', 'exit');
-        if (idx === i) {
-          s.classList.add('active');
-        } else if (idx === (i - 1 + slides.length) % slides.length) {
-          s.classList.add('exit');
-        }
-      });
-    }
+function show(i) {
+slides.forEach((s, idx) => {
+s.classList.remove('active', 'exit');
+if (idx === i) {
+s.classList.add('active');
+} else if (idx === (i - 1 + slides.length) % slides.length) {
+s.classList.add('exit');
+}
+});
+}
 
-    // show first slide
-    show(current);
+// show first slide
+show(current);
 
-    // auto-advance every 3 seconds
-    setInterval(() => {
-      current = (current + 1) % slides.length;
-      show(current);
-    }, 3000);
-  });
+// auto-advance every 3 seconds
+setInterval(() => {
+current = (current + 1) % slides.length;
+show(current);
+}, 3000);
+});
 </script>
 <script>
 const sortSelect = document.getElementById("sort-select");
 
 sortSelect.addEventListener("change", () => {
-  let sortedProducts = [...products]; // make a copy
+let sortedProducts = [...products]; // make a copy
 
-  switch(sortSelect.value) {
-    case "price-asc":
-      sortedProducts.sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      sortedProducts.sort((a, b) => b.price - a.price);
-      break;
-    case "name-asc":
-      sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "name-desc":
-      sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-      break;
-    default:
-      // keep original order
-      break;
-  }
+switch(sortSelect.value) {
+case "price-asc":
+sortedProducts.sort((a, b) => a.price - b.price);
+break;
+case "price-desc":
+sortedProducts.sort((a, b) => b.price - a.price);
+break;
+case "name-asc":
+sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+break;
+case "name-desc":
+sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+break;
+default:
+// keep original order
+break;
+}
 
-  loadProducts(sortedProducts); // re-render products
+loadProducts(sortedProducts); // re-render products
 });
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
