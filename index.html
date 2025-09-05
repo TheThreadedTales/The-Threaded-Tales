@@ -668,12 +668,8 @@ Add to Cart
 <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
 </ul>
 </div>
-<!-- ✅ Cart replicated inside Product Modal -->
-<div id="modal-cart" class="mt-6 border-t pt-4">
-  <h3 class="text-lg font-semibold mb-2">Your Cart</h3>
-  <ul id="modal-cart-items" class="space-y-4"></ul>
-</div>
-
+<!-- 🛒 Embedded Cart inside Product Modal -->
+  <div id="modal-cart-items" class="mt-6 border-t pt-4 max-h-48 overflow-y-auto">
 </div>
 <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
@@ -758,6 +754,18 @@ function renderCart() {
       `;
       targetList.appendChild(li);
     });
+
+    // ✅ Add total only if cart has items
+    if (cart.length > 0) {
+      const totalElem = document.createElement('li');
+      totalElem.innerHTML = `
+        <hr class="my-2" />
+        <p class="text-right font-semibold text-lg">Total: ₹${total}</p>
+      `;
+      targetList.appendChild(totalElem);
+    }
+  });
+}
 
     // total line
     const totalElem = document.createElement('li');
@@ -1232,5 +1240,6 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
