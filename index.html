@@ -667,6 +667,15 @@ Privacy Policy
     <li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
     <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
   </ul>
+   <!-- ✅ Embedded Cart inside Product Modal -->
+  <div id="modal-cart" class="mt-6 border-t pt-4">
+    <h3 class="text-lg font-semibold mb-2">Your Cart</h3>
+    <div id="modal-cart-items" class="space-y-2"></div>
+    <div class="flex justify-between font-bold mt-2">
+      <span>Total:</span>
+      <span id="modal-cart-total">₹0</span>
+    </div>
+  </div>
 </div>
 
 </div>
@@ -727,14 +736,14 @@ document.getElementById('cart-modal').classList.add('hidden');
 }
 
 function renderCart() {
-const list = document.getElementById('cart-items');
-list.innerHTML = '';
-let total = 0;
+  const list = document.getElementById('cart-items');
+  list.innerHTML = '';
+  let total = 0;
 
-cart.forEach((item, index) => {
-total += item.price * item.qty;
-const li = document.createElement('li');
-li.innerHTML = `
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    const li = document.createElement('li');
+    li.innerHTML = `
       <div class="flex justify-between items-center">
         <div>
           <p><strong>${item.name}</strong></p>
@@ -747,8 +756,37 @@ li.innerHTML = `
         </div>
       </div>
     `;
-list.appendChild(li);
-});
+    list.appendChild(li);
+  });
+
+  const totalElem = document.createElement('li');
+  totalElem.innerHTML = `<hr class="my-2" />
+    <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
+  list.appendChild(totalElem);
+
+  // ✅ Also update embedded cart inside product modal
+  const modalCartItems = document.getElementById("modal-cart-items");
+  const modalCartTotal = document.getElementById("modal-cart-total");
+
+  if (modalCartItems && modalCartTotal) {
+    modalCartItems.innerHTML = "";
+    let modalTotal = 0;
+
+    cart.forEach((item, index) => {
+      modalTotal += item.price * item.qty;
+      const div = document.createElement("div");
+      div.className = "flex justify-between items-center text-sm border-b pb-1";
+      div.innerHTML = `
+        <span>${item.name} (x${item.qty})</span>
+        <span>₹${item.price * item.qty}</span>
+      `;
+      modalCartItems.appendChild(div);
+    });
+
+    modalCartTotal.textContent = "₹" + modalTotal;
+  }
+}
+
 
 const totalElem = document.createElement('li');
 totalElem.innerHTML = `<hr class="my-2" />
@@ -1205,6 +1243,7 @@ sortSelect.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
