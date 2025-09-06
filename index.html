@@ -639,37 +639,37 @@ Privacy Policy
 
 <!-- Right: Product Info -->
 <div>
-<h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
-<p id="modal-product-description" class="text-gray-800 mb-4"></p>
+  <h2 id="modal-product-name" class="text-2xl font-bold mb-2"></h2>
+  <p id="modal-product-description" class="text-gray-800 mb-4"></p>
 
-<!-- ✅ Price block -->
-<div class="flex items-center space-x-2 mb-4">
-<span id="modal-product-price" class="text-lg font-semibold text-green-600"></span>
-<span id="modal-product-original-price" class="text-gray-500 line-through text-sm"></span>
+  <!-- ✅ Price block -->
+  <div class="flex items-center space-x-2 mb-4">
+    <span id="modal-product-price" class="text-lg font-semibold text-green-600"></span>
+    <span id="modal-product-original-price" class="text-gray-500 line-through text-sm"></span>
+  </div>
+
+  <!-- ✅ Quantity Selector -->
+  <div class="flex items-center space-x-4 mb-4">
+    <button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
+    <span id="product-quantity" class="px-4 text-lg font-medium">1</span>
+    <button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
+  </div>
+
+  <!-- ✅ Add to Cart Button BELOW price/qty -->
+  <div class="mb-6">
+    <button id="modal-add-to-cart" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition">
+      Add to Cart
+    </button>
+  </div>
+
+  <!-- ✅ Details list stays below -->
+  <ul class="text-sm space-y-1 mb-4">
+    <li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
+    <li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
+    <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
+  </ul>
 </div>
 
-<!-- ✅ Quantity Selector + Add to Cart (below price, more spacing) -->
-<div class="flex items-center justify-between gap-6 mb-6">
-<div class="flex items-center space-x-4">
-<button id="decrease-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">-</button>
-<span id="product-quantity" class="px-4 text-lg font-medium">1</span>
-<button id="increase-qty" class="px-3 py-1 bg-gray-200 text-blue-600 text-xl rounded">+</button>
-</div>
-
-<button id="modal-add-to-cart" class="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800 transition">
-Add to Cart
-</button>
-</div>
-
-<!-- ✅ Details list stays below -->
-<ul class="text-sm space-y-1 mb-4">
-<li><strong>Fabric:</strong> <span id="modal-fabric"></span></li>
-<li><strong>Dimensions:</strong> <span id="modal-dimensions"></span></li>
-<li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
-</ul>
-</div>
-
-</div>
 <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
 
@@ -1205,3 +1205,4 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
