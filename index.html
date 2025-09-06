@@ -668,8 +668,7 @@ Add to Cart
 <li><strong>Wash Care:</strong> <span id="modal-washcare"></span></li>
 </ul>
 </div>
-<!-- 🛒 Embedded Cart inside Product Modal -->
-  <div id="modal-cart-items" class="mt-6 border-t pt-4 max-h-48 overflow-y-auto">
+
 </div>
 <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-black"></div>
 </div>
@@ -678,7 +677,7 @@ Add to Cart
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let allProducts = [];
-let selectedProduct = null; 
+
 // ✅ Visibility toggle function
 function toggleCartVisibility() {
 const cartModal = document.getElementById('cart-modal');
@@ -728,52 +727,35 @@ document.getElementById('cart-modal').classList.add('hidden');
 }
 
 function renderCart() {
-  const list = document.getElementById('cart-items');       // normal cart
-  const modalList = document.getElementById('modal-cart-items'); // modal cart
+const list = document.getElementById('cart-items');
+list.innerHTML = '';
+let total = 0;
 
-  [list, modalList].forEach(targetList => {
-    if (!targetList) return;
-    targetList.innerHTML = '';
-    let total = 0;
+cart.forEach((item, index) => {
+total += item.price * item.qty;
+const li = document.createElement('li');
+li.innerHTML = `
+     <div class="flex justify-between items-center">
+       <div>
+         <p><strong>${item.name}</strong></p>
+         <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
+         <div class="mt-2 space-x-2">
+           <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
+           <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
+           <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
+         </div>
+       </div>
+     </div>
+   `;
+list.appendChild(li);
+});
 
-    cart.forEach((item, index) => {
-      total += item.price * item.qty;
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <div class="flex justify-between items-center">
-          <div>
-            <p><strong>${item.name}</strong></p>
-            <p>₹${item.price} x ${item.qty} = ₹${item.price * item.qty}</p>
-            <div class="mt-2 space-x-2">
-              <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
-              <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
-              <button onclick="removeItem(${index})" class="ml-2 px-2 py-1 text-red-600">Remove</button>
-            </div>
-          </div>
-        </div>
-      `;
-      targetList.appendChild(li);
-    });
-
-    // ✅ Add total only if cart has items
-    if (cart.length > 0) {
-      const totalElem = document.createElement('li');
-      totalElem.innerHTML = `
-        <hr class="my-2" />
-        <p class="text-right font-semibold text-lg">Total: ₹${total}</p>
-      `;
-      targetList.appendChild(totalElem);
-    }
-  });
+const totalElem = document.createElement('li');
+totalElem.innerHTML = `<hr class="my-2" />
+   <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
+list.appendChild(totalElem);
 }
 
-    // total line
-    const totalElem = document.createElement('li');
-    totalElem.innerHTML = `<hr class="my-2" />
-      <p class="text-right font-semibold text-lg">Total: ₹${total}</p>`;
-    targetList.appendChild(totalElem);
-  });
-}
 function changeQty(index, delta) {
 if (cart[index]) {
 cart[index].qty += delta;
@@ -814,14 +796,6 @@ document.getElementById("product-modal").classList.add("hidden");
 document.getElementById("modal-content").innerHTML = "";
 }
 });
-// ✅ Add-to-cart button inside Product Modal
-document.getElementById("modal-add-to-cart").addEventListener("click", () => {
-  if (selectedProduct) {
-    addToCart(selectedProduct);
-    renderCart(); // refresh both modal + main cart
-  }
-});
-
 // ✅ Close cart modal when clicking outside its content
 document.getElementById("cart-modal").addEventListener("click", (e) => {
   if (e.target === document.getElementById("cart-modal")) {
@@ -998,15 +972,6 @@ modalContent.innerHTML = `
 
          </div>
        `;
-// ✅ Store the product being viewed in modal
-selectedProduct = { 
-  name, 
-  price: discountedPrice, 
-  originalPrice, 
-  description, 
-  details, 
-  images 
-};
 
 modal.classList.remove('hidden');
 
@@ -1240,6 +1205,3 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
-
-
-
