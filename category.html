@@ -598,7 +598,21 @@ let q = parseInt(document.getElementById("modal-quantity").textContent);
 if(q > 1) document.getElementById("modal-quantity").textContent = q - 1;
 };
 
+function openCart() {
+  const cartModal = document.getElementById("cart-modal");
+  cartModal.classList.add("show");
+  cartModal.classList.remove("hidden");
+  renderCart();
+}
+
+function closeCart() {
+  const cartModal = document.getElementById("cart-modal");
+  cartModal.classList.remove("show");
+  setTimeout(() => cartModal.classList.add("hidden"), 600); // match CSS duration
+}
+
 // Cart modal toggles
+  
 document.getElementById("cart-button").onclick = () => document.getElementById("cart-modal").classList.remove("hidden");
 document.getElementById("close-cart").onclick = () => document.getElementById("cart-modal").classList.add("hidden");
 
