@@ -27,12 +27,12 @@ scrollbar-width: none;     /* Firefox */
 display: none;             /* Chrome/Safari */
 }
 /* Bounce drop-down cart modal */
+
 #cart-modal {
   opacity: 0;
   transform: translateY(-100%);
   pointer-events: none;
-  transition: transform 0.6s cubic-bezier(0.68,-0.55,0.27,1.55), 
-              opacity 0.3s ease;
+  transition: transform 0.6s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.3s ease;
 }
 
 #cart-modal.show {
@@ -40,6 +40,7 @@ display: none;             /* Chrome/Safari */
   transform: translateY(0);
   pointer-events: auto;
 }
+
 </style>
 <!-- Launch Offer Banner -->
 <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
@@ -572,6 +573,7 @@ if(existing) existing.qty++;
 else cart.push({...product, qty:1});
 updateCart();
 showToast();
+openCart();
 }
 });
 
@@ -600,21 +602,21 @@ if(q > 1) document.getElementById("modal-quantity").textContent = q - 1;
 
 function openCart() {
   const cartModal = document.getElementById("cart-modal");
+  updateCart();             // Ensure latest cart items are rendered
   cartModal.classList.add("show");
   cartModal.classList.remove("hidden");
-  renderCart();
 }
 
 function closeCart() {
   const cartModal = document.getElementById("cart-modal");
   cartModal.classList.remove("show");
-  setTimeout(() => cartModal.classList.add("hidden"), 600); // match CSS duration
+  setTimeout(() => cartModal.classList.add("hidden"), 600); // Match CSS transition
 }
 
 // Cart modal toggles
   
-document.getElementById("cart-button").onclick = () => document.getElementById("cart-modal").classList.remove("hidden");
-document.getElementById("close-cart").onclick = () => document.getElementById("cart-modal").classList.add("hidden");
+document.getElementById("cart-button").onclick = openCart;
+document.getElementById("close-cart").onclick = closeCart;
 
 // WhatsApp checkout
 document.getElementById("checkout").onclick = () => {
@@ -630,9 +632,9 @@ this.classList.add("hidden");
 });
 // Close modal when clicking outside cart modal content
 document.getElementById("cart-modal").addEventListener("click", function(e) {
-if (e.target === this) {
-this.classList.add("hidden");
-}
+  if (e.target === this) {
+    closeCart(); // uses smooth transition
+  }
 });
 
 </script>
