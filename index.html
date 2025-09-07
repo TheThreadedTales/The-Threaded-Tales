@@ -131,19 +131,19 @@ opacity: 0;
 transform: translateX(-100%);
 }
 /* ✅ Cart modal animation */
+/* ✅ Drop-down bounce cart modal */
 #cart-modal {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.3s ease;
+  transform: translateY(-100%);
   opacity: 0;
-  transform: translateY(-20px); /* start slightly above */
-  pointer-events: none; /* block clicks when hidden */
+  pointer-events: none;
 }
 
 #cart-modal.show {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
   pointer-events: auto;
 }
-
 
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
@@ -1229,6 +1229,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
