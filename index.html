@@ -132,16 +132,18 @@ transform: translateX(-100%);
 }
 /* ✅ Cart modal animation */
 /* ✅ Drop-down bounce cart modal */
+/* ✅ Drop-down bounce cart modal */
+/* Bounce drop-down on the whole cart modal */
 #cart-modal {
-  transition: transform 0.5s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.3s ease;
-  transform: translateY(-100%);
   opacity: 0;
+  transform: translateY(-100%);
   pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.3s ease;
 }
 
 #cart-modal.show {
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
@@ -746,10 +748,8 @@ function openCart() {
 function closeCart() {
   const cartModal = document.getElementById("cart-modal");
   cartModal.classList.remove("show");
-  setTimeout(() => cartModal.classList.add("hidden"), 400); // match CSS transition
+  setTimeout(() => cartModal.classList.add("hidden"), 500); // match CSS duration
 }
-
-
 function renderCart() {
 const list = document.getElementById('cart-items');
 list.innerHTML = '';
@@ -1229,6 +1229,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
