@@ -721,6 +721,9 @@ else cart.push({ ...product, qty: 1 });
 localStorage.setItem("cart", JSON.stringify(cart));
 updateCartCount();
 updateCartButtonVisibility();// ✅ Show cart icon when there’s at least 1 item
+// ✅ Close product modal (so cart isn’t hidden behind it)
+document.getElementById("product-modal").classList.add("hidden");
+document.getElementById("modal-content").innerHTML = "";
  openCart();
 }
 
@@ -1226,5 +1229,6 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
