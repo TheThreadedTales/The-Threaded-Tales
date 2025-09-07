@@ -26,7 +26,20 @@ scrollbar-width: none;     /* Firefox */
 .scrollbar-hide::-webkit-scrollbar {
 display: none;             /* Chrome/Safari */
 }
+/* Bounce drop-down cart modal */
+#cart-modal {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.68,-0.55,0.27,1.55), 
+              opacity 0.3s ease;
+}
 
+#cart-modal.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 </style>
 <!-- Launch Offer Banner -->
 <div class="fixed top-0 left-0 w-full bg-black text-yellow-400 z-50 overflow-hidden py-2">
@@ -571,6 +584,8 @@ if(existing) existing.qty += qty;
 else cart.push({...currentProduct, qty});
 updateCart();
 showToast();
+ document.getElementById("product-modal").classList.add("hidden");
+  openCart();
 };
 
 // Quantity controls
