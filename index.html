@@ -134,14 +134,14 @@ transform: translateX(-100%);
 /* ✅ Drop-down bounce cart modal */
 /* ✅ Drop-down bounce cart modal */
 /* Bounce drop-down on the whole cart modal */
-#cart-modal {
+.cart-modal {
   opacity: 0;
   transform: translateY(-100%);
   pointer-events: none;
   transition: transform 0.5s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.3s ease;
 }
 
-#cart-modal.show {
+.cart-modal.show {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -1229,6 +1229,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
