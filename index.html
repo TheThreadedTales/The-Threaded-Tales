@@ -130,6 +130,21 @@ transform: translateX(0);
 opacity: 0;
 transform: translateX(-100%);
 }
+/* ✅ Cart modal animation */
+#cart-modal {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(-20px); /* start slightly above */
+  pointer-events: none; /* block clicks when hidden */
+}
+
+#cart-modal.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
 @keyframes slideInLeft {
 0% { transform: translateX(-100%); opacity: 0; }
 100% { transform: translateX(0); opacity: 0.25; }
@@ -321,7 +336,7 @@ document.getElementById("mobileMenu").classList.toggle("hidden");
 <div class="absolute inset-0 slideshow">
 <div class="slide" style="background-image: url('images/hero-bg.png.png');"></div>
 <div class="slide" style="background-image: url('images/m2.jpg');"></div>
-<div class="slide" style="background-image: url('images/B1.jpg');"></div>
+<div class="slide" style="background-image: url('images/B1.png');"></div>
 </div>
 
 <!-- Dark overlay -->
@@ -705,7 +720,8 @@ if (existing) existing.qty += 1;
 else cart.push({ ...product, qty: 1 });
 localStorage.setItem("cart", JSON.stringify(cart));
 updateCartCount();
-updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 item
+updateCartButtonVisibility();// ✅ Show cart icon when there’s at least 1 item
+ openCart();
 }
 
 // ✅ Update cart count display (shows total quantity, not just unique products)
@@ -718,13 +734,18 @@ cartCount.classList.toggle("hidden", totalQty === 0); // hides badge if cart emp
 
 
 function openCart() {
-document.getElementById('cart-modal').classList.remove('hidden');
-renderCart();
+  const cartModal = document.getElementById("cart-modal");
+  cartModal.classList.add("show");
+  cartModal.classList.remove("hidden");
+  renderCart();
 }
 
 function closeCart() {
-document.getElementById('cart-modal').classList.add('hidden');
+  const cartModal = document.getElementById("cart-modal");
+  cartModal.classList.remove("show");
+  setTimeout(() => cartModal.classList.add("hidden"), 400); // match CSS transition
 }
+
 
 function renderCart() {
 const list = document.getElementById('cart-items');
@@ -1205,4 +1226,5 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
