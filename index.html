@@ -483,13 +483,12 @@ Stitched every thread with care, our products are created using Animal Cruelty-f
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   new Swiper(".categories-carousel", {
-    slidesPerView: 1,
+    slidesPerView: 2,   // ✅ show 2 even on small mobiles
     spaceBetween: 16,
-    loop: true,
+    loop: true,         // ✅ still loops
     breakpoints: {
-      640: { slidesPerView: 2 },   // 2 cards on mobile
-      768: { slidesPerView: 3 },   // 3 cards on tablet
-      1024: { slidesPerView: 4 },  // 4 cards on desktop
+      768: { slidesPerView: 3 },   // tablet
+      1024: { slidesPerView: 4 },  // desktop
     },
   });
 });
@@ -1272,6 +1271,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
