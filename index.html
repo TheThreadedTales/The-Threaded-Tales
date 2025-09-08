@@ -7,6 +7,9 @@
 
 <!-- Tailwind & Lottie -->
 <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 <!-- Fonts -->
@@ -390,68 +393,87 @@ Stitched every thread with care, our products are created using Animal Cruelty-f
 <h2 class="text-3xl font-bold text-center mb-10">SHOP BY CATEGORIES</h2>
 
 <!-- Categories Grid -->
-<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Categories Carousel -->
+<div class="swiper categorySwiper">
+  <div class="swiper-wrapper">
 
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=BEDSHEETS" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/Minimalist Grey.jpeg" alt="BEDSHEETS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">BEDSHEETS</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- Category Card -->
-<a href="category.html?category=BEDSHEETS" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/Minimalist Grey.jpeg" alt="BEDSHEETS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">BEDSHEETS</h3>
-</div>
-</div>
-</a>
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=DOORMATS%20%26%20RUGS" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/Doormat1.jpeg" alt="DOORMATS & RUGS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">DOORMATS & RUGS</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- Category Card -->
-<a href="category.html?category=DOORMATS%20%26%20RUGS" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/Doormat1.jpeg" alt="DOORMATS & RUGS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">DOORMATS & RUGS</h3>
-</div>
-</div>
-</a>
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=COMFORTERS" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/comfort1.jpeg" alt="COMFORTERS" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">COMFORTERS</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- Category Card -->
-<a href="category.html?category=COMFORTERS" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/comfort1.jpeg" alt="COMFORTERS" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">COMFORTERS</h3>
-</div>
-</div>
-</a>
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=Organizers" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/tissue1.jpeg" alt="Organizers" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">Organizers</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- Category Card -->
-<a href="category.html?category=Organizers" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/tissue1.jpeg" alt="Organizers" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">Organizers</h3>
-</div>
-</div>
-</a>
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=Table%20Mats" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/mat1.jpeg" alt="Table Mats" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">Table Mats</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- New Category -->
-<a href="category.html?category=Table%20Mats" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/mat1.jpeg" alt="Table Mats" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">Table Mats</h3>
-</div>
-</div>
-</a>
+    <!-- Category Card -->
+    <div class="swiper-slide">
+      <a href="category.html?category=HandBags" class="group block">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
+          <img src="images/bag1.jpeg" alt="HandBags" class="w-full h-56 object-cover group-hover:scale-105 transition">
+          <div class="p-4 text-center">
+            <h3 class="text-lg font-semibold text-gray-800">HandBags</h3>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<a href="category.html?category=HandBags" class="group block">
-<div class="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1">
-<img src="images/bag1.jpeg" alt="HandBags" class="w-full h-56 object-cover group-hover:scale-105 transition">
-<div class="p-4 text-center">
-<h3 class="text-lg font-semibold text-gray-800">HandBags</h3>
-</div>
-</div>
-</a>
+  </div>
 
+  <!-- ✅ Navigation arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </div>
 </div>
 </section>
@@ -1231,8 +1253,27 @@ break;
 loadProducts(sortedProducts); // re-render products
 });
 </script>
+<!-- ✅ Swiper Initialization -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  new Swiper(".categories-carousel", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 4 },
+    },
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
