@@ -392,7 +392,7 @@ Stitched every thread with care, our products are created using Animal Cruelty-f
     <h2 class="text-3xl font-bold text-center mb-10">SHOP BY CATEGORIES</h2>
 
     <!-- ✅ Swiper Wrapper -->
-    <div class="swiper categories-carousel">
+    <div class="swiper categories-carousel w-full relative">
       <div class="swiper-wrapper">
 
         <!-- Category Card -->
@@ -468,7 +468,10 @@ Stitched every thread with care, our products are created using Animal Cruelty-f
         </div>
 
       </div>
-     
+
+      <!-- ✅ Navigation Buttons -->
+      <div class="swiper-button-prev !text-gray-700"></div>
+      <div class="swiper-button-next !text-gray-700"></div>
     </div>
   </div>
 </section>
@@ -483,9 +486,13 @@ Stitched every thread with care, our products are created using Animal Cruelty-f
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   new Swiper(".categories-carousel", {
-    slidesPerView: 2,   // ✅ show 2 even on small mobiles
+    slidesPerView: 2,    // ✅ force 2 on mobile
     spaceBetween: 16,
-    loop: true,         // ✅ still loops
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
     breakpoints: {
       768: { slidesPerView: 3 },   // tablet
       1024: { slidesPerView: 4 },  // desktop
@@ -1271,6 +1278,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
