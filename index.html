@@ -1017,9 +1017,15 @@ modalContent.innerHTML = `
              <h2 class="text-2xl font-bold">${name}</h2>
              <p class="text-sm text-gray-600 mt-1">${description}</p>
              <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+              <!-- ✅ Quantity selector + Add To Cart -->
+<div class="flex items-center space-x-2 mt-3">
+  <button class="qty-decrease px-3 py-1 border rounded">-</button>
+  <span class="qty-value px-4">1</span>
+  <button class="qty-increase px-3 py-1 border rounded">+</button>
               <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
  Add To Cart
 </button>
+</div>
              <div class="mt-4 text-sm space-y-1 text-gray-800">
  <p><span class="font-semibold">Fabric:</span> ${details.fabric || 'N/A'}</p>
  <p><span class="font-semibold">Dimensions:</span> ${details.dimensions || 'N/A'}</p>
@@ -1045,11 +1051,28 @@ modalContent.innerHTML = `
        `;
 
 modal.classList.remove('hidden');
+  // 🆕 Quantity selector logic
+let qty = 1;
+const qtyValue = modalContent.querySelector(".qty-value");
+const decreaseBtn = modalContent.querySelector(".qty-decrease");
+const increaseBtn = modalContent.querySelector(".qty-increase");
+
+decreaseBtn.addEventListener("click", () => {
+  if (qty > 1) {
+    qty--;
+    qtyValue.textContent = qty;
+  }
+});
+
+increaseBtn.addEventListener("click", () => {
+  qty++;
+  qtyValue.textContent = qty;
+});
 
 // 🆕 Add to cart from modal
 modalContent.querySelector('.add-to-cart').addEventListener('click', () => {
-addToCart({ name, price: discountedPrice });
-showAddToCartToast(); 
+  addToCart({ id: product.id, name, price: discountedPrice }, qty); 
+  showAddToCartToast(); 
 });
 
 // 🔁 Left/right arrow handlers
@@ -1276,6 +1299,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
