@@ -2,35 +2,39 @@
   {
     "id": "d1",
     "tag": "✨ Diwali Special ✨",
-    "name": "Festive Handloom Rangoli Mat",
-    "price": 799,
+    "name": "Festive Diwali Special Jute Bag",
+    "price": 549,
     "images": [
-      "images/diwali1.jpg",
-      "images/diwali2.jpg"
+      "images/DB1.jpeg",
+      "images/DB2.jpeg",
+      "images/DB3.jpeg",
+      "images/DB4.jpeg",
+      "images/DB5.jpeg"
     ],
-    "description": "Brighten your Diwali with our handcrafted rangoli-inspired mat.",
+    "description": "Brighten your Diwali with our handcrafted Diwali Jute Bags.",
     "details": {
-      "fabric": "Premium handwoven cotton",
-      "dimensions": "50 x 70 cm",
+      "fabric": "Premium handwoven Jute",
+      "dimensions": "7 x 7 inch",
       "washCare": "Gentle hand wash",
-      "otherDetails": "Perfect for festive home décor."
+      "otherDetails": "Perfect for gifting to your loved ones.weight: 450gms"
     }
   },
   {
     "id": "d2",
     "tag": "🪔 Diwali Decor",
-    "name": "Handloom Diyas Runner",
-    "price": 1299,
+    "name": "Diwali Special Round Dry Fruit Tray(Round)",
+    "price": 599,
     "images": [
-      "images/diwali-runner1.jpg",
-      "images/diwali-runner2.jpg"
+      "images/round1.jpeg",
+      "images/round2.jpeg",
+       "images/round3.jpeg"
     ],
-    "description": "A stunning festive table runner to elevate your Diwali décor.",
+    "description": "A stunning festive table runner to elevate your Diwali décor. SET OF 1 LOWER TRAY  2 BOWL 1 TRAY COVER",
     "details": {
-      "fabric": "Silk blend",
-      "dimensions": "150 x 40 cm",
-      "washCare": "Dry clean only",
-      "otherDetails": "Intricate diya patterns woven with gold thread."
+      "fabric": "Premium Quality Jute",
+      "dimensions": "10inch",
+      "washCare": "mild handwash",
+      "otherDetails": "This rope dry fruit tray set can be used to store dry fruit home organisers items,return gift for wedding,multifunctional kitchen shelf,wedding gift etc. weight: 400grams"
     }
   }
 ]
