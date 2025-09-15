@@ -1225,51 +1225,55 @@ card.querySelector('.view-details').addEventListener('click', () => {
   }
 }
   // ✅ Reusable modal function for both handloom + diwali
-function openProductModal(productId, source = 'handloom') {
-  const products = source === 'diwali' ? window.diwaliProducts : window.allProducts;
+function openProductModal(productId, source = "handloom") {
+  const products = source === "diwali" ? window.diwaliProducts : window.allProducts;
   const product = products.find(p => p.id === productId);
+
   if (!product) return;
 
-  // Update modal fields
+  // ✅ Set modal title & description
   document.getElementById("modal-product-name").textContent = product.name;
   document.getElementById("modal-product-description").textContent = product.description;
+
+  // ✅ Price
   document.getElementById("modal-product-price").textContent = `₹${product.price}`;
 
-  // ✅ Thumbnails + main image
-  const mainImage = document.getElementById("modal-main-image");
-  const thumbnails = document.getElementById("modal-thumbnails");
-  thumbnails.innerHTML = "";
-  if (product.images && product.images.length) {
-    mainImage.src = product.images[0];
-    product.images.forEach((img, i) => {
-      const thumb = document.createElement("img");
-      thumb.src = img;
-      thumb.className = "w-16 h-16 object-cover border cursor-pointer";
-      if (i === 0) thumb.classList.add("border-black");
-      thumb.addEventListener("click", () => {
-        mainImage.src = img;
-        thumbnails.querySelectorAll("img").forEach(t => t.classList.remove("border-black"));
-        thumb.classList.add("border-black");
-      });
-      thumbnails.appendChild(thumb);
-    });
-  }
+  // ✅ Render images (main + thumbnails, same as your current logic)
+  const mainImg = document.getElementById("modal-main-image");
+  mainImg.src = product.images[0];
+  const thumbs = document.getElementById("modal-thumbnails");
+  thumbs.innerHTML = "";
+  product.images.forEach(img => {
+    const thumb = document.createElement("img");
+    thumb.src = img;
+    thumb.className = "w-16 h-16 object-cover cursor-pointer border rounded";
+    thumb.addEventListener("click", () => mainImg.src = img);
+    thumbs.appendChild(thumb);
+  });
 
-  // ✅ Reset quantity
-  const qtyInput = document.querySelector("#product-modal .qty-input");
-  if (qtyInput) qtyInput.value = 1;
+  // ✅ Details
+  const detailsDiv = document.getElementById("modal-product-details");
+  detailsDiv.innerHTML = `
+    <p><strong>Fabric:</strong> ${product.details.fabric}</p>
+    <p><strong>Dimensions:</strong> ${product.details.dimensions}</p>
+    <p><strong>Wash Care:</strong> ${product.details.washCare}</p>
+    <p><strong>Other:</strong> ${product.details.otherDetails}</p>
+  `;
 
-  // ✅ Add to cart button
-  const modalAddToCart = document.getElementById("modal-add-to-cart");
-  modalAddToCart.onclick = () => {
-    const qty = parseInt(qtyInput.value) || 1;
-    addToCart({ id: product.id, name: product.name, price: product.price }, qty);
-    showAddToCartToast();
+  // ✅ Quantity reset
+  document.getElementById("modal-quantity").value = 1;
+
+  // ✅ Add to Cart button
+  const addBtn = document.getElementById("modal-add-to-cart");
+  addBtn.onclick = () => {
+    addToCart(product);
+    closeModal();
   };
 
-  // ✅ Show modal
+  // ✅ Finally show modal
   document.getElementById("product-modal").classList.remove("hidden");
 }
+
 
 window.addEventListener('DOMContentLoaded', loadDiwaliProducts);
 </script>
@@ -1429,6 +1433,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
