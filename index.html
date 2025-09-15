@@ -1192,9 +1192,49 @@ async function loadDiwaliProducts() {
       // ✅ View details = open modal with same logic
       // ✅ View details = open modal with same logic
 card.querySelector('.view-details').addEventListener('click', () => {
-  openProductModal(product.id, 'diwali');
-});
+  const modal = document.getElementById('product-modal');
+  const modalContent = document.getElementById('modal-content');
+  let currentImageIndex = 0;
 
+  function renderModalImage() {
+    return `<img src="${images[currentImageIndex]}" 
+               id="main-modal-image"
+               class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
+  }
+
+  modalContent.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
+      <div>
+        <div class="relative">
+          ${renderModalImage()}
+          <!-- arrows here... -->
+        </div>
+        <div class="flex mt-2 space-x-2 overflow-x-auto">
+          ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+        </div>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold">${name}</h2>
+        <p class="text-sm text-gray-600 mt-1">${description}</p>
+        <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
+
+        <!-- Quantity selector + Add to Cart -->
+        <div class="flex items-center space-x-2 mt-3">
+          <button class="qty-decrease px-3 py-1 border rounded">-</button>
+          <span class="qty-value px-4">1</span>
+          <button class="qty-increase px-3 py-1 border rounded">+</button>
+          <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.classList.remove('hidden');
+
+  // quantity logic, add-to-cart, arrows, fullscreen click...
+});
       // ✅ Hover slideshow
       let interval;
       let currentImage = 0;
@@ -1433,6 +1473,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
