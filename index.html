@@ -501,14 +501,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<!-- ✅ Diwali Featured Section -->
 <section id="diwali-featured" class="py-12 bg-yellow-50">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-yellow-800 mb-8">
-      ✨ Diwali Specials ✨
-    </h2>
-    <div id="featured-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <h2 class="text-3xl font-bold text-center text-yellow-700 mb-8">✨ Diwali Specials ✨</h2>
+    <div id="diwali-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </div>
 </section>
+
 
 <!-- Products -->
 <section class="py-16 px-6 md:px-20 bg-white" id="products">
@@ -1150,7 +1150,129 @@ toast.classList.add("opacity-0");
 }
 window.addEventListener('DOMContentLoaded', loadProducts);
 </script>
+<script>
+async function loadDiwaliProducts() {
+  try {
+    const response = await fetch('./diwali.json');
+    const diwaliProducts = await response.json();
+    const diwaliGrid = document.getElementById('diwali-grid');
+    diwaliGrid.innerHTML = "";
 
+    diwaliProducts.forEach((product, index) => {
+      const { name, description, price: originalPrice, images = [], details = {} } = product;
+      const discountedPrice = product.discountedPrice || product.price; // if you want discounts, adapt here
+      const imageId = `diwali-image-${index}`;
+
+      const card = document.createElement('div');
+      card.className = 'bg-white border border-yellow-200 overflow-hidden transform hover:scale-105 transition w-full';
+      card.innerHTML = `
+        <div class="relative h-72 overflow-hidden">
+          <img src="${images[0]}" id="${imageId}" class="w-full h-full object-cover transition-all duration-300 ease-in-out" />
+          ${product.tag ? `<span class="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded text-xs">${product.tag}</span>` : ""}
+        </div>
+        <div class="p-4">
+          <h3 class="text-xl font-semibold cursor-pointer hover:underline">${name}</h3>
+          <p class="text-gray-600 text-sm mt-1">${description}</p>
+          <p class="text-green-600 font-bold mt-2">₹${discountedPrice}</p>
+          <button class="add-to-cart mt-2 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+            Add To Cart
+          </button>
+          <button class="view-details mt-3 w-full px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
+            View Details
+          </button>
+        </div>
+      `;
+
+      // ✅ Add to cart
+      card.querySelector('.add-to-cart').addEventListener('click', () => {
+        addToCart({ id: product.id, name, price: discountedPrice });
+        showAddToCartToast();
+      });
+
+      // ✅ View details = open modal with same logic
+      // ✅ View details = open modal with same logic
+card.querySelector('.view-details').addEventListener('click', () => {
+  openProductModal(product.id, './diwali.json');
+});
+
+      // ✅ Hover slideshow
+      let interval;
+      let currentImage = 0;
+      card.addEventListener('mouseenter', () => {
+        if (images.length > 1) {
+          interval = setInterval(() => {
+            currentImage = (currentImage + 1) % images.length;
+            const img = document.getElementById(imageId);
+            if (img) img.src = images[currentImage];
+          }, 1000);
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        const img = document.getElementById(imageId);
+        if (img) img.src = images[0];
+      });
+
+      diwaliGrid.appendChild(card);
+    });
+
+    // ✅ Store globally for modal access
+    window.diwaliProducts = diwaliProducts;
+
+  } catch (error) {
+    console.error("Failed to load Diwali products:", error);
+    document.getElementById('diwali-grid').innerHTML = "<p class='text-center text-red-500'>Unable to load Diwali products. Please try again later.</p>";
+  }
+}
+  // ✅ Reusable modal function for both handloom + diwali
+function openProductModal(productId, source = 'handloom') {
+  const products = source === 'diwali' ? window.diwaliProducts : window.allProducts;
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  // Update modal fields
+  document.getElementById("modal-product-name").textContent = product.name;
+  document.getElementById("modal-product-description").textContent = product.description;
+  document.getElementById("modal-product-price").textContent = `₹${product.price}`;
+
+  // ✅ Thumbnails + main image
+  const mainImage = document.getElementById("modal-main-image");
+  const thumbnails = document.getElementById("modal-thumbnails");
+  thumbnails.innerHTML = "";
+  if (product.images && product.images.length) {
+    mainImage.src = product.images[0];
+    product.images.forEach((img, i) => {
+      const thumb = document.createElement("img");
+      thumb.src = img;
+      thumb.className = "w-16 h-16 object-cover border cursor-pointer";
+      if (i === 0) thumb.classList.add("border-black");
+      thumb.addEventListener("click", () => {
+        mainImage.src = img;
+        thumbnails.querySelectorAll("img").forEach(t => t.classList.remove("border-black"));
+        thumb.classList.add("border-black");
+      });
+      thumbnails.appendChild(thumb);
+    });
+  }
+
+  // ✅ Reset quantity
+  const qtyInput = document.querySelector("#product-modal .qty-input");
+  if (qtyInput) qtyInput.value = 1;
+
+  // ✅ Add to cart button
+  const modalAddToCart = document.getElementById("modal-add-to-cart");
+  modalAddToCart.onclick = () => {
+    const qty = parseInt(qtyInput.value) || 1;
+    addToCart({ id: product.id, name: product.name, price: product.price }, qty);
+    showAddToCartToast();
+  };
+
+  // ✅ Show modal
+  document.getElementById("product-modal").classList.remove("hidden");
+}
+
+window.addEventListener('DOMContentLoaded', loadDiwaliProducts);
+</script>
 
 </script>
 <!-- Scroll Animation for Artisan Images -->
@@ -1305,52 +1427,9 @@ break;
 loadProducts(sortedProducts); // re-render products
 });
 </script>
-
-<script>
-async function loadFeatured() {
-  try {
-    const response = await fetch("./diwali.json");
-    const featured = await response.json();
-
-    const featuredGrid = document.getElementById("featured-grid");
-    featuredGrid.innerHTML = "";
-
-    featured.forEach((product) => {
-      const card = document.createElement("div");
-      card.className =
-        "bg-white border border-yellow-200 rounded-lg shadow hover:shadow-lg transform hover:scale-105 transition duration-300";
-
-      card.innerHTML = `
-        <div class="relative h-60 overflow-hidden">
-          <img src="${product.images[0]}" class="w-full h-full object-cover transition-all duration-300" />
-          <span class="absolute top-2 left-2 bg-yellow-400 text-white px-2 py-1 text-xs font-semibold rounded">
-            ${product.tag || "Featured"}
-          </span>
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
-          <p class="text-gray-700 text-sm mb-3">${product.description}</p>
-          <p class="text-green-600 font-bold text-lg mb-4">₹${product.price}</p>
-          <button
-            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg font-medium"
-            onclick='openProductModal(${JSON.stringify(product).replace(/"/g, "&quot;")})'>
-            View Details
-          </button>
-        </div>
-      `;
-
-      featuredGrid.appendChild(card);
-    });
-  } catch (err) {
-    console.error("Error loading Diwali products:", err);
-  }
-}
-
-// Load Diwali section immediately
-loadFeatured();
-</script>
 </body>
 </html>
+
 
 
 
