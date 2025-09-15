@@ -1305,37 +1305,40 @@ break;
 loadProducts(sortedProducts); // re-render products
 });
 </script>
+
 <script>
 async function loadFeatured() {
   try {
-    const response = await fetch("./diwali.json");
+    const response = await fetch("./diwali_products.json");
     const featured = await response.json();
 
     const featuredGrid = document.getElementById("featured-grid");
     featuredGrid.innerHTML = "";
 
-    featured.forEach((item) => {
+    featured.forEach((product) => {
       const card = document.createElement("div");
       card.className =
         "bg-white border border-yellow-200 rounded-lg shadow hover:shadow-lg transform hover:scale-105 transition duration-300";
 
       card.innerHTML = `
         <div class="relative h-60 overflow-hidden">
-          <img src="${item.images[0]}" class="w-full h-full object-cover" />
+          <img src="${product.images[0]}" class="w-full h-full object-cover transition-all duration-300" />
           <span class="absolute top-2 left-2 bg-yellow-400 text-white px-2 py-1 text-xs font-semibold rounded">
-            ${item.tag || "Featured"}
+            ${product.tag || "Featured"}
           </span>
         </div>
         <div class="p-4">
-          <h3 class="text-lg font-semibold mb-2">${item.name}</h3>
-          <p class="text-gray-700 text-sm mb-3">${item.description}</p>
-          <p class="text-green-600 font-bold text-lg mb-4">₹${item.price}</p>
-          <button onclick='openProductModal(${JSON.stringify(item).replace(/"/g, "&quot;")})'
-            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg font-medium">
+          <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
+          <p class="text-gray-700 text-sm mb-3">${product.description}</p>
+          <p class="text-green-600 font-bold text-lg mb-4">₹${product.price}</p>
+          <button
+            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg font-medium"
+            onclick='openProductModal(${JSON.stringify(product).replace(/"/g, "&quot;")})'>
             View Details
           </button>
         </div>
       `;
+
       featuredGrid.appendChild(card);
     });
   } catch (err) {
@@ -1343,13 +1346,12 @@ async function loadFeatured() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadFeatured();
-  loadProducts(); // your existing loader for handloom_products.json
-});
+// Load Diwali section immediately
+loadFeatured();
 </script>
 </body>
 </html>
+
 
 
 
