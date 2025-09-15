@@ -1309,7 +1309,7 @@ loadProducts(sortedProducts); // re-render products
 <script>
 async function loadFeatured() {
   try {
-    const response = await fetch("./diwali_products.json");
+    const response = await fetch("./diwali.json");
     const featured = await response.json();
 
     const featuredGrid = document.getElementById("featured-grid");
@@ -1351,6 +1351,7 @@ loadFeatured();
 </script>
 </body>
 </html>
+
 
 
 
