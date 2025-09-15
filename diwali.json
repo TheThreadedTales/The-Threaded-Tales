@@ -1,0 +1,36 @@
+[
+  {
+    "id": "d1",
+    "tag": "✨ Diwali Special ✨",
+    "name": "Festive Handloom Rangoli Mat",
+    "price": 799,
+    "images": [
+      "images/diwali1.jpg",
+      "images/diwali2.jpg"
+    ],
+    "description": "Brighten your Diwali with our handcrafted rangoli-inspired mat.",
+    "details": {
+      "fabric": "Premium handwoven cotton",
+      "dimensions": "50 x 70 cm",
+      "washCare": "Gentle hand wash",
+      "otherDetails": "Perfect for festive home décor."
+    }
+  },
+  {
+    "id": "d2",
+    "tag": "🪔 Diwali Decor",
+    "name": "Handloom Diyas Runner",
+    "price": 1299,
+    "images": [
+      "images/diwali-runner1.jpg",
+      "images/diwali-runner2.jpg"
+    ],
+    "description": "A stunning festive table runner to elevate your Diwali décor.",
+    "details": {
+      "fabric": "Silk blend",
+      "dimensions": "150 x 40 cm",
+      "washCare": "Dry clean only",
+      "otherDetails": "Intricate diya patterns woven with gold thread."
+    }
+  }
+]
