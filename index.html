@@ -1209,7 +1209,7 @@ let currentImageIndex = 0;
 function renderModalImage() {
 return `<img src="${images[currentImageIndex]}" 
               id="main-modal-image"
-              class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
+              class="w-full h-80 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
 }
 
 modalContent.innerHTML = `
@@ -1220,7 +1220,7 @@ modalContent.innerHTML = `
          <!-- arrows here... -->
        </div>
        <div class="flex mt-2 space-x-2 overflow-x-auto">
-         ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
+         ${images.map((img, i) => `<img src="${img}" class="w-24 h-24 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
        </div>
      </div>
      <div>
@@ -1296,7 +1296,7 @@ thumbs.innerHTML = "";
 product.images.forEach(img => {
 const thumb = document.createElement("img");
 thumb.src = img;
-thumb.className = "w-16 h-16 object-cover cursor-pointer border rounded";
+thumb.className = "w-20 h-20 object-cover cursor-pointer border rounded";
 thumb.addEventListener("click", () => mainImg.src = img);
 thumbs.appendChild(thumb);
 });
@@ -1498,5 +1498,6 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
