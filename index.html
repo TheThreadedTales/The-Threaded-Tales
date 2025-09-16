@@ -1318,7 +1318,7 @@ function openProductModal(productId, source = "handloom") {
   };
 
   // ✅ Add to cart with correct qty
-  const addBtn = document.getElementById("modal-add-to-cart");
+  const addBtn = document.getElementById(".add-to-cart");
   addBtn.onclick = () => {
     const qty = parseInt(document.getElementById("modal-quantity").value);
     addToCart(product, qty);
@@ -1488,6 +1488,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
