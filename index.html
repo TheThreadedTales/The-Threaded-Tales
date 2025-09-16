@@ -501,13 +501,41 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- ✅ Diwali Featured Section -->
-<section id="diwali-featured" class="py-12 bg-yellow-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-yellow-700 mb-8">✨ Diwali Specials ✨</h2>
-    <div id="diwali-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+<!-- ✅ Diwali Modal -->
+<div id="diwali-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6 relative">
+    <button onclick="closeModal('diwali-')" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Left: Images -->
+      <div>
+        <img id="diwali-modal-main-image" src="" class="w-full h-72 object-cover rounded">
+        <div id="diwali-modal-thumbnails" class="flex mt-3 space-x-2 overflow-x-auto"></div>
+      </div>
+      
+      <!-- Right: Info -->
+      <div>
+        <h2 id="diwali-modal-name" class="text-2xl font-bold"></h2>
+        <p id="diwali-modal-description" class="text-gray-600 mt-2"></p>
+        <p id="diwali-modal-price" class="text-lg font-semibold text-green-700 mt-2"></p>
+
+        <!-- ✅ Specs -->
+        <ul id="diwali-modal-specs" class="mt-3 text-sm text-gray-700 list-disc list-inside"></ul>
+
+        <!-- ✅ Quantity + Add to Cart -->
+        <div class="flex items-center space-x-3 mt-4">
+          <button id="diwali-qty-decrease" class="px-3 py-1 border rounded">-</button>
+          <span id="diwali-qty" class="px-4">1</span>
+          <button id="diwali-qty-increase" class="px-3 py-1 border rounded">+</button>
+        </div>
+        <button id="diwali-add-to-cart" 
+                class="mt-4 w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 rounded">
+          Add to Cart
+        </button>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 
 <!-- Products -->
@@ -752,6 +780,7 @@ Privacy Policy
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let allProducts = [];
 
+
 // ✅ Visibility toggle function
 function toggleCartVisibility() {
 const cartModal = document.getElementById('cart-modal');
@@ -773,18 +802,19 @@ cartButton.classList.remove('hidden');
 cartButton.classList.add('hidden');
 }
 }
-function addToCart(product) {
-const existing = cart.find(p => p.name === product.name);
-if (existing) existing.qty += 1;
-else cart.push({ ...product, qty: 1 });
-localStorage.setItem("cart", JSON.stringify(cart));
-updateCartCount();
-updateCartButtonVisibility();// ✅ Show cart icon when there’s at least 1 item
-// ✅ Close product modal (so cart isn’t hidden behind it)
-document.getElementById("product-modal").classList.add("hidden");
-document.getElementById("modal-content").innerHTML = "";
- openCart();
+function addToCart(product, qty = 1) {
+  const existing = cart.find(p => p.name === product.name);
+  if (existing) existing.qty += qty;
+  else cart.push({ ...product, qty });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  updateCartButtonVisibility(); // ✅ Show cart icon when there’s at least 1 item
+  // ✅ Close product modal (so cart isn’t hidden behind it)
+  document.getElementById("product-modal").classList.add("hidden");
+  document.getElementById("modal-content").innerHTML = "";
+  openCart();
 }
+
 
 // ✅ Update cart count display (shows total quantity, not just unique products)
 function updateCartCount() {
@@ -1192,49 +1222,9 @@ async function loadDiwaliProducts() {
       // ✅ View details = open modal with same logic
       // ✅ View details = open modal with same logic
 card.querySelector('.view-details').addEventListener('click', () => {
-  const modal = document.getElementById('product-modal');
-  const modalContent = document.getElementById('modal-content');
-  let currentImageIndex = 0;
-
-  function renderModalImage() {
-    return `<img src="${images[currentImageIndex]}" 
-               id="main-modal-image"
-               class="w-full h-72 object-cover rounded transition-transform duration-300 cursor-zoom-in hover:scale-105" />`;
-  }
-
-  modalContent.innerHTML = `
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
-      <div>
-        <div class="relative">
-          ${renderModalImage()}
-          <!-- arrows here... -->
-        </div>
-        <div class="flex mt-2 space-x-2 overflow-x-auto">
-          ${images.map((img, i) => `<img src="${img}" class="w-20 h-20 object-cover rounded border hover:border-blue-600 cursor-pointer" onclick="document.getElementById('main-modal-image').src='${img}'; currentImageIndex=${i}" />`).join('')}
-        </div>
-      </div>
-      <div>
-        <h2 class="text-2xl font-bold">${name}</h2>
-        <p class="text-sm text-gray-600 mt-1">${description}</p>
-        <div class="mt-2 text-lg font-semibold text-green-700">₹${discountedPrice} <span class="text-sm text-gray-500 line-through ml-2">₹${originalPrice}</span></div>
-
-        <!-- Quantity selector + Add to Cart -->
-        <div class="flex items-center space-x-2 mt-3">
-          <button class="qty-decrease px-3 py-1 border rounded">-</button>
-          <span class="qty-value px-4">1</span>
-          <button class="qty-increase px-3 py-1 border rounded">+</button>
-          <button class="add-to-cart mt-4 px-4 py-2 bg-white text-black border border-black rounded hover:bg-black hover:text-white transition">
-            Add To Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  modal.classList.remove('hidden');
-
-  // quantity logic, add-to-cart, arrows, fullscreen click...
+  openProductModal(product.id, "diwali");
 });
+
       // ✅ Hover slideshow
       let interval;
       let currentImage = 0;
@@ -1318,7 +1308,7 @@ function openProductModal(productId, source = "handloom") {
   };
 
   // ✅ Add to cart with correct qty
-  const addBtn = document.getElementById(".add-to-cart");
+  const addBtn = document.querySelector("#product-modal .add-to-cart");
   addBtn.onclick = () => {
     const qty = parseInt(document.getElementById("modal-quantity").value);
     addToCart(product, qty);
@@ -1329,8 +1319,14 @@ function openProductModal(productId, source = "handloom") {
   document.getElementById("product-modal").classList.remove("hidden");
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+  loadProducts();
+  loadDiwaliProducts();
+  updateCartCount();
+  renderCart();
+  updateCartButtonVisibility();
+});
 
-window.addEventListener('DOMContentLoaded', loadDiwaliProducts);
 </script>
 
 </script>
@@ -1488,6 +1484,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
