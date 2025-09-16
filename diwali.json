@@ -1,6 +1,42 @@
-[
+[ 
   {
     "id": "d1",
+    "tag": "✨ Diwali Special ✨",
+    "name": "Colorful Rangoli Placemat for Home Décor - Peacock",
+    "price": 549,
+    "images": [
+      "images/peacock1.jpeg",
+      "images/peacock2.jpeg",
+    ],
+    "description": "Brighten your Diwali with these diwali special place mats. Special Festival Decorative Floor Mat for Entrance, Pooja Room & Living Room",
+    "details": {
+      "fabric": "Soft Velvet",
+      "dimensions": "60 X 60 cms",
+      "washCare": "Machine wash",
+      "otherDetails": "Ideal for saving time and decorating your home in a new way."
+    }
+  },
+  {
+    "id": "d2",
+    "tag": "✨ Diwali Special ✨",
+    "name": "Colorful Floral Rangoli Placemat for Home Décor",
+    "price": 549,
+    "images": [
+      "images/rangoli1 (3).jpeg",
+      "images/rangoli2 (3).jpeg",
+      "images/rangoli3 (3).jpeg",
+      "images/rangoli4 (3).jpeg"
+    ],
+    "description": "Brighten your Diwali with these diwali special place mats. Special Festival Decorative Floor Mat for Entrance, Pooja Room & Living Room",
+    "details": {
+      "fabric": "Soft Velvet",
+      "dimensions": "60 X 60 cms",
+      "washCare": "Machine wash",
+      "otherDetails": "Ideal for saving time and decorating your home in a new way."
+    }
+  },
+  {
+    "id": "d3",
     "tag": "✨ Diwali Special ✨",
     "name": "Festive Diwali Special Jute Bag",
     "price": 549,
@@ -20,7 +56,7 @@
     }
   },
   {
-    "id": "d2",
+    "id": "d4",
     "tag": "🪔 Diwali Decor",
     "name": "Diwali Special Round Dry Fruit Tray(Round)",
     "price": 599,
