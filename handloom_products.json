@@ -3,7 +3,7 @@
     "id": 1,
     "category": "DOORMATS & RUGS",
     "name": " Premium Soft Feel Door Mat/ Bath Mat",
-    "price": 440,
+    "price": 498,
     "images": [
       "images/rabbit1.jpeg",
       "images/rabbit2.jpeg",
@@ -26,7 +26,7 @@
     "id": 2,
     "category": "BEDSHEETS",
     "name": " Kids Unicorn Printed Elastic Fitted Bedsheet",
-    "price": 900,
+    "price": 898,
     "images": [
       "images/kids1.jpeg",
       "images/kids2.jpeg",
@@ -45,7 +45,7 @@
     "id": 3,
     "category": "COMFORTERS",
     "name": "Kids Single Bed Comforter(5 Variants Available)",
-    "price": 1100,
+    "price": 1098,
     "images": [
       "images/comfort1.jpeg",
       "images/comfort2.jpeg",
@@ -65,7 +65,7 @@
     "id": 4,
     "category": "Organizers",
     "name": "Cotton Rope Tissue Holder/Organizer Box",
-    "price": 400,
+    "price": 398,
     "images": [
       "images/tissue1.jpeg",
       "images/tissue2.jpeg",
@@ -85,7 +85,7 @@
     "id": 5,
     "category": "Table Mats",
     "name": "Round Jute Table Mat(2 Variants Available)",
-    "price": 300,
+    "price": 298,
     "images": [
       "images/mat1.jpeg",
       "images/mat2.jpeg",
@@ -106,7 +106,7 @@
     "id": 6,
     "category": "Organizers",
     "name": "3-Pcs Cotton Rope Woven Storage Baskets",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/basket1.jpeg",
       "images/basket2.jpeg",
@@ -129,7 +129,7 @@
     "id": 7,
     "category": "HandBags",
     "name": "Cute Face Jute Cotton Handbag",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/bag1.jpeg",
       "images/bag2.jpeg",
@@ -150,7 +150,7 @@
     "id": 8,
     "category": "BEDSHEETS",
     "name": "Elastic Fitted Bedsheet with Pillow Covers",
-    "price": 1400,
+    "price": 1398,
     "images": [
       "images/elastic1.jpeg",
       "images/elastic2.jpeg",
@@ -172,7 +172,7 @@
     "id": 9,
     "category": "HandBags",
     "name": "Rainbow Jute Cotton Handbag",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/rainbow1.jpeg",
       "images/rainbow2.jpeg",
@@ -192,7 +192,7 @@
     "id": 10,
     "category": "Table Mats",
     "name": "Luxurious Golden Flower Table Mats 6Pcs.",
-    "price": 1100,
+    "price": 1098,
     "images": [
       "images/flower4.jpeg",
       "images/flower5.jpeg",
@@ -210,7 +210,7 @@
     "id": 11,
     "category": "Table Mats",
     "name": "Luxurious Golden Leaf Table Mats 6Pcs.",
-    "price": 1100,
+    "price": 1098,
     "images": [
       "images/leaf1.jpeg",
       "images/leaf2.jpeg",
@@ -231,7 +231,7 @@
     "id": 12,
     "category": "Table Mats",
     "name": "Silver Flower Table Mats 6Pcs.",
-    "price": 1100,
+    "price": 1098,
     "images": [
       "images/silver1.jpeg",
       "images/silver2.jpeg",
@@ -249,7 +249,7 @@
     "id": 13,
     "category": "DOORMATS & RUGS",
     "name": "Premium Ultra Soft Feel Bedside Runner",
-    "price": 1300,
+    "price": 1298,
     "images": [
       "images/runner1.jpeg",
       "images/runner2.jpeg",
@@ -272,7 +272,7 @@
     "id": 14,
     "category": "DOORMATS & RUGS",
     "name": " Ultra Soft Anti Skid Premium Door Mat",
-    "price": 900,
+    "price": 898,
     "images": [
       "images/Doormat1.jpeg",
       "images/Doormat2.jpeg",
@@ -292,7 +292,7 @@
     "id": 15,
     "category": "DOORMATS & RUGS",
     "name": " Temple Pattern Doormat/ Bath Mat",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/temple1.jpeg",
       "images/temple2.jpeg",
@@ -312,7 +312,7 @@
     "id": 16,
     "category": "COMFORTERS",
     "name": " Bubble Perfumed AC Blanket(Double Bed)",
-    "price": 2600,
+    "price": 2598,
     "images": [
       "images/ac1.jpeg",
       "images/ac2.jpeg",
@@ -333,7 +333,7 @@
     "id": 17,
     "category": "BEDSHEETS",
     "name": " King Sized Elastic Fitted Bedsheet",
-    "price": 800,
+    "price": 798,
     "images": [
       "images/king1.jpeg",
       "images/king2.jpeg",
@@ -356,7 +356,7 @@
     "id": 18,
     "category": "BEDSHEETS",
     "name": " Queen Sized 5-Pieces Elastic Bedding Ensemble",
-    "price": 1200,
+    "price": 1198,
     "images": [
       "images/e1.jpeg",
       "images/e2.jpeg",
@@ -381,7 +381,7 @@
     "id": 19,
     "category": "BEDSHEETS",
     "name": " King Sized Elastic Fitted Classic Bedsheet",
-    "price": 800,
+    "price": 798,
     "images": [
       "images/simple1.jpeg",
       "images/simple2.jpeg",
@@ -402,7 +402,7 @@
     "id": 20,
     "category": "BEDSHEETS",
     "name": " King Sized Elastic Fitted Feather Bedsheet",
-    "price": 900,
+    "price": 898,
     "images": [
       "images/feather4.jpeg",
       "images/feather3.jpeg",
@@ -421,7 +421,7 @@
     "id": 21,
     "category": "Table Mats",
     "name": "Animals Round Jute Table Mat(2Pcs.)",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/animal1.jpeg",
       "images/animal2.jpeg",
@@ -441,7 +441,7 @@
     "id": 22,
     "category": "Table Mats",
     "name": "Leafy Round Jute Table Mat(2Pcs.)",
-    "price": 600,
+    "price": 598,
     "images": [
       "images/l1.jpeg",
       "images/l2.jpeg",
@@ -461,7 +461,7 @@
     "id": 23,
     "category": "Table Mats",
     "name": "Exclusive Rangoli Round Jute Table Mat(2 Pcs.)",
-    "price": 700,
+    "price": 698,
     "images": [
       "images/rangoli1.jpeg",
       "images/rangoli2.jpeg",
@@ -480,7 +480,7 @@
     "id": 24,
     "category": "BEDSHEETS",
     "name": " Royal Elastic Fitted Bedsheet",
-    "price": 900,
+    "price": 898,
     "images": [
       "images/royal2.jpeg",
       "images/royal1.jpeg",
@@ -502,7 +502,7 @@
     "id": 25,
     "category": "COMFORTERS",
     "name": "Minimalist Double Bed Comforter(2 Variants Available)",
-    "price": 2400,
+    "price": 2398,
     "images": [
       "images/comf1.jpeg",
       "images/comf2.jpeg",
@@ -522,7 +522,7 @@
     "id": 26,
     "category": "COMFORTERS",
     "name": "Free Designed Double Bed Comforter(2 Variants Available)",
-    "price": 2300,
+    "price": 2298,
     "images": [
       "images/comd1.jpeg",
       "images/comd2.jpeg",
@@ -537,8 +537,83 @@
       "washCare": "Machine washable",
       "Other Details": " Weight: 1.3KG(Approx), Available in 2 Designs, Ultra Soft for more comfort, Premium Quality, Ideal for Gifting, Comes with luxurious packaging."
     }
+  },
+  {
+    "id": 27,
+    "category": "Diwali Special Home Decor🪔",
+    "name": "Colorful Rangoli Placemat for Home Décor - Peacock",
+    "price": 1098,
+    "images": [
+      "images/peacock2.jpeg",
+      "images/peacock1.jpeg"
+    ],
+    "description": "Brighten your Diwali with these diwali special place mats. Special Festival Decorative Floor Mat for Entrance, Pooja Room & Living Room.",
+    "details": {
+      "fabric": "Premium Soft Velvet",
+      "dimensions": "60 cms",
+      "washCare": "Machine washable",
+      "Other Details": " Weight: 0.4KG(Approx), Available in 2 Designs, Ideal for saving time and decorating your home in a new way."
+    }
+  },
+  {
+    "id": 28,
+    "category": "Diwali Special Home Decor🪔",
+    "name": "Minimalist Double Bed Comforter(2 Variants Available)",
+    "price": 1098,
+    "images": [
+      "images/rangoli1 (3).jpeg",
+      "images/rangoli2 (2).jpeg",
+      "images/rangoli3 (2).jpeg",
+      "images/rangoli4 (2).jpeg"
+    ],
+    "description": "Glace Cotton Super Soft Single Bed Comforter for Kids with attractive 5 different designs.",
+    "details": {
+      "fabric": "Premium Soft Velvet",
+      "dimensions": "60 cms",
+      "washCare": "Machine washable",
+      "Other Details": " Weight: 0.3KG(Approx), Available in 4 Designs, Ideal for saving time and decorating your home in a new way."
+    }
+  },
+  {
+    "id": 29,
+    "category": "Diwali Special Home Decor🪔",
+    "name": "Festive Diwali Special Gifting/Decorative Jute Bag",
+    "price": 998,
+    "images": [
+      "images/DB1.jpeg",
+      "images/DB2.jpeg",
+      "images/DB3.jpeg",
+      "images/DB4.jpeg",
+      "images/DB5.jpeg"
+    ],
+    "description": "Brighten your Diwali with our handcrafted Diwali Jute Bags. Ideal for Gifting as well as decoration. Available in 5 colours.",
+    "details": {
+      "fabric": "Pure handwoven Jute",
+      "dimensions": "7 X 7 inches",
+      "washCare": "Hand washable",
+      "Other Details": "Perfect for gifting to your loved onesin a bag like this.weight: 450gms."
+    }
+  },
+  {
+    "id": 30,
+    "category": "Diwali Special Home Decor🪔",
+    "name": "Diwali Special Round Dry Fruit Tray(Round)",
+    "price": 698,
+    "images": [
+      "images/round1.jpeg",
+      "images/round2.jpeg",
+       "images/round3.jpeg"
+    ],
+    "description": "A stunning festive table runner to elevate your Diwali décor. SET OF 1 LOWER TRAY  2 BOWL 1 TRAY COVER. Available in 3 colors.",
+    "details": {
+      "fabric": "Premium Quality Jute",
+      "dimensions": "10 inches",
+      "washCare": "Mild Hand washable",
+      "Other Details": " This rope dry fruit tray set can be used to store dry fruit home organisers items,return gift for wedding,multifunctional kitchen shelf,wedding gift etc. weight: 400grams"
+    }
   }
 ]
+
 
 
 
