@@ -1271,14 +1271,14 @@ function openProductModal(productId, source = "handloom") {
 
   if (!product) return;
 
-  // ✅ Set modal title & description
+  // ✅ Title & description
   document.getElementById("modal-product-name").textContent = product.name;
   document.getElementById("modal-product-description").textContent = product.description;
 
   // ✅ Price
   document.getElementById("modal-product-price").textContent = `₹${product.price}`;
 
-  // ✅ Render images (main + thumbnails, same as your current logic)
+  // ✅ Images
   const mainImg = document.getElementById("modal-main-image");
   mainImg.src = product.images[0];
   const thumbs = document.getElementById("modal-thumbnails");
@@ -1291,26 +1291,41 @@ function openProductModal(productId, source = "handloom") {
     thumbs.appendChild(thumb);
   });
 
-  // ✅ Details
+  // ✅ Details from JSON (if available)
   const detailsDiv = document.getElementById("modal-product-details");
-  detailsDiv.innerHTML = `
-    <p><strong>Fabric:</strong> ${product.details.fabric}</p>
-    <p><strong>Dimensions:</strong> ${product.details.dimensions}</p>
-    <p><strong>Wash Care:</strong> ${product.details.washCare}</p>
-    <p><strong>Other:</strong> ${product.details.otherDetails}</p>
-  `;
+  if (product.details) {
+    detailsDiv.innerHTML = `
+      <p><strong>Fabric:</strong> ${product.details.fabric || "-"}</p>
+      <p><strong>Dimensions:</strong> ${product.details.dimensions || "-"}</p>
+      <p><strong>Wash Care:</strong> ${product.details.washCare || "-"}</p>
+      <p><strong>Other:</strong> ${product.details.otherDetails || "-"}</p>
+    `;
+  } else {
+    detailsDiv.innerHTML = "";
+  }
 
-  // ✅ Quantity reset
+  // ✅ Reset quantity
   document.getElementById("modal-quantity").value = 1;
 
-  // ✅ Add to Cart button
+  // ✅ Quantity buttons
+  document.getElementById("modal-qty-minus").onclick = () => {
+    let qty = parseInt(document.getElementById("modal-quantity").value);
+    if (qty > 1) document.getElementById("modal-quantity").value = qty - 1;
+  };
+  document.getElementById("modal-qty-plus").onclick = () => {
+    let qty = parseInt(document.getElementById("modal-quantity").value);
+    document.getElementById("modal-quantity").value = qty + 1;
+  };
+
+  // ✅ Add to cart with correct qty
   const addBtn = document.getElementById("modal-add-to-cart");
   addBtn.onclick = () => {
-    addToCart(product);
+    const qty = parseInt(document.getElementById("modal-quantity").value);
+    addToCart(product, qty);
     closeModal();
   };
 
-  // ✅ Finally show modal
+  // ✅ Show modal
   document.getElementById("product-modal").classList.remove("hidden");
 }
 
@@ -1473,6 +1488,7 @@ loadProducts(sortedProducts); // re-render products
 </script>
 </body>
 </html>
+
 
 
 
