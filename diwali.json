@@ -38,7 +38,7 @@
   {
     "id": "d3",
     "tag": "✨ Diwali Special ✨",
-    "name": "Festive Diwali Special Jute Bag",
+    "name": "Festive Diwali Special Gifting Jute Bag",
     "price": 499,
     "images": [
       "images/DB1.jpeg",
@@ -71,6 +71,26 @@
       "dimensions": "10inch",
       "washCare": "mild handwash",
       "otherDetails": "This rope dry fruit tray set can be used to store dry fruit home organisers items,return gift for wedding,multifunctional kitchen shelf,wedding gift etc. weight: 400grams"
+    }
+  },
+  {
+    "id": "d5",
+    "tag": "🪔 Diwali Decor",
+    "name": "Festive Diwali Special Gifting Jute Bag",
+    "price": 449,
+    "images": [
+      "images/ob.jpeg",
+      "images/ob2.jpeg",
+      "images/ob3.jpeg",
+      "images/ob4.jpeg",
+      "images/ob5.jpeg"
+    ],
+    "description": "Brighten your Diwali with our handcrafted Diwali Jute Bags.",
+    "details": {
+      "fabric": "Premium handwoven Jute",
+      "dimensions": "7 x 7 inch",
+      "washCare": "Gentle hand wash",
+      "otherDetails": "Perfect for gifting to your loved ones.weight: 450gms"
     }
   }
 ]
