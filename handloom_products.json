@@ -611,8 +611,29 @@
       "washCare": "Mild Hand washable",
       "Other Details": " This rope dry fruit tray set can be used to store dry fruit home organisers items,return gift for wedding,multifunctional kitchen shelf,wedding gift etc. weight: 400grams"
     }
+  },
+  {
+    "id": 29,
+    "category": "Diwali Special Home Decor🪔",
+    "name": "Festive Diwali Special Gifting/Decorative Jute Bag",
+    "price": 898,
+    "images": [
+      "images/ob.jpeg",
+      "images/ob2.jpeg",
+      "images/ob3.jpeg",
+      "images/ob4.jpeg",
+      "images/ob5.jpeg"
+    ],
+    "description": "Brighten your Diwali with our handcrafted Diwali Jute Bags. Ideal for Gifting as well as decoration. Available in 5 colours.",
+    "details": {
+      "fabric": "Pure handwoven Jute",
+      "dimensions": "7 X 7 inches",
+      "washCare": "Hand washable",
+      "Other Details": "Perfect for gifting to your loved onesin a bag like this.weight: 450gms."
+    }
   }
 ]
+
 
 
 
